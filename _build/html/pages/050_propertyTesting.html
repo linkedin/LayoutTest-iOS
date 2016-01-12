@@ -1,0 +1,232 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Property Testing &mdash; Layout Testing Library 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Layout Testing Library 1.0 documentation" href="../index.html"/>
+        <link rel="next" title="UI Catalog" href="060_catalog.html"/>
+        <link rel="prev" title="Automatic Tests" href="040_includedTests.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Layout Testing Library
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="000_gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="020_writingTest.html">Writing Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="030_viewSizes.html">Testing Different View Sizes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_includedTests.html">Automatic Tests</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Property Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#differences">Differences</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="060_catalog.html">UI Catalog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_apis.html">Other APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="080_config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="090_testingOtherObjects.html">Testing Other Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="100_performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_projectStructure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_future.html">Future Plans</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Layout Testing Library</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Property Testing</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/pages/050_propertyTesting.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="property-testing">
+<h1>Property Testing<a class="headerlink" href="#property-testing" title="Permalink to this headline">¶</a></h1>
+<p>This library is built of the idea of property testing. Property testing is basically when you create a bunch of inputs to a function and assert properties on the output. It gained popularity in Haskell with the QuickCheck library and in Scala with ScalaCheck.</p>
+<p>For an overview of property based testing, see:</p>
+<blockquote>
+<div><p>Human Readable Description</p>
+<p><a class="reference external" href="http://blog.jessitron.com/2013/04/property-based-testing-what-is-it.html">http://blog.jessitron.com/2013/04/property-based-testing-what-is-it.html</a></p>
+<p>Mathematical Definition</p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Property_testing">http://en.wikipedia.org/wiki/Property_testing</a></p>
+</div></blockquote>
+<div class="section" id="differences">
+<h2>Differences<a class="headerlink" href="#differences" title="Permalink to this headline">¶</a></h2>
+<p>The main difference between this library and traditional property testing is that traditional property testing uses truly random input. For now, this library is deterministic, but takes the idea of running many combinations from property based testing.</p>
+<p>Also, QuickCheck and ScalaTest attempt to provide the smallest possible input for a failure. So if it fails on an array of 100 elements, it will try it with some of the elements removed, and when it presents a failure will try to give the smallest input it failed on. This library does not attempt anything like that, but it&#8217;s a good idea for the future.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="060_catalog.html" class="btn btn-neutral float-right" title="UI Catalog" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="040_includedTests.html" class="btn btn-neutral" title="Automatic Tests" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Peter Livesey.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Writing Tests &mdash; Layout Testing Library 1.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Layout Testing Library 1.0 documentation" href="../index.html"/>
+        <link rel="next" title="Testing Different View Sizes" href="030_viewSizes.html"/>
+        <link rel="prev" title="Overview" href="010_overview.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Layout Testing Library
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="000_gettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="010_overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Writing Tests</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#lytviewprovider">LYTViewProvider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nsdictionary-dataspecfortest">+ (NSDictionary *)dataSpecForTest;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#uiview-viewfordata-nsdictionary-data-reuseview-uiview-reuseview-size-lytviewsize-size-context-id-context">+ (UIView *)viewForData:(NSDictionary *)data reuseView:(UIView *)reuseView size:(LYTViewSize *)size context:(id *)context;</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-your-unit-test">Writing Your Unit Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing-different-view-sizes">Testing Different View Sizes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="030_viewSizes.html">Testing Different View Sizes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="040_includedTests.html">Automatic Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="050_propertyTesting.html">Property Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="060_catalog.html">UI Catalog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="070_apis.html">Other APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="080_config.html">Config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="090_testingOtherObjects.html">Testing Other Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="100_performance.html">Performance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="110_projectStructure.html">Project Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="120_FAQ.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="130_future.html">Future Plans</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Layout Testing Library</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>Writing Tests</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="../_sources/pages/020_writingTest.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="writing-tests">
+<h1>Writing Tests<a class="headerlink" href="#writing-tests" title="Permalink to this headline">¶</a></h1>
+<p>To test your view, there are two steps:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Make your view implement LYTViewProvider.</li>
+<li>Write your unit test and pass in your view&#8217;s class.</li>
+</ol>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This page describes how to create a test for a UIView subclass. If you want to test another object (like a UIViewController), see <a class="reference internal" href="090_testingOtherObjects.html"><em>Testing Other Objects</em></a>.</p>
+</div>
+<div class="section" id="lytviewprovider">
+<h2>LYTViewProvider<a class="headerlink" href="#lytviewprovider" title="Permalink to this headline">¶</a></h2>
+<p>This protocol dictates how the view is created and inflated with data. There are two methods that are required to implement. One easy way to implement it is to add an extension to the view your are trying to test.</p>
+<div class="section" id="nsdictionary-dataspecfortest">
+<h3>+ (NSDictionary <a href="#id1"><span class="problematic" id="id2">*</span></a>)dataSpecForTest;<a class="headerlink" href="#nsdictionary-dataspecfortest" title="Permalink to this headline">¶</a></h3>
+<p>This method defines the mock data we will use for the test. It should return an NSDictionary of any format (usually JSON), but can also include LYTDataValues subclasses. These data values are the key to writing property tests and allow the library to create many combinations of this data to inflate your view with. For instance, you can return the dictionary:</p>
+<div class="highlight-objective-c"><div class="highlight"><pre>// Objective-C
+@{ @&quot;string&quot;: [[LYTStringValues alloc] init], @&quot;int&quot;: [[LYTIntegerValues alloc] init] }
+</pre></div>
+</div>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="c1">// Swift</span>
+<span class="p">[</span> <span class="s">&quot;string&quot;</span><span class="o">:</span> <span class="n">LYTStringValues</span><span class="p">(),</span> <span class="s">&quot;int&quot;</span><span class="o">:</span> <span class="n">LYTIntegerValues</span><span class="p">()</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>Given this, the library will inflate your view with a different NSDictionary each time. It will produce all the combinations of strings and ints in the generators.</p>
+<div class="highlight-json"><div class="highlight"><pre>{&quot;string&quot;: &quot;Normal length string&quot;, &quot;int&quot;: 42},
+{&quot;string&quot;: &quot;&quot;, &quot;int&quot;: 42},
+{&quot;int&quot;: 42},
+{&quot;string&quot;: &quot;Normal length string&quot;, &quot;int&quot;: 0},
+{&quot;string&quot;: &quot;&quot;, &quot;int&quot;: 0},
+{&quot;int&quot;: 0}, etc.
+</pre></div>
+</div>
+<p>There are actually more strings and ints in the default data values and this code will produce 30 different dictionaries.</p>
+<p>This API makes it easy for you to write tests which will be ran on many different inputs. It&#8217;s also easy for you to make your own LYTDataValues subclasses (see the LYTDataValues class for more info).</p>
+</div>
+<div class="section" id="uiview-viewfordata-nsdictionary-data-reuseview-uiview-reuseview-size-lytviewsize-size-context-id-context">
+<h3>+ (UIView <a href="#id3"><span class="problematic" id="id4">*</span></a>)viewForData:(NSDictionary <a href="#id5"><span class="problematic" id="id6">*</span></a>)data reuseView:(UIView <a href="#id7"><span class="problematic" id="id8">*</span></a>)reuseView size:(LYTViewSize <a href="#id9"><span class="problematic" id="id10">*</span></a>)size context:(id <a href="#id11"><span class="problematic" id="id12">*</span></a>)context;<a class="headerlink" href="#uiview-viewfordata-nsdictionary-data-reuseview-uiview-reuseview-size-lytviewsize-size-context-id-context" title="Permalink to this headline">¶</a></h3>
+<p>This method should inflate your view with data for the test. This data will NOT contain LYTDataValues subclasses, but instead be the output of the LYTDataValues code. A reuse view is provided if you want to reuse views for the test (recommended if you are testing cells). Size and context are additional helpers (see <a class="reference internal" href="030_viewSizes.html"><em>Testing Different View Sizes</em></a> and <a class="reference internal" href="090_testingOtherObjects.html"><em>Testing Other Objects</em></a>). This method should be simple to implement and look something like this:</p>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="c1">// Objective-C</span>
+<span class="cp">#import &quot;LayoutTestBase.h&quot;</span>
+
+<span class="k">+</span> <span class="p">(</span><span class="n">UIView</span> <span class="o">*</span><span class="p">)</span><span class="nf">viewForData:</span><span class="p">(</span><span class="n">NSDictionary</span> <span class="o">*</span><span class="p">)</span><span class="nv">data</span>
+              <span class="nl">reuseView:</span><span class="p">(</span><span class="n">nullable</span> <span class="n">UIView</span> <span class="o">*</span><span class="p">)</span><span class="nv">reuseView</span>
+                   <span class="nl">size:</span><span class="p">(</span><span class="n">nullable</span> <span class="n">LYTViewSize</span> <span class="o">*</span><span class="p">)</span><span class="nv">size</span>
+                <span class="nl">context:</span><span class="p">(</span><span class="kt">id</span> <span class="n">_Nullable</span> <span class="o">*</span> <span class="n">_Nullable</span><span class="p">)</span><span class="nv">context</span> <span class="p">{</span>
+  <span class="n">SimpleTableViewCell</span> <span class="o">*</span><span class="n">cell</span> <span class="o">=</span> <span class="p">(</span><span class="n">SimpleTableViewCell</span> <span class="o">*</span><span class="p">)</span><span class="n">reuseView</span> <span class="o">?:</span> <span class="p">[</span><span class="n">SimpleTableViewCell</span> <span class="n">loadFromNib</span><span class="p">];</span>
+  <span class="p">[</span><span class="n">cell</span> <span class="n">prepareForReuse</span><span class="p">];</span>
+  <span class="p">[</span><span class="n">cell</span> <span class="n">setupWithDictionary</span><span class="o">:</span><span class="n">data</span><span class="p">];</span>
+  <span class="k">return</span> <span class="n">cell</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="c1">// Swift</span>
+<span class="n">import</span> <span class="n">LayoutTestBase</span>
+
+<span class="n">class</span> <span class="n">func</span> <span class="n">viewForData</span><span class="p">(</span><span class="n">data</span><span class="o">:</span> <span class="p">[</span><span class="n">NSObject</span><span class="o">:</span> <span class="n">AnyObject</span><span class="p">],</span>
+                  <span class="nl">reuseView:</span> <span class="n">UIView</span><span class="o">?</span><span class="p">,</span>
+                       <span class="nl">size:</span> <span class="n">LYTViewSize</span><span class="o">?</span><span class="p">,</span>
+                    <span class="nl">context:</span> <span class="n">AutoreleasingUnsafeMutablePointer</span><span class="o">&lt;</span><span class="n">AnyObject</span><span class="o">?&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UIView</span> <span class="p">{</span>
+  <span class="n">let</span> <span class="n">cell</span> <span class="o">=</span> <span class="n">reuseView</span> <span class="n">as</span><span class="o">?</span> <span class="n">SampleTableViewCell</span> <span class="o">??</span> <span class="n">SampleTableViewCell</span><span class="p">.</span><span class="n">loadFromNib</span><span class="p">()</span>
+  <span class="n">cell</span><span class="p">.</span><span class="n">prepareForReuse</span><span class="p">()</span>
+  <span class="n">cell</span><span class="p">.</span><span class="n">setupWithDictionary</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">cell</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="writing-your-unit-test">
+<h2>Writing Your Unit Test<a class="headerlink" href="#writing-your-unit-test" title="Permalink to this headline">¶</a></h2>
+<p>Now, you just need to add a test case which subclasses LYTLayoutTestCase (Objective-C) or LayoutTestCase (Swift) and call runLayoutTests.</p>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="c1">// Objective-C</span>
+<span class="cp">#import &quot;LayoutTest.h&quot;</span>
+<span class="cp">#import &quot;LayoutTestBase.h&quot;</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testSampleTableViewCellLayout</span> <span class="p">{</span>
+  <span class="p">[</span><span class="n">self</span> <span class="n">runLayoutTestsWithViewProvider</span><span class="o">:</span><span class="p">[</span><span class="n">SampleTableViewCell</span> <span class="n">class</span><span class="p">]</span>
+                        <span class="nl">validation:</span><span class="o">^</span><span class="p">(</span><span class="n">UIView</span> <span class="o">*</span> <span class="n">view</span><span class="p">,</span> <span class="n">NSDictionary</span> <span class="o">*</span> <span class="n">data</span><span class="p">,</span> <span class="kt">id</span> <span class="n">context</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Add your custom tests here.</span>
+  <span class="p">}];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-objective-c"><div class="highlight"><pre><span class="c1">// Swift</span>
+<span class="n">import</span> <span class="n">LayoutTest</span>
+<span class="n">import</span> <span class="n">LayoutTestBase</span>
+
+<span class="n">func</span> <span class="nf">testSampleTableViewCell</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">runLayoutTests</span><span class="p">()</span> <span class="p">{</span> <span class="p">(</span><span class="n">view</span><span class="o">:</span> <span class="n">SampleTableViewCell</span><span class="p">,</span> <span class="n">data</span><span class="o">:</span> <span class="p">[</span><span class="n">NSObject</span><span class="o">:</span> <span class="n">AnyObject</span><span class="p">],</span> <span class="n">context</span><span class="o">:</span> <span class="n">Any</span><span class="o">?</span><span class="p">)</span> <span class="k">in</span>
+    <span class="c1">// Add your custom tests here.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This example is taken from the sample project unit tests. You can view a more complete example there.</p>
+</div>
+<div class="section" id="testing-different-view-sizes">
+<h2>Testing Different View Sizes<a class="headerlink" href="#testing-different-view-sizes" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="030_viewSizes.html"><em>Testing Different View Sizes</em></a></p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="030_viewSizes.html" class="btn btn-neutral float-right" title="Testing Different View Sizes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="010_overview.html" class="btn btn-neutral" title="Overview" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Peter Livesey.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

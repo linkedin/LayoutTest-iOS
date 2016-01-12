@@ -1,0 +1,14 @@
+use_frameworks!
+
+target :SampleApp do
+  pod 'LayoutTestBase', :path => '..'
+end
+
+target :CatalogSample do
+  pod 'LayoutTestBase', :path => '..'
+end
+
+target :SampleAppTests do
+  pod 'LayoutTest/Swift', :path => '..'
+end
+

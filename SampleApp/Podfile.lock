@@ -1,0 +1,52 @@
+PODS:
+  - LayoutTest/ModuleHeader (1.0.0):
+    - LayoutTestBase
+  - LayoutTest/Swift (1.0.0):
+    - LayoutTest/ModuleHeader
+    - LayoutTest/SwiftSubspec
+    - LayoutTest/TestCase
+    - LayoutTestBase
+    - LayoutTestBase/Autolayout
+    - LayoutTestBase/Catalog
+    - LayoutTestBase/Config
+    - LayoutTestBase/Core
+    - LayoutTestBase/UIViewHelpers
+  - LayoutTest/SwiftSubspec (1.0.0):
+    - LayoutTest/ModuleHeader
+    - LayoutTest/TestCase
+    - LayoutTestBase
+  - LayoutTest/TestCase (1.0.0):
+    - LayoutTest/ModuleHeader
+    - LayoutTestBase
+    - LayoutTestBase/Config
+    - LayoutTestBase/Core
+  - LayoutTestBase (1.0.0):
+    - LayoutTestBase/Autolayout (= 1.0.0)
+    - LayoutTestBase/Catalog (= 1.0.0)
+    - LayoutTestBase/Config (= 1.0.0)
+    - LayoutTestBase/Core (= 1.0.0)
+    - LayoutTestBase/UIViewHelpers (= 1.0.0)
+  - LayoutTestBase/Autolayout (1.0.0)
+  - LayoutTestBase/Catalog (1.0.0):
+    - LayoutTestBase/Core
+  - LayoutTestBase/Config (1.0.0)
+  - LayoutTestBase/Core (1.0.0):
+    - LayoutTestBase/Config
+  - LayoutTestBase/UIViewHelpers (1.0.0):
+    - LayoutTestBase/Config
+
+DEPENDENCIES:
+  - LayoutTest/Swift (from `..`)
+  - LayoutTestBase (from `..`)
+
+EXTERNAL SOURCES:
+  LayoutTest:
+    :path: ..
+  LayoutTestBase:
+    :path: ..
+
+SPEC CHECKSUMS:
+  LayoutTest: e4e56d965996c4b2aaeba4e86e471ab36d08e8a2
+  LayoutTestBase: 947b8809f68ff2224a4f18ce5fc0103eb11030b3
+
+COCOAPODS: 0.39.0

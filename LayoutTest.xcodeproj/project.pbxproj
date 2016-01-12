@@ -1,0 +1,946 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		614FE6431C03EE3C00BB9EE6 /* LayoutTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614FE6391C03EE3C00BB9EE6 /* LayoutTest.framework */; };
+		614FE6A01C03EF6A00BB9EE6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6152970D187CAEEC00BAF959 /* XCTest.framework */; };
+		614FE6B31C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6A11C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m */; };
+		614FE6B41C03F05E00BB9EE6 /* ConfigTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6A21C03F05E00BB9EE6 /* ConfigTests.m */; };
+		614FE6B51C03F05E00BB9EE6 /* DataValuesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6A31C03F05E00BB9EE6 /* DataValuesTests.m */; };
+		614FE6B61C03F05E00BB9EE6 /* UnitTestViews.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6A61C03F05E00BB9EE6 /* UnitTestViews.m */; };
+		614FE6B71C03F05E00BB9EE6 /* IteratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6A71C03F05E00BB9EE6 /* IteratorTests.m */; };
+		614FE6B81C03F05E00BB9EE6 /* LayoutTestCaseAccessibilityControlTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6A91C03F05E00BB9EE6 /* LayoutTestCaseAccessibilityControlTests.m */; };
+		614FE6B91C03F05E00BB9EE6 /* LayoutTestCaseAmbiguousTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6AA1C03F05E00BB9EE6 /* LayoutTestCaseAmbiguousTests.m */; };
+		614FE6BA1C03F05E00BB9EE6 /* LayoutTestCaseAutolayoutFailureTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6AB1C03F05E00BB9EE6 /* LayoutTestCaseAutolayoutFailureTests.m */; };
+		614FE6BB1C03F05E00BB9EE6 /* LayoutTestCaseMissingLabelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6AC1C03F05E00BB9EE6 /* LayoutTestCaseMissingLabelTests.m */; };
+		614FE6BC1C03F05E00BB9EE6 /* LayoutTestCaseNestedAccessibilityTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6AD1C03F05E00BB9EE6 /* LayoutTestCaseNestedAccessibilityTests.m */; };
+		614FE6BD1C03F05E00BB9EE6 /* LayoutTestCaseOverlapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6AE1C03F05E00BB9EE6 /* LayoutTestCaseOverlapTests.m */; };
+		614FE6BE1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6AF1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m */; };
+		614FE6C01C03F05E00BB9EE6 /* NullIteratorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6B11C03F05E00BB9EE6 /* NullIteratorTests.m */; };
+		614FE6C11C03F05E00BB9EE6 /* TestHelpersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6B21C03F05E00BB9EE6 /* TestHelpersTests.m */; };
+		614FE6C31C03F11300BB9EE6 /* SwiftLayoutTestCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6C21C03F11300BB9EE6 /* SwiftLayoutTestCaseTests.swift */; };
+		614FE6D01C050F4000BB9EE6 /* FrameComparisonTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6CF1C050F4000BB9EE6 /* FrameComparisonTests.m */; };
+		61A306461C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A3061D1C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306471C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3061E1C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.m */; };
+		61A306481C125A6F00CB3FEC /* LYTCatalogCollectionViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306201C125A6F00CB3FEC /* LYTCatalogCollectionViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306491C125A6F00CB3FEC /* LYTCatalogCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306211C125A6F00CB3FEC /* LYTCatalogCollectionViewController.m */; };
+		61A3064A1C125A6F00CB3FEC /* LYTCatalogTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306221C125A6F00CB3FEC /* LYTCatalogTableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A3064B1C125A6F00CB3FEC /* LYTCatalogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306231C125A6F00CB3FEC /* LYTCatalogTableViewController.m */; };
+		61A3064C1C125A6F00CB3FEC /* LYTViewCatalogProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306241C125A6F00CB3FEC /* LYTViewCatalogProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A3064D1C125A6F00CB3FEC /* LYTConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306261C125A6F00CB3FEC /* LYTConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A3064E1C125A6F00CB3FEC /* LYTConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306271C125A6F00CB3FEC /* LYTConfig.m */; };
+		61A3064F1C125A6F00CB3FEC /* LYTBoolValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A3062A1C125A6F00CB3FEC /* LYTBoolValues.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306501C125A6F00CB3FEC /* LYTBoolValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3062B1C125A6F00CB3FEC /* LYTBoolValues.m */; };
+		61A306511C125A6F00CB3FEC /* LYTFloatValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A3062C1C125A6F00CB3FEC /* LYTFloatValues.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306521C125A6F00CB3FEC /* LYTFloatValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3062D1C125A6F00CB3FEC /* LYTFloatValues.m */; };
+		61A306531C125A6F00CB3FEC /* LYTIntegerValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A3062E1C125A6F00CB3FEC /* LYTIntegerValues.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306541C125A6F00CB3FEC /* LYTIntegerValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3062F1C125A6F00CB3FEC /* LYTIntegerValues.m */; };
+		61A306551C125A6F00CB3FEC /* LYTStringValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306301C125A6F00CB3FEC /* LYTStringValues.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306561C125A6F00CB3FEC /* LYTStringValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306311C125A6F00CB3FEC /* LYTStringValues.m */; };
+		61A306571C125A6F00CB3FEC /* LYTDataValues.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306321C125A6F00CB3FEC /* LYTDataValues.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306581C125A6F00CB3FEC /* LYTDataValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306331C125A6F00CB3FEC /* LYTDataValues.m */; };
+		61A306591C125A6F00CB3FEC /* LYTValuesIterator.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306351C125A6F00CB3FEC /* LYTValuesIterator.h */; };
+		61A3065A1C125A6F00CB3FEC /* LYTValuesIterator.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306361C125A6F00CB3FEC /* LYTValuesIterator.m */; };
+		61A3065B1C125A6F00CB3FEC /* LYTMutableCopier.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306381C125A6F00CB3FEC /* LYTMutableCopier.h */; };
+		61A3065C1C125A6F00CB3FEC /* LYTMutableCopier.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306391C125A6F00CB3FEC /* LYTMutableCopier.m */; };
+		61A3065D1C125A6F00CB3FEC /* LYTViewProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A3063A1C125A6F00CB3FEC /* LYTViewProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A3065E1C125A6F00CB3FEC /* LYTLayoutPropertyTester.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A3063C1C125A6F00CB3FEC /* LYTLayoutPropertyTester.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A3065F1C125A6F00CB3FEC /* LYTLayoutPropertyTester.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A3063D1C125A6F00CB3FEC /* LYTLayoutPropertyTester.m */; };
+		61A306601C125A6F00CB3FEC /* LayoutTestBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A3063E1C125A6F00CB3FEC /* LayoutTestBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306611C125A6F00CB3FEC /* UIView+LYTFrameComparison.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306401C125A6F00CB3FEC /* UIView+LYTFrameComparison.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306621C125A6F00CB3FEC /* UIView+LYTFrameComparison.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306411C125A6F00CB3FEC /* UIView+LYTFrameComparison.m */; };
+		61A306631C125A6F00CB3FEC /* UIView+LYTHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306421C125A6F00CB3FEC /* UIView+LYTHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306641C125A6F00CB3FEC /* UIView+LYTHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306431C125A6F00CB3FEC /* UIView+LYTHelpers.m */; };
+		61A306651C125A6F00CB3FEC /* UIView+LYTTestHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306441C125A6F00CB3FEC /* UIView+LYTTestHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306661C125A6F00CB3FEC /* UIView+LYTTestHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A306451C125A6F00CB3FEC /* UIView+LYTTestHelpers.m */; };
+		61A306681C125A8000CB3FEC /* LayoutTest.h in Headers */ = {isa = PBXBuildFile; fileRef = 61A306671C125A8000CB3FEC /* LayoutTest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61A306691C125A9A00CB3FEC /* LayoutTestBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A306121C125A1C00CB3FEC /* LayoutTestBase.framework */; };
+		61ADE1E81C0CA81600585946 /* LayoutTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ADE1C41C0CA81600585946 /* LayoutTestCase.swift */; };
+		61ADE2491C0CAFE900585946 /* LYTLayoutTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = 61ADE2341C0CAFE900585946 /* LYTLayoutTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61ADE24A1C0CAFE900585946 /* LYTLayoutTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ADE2351C0CAFE900585946 /* LYTLayoutTestCase.m */; };
+		61CACFAD1C1A4F7300369461 /* LYTViewSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 61CACFA91C1A4F7300369461 /* LYTViewSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61CACFAE1C1A4F7300369461 /* LYTViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFAA1C1A4F7300369461 /* LYTViewSize.m */; };
+		61CACFAF1C1A4F7300369461 /* UIView+LYTViewSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 61CACFAB1C1A4F7300369461 /* UIView+LYTViewSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61CACFB01C1A4F7300369461 /* UIView+LYTViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFAC1C1A4F7300369461 /* UIView+LYTViewSize.m */; };
+		61CACFB31C1A4FF500369461 /* LYTDeviceConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 61CACFB11C1A4FF500369461 /* LYTDeviceConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		61CACFB41C1A4FF500369461 /* LYTDeviceConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFB21C1A4FF500369461 /* LYTDeviceConstants.m */; };
+		61CACFB61C1A560000369461 /* LayoutTestCaseViewSizesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */; };
+		61CACFB81C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		614FE6441C03EE3C00BB9EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 615296F4187CAEEB00BAF959 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 614FE6381C03EE3C00BB9EE6;
+			remoteInfo = LayoutTest;
+		};
+		61A3061A1C125A2400CB3FEC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 615296F4187CAEEB00BAF959 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 61A306111C125A1C00CB3FEC;
+			remoteInfo = LayoutTestBase;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		613272E418A2BB7400036061 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		614FE6391C03EE3C00BB9EE6 /* LayoutTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LayoutTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		614FE63D1C03EE3C00BB9EE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		614FE6421C03EE3C00BB9EE6 /* LayoutTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LayoutTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		614FE6491C03EE3C00BB9EE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		614FE6A11C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutFailureInterceptorTests.m; sourceTree = "<group>"; };
+		614FE6A21C03F05E00BB9EE6 /* ConfigTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigTests.m; sourceTree = "<group>"; };
+		614FE6A31C03F05E00BB9EE6 /* DataValuesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataValuesTests.m; sourceTree = "<group>"; };
+		614FE6A51C03F05E00BB9EE6 /* UnitTestViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTestViews.h; sourceTree = "<group>"; };
+		614FE6A61C03F05E00BB9EE6 /* UnitTestViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTestViews.m; sourceTree = "<group>"; };
+		614FE6A71C03F05E00BB9EE6 /* IteratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IteratorTests.m; sourceTree = "<group>"; };
+		614FE6A91C03F05E00BB9EE6 /* LayoutTestCaseAccessibilityControlTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseAccessibilityControlTests.m; sourceTree = "<group>"; };
+		614FE6AA1C03F05E00BB9EE6 /* LayoutTestCaseAmbiguousTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseAmbiguousTests.m; sourceTree = "<group>"; };
+		614FE6AB1C03F05E00BB9EE6 /* LayoutTestCaseAutolayoutFailureTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseAutolayoutFailureTests.m; sourceTree = "<group>"; };
+		614FE6AC1C03F05E00BB9EE6 /* LayoutTestCaseMissingLabelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseMissingLabelTests.m; sourceTree = "<group>"; };
+		614FE6AD1C03F05E00BB9EE6 /* LayoutTestCaseNestedAccessibilityTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseNestedAccessibilityTests.m; sourceTree = "<group>"; };
+		614FE6AE1C03F05E00BB9EE6 /* LayoutTestCaseOverlapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseOverlapTests.m; sourceTree = "<group>"; };
+		614FE6AF1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseWithinSuperviewTests.m; sourceTree = "<group>"; };
+		614FE6B11C03F05E00BB9EE6 /* NullIteratorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullIteratorTests.m; sourceTree = "<group>"; };
+		614FE6B21C03F05E00BB9EE6 /* TestHelpersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelpersTests.m; sourceTree = "<group>"; };
+		614FE6C21C03F11300BB9EE6 /* SwiftLayoutTestCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLayoutTestCaseTests.swift; sourceTree = "<group>"; };
+		614FE6CF1C050F4000BB9EE6 /* FrameComparisonTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameComparisonTests.m; sourceTree = "<group>"; };
+		615296FF187CAEEB00BAF959 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6152970D187CAEEC00BAF959 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		61529710187CAEEC00BAF959 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		6152AF4C1BFE29B00057B38F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		61A306121C125A1C00CB3FEC /* LayoutTestBase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LayoutTestBase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		61A306161C125A1C00CB3FEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61A3061D1C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTAutolayoutFailureIntercepter.h; sourceTree = "<group>"; };
+		61A3061E1C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTAutolayoutFailureIntercepter.m; sourceTree = "<group>"; };
+		61A306201C125A6F00CB3FEC /* LYTCatalogCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTCatalogCollectionViewController.h; sourceTree = "<group>"; };
+		61A306211C125A6F00CB3FEC /* LYTCatalogCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTCatalogCollectionViewController.m; sourceTree = "<group>"; };
+		61A306221C125A6F00CB3FEC /* LYTCatalogTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTCatalogTableViewController.h; sourceTree = "<group>"; };
+		61A306231C125A6F00CB3FEC /* LYTCatalogTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTCatalogTableViewController.m; sourceTree = "<group>"; };
+		61A306241C125A6F00CB3FEC /* LYTViewCatalogProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTViewCatalogProvider.h; sourceTree = "<group>"; };
+		61A306261C125A6F00CB3FEC /* LYTConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTConfig.h; sourceTree = "<group>"; };
+		61A306271C125A6F00CB3FEC /* LYTConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTConfig.m; sourceTree = "<group>"; };
+		61A3062A1C125A6F00CB3FEC /* LYTBoolValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTBoolValues.h; sourceTree = "<group>"; };
+		61A3062B1C125A6F00CB3FEC /* LYTBoolValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTBoolValues.m; sourceTree = "<group>"; };
+		61A3062C1C125A6F00CB3FEC /* LYTFloatValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTFloatValues.h; sourceTree = "<group>"; };
+		61A3062D1C125A6F00CB3FEC /* LYTFloatValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTFloatValues.m; sourceTree = "<group>"; };
+		61A3062E1C125A6F00CB3FEC /* LYTIntegerValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTIntegerValues.h; sourceTree = "<group>"; };
+		61A3062F1C125A6F00CB3FEC /* LYTIntegerValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTIntegerValues.m; sourceTree = "<group>"; };
+		61A306301C125A6F00CB3FEC /* LYTStringValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTStringValues.h; sourceTree = "<group>"; };
+		61A306311C125A6F00CB3FEC /* LYTStringValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTStringValues.m; sourceTree = "<group>"; };
+		61A306321C125A6F00CB3FEC /* LYTDataValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTDataValues.h; sourceTree = "<group>"; };
+		61A306331C125A6F00CB3FEC /* LYTDataValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTDataValues.m; sourceTree = "<group>"; };
+		61A306351C125A6F00CB3FEC /* LYTValuesIterator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTValuesIterator.h; sourceTree = "<group>"; };
+		61A306361C125A6F00CB3FEC /* LYTValuesIterator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTValuesIterator.m; sourceTree = "<group>"; };
+		61A306381C125A6F00CB3FEC /* LYTMutableCopier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTMutableCopier.h; sourceTree = "<group>"; };
+		61A306391C125A6F00CB3FEC /* LYTMutableCopier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTMutableCopier.m; sourceTree = "<group>"; };
+		61A3063A1C125A6F00CB3FEC /* LYTViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTViewProvider.h; sourceTree = "<group>"; };
+		61A3063C1C125A6F00CB3FEC /* LYTLayoutPropertyTester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTLayoutPropertyTester.h; sourceTree = "<group>"; };
+		61A3063D1C125A6F00CB3FEC /* LYTLayoutPropertyTester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTLayoutPropertyTester.m; sourceTree = "<group>"; };
+		61A3063E1C125A6F00CB3FEC /* LayoutTestBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutTestBase.h; sourceTree = "<group>"; };
+		61A306401C125A6F00CB3FEC /* UIView+LYTFrameComparison.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LYTFrameComparison.h"; sourceTree = "<group>"; };
+		61A306411C125A6F00CB3FEC /* UIView+LYTFrameComparison.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LYTFrameComparison.m"; sourceTree = "<group>"; };
+		61A306421C125A6F00CB3FEC /* UIView+LYTHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LYTHelpers.h"; sourceTree = "<group>"; };
+		61A306431C125A6F00CB3FEC /* UIView+LYTHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LYTHelpers.m"; sourceTree = "<group>"; };
+		61A306441C125A6F00CB3FEC /* UIView+LYTTestHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LYTTestHelpers.h"; sourceTree = "<group>"; };
+		61A306451C125A6F00CB3FEC /* UIView+LYTTestHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LYTTestHelpers.m"; sourceTree = "<group>"; };
+		61A306671C125A8000CB3FEC /* LayoutTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LayoutTest.h; sourceTree = "<group>"; };
+		61ADE1C41C0CA81600585946 /* LayoutTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutTestCase.swift; sourceTree = "<group>"; };
+		61ADE2341C0CAFE900585946 /* LYTLayoutTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTLayoutTestCase.h; sourceTree = "<group>"; };
+		61ADE2351C0CAFE900585946 /* LYTLayoutTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTLayoutTestCase.m; sourceTree = "<group>"; };
+		61CACFA91C1A4F7300369461 /* LYTViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTViewSize.h; sourceTree = "<group>"; };
+		61CACFAA1C1A4F7300369461 /* LYTViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTViewSize.m; sourceTree = "<group>"; };
+		61CACFAB1C1A4F7300369461 /* UIView+LYTViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LYTViewSize.h"; sourceTree = "<group>"; };
+		61CACFAC1C1A4F7300369461 /* UIView+LYTViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LYTViewSize.m"; sourceTree = "<group>"; };
+		61CACFB11C1A4FF500369461 /* LYTDeviceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTDeviceConstants.h; sourceTree = "<group>"; };
+		61CACFB21C1A4FF500369461 /* LYTDeviceConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTDeviceConstants.m; sourceTree = "<group>"; };
+		61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseViewSizesTests.m; sourceTree = "<group>"; };
+		61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseViewSizesConfigTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		614FE6351C03EE3C00BB9EE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61A306691C125A9A00CB3FEC /* LayoutTestBase.framework in Frameworks */,
+				614FE6A01C03EF6A00BB9EE6 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		614FE63F1C03EE3C00BB9EE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				614FE6431C03EE3C00BB9EE6 /* LayoutTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61A3060E1C125A1C00CB3FEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		614FE63A1C03EE3C00BB9EE6 /* LayoutTest */ = {
+			isa = PBXGroup;
+			children = (
+				61A306671C125A8000CB3FEC /* LayoutTest.h */,
+				61ADE1C31C0CA81600585946 /* Swift */,
+				61ADE2331C0CAFE900585946 /* TestCase */,
+				614FE63D1C03EE3C00BB9EE6 /* Info.plist */,
+			);
+			path = LayoutTest;
+			sourceTree = "<group>";
+		};
+		614FE6461C03EE3C00BB9EE6 /* LayoutTestTests */ = {
+			isa = PBXGroup;
+			children = (
+				614FE6A81C03F05E00BB9EE6 /* LayoutTestCaseTests */,
+				614FE6A41C03F05E00BB9EE6 /* Helpers */,
+				614FE6A11C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m */,
+				614FE6A21C03F05E00BB9EE6 /* ConfigTests.m */,
+				614FE6A31C03F05E00BB9EE6 /* DataValuesTests.m */,
+				614FE6A71C03F05E00BB9EE6 /* IteratorTests.m */,
+				614FE6B11C03F05E00BB9EE6 /* NullIteratorTests.m */,
+				614FE6B21C03F05E00BB9EE6 /* TestHelpersTests.m */,
+				614FE6CF1C050F4000BB9EE6 /* FrameComparisonTests.m */,
+				614FE6C21C03F11300BB9EE6 /* SwiftLayoutTestCaseTests.swift */,
+				614FE6491C03EE3C00BB9EE6 /* Info.plist */,
+			);
+			path = LayoutTestTests;
+			sourceTree = "<group>";
+		};
+		614FE6A41C03F05E00BB9EE6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				614FE6A51C03F05E00BB9EE6 /* UnitTestViews.h */,
+				614FE6A61C03F05E00BB9EE6 /* UnitTestViews.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		614FE6A81C03F05E00BB9EE6 /* LayoutTestCaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				614FE6A91C03F05E00BB9EE6 /* LayoutTestCaseAccessibilityControlTests.m */,
+				614FE6AA1C03F05E00BB9EE6 /* LayoutTestCaseAmbiguousTests.m */,
+				614FE6AB1C03F05E00BB9EE6 /* LayoutTestCaseAutolayoutFailureTests.m */,
+				614FE6AC1C03F05E00BB9EE6 /* LayoutTestCaseMissingLabelTests.m */,
+				614FE6AD1C03F05E00BB9EE6 /* LayoutTestCaseNestedAccessibilityTests.m */,
+				614FE6AE1C03F05E00BB9EE6 /* LayoutTestCaseOverlapTests.m */,
+				614FE6AF1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m */,
+				61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */,
+				61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */,
+			);
+			path = LayoutTestCaseTests;
+			sourceTree = "<group>";
+		};
+		615296F3187CAEEB00BAF959 = {
+			isa = PBXGroup;
+			children = (
+				614FE63A1C03EE3C00BB9EE6 /* LayoutTest */,
+				61A306131C125A1C00CB3FEC /* LayoutTestBase */,
+				614FE6461C03EE3C00BB9EE6 /* LayoutTestTests */,
+				615296FE187CAEEB00BAF959 /* Frameworks */,
+				615296FD187CAEEB00BAF959 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		615296FD187CAEEB00BAF959 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				614FE6391C03EE3C00BB9EE6 /* LayoutTest.framework */,
+				614FE6421C03EE3C00BB9EE6 /* LayoutTestTests.xctest */,
+				61A306121C125A1C00CB3FEC /* LayoutTestBase.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		615296FE187CAEEB00BAF959 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6152AF4C1BFE29B00057B38F /* UIKit.framework */,
+				615296FF187CAEEB00BAF959 /* Foundation.framework */,
+				6152970D187CAEEC00BAF959 /* XCTest.framework */,
+				61529710187CAEEC00BAF959 /* UIKit.framework */,
+				613272E418A2BB7400036061 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		61A306131C125A1C00CB3FEC /* LayoutTestBase */ = {
+			isa = PBXGroup;
+			children = (
+				61A3063E1C125A6F00CB3FEC /* LayoutTestBase.h */,
+				61A3061C1C125A6F00CB3FEC /* Autolayout */,
+				61A3061F1C125A6F00CB3FEC /* Catalog */,
+				61A306251C125A6F00CB3FEC /* Config */,
+				61A306281C125A6F00CB3FEC /* Core */,
+				61A3063F1C125A6F00CB3FEC /* UIViewHelpers */,
+				61A306161C125A1C00CB3FEC /* Info.plist */,
+			);
+			path = LayoutTestBase;
+			sourceTree = "<group>";
+		};
+		61A3061C1C125A6F00CB3FEC /* Autolayout */ = {
+			isa = PBXGroup;
+			children = (
+				61A3061D1C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.h */,
+				61A3061E1C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.m */,
+			);
+			path = Autolayout;
+			sourceTree = "<group>";
+		};
+		61A3061F1C125A6F00CB3FEC /* Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				61A306201C125A6F00CB3FEC /* LYTCatalogCollectionViewController.h */,
+				61A306211C125A6F00CB3FEC /* LYTCatalogCollectionViewController.m */,
+				61A306221C125A6F00CB3FEC /* LYTCatalogTableViewController.h */,
+				61A306231C125A6F00CB3FEC /* LYTCatalogTableViewController.m */,
+				61A306241C125A6F00CB3FEC /* LYTViewCatalogProvider.h */,
+			);
+			path = Catalog;
+			sourceTree = "<group>";
+		};
+		61A306251C125A6F00CB3FEC /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				61A306261C125A6F00CB3FEC /* LYTConfig.h */,
+				61A306271C125A6F00CB3FEC /* LYTConfig.m */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		61A306281C125A6F00CB3FEC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				61A306291C125A6F00CB3FEC /* DataValues */,
+				61A306371C125A6F00CB3FEC /* Helpers */,
+				61A3063B1C125A6F00CB3FEC /* Testers */,
+				61CACFA81C1A4F7300369461 /* ViewSizing */,
+				61A3063A1C125A6F00CB3FEC /* LYTViewProvider.h */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		61A306291C125A6F00CB3FEC /* DataValues */ = {
+			isa = PBXGroup;
+			children = (
+				61A3062A1C125A6F00CB3FEC /* LYTBoolValues.h */,
+				61A3062B1C125A6F00CB3FEC /* LYTBoolValues.m */,
+				61A3062C1C125A6F00CB3FEC /* LYTFloatValues.h */,
+				61A3062D1C125A6F00CB3FEC /* LYTFloatValues.m */,
+				61A3062E1C125A6F00CB3FEC /* LYTIntegerValues.h */,
+				61A3062F1C125A6F00CB3FEC /* LYTIntegerValues.m */,
+				61A306301C125A6F00CB3FEC /* LYTStringValues.h */,
+				61A306311C125A6F00CB3FEC /* LYTStringValues.m */,
+				61A306321C125A6F00CB3FEC /* LYTDataValues.h */,
+				61A306331C125A6F00CB3FEC /* LYTDataValues.m */,
+				61A306341C125A6F00CB3FEC /* Private */,
+			);
+			name = DataValues;
+			path = Generators;
+			sourceTree = "<group>";
+		};
+		61A306341C125A6F00CB3FEC /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				61A306351C125A6F00CB3FEC /* LYTValuesIterator.h */,
+				61A306361C125A6F00CB3FEC /* LYTValuesIterator.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
+		61A306371C125A6F00CB3FEC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				61A306381C125A6F00CB3FEC /* LYTMutableCopier.h */,
+				61A306391C125A6F00CB3FEC /* LYTMutableCopier.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		61A3063B1C125A6F00CB3FEC /* Testers */ = {
+			isa = PBXGroup;
+			children = (
+				61A3063C1C125A6F00CB3FEC /* LYTLayoutPropertyTester.h */,
+				61A3063D1C125A6F00CB3FEC /* LYTLayoutPropertyTester.m */,
+			);
+			path = Testers;
+			sourceTree = "<group>";
+		};
+		61A3063F1C125A6F00CB3FEC /* UIViewHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				61A306401C125A6F00CB3FEC /* UIView+LYTFrameComparison.h */,
+				61A306411C125A6F00CB3FEC /* UIView+LYTFrameComparison.m */,
+				61A306421C125A6F00CB3FEC /* UIView+LYTHelpers.h */,
+				61A306431C125A6F00CB3FEC /* UIView+LYTHelpers.m */,
+				61A306441C125A6F00CB3FEC /* UIView+LYTTestHelpers.h */,
+				61A306451C125A6F00CB3FEC /* UIView+LYTTestHelpers.m */,
+			);
+			path = UIViewHelpers;
+			sourceTree = "<group>";
+		};
+		61ADE1C31C0CA81600585946 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				61ADE1C41C0CA81600585946 /* LayoutTestCase.swift */,
+			);
+			path = Swift;
+			sourceTree = "<group>";
+		};
+		61ADE2331C0CAFE900585946 /* TestCase */ = {
+			isa = PBXGroup;
+			children = (
+				61ADE2341C0CAFE900585946 /* LYTLayoutTestCase.h */,
+				61ADE2351C0CAFE900585946 /* LYTLayoutTestCase.m */,
+			);
+			path = TestCase;
+			sourceTree = "<group>";
+		};
+		61CACFA81C1A4F7300369461 /* ViewSizing */ = {
+			isa = PBXGroup;
+			children = (
+				61CACFA91C1A4F7300369461 /* LYTViewSize.h */,
+				61CACFAA1C1A4F7300369461 /* LYTViewSize.m */,
+				61CACFAB1C1A4F7300369461 /* UIView+LYTViewSize.h */,
+				61CACFAC1C1A4F7300369461 /* UIView+LYTViewSize.m */,
+				61CACFB11C1A4FF500369461 /* LYTDeviceConstants.h */,
+				61CACFB21C1A4FF500369461 /* LYTDeviceConstants.m */,
+			);
+			path = ViewSizing;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		614FE6361C03EE3C00BB9EE6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61A306681C125A8000CB3FEC /* LayoutTest.h in Headers */,
+				61ADE2491C0CAFE900585946 /* LYTLayoutTestCase.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61A3060F1C125A1C00CB3FEC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61A306571C125A6F00CB3FEC /* LYTDataValues.h in Headers */,
+				61CACFAD1C1A4F7300369461 /* LYTViewSize.h in Headers */,
+				61A306551C125A6F00CB3FEC /* LYTStringValues.h in Headers */,
+				61A306511C125A6F00CB3FEC /* LYTFloatValues.h in Headers */,
+				61A306531C125A6F00CB3FEC /* LYTIntegerValues.h in Headers */,
+				61A306611C125A6F00CB3FEC /* UIView+LYTFrameComparison.h in Headers */,
+				61A3064F1C125A6F00CB3FEC /* LYTBoolValues.h in Headers */,
+				61A3065B1C125A6F00CB3FEC /* LYTMutableCopier.h in Headers */,
+				61A3064A1C125A6F00CB3FEC /* LYTCatalogTableViewController.h in Headers */,
+				61A306601C125A6F00CB3FEC /* LayoutTestBase.h in Headers */,
+				61A306461C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.h in Headers */,
+				61A3065E1C125A6F00CB3FEC /* LYTLayoutPropertyTester.h in Headers */,
+				61CACFAF1C1A4F7300369461 /* UIView+LYTViewSize.h in Headers */,
+				61A306591C125A6F00CB3FEC /* LYTValuesIterator.h in Headers */,
+				61A306481C125A6F00CB3FEC /* LYTCatalogCollectionViewController.h in Headers */,
+				61A3064C1C125A6F00CB3FEC /* LYTViewCatalogProvider.h in Headers */,
+				61CACFB31C1A4FF500369461 /* LYTDeviceConstants.h in Headers */,
+				61A3064D1C125A6F00CB3FEC /* LYTConfig.h in Headers */,
+				61A306631C125A6F00CB3FEC /* UIView+LYTHelpers.h in Headers */,
+				61A3065D1C125A6F00CB3FEC /* LYTViewProvider.h in Headers */,
+				61A306651C125A6F00CB3FEC /* UIView+LYTTestHelpers.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		614FE6381C03EE3C00BB9EE6 /* LayoutTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 614FE64A1C03EE3C00BB9EE6 /* Build configuration list for PBXNativeTarget "LayoutTest" */;
+			buildPhases = (
+				614FE6341C03EE3C00BB9EE6 /* Sources */,
+				614FE6351C03EE3C00BB9EE6 /* Frameworks */,
+				614FE6361C03EE3C00BB9EE6 /* Headers */,
+				614FE6371C03EE3C00BB9EE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				61A3061B1C125A2400CB3FEC /* PBXTargetDependency */,
+			);
+			name = LayoutTest;
+			productName = LayoutTest;
+			productReference = 614FE6391C03EE3C00BB9EE6 /* LayoutTest.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		614FE6411C03EE3C00BB9EE6 /* LayoutTestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 614FE64D1C03EE3C00BB9EE6 /* Build configuration list for PBXNativeTarget "LayoutTestTests" */;
+			buildPhases = (
+				614FE63E1C03EE3C00BB9EE6 /* Sources */,
+				614FE63F1C03EE3C00BB9EE6 /* Frameworks */,
+				614FE6401C03EE3C00BB9EE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				614FE6451C03EE3C00BB9EE6 /* PBXTargetDependency */,
+			);
+			name = LayoutTestTests;
+			productName = LayoutTestTests;
+			productReference = 614FE6421C03EE3C00BB9EE6 /* LayoutTestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		61A306111C125A1C00CB3FEC /* LayoutTestBase */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 61A306171C125A1C00CB3FEC /* Build configuration list for PBXNativeTarget "LayoutTestBase" */;
+			buildPhases = (
+				61A3060D1C125A1C00CB3FEC /* Sources */,
+				61A3060E1C125A1C00CB3FEC /* Frameworks */,
+				61A3060F1C125A1C00CB3FEC /* Headers */,
+				61A306101C125A1C00CB3FEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LayoutTestBase;
+			productName = LayoutTestBase;
+			productReference = 61A306121C125A1C00CB3FEC /* LayoutTestBase.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		615296F4187CAEEB00BAF959 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = LinkedIn;
+				TargetAttributes = {
+					614FE6381C03EE3C00BB9EE6 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					614FE6411C03EE3C00BB9EE6 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					61A306111C125A1C00CB3FEC = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 615296F7187CAEEB00BAF959 /* Build configuration list for PBXProject "LayoutTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 615296F3187CAEEB00BAF959;
+			productRefGroup = 615296FD187CAEEB00BAF959 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				614FE6381C03EE3C00BB9EE6 /* LayoutTest */,
+				614FE6411C03EE3C00BB9EE6 /* LayoutTestTests */,
+				61A306111C125A1C00CB3FEC /* LayoutTestBase */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		614FE6371C03EE3C00BB9EE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		614FE6401C03EE3C00BB9EE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61A306101C125A1C00CB3FEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		614FE6341C03EE3C00BB9EE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61ADE24A1C0CAFE900585946 /* LYTLayoutTestCase.m in Sources */,
+				61ADE1E81C0CA81600585946 /* LayoutTestCase.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		614FE63E1C03EE3C00BB9EE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				614FE6C01C03F05E00BB9EE6 /* NullIteratorTests.m in Sources */,
+				61CACFB81C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m in Sources */,
+				614FE6BC1C03F05E00BB9EE6 /* LayoutTestCaseNestedAccessibilityTests.m in Sources */,
+				614FE6C11C03F05E00BB9EE6 /* TestHelpersTests.m in Sources */,
+				614FE6B71C03F05E00BB9EE6 /* IteratorTests.m in Sources */,
+				614FE6BA1C03F05E00BB9EE6 /* LayoutTestCaseAutolayoutFailureTests.m in Sources */,
+				614FE6B91C03F05E00BB9EE6 /* LayoutTestCaseAmbiguousTests.m in Sources */,
+				614FE6B51C03F05E00BB9EE6 /* DataValuesTests.m in Sources */,
+				614FE6B31C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m in Sources */,
+				614FE6B81C03F05E00BB9EE6 /* LayoutTestCaseAccessibilityControlTests.m in Sources */,
+				614FE6BB1C03F05E00BB9EE6 /* LayoutTestCaseMissingLabelTests.m in Sources */,
+				614FE6D01C050F4000BB9EE6 /* FrameComparisonTests.m in Sources */,
+				614FE6BE1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m in Sources */,
+				61CACFB61C1A560000369461 /* LayoutTestCaseViewSizesTests.m in Sources */,
+				614FE6BD1C03F05E00BB9EE6 /* LayoutTestCaseOverlapTests.m in Sources */,
+				614FE6C31C03F11300BB9EE6 /* SwiftLayoutTestCaseTests.swift in Sources */,
+				614FE6B41C03F05E00BB9EE6 /* ConfigTests.m in Sources */,
+				614FE6B61C03F05E00BB9EE6 /* UnitTestViews.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		61A3060D1C125A1C00CB3FEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61A3065C1C125A6F00CB3FEC /* LYTMutableCopier.m in Sources */,
+				61CACFAE1C1A4F7300369461 /* LYTViewSize.m in Sources */,
+				61CACFB01C1A4F7300369461 /* UIView+LYTViewSize.m in Sources */,
+				61A306581C125A6F00CB3FEC /* LYTDataValues.m in Sources */,
+				61A306621C125A6F00CB3FEC /* UIView+LYTFrameComparison.m in Sources */,
+				61A306521C125A6F00CB3FEC /* LYTFloatValues.m in Sources */,
+				61A3065F1C125A6F00CB3FEC /* LYTLayoutPropertyTester.m in Sources */,
+				61A3064B1C125A6F00CB3FEC /* LYTCatalogTableViewController.m in Sources */,
+				61A3064E1C125A6F00CB3FEC /* LYTConfig.m in Sources */,
+				61A306501C125A6F00CB3FEC /* LYTBoolValues.m in Sources */,
+				61A306661C125A6F00CB3FEC /* UIView+LYTTestHelpers.m in Sources */,
+				61A306641C125A6F00CB3FEC /* UIView+LYTHelpers.m in Sources */,
+				61A306541C125A6F00CB3FEC /* LYTIntegerValues.m in Sources */,
+				61A306491C125A6F00CB3FEC /* LYTCatalogCollectionViewController.m in Sources */,
+				61A306561C125A6F00CB3FEC /* LYTStringValues.m in Sources */,
+				61A306471C125A6F00CB3FEC /* LYTAutolayoutFailureIntercepter.m in Sources */,
+				61A3065A1C125A6F00CB3FEC /* LYTValuesIterator.m in Sources */,
+				61CACFB41C1A4FF500369461 /* LYTDeviceConstants.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		614FE6451C03EE3C00BB9EE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 614FE6381C03EE3C00BB9EE6 /* LayoutTest */;
+			targetProxy = 614FE6441C03EE3C00BB9EE6 /* PBXContainerItemProxy */;
+		};
+		61A3061B1C125A2400CB3FEC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 61A306111C125A1C00CB3FEC /* LayoutTestBase */;
+			targetProxy = 61A3061A1C125A2400CB3FEC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		614FE64B1C03EE3C00BB9EE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks/**";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = LayoutTest/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.LayoutTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		614FE64C1C03EE3C00BB9EE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(PLATFORM_DIR)/Developer/Library/Frameworks/**";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = LayoutTest/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.LayoutTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		614FE64E1C03EE3C00BB9EE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = LayoutTestTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.LayoutTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		614FE64F1C03EE3C00BB9EE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = LayoutTestTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.LayoutTestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		6152971D187CAEEC00BAF959 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6152971E187CAEEC00BAF959 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		61A306181C125A1C00CB3FEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = LayoutTestBase/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.LayoutTestBase;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		61A306191C125A1C00CB3FEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = LayoutTestBase/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.LayoutTestBase;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		614FE64A1C03EE3C00BB9EE6 /* Build configuration list for PBXNativeTarget "LayoutTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				614FE64B1C03EE3C00BB9EE6 /* Debug */,
+				614FE64C1C03EE3C00BB9EE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		614FE64D1C03EE3C00BB9EE6 /* Build configuration list for PBXNativeTarget "LayoutTestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				614FE64E1C03EE3C00BB9EE6 /* Debug */,
+				614FE64F1C03EE3C00BB9EE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		615296F7187CAEEB00BAF959 /* Build configuration list for PBXProject "LayoutTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6152971D187CAEEC00BAF959 /* Debug */,
+				6152971E187CAEEC00BAF959 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		61A306171C125A1C00CB3FEC /* Build configuration list for PBXNativeTarget "LayoutTestBase" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				61A306181C125A1C00CB3FEC /* Debug */,
+				61A306191C125A1C00CB3FEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 615296F4187CAEEB00BAF959 /* Project object */;
+}

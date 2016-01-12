@@ -1,0 +1,11 @@
+# XCode
+LayoutTest.xcodeproj/xcuserdata/*
+LayoutTest.xcworkspace/xcuserdata/*
+LayoutTest.xcodeproj/project.xcworkspace/xcuserdata
+
+# Cocoapods
+Pods
+
+SampleApp/SampleApp.xcodeproj/project.xcworkspace/xcuserdata
+SampleApp/SampleApp.xcodeproj/xcuserdata
+SampleApp/SampleApp.xcworkspace/xcuserdata

@@ -46,7 +46,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Layout Testing Library'
-copyright = u'2015, Peter Livesey'
+copyright = u'2016, LinkedIn'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -199,7 +199,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'LayoutTestingLibrary.tex', u'Layout Testing Library Documentation',
-   u'Peter Livesey', 'manual'),
+   u'LinkedIn', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -229,7 +229,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'layouttestinglibrary', u'Layout Testing Library Documentation',
-     [u'Peter Livesey'], 1)
+     [u'LinkedIn'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -243,7 +243,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'LayoutTestingLibrary', u'Layout Testing Library Documentation',
-   u'Peter Livesey', 'LayoutTestingLibrary', 'One line description of project.',
+   u'LinkedIn', 'LayoutTestingLibrary', 'One line description of project.',
    'Miscellaneous'),
 ]
 

@@ -6,6 +6,11 @@ LayoutTest.xcodeproj/project.xcworkspace/xcuserdata
 # Cocoapods
 Pods
 
+# Sample App
 SampleApp/SampleApp.xcodeproj/project.xcworkspace/xcuserdata
 SampleApp/SampleApp.xcodeproj/xcuserdata
 SampleApp/SampleApp.xcworkspace/xcuserdata
+
+# Docs
+_build
+

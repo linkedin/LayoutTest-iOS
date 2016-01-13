@@ -6,7 +6,7 @@ This library enables you to write unit tests which test the layout of a view in 
 
 To get started, you should take a look at the docs: 
 
-http://linkedin.github.io/LayoutTest-iOS
+https://linkedin.github.io/LayoutTest-iOS
 
 ## Installation
 

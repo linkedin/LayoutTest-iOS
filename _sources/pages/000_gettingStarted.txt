@@ -25,7 +25,7 @@ Adding To Non-UnitTest Targets
 ==============================
 
 .. NOTE::
-  Since LayoutTestCase depends on XCTest, you should only add this pod to your unit tests target. If you want to use some of the functionality in an app (ie. catalog functionality or helpers), then you can include the LayoutTestBase pod in those targets.
+  Since LayoutTestCase depends on XCTest, you should only add LayoutTest to your unit tests target. If you want to use some of the functionality in an app (ie. catalog functionality or helpers), then you can include the LayoutTestBase pod in those targets.
 
 For example:
 

@@ -46,7 +46,7 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  LayoutTest: e4e56d965996c4b2aaeba4e86e471ab36d08e8a2
-  LayoutTestBase: 947b8809f68ff2224a4f18ce5fc0103eb11030b3
+  LayoutTest: 74d80f160de0bbe1d7fe24fd7132449eb5004d41
+  LayoutTestBase: 382dd07d7b43b78158a62327e2e648ea4d1e7700
 
 COCOAPODS: 0.39.0

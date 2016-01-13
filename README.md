@@ -12,9 +12,50 @@ http://linkedin.github.io/LayoutTest-iOS
 
 Add to your unit test target:
 
+```
 pod 'LayoutTest'
+```
 
 or
 
+```
 pod 'LayoutTest/Swift'
+```
+
+## Example
+
+A simple test would look something like this. Check the docs for more detailed information and examples.
+
+```objective-c
+@interface SampleTableViewCellLayoutTests : LYTLayoutTestCase
+@end
+
+@implementation LayoutTestCaseMissingLabelTests
+
+- (void)testSampleTableViewCellLayout {
+  [self runLayoutTestsWithViewProvider:[SampleTableViewCell class]
+                            validation:^(UIView * view, NSDictionary * data, id context) {
+    // Add your custom tests here.
+  }];
+}
+
+@end
+
+@implementation SampleTableViewCell (LayoutTesting)
+  + (NSDictionary *)dataSpecForTest {
+    return @{
+      @"text": [[LYTStringValues alloc] init],
+      @"showButton": [[LYTBoolValues alloc] init]
+    }
+  }
+  + (UIView *)viewForData:(NSDictionary *)data
+                reuseView:(nullable UIView *)reuseView
+                     size:(nullable LYTViewSize *)size
+                  context:(id _Nullable * _Nullable)context {
+    SampleTableViewCell *view = (SampleTableViewCell *)reuseView ?: [SampleTableViewCell viewFromNib];
+    [view setupWithJSON:data];
+    return view;
+  }
+@end
+``` 
 

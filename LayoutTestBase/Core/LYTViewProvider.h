@@ -58,7 +58,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSArray<LYTViewSize *> *)sizesForView;
 
 /**
+ This is called after viewForData:reuseView:size:context: and after the view has been resized using the sizes provided. This gives you the opportunity to make any final changes to the view based on the size of the view before any assertions are made.
  
+ For example, if you use multiple different widths to test your view, you may want to adjust the height in this method.
+ 
+ \param view The view which we are about to test. This is already setup with data.
+ \param data The data used to layout the view.
+ \param size This size used to resize the view. This size has already been applied.
+ \param context If a context was set in viewForData:reuseView:size:context:, it will be passed back to you here.
  */
 @optional
 + (void)adjustViewSize:(UIView *)view data:(NSDictionary *)data size:(nullable LYTViewSize *)size context:(nullable id)context;

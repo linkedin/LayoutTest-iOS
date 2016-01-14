@@ -13,7 +13,7 @@
  I have so far been unable to reproduce a view which has ambiguous layout in unit tests.
  I'm not sure why this is, but it seems to suggest that my code may not be working. However, for now, I'll just test using a view which overrides this property to be true.
  
- TODO: Try to investigate why everything returns false for hasAmbiguousLayout
+ TODO: Try to investigate why everything returns false for hasAmbiguousLayout (https://github.com/linkedin/LayoutTest-iOS/issues/2)
  */
 @interface AmbiguousLayoutView : UIView
 
@@ -99,30 +99,6 @@
 
     [superview addSubview:view1];
     [superview addSubview:view2];
-
-    // Keeping this code here so in the future we can look and try to work out why it doesn't work.
-    // For now, this is only ambiguous because AmbiguousLayoutView overrides the property and returns true always
-//    NSDictionary *viewsDictionary = @{
-//                                      @"view1": view1,
-//                                      @"view2": view2
-//                                      };
-//    [superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view1]-|" options:0 metrics:nil views:viewsDictionary]];
-//    [superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[view2]-|" options:0 metrics:nil views:viewsDictionary]];
-//    [superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[view1]-[view2]-|" options:0 metrics:nil views:viewsDictionary]];
-//    [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
-//                                                          attribute:NSLayoutAttributeWidth
-//                                                          relatedBy:NSLayoutRelationEqual
-//                                                             toItem:nil
-//                                                          attribute:NSLayoutAttributeNotAnAttribute
-//                                                         multiplier:1
-//                                                           constant:100]];
-//    [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
-//                                                          attribute:NSLayoutAttributeHeight
-//                                                          relatedBy:NSLayoutRelationEqual
-//                                                             toItem:nil
-//                                                          attribute:NSLayoutAttributeNotAnAttribute
-//                                                         multiplier:1
-//                                                           constant:100]];
 
     return superview;
 }

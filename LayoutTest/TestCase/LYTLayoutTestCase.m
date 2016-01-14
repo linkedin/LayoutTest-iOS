@@ -165,7 +165,7 @@ NS_ASSUME_NONNULL_BEGIN
                 [self failTest:message view:view];
             }
             if (subview.accessibilityIdentifier && !subview.accessibilityLabel) {
-                NSString *message = [NSString stringWithFormat:@"Subview has an accessibility label, but doesn't have an accessibility identifier. This means that the voice over will read the accessibility identifier instead of the label! You should always add an accessibility label if it has an identifier. Consider adding this view to viewsAllowingAccessibilityErrors if this is intentional.\n%@", subview];
+                NSString *message = [NSString stringWithFormat:@"Subview has an accessibility identifier, but doesn't have an accessibility label. This means that the voice over will read the accessibility identifier instead of the label! You should always add an accessibility label if it has an identifier. Consider adding this view to viewsAllowingAccessibilityErrors if this is intentional.\n%@", subview];
                 [self failTest:message view:view];
             }
         }

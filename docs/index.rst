@@ -16,6 +16,8 @@ Contents:
 
 This library enables you to write unit tests which test the layout of a view in multiple configurations. It tests the view with different data combinations and different view sizes. The library works in both Objective-C and Swift.
 
+You can view the source code on GitHub: https://github.com/linkedin/LayoutTest-iOS
+
 The syntax is also light allowing you to add these tests easily. This test automatically verifies no views are overlapping, verifies Autolayout doesn't throw and runs some sanity accessibility tests.
 
 .. code-block:: objective-c

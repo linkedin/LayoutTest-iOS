@@ -18,13 +18,13 @@
 
 + (void)interceptAutolayoutFailuresWithBlock:(void(^)())block {
     Class c = NSClassFromString(NSStringISEngineClassName);
-    NSAssert(c != nil, @"This class no longer exists which mean this method no longer works. Please file a bug with this information.");
+    NSAssert(c != nil, @"This class no longer exists which mean this method no longer works. This means that Apple has changed their implementation of Auto Layout and this code needs to be updated. Please file a bug with this information.");
     [c interceptAutolayoutFailuresWithBlock:block];
 }
 
 + (void)stopInterceptingAutolayoutFailures {
     Class c = NSClassFromString(NSStringISEngineClassName);
-    NSAssert(c != nil, @"This class no longer exists which mean this method no longer works. Please file a bug with this information.");
+    NSAssert(c != nil, @"This class no longer exists which mean this method no longer works. This means that Apple has changed their implementation of Auto Layout and this code needs to be updated. Please file a bug with this information.");
     [c stopInterceptingAutolayoutFailures];
 }
 
@@ -41,8 +41,7 @@ static BOOL swizzledAutolayout = false;
 /**
  This method will run a block whenever there are autolayout failures. Running it multiple times will remove the old block and add a new block.
  */
-+ (void)interceptAutolayoutFailuresWithBlock:(void(^)())block
-{
++ (void)interceptAutolayoutFailuresWithBlock:(void(^)())block {
     savedBlock = block;
 
     if (!swizzledAutolayout) {
@@ -52,8 +51,7 @@ static BOOL swizzledAutolayout = false;
     }
 }
 
-+ (void)stopInterceptingAutolayoutFailures
-{
++ (void)stopInterceptingAutolayoutFailures {
     savedBlock = nil;
 
     if (swizzledAutolayout) {

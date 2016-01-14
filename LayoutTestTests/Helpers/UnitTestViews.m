@@ -9,12 +9,6 @@
 
 #import "UnitTestViews.h"
 
-/**
- I have so far been unable to reproduce a view which has ambiguous layout in unit tests.
- I'm not sure why this is, but it seems to suggest that my code may not be working. However, for now, I'll just test using a view which overrides this property to be true.
- 
- TODO: Try to investigate why everything returns false for hasAmbiguousLayout (https://github.com/linkedin/LayoutTest-iOS/issues/2)
- */
 @interface AmbiguousLayoutView : UIView
 
 @end
@@ -159,6 +153,12 @@
 
 @end
 
+/**
+ I have so far been unable to reproduce a view which has ambiguous layout in unit tests.
+ I'm not sure why this is, but it seems to suggest that my code may not be working. However, for now, I'll just test using a view which overrides this property to be true.
+
+ TODO: Try to investigate why everything returns false for hasAmbiguousLayout (https://github.com/linkedin/LayoutTest-iOS/issues/2)
+ */
 @implementation AmbiguousLayoutView
 
 - (BOOL)hasAmbiguousLayout {

@@ -14,7 +14,7 @@ import LayoutTestBase
 
 // If you are writing in Objective-C, you should use LYTLayoutTestCase instead
 
-class SampleTableViewCellLayoutTests: LayoutTestCase {
+class SampleTableViewCellLayoutTests : LayoutTestCase {
 
     let titleLabelLeftPadding: CGFloat = 8
     
@@ -53,7 +53,7 @@ class SampleTableViewCellLayoutTests: LayoutTestCase {
     }
 }
 
-extension SampleTableViewCell: LYTViewProvider {
+extension SampleTableViewCell : LYTViewProvider {
     public class func dataSpecForTest() -> [NSObject: AnyObject] {
         return [
             "text": LYTStringValues(),

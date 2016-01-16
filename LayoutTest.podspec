@@ -1,11 +1,11 @@
 Pod::Spec.new do |spec|
   spec.name             = 'LayoutTest'
-  spec.version          = '1.0.0-beta1'
+  spec.version          = '1.0.0'
   spec.license          = { :type => 'Apache License, Version 2.0' }
   spec.homepage         = 'https://linkedin.github.io/LayoutTest-iOS'
   spec.authors          = 'LinkedIn'
   spec.summary          = 'LayoutTest enables you to write unit tests which test the layout of a view in multiple configurations.'
-  spec.source           = { :git => 'https://github.com/linkedin/LayoutTest-iOS.git', :tag => '1.0.0-beta1' }
+  spec.source           = { :git => 'https://github.com/linkedin/LayoutTest-iOS.git', :tag => '1.0.0' }
   spec.platform         = :ios, '7.0'
   spec.default_subspecs = 'TestCase'
   spec.dependency         'LayoutTestBase', '1.0.0-beta1'

@@ -5,13 +5,7 @@ This library is based on the idea of property testing. Property testing is basic
 
 For an overview of property based testing, see:
 
-  Human Readable Description
-
   http://blog.jessitron.com/2013/04/property-based-testing-what-is-it.html
-
-  Mathematical Definition
-
-  http://en.wikipedia.org/wiki/Property_testing
 
 Differences
 ===========

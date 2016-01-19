@@ -11,4 +11,5 @@ xcuserdata
 
 # Docs
 _build
+.buildinfo
 

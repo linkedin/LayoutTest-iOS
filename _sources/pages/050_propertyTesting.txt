@@ -1,7 +1,7 @@
 Property Testing
 ----------------
 
-This library is built of the idea of property testing. Property testing is basically when you create a bunch of inputs to a function and assert properties on the output. It gained popularity in Haskell with the QuickCheck library and in Scala with ScalaCheck.
+This library is based on the idea of property testing. Property testing is basically when you create a bunch of inputs to a function and assert properties on the output. It gained popularity in Haskell with the QuickCheck library and in Scala with ScalaCheck.
 
 For an overview of property based testing, see:
 

@@ -36,8 +36,9 @@
     self.accessibilityTestsEnabled = YES;
     /*
      UISwitch - This is a known class which has internal overlapping subviews.
+     UITextView - If you use attributed text, UIKit may add UIImage views which can overlap with the internal text containers.
      */
-    self.viewClassesAllowingSubviewErrors = [NSSet setWithObjects:[UISwitch class], nil];
+    self.viewClassesAllowingSubviewErrors = [NSSet setWithObjects:[UISwitch class], [UITextView class], nil];
     /*
      UIControl - Subclasses of UIControl should all have accessibility labels.
      */

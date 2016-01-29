@@ -6,7 +6,7 @@ This library enables you to write unit tests which test the layout of a view in 
 
 When creating views, apps often have conditional logic which depends on the data used to setup the view. LayoutTest provides an easy way to define a data spec (a dictionary) which is then used to generate many different combinations of data. The library then uses this data to layout your view multiple times. For example, this is a small portion of the tests ran in our sample app:
 
-![alt tag](https://raw.githubusercontent.com/linkedin/LayoutTest-iOS/master/docs/images/catalog.png)
+<img src="https://raw.githubusercontent.com/linkedin/LayoutTest-iOS/master/docs/images/catalog.png" height="400px" align="middle" />
 
 In just one test, your view will be laid out multiple times with different data. You can then run test assertions on these views to verify that the layout and view content is correct. Also, the library will run a few tests automatically such as checking for Autolayout errors, missing accessibility, and overlapping views.
 Finally, the library makes it easy to test each view with different sizes so you can verify the view will work on different devices.
@@ -35,6 +35,7 @@ pod 'LayoutTest/Swift'
 
 A simple test would look something like this. Check the docs for more detailed information and examples.
 
+Objective-C:
 ```objective-c
 @interface SampleTableViewCellLayoutTests : LYTLayoutTestCase
 @end
@@ -65,6 +66,7 @@ A simple test would look something like this. Check the docs for more detailed i
   }
 @end
 ``` 
+Swift:
 
 ```swift
 class SampleTableViewCellLayoutTests {

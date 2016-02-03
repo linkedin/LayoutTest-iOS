@@ -33,16 +33,14 @@ public class SampleTableViewCell: UITableViewCell {
     }
 
     class func loadFromNib() -> SampleTableViewCell {
-        let bun = NSBundle(forClass: self.classForCoder())
-        return bun.loadNibNamed(SampleTableViewCell.nibName, owner: nil, options: nil)[0] as! SampleTableViewCell
+        return NSBundle.mainBundle().loadNibNamed(SampleTableViewCell.nibName, owner: nil, options: nil)[0] as! SampleTableViewCell
     }
 
     func setup(json: [NSObject: AnyObject]) {
-        let bun = NSBundle(forClass:object_getClass(self))
         if let imageType = json["imageType"] as? String {
             switch imageType {
             case "linkedin":
-                mainImageView.image = UIImage(named: "LinkedInLogo", inBundle: bun, compatibleWithTraitCollection: nil)
+                mainImageView.image = UIImage(named: "LinkedInLogo")
                 mainImageView.hidden = false
                 labelLeftEdge.constant = SampleTableViewCell.leftMaxEdge
             default:

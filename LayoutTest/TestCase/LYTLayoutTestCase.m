@@ -69,6 +69,61 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
     [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
+    [self appendToLog:description imagePath:@"Blahpath" testData:[NSDictionary dictionary]];
+}
+
+- (void)appendToLog:(NSString *)description imagePath:(NSString *)imagePath testData:(NSDictionary *)testData {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *currentDirectory = [[NSBundle bundleForClass:[self class]] bundlePath];
+    NSError *error;
+    NSString *documentsDirectory = [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages"];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
+    BOOL isDirectory;
+    
+    if (![fileManager fileExistsAtPath:filePath isDirectory:&isDirectory]) {
+        NSString *header = @"<HTML>\
+        <HEAD>\
+        </HEAD>\
+        <BODY>\
+        \
+        <TABLE style='width:100%'>\
+        \
+        <TR>\
+        <TH>Description</TH>\
+        <TH>Image</TH>\
+        <TH>Input Data</TH>\
+        </TR>";
+        
+        [fileManager createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+        
+        [fileManager createFileAtPath:filePath contents:nil attributes:nil];
+        
+        // Write to the file
+        [header writeToFile:filePath atomically:YES
+                        encoding:NSUTF8StringEncoding error:&error];
+    }
+    NSString *errorHTML = [NSString stringWithFormat:@"<TR>\
+                           <TD>%@</TD>\
+                           <TD><IMG src='%@' alt='No Image'></TD>\
+                           <TD>%@</TD>\
+                           </TR>\
+                           ", description, imagePath, testData.description];
+
+    NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+    [fileHandler seekToEndOfFile];
+    [fileHandler writeData:[errorHTML dataUsingEncoding:NSUTF8StringEncoding]];
+    [fileHandler closeFile];
+    
+    NSString *footer = @"</TABLE>\
+    \
+    </BODY>\
+    </HTML>\
+    ";
+
+    fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+    [fileHandler seekToEndOfFile];
+    [fileHandler writeData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
+    [fileHandler closeFile];
 }
 
 #pragma mark - Test Lifecycle

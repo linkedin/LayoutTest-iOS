@@ -203,6 +203,7 @@ NS_ASSUME_NONNULL_BEGIN
     [self saveImage:viewImage toFileWithName:@"TestFile"];
     
     //Save html with data
+    [self appendToLog:description imagePath:[self pathForImage:viewImage withFileName:@"TestFile"] testData:self.dataForViewUnderTest];
 }
 
 - (UIImage *)renderLayer:(CALayer *)layer {

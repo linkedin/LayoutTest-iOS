@@ -60,7 +60,7 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
         runLayoutTests() { (view: SampleTableViewCell, data: [NSObject: AnyObject], context: Any?) in
             
             // Verify that the label and image view are top aligned
-            //XCTAssertTrue(view, expression: view.titleLabel.lyt_bottomAligned(view.mainImageView))
+            XCTAssertTrue(view.titleLabel.lyt_topAligned(view.mainImageView))
 
             // Verify that the text gets set correctly
             XCTAssertEqual(view.titleLabel.text, data["text"] as? String)
@@ -87,8 +87,6 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
 
             // Verify that the right label is enabled iff the data specifies that it is enabled
             XCTAssertEqual(view.rightButton.enabled, data["buttonEnabled"] as? Bool ?? false)
-            
-            LYTAssertTrue(view, expression: view.titleLabel.lyt_bottomAligned(view.mainImageView))
         }
     }
 

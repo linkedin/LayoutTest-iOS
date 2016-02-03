@@ -228,23 +228,29 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)saveImage:(UIImage *)image toFileWithName:(NSString *)fileName {
-    
-    NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
-    NSString *className = NSStringFromClass(self.class);
-    
-    //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
-    if ([className containsString:@"."]) {
-        className = [className componentsSeparatedByString:@"."].lastObject;
-    }
-    
-    NSString *documentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, true).firstObject;
-    NSString *directoryToCreate = [NSString stringWithFormat:@"/snapshots/%@/%@", className, methodName];
-    NSString *directoryPath = [documentsPath stringByAppendingString:directoryToCreate];
+    NSString *directoryPath = [self directoryPathForCurrentTestCase];
     NSString *imageName = [NSString stringWithFormat:@"/%@_%.2f_%.2f.png", fileName, image.size.width, image.size.height];
     NSString *imagePath = [directoryPath stringByAppendingString:imageName];
     
     [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
     [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+}
+
+/**
+ Returns the path to the directory to save snapshots of the current failing test. Path includes class and method name
+ e.g. {FULL_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell
+ */
+- (NSString *)directoryPathForCurrentTestCase {
+    NSString *documentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, true).firstObject;
+    NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
+    NSString *className = NSStringFromClass(self.class);
+    //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
+    if ([className containsString:@"."]) {
+        className = [className componentsSeparatedByString:@"."].lastObject;
+    }
+    
+    NSString *directoryPath = [documentsPath stringByAppendingString:[NSString stringWithFormat:@"/snapshots/%@/%@", className, methodName]];
+    return directoryPath;
 }
 
 #pragma mark - Private Functional (Class) Methods

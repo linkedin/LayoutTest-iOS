@@ -21,6 +21,9 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
     func testSampleTableViewCell() {
         runLayoutTests() { (view: SampleTableViewCell, data: [NSObject: AnyObject], context: Any?) in
 
+            let image = self.snapShot(view)
+            self.saveImage(image, fileName: "snapshot")
+            
             // Verify that the label and image view are top aligned
             XCTAssertTrue(view.titleLabel.lyt_topAligned(view.mainImageView))
 
@@ -51,6 +54,21 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
             XCTAssertEqual(view.rightButton.enabled, data["buttonEnabled"] as? Bool ?? false)
         }
     }
+    
+    func snapShot(view: UIView) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, true, 0)
+        view.drawViewHierarchyInRect(view.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
+    func saveImage(image: UIImage, fileName: String) {
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+        let destinationPath = documentsPath.stringByAppendingString("/" + fileName + ".png")
+        UIImageJPEGRepresentation(image,1.0)!.writeToFile(destinationPath, atomically: true)
+    }
+
 }
 
 extension SampleTableViewCell : LYTViewProvider {

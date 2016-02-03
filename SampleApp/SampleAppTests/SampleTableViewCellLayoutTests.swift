@@ -14,8 +14,15 @@ import LayoutTestBase
 
 public func saveImage(image: UIImage, fileName: String) {
     let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-    let destinationPath = documentsPath.stringByAppendingString("/" + fileName + ".png")
-    UIImageJPEGRepresentation(image,1.0)!.writeToFile(destinationPath, atomically: true)
+    let directoryPath = documentsPath.stringByAppendingString("/snapshots")
+    
+    let imagePath = directoryPath.stringByAppendingString("/" + fileName + "_" + String(image.size.width) + "_" + String(image.size.height) + ".png")
+    
+    do {
+        try NSFileManager.defaultManager().createDirectoryAtPath(directoryPath, withIntermediateDirectories: false, attributes: nil)
+    } catch {}
+    
+    UIImageJPEGRepresentation(image,1.0)!.writeToFile(imagePath, atomically: true)
 }
 
 // If you are writing in Objective-C, you should use LYTLayoutTestCase instead

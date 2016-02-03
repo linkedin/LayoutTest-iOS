@@ -67,65 +67,6 @@ NS_ASSUME_NONNULL_BEGIN
                                                        }];
 }
 
-- (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
-    [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
-    [self appendToLog:description imagePath:@"Blahpath" testData:[NSDictionary dictionary]];
-}
-
-- (void)appendToLog:(NSString *)description imagePath:(NSString *)imagePath testData:(NSDictionary *)testData {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *currentDirectory = [[NSBundle bundleForClass:[self class]] bundlePath];
-    NSError *error;
-    NSString *documentsDirectory = [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages"];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
-    BOOL isDirectory;
-    
-    if (![fileManager fileExistsAtPath:filePath isDirectory:&isDirectory]) {
-        NSString *header = @"<HTML>\
-        <HEAD>\
-        </HEAD>\
-        <BODY>\
-        \
-        <TABLE style='width:100%'>\
-        \
-        <TR>\
-        <TH>Description</TH>\
-        <TH>Image</TH>\
-        <TH>Input Data</TH>\
-        </TR>";
-        
-        [fileManager createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
-        
-        [fileManager createFileAtPath:filePath contents:nil attributes:nil];
-        
-        // Write to the file
-        [header writeToFile:filePath atomically:YES
-                        encoding:NSUTF8StringEncoding error:&error];
-    }
-    NSString *errorHTML = [NSString stringWithFormat:@"<TR>\
-                           <TD>%@</TD>\
-                           <TD><IMG src='%@' alt='No Image'></TD>\
-                           <TD>%@</TD>\
-                           </TR>\
-                           ", description, imagePath, testData.description];
-
-    NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
-    [fileHandler seekToEndOfFile];
-    [fileHandler writeData:[errorHTML dataUsingEncoding:NSUTF8StringEncoding]];
-    [fileHandler closeFile];
-    
-    NSString *footer = @"</TABLE>\
-    \
-    </BODY>\
-    </HTML>\
-    ";
-
-    fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
-    [fileHandler seekToEndOfFile];
-    [fileHandler writeData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
-    [fileHandler closeFile];
-}
-
 #pragma mark - Test Lifecycle
 
 - (void)setUp {
@@ -249,6 +190,81 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)failTest:(NSString *)errorMessage view:(nullable UIView *)view {
     XCTFail(@"%@", errorMessage);
+}
+
+#pragma mark Failing Test Snapshots
+
+- (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
+    [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
+    //Create image
+    UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
+    
+    //Save image
+    [self saveImage:viewImage toFileWithName:@"TestFile"];
+    
+    //Save html with data
+}
+
+- (UIImage *)renderLayer:(CALayer *)layer {
+    CGRect bounds = layer.bounds;
+    
+    NSAssert1(CGRectGetWidth(bounds), @"Zero width for layer %@", layer);
+    NSAssert1(CGRectGetHeight(bounds), @"Zero height for layer %@", layer);
+    
+    UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    NSAssert1(context, @"Could not generate context for layer %@", layer);
+    
+    CGContextSaveGState(context);
+    {
+        [layer renderInContext:context];
+    }
+    CGContextRestoreGState(context);
+    
+    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return snapshot;
+}
+
+- (void)saveImage:(UIImage *)image toFileWithName:(NSString *)fileName {
+    [self createDirectoryForCurrentTestCaseIfNeeded];
+    [UIImagePNGRepresentation(image) writeToFile:[self pathForImage:image withFileName:fileName] atomically:YES];
+}
+
+/**
+ Returns the path to the directory to save snapshots of the current failing test. Path includes class and method name
+ e.g. {FULL_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell
+ */
+- (NSString *)directoryPathForCurrentTestCase {
+    NSString *documentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, true).firstObject;
+    NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
+    NSString *className = NSStringFromClass(self.class);
+    //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
+    if ([className containsString:@"."]) {
+        className = [className componentsSeparatedByString:@"."].lastObject;
+    }
+    
+    NSString *directoryPath = [documentsPath stringByAppendingString:[NSString stringWithFormat:@"/snapshots/%@/%@", className, methodName]];
+    return directoryPath;
+}
+
+- (void)createDirectoryForCurrentTestCaseIfNeeded {
+    NSString *directoryPath = [self directoryPathForCurrentTestCase];
+    BOOL isDirectory = NO;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDirectory]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+}
+
+/**
+ Returns the full path to the image with the given file name and the iamge size and width appended to it.
+ e.g. {DIRECTORY_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell/{FILE_NAME}_{IMAGE_WIDTH}_{IMAGE_HEIGHT}.png
+ */
+- (NSString *)pathForImage:(UIImage *)image withFileName:(NSString *)fileName {
+    NSString *directoryPath = [self directoryPathForCurrentTestCase];
+    NSString *imageName = [NSString stringWithFormat:@"/%@_%.2f_%.2f.png", fileName, image.size.width, image.size.height];
+    return [directoryPath stringByAppendingString:imageName];
 }
 
 #pragma mark - Private Functional (Class) Methods

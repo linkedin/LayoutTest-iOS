@@ -237,7 +237,6 @@ NS_ASSUME_NONNULL_BEGIN
     [UIImagePNGRepresentation(image) writeToFile:[self pathForImage:image withFileName:fileName] atomically:YES];
 }
 
-
 - (NSString *)commonRootPath {
     NSString *currentDirectory = [[NSBundle bundleForClass:[self class]] bundlePath];
     return [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages"];
@@ -274,8 +273,14 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)pathForImage:(UIImage *)image withFileName:(NSString *)fileName {
     NSString *directoryPath = [self directoryPathForCurrentTestCase];
-    NSString *imageName = [NSString stringWithFormat:@"/%@_%.2f_%.2f.png", fileName, image.size.width, image.size.height];
-    return [directoryPath stringByAppendingString:imageName];
+    NSString *imageName = [NSString stringWithFormat:@"%@_%.2f_%.2f_%@", @"", image.size.width, image.size.height, self.dataForViewUnderTest.description];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_]+" options:0 error:nil];
+    imageName = [regex stringByReplacingMatchesInString:imageName options:0 range:NSMakeRange(0, imageName.length) withTemplate:@"-"];
+    if (imageName.length > 250) {
+        imageName = [imageName substringToIndex:250];
+    }
+    imageName = [imageName stringByAppendingPathExtension:@"png"];
+    return [directoryPath stringByAppendingPathComponent:imageName];
 }
 
 - (void)startNewLog {

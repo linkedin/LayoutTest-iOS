@@ -33,7 +33,8 @@ public class SampleTableViewCell: UITableViewCell {
     }
 
     class func loadFromNib() -> SampleTableViewCell {
-        return NSBundle.mainBundle().loadNibNamed(SampleTableViewCell.nibName, owner: nil, options: nil)[0] as! SampleTableViewCell
+        let bun = NSBundle(forClass: self.classForCoder())
+        return bun.loadNibNamed(SampleTableViewCell.nibName, owner: nil, options: nil)[0] as! SampleTableViewCell
     }
 
     func setup(json: [NSObject: AnyObject]) {

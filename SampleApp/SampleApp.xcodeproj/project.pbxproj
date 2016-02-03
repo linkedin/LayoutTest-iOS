@@ -23,6 +23,8 @@
 		61F42D7E1C18878700A21677 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61F42D7C1C18878700A21677 /* LaunchScreen.storyboard */; };
 		80D929B7BEDDE2B3BB220B59 /* Pods_CatalogSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F204CD35FFC3C2EC6A56E828 /* Pods_CatalogSample.framework */; };
 		AF642C19C9DA1CBDF87E8127 /* Pods_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C92A33C23683C87FF5EC96 /* Pods_SampleApp.framework */; };
+		C5CE8F961C620D2400250812 /* SampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A306071C12588700CB3FEC /* SampleTableViewCell.swift */; };
+		C5CE8F971C620D4900250812 /* SampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A306081C12588700CB3FEC /* SampleTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -251,7 +253,6 @@
 					};
 					61A305F31C12583100CB3FEC = {
 						CreatedOnToolsVersion = 7.1.1;
-						TestTargetID = 61A305DF1C12583100CB3FEC;
 					};
 					61F42D701C18878700A21677 = {
 						CreatedOnToolsVersion = 7.2;
@@ -294,6 +295,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C5CE8F971C620D4900250812 /* SampleTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +465,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61A306041C12587100CB3FEC /* SampleTableViewCellLayoutTests.swift in Sources */,
+				C5CE8F961C620D2400250812 /* SampleTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,12 +619,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 55DBA39A601DE67E9265B040 /* Pods-SampleAppTests.debug.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SampleAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.SampleAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SampleApp.app/SampleApp";
 			};
 			name = Debug;
 		};
@@ -629,12 +630,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C8E3A016ED97012DB64C99EA /* Pods-SampleAppTests.release.xcconfig */;
 			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = SampleAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.SampleAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SampleApp.app/SampleApp";
 			};
 			name = Release;
 		};

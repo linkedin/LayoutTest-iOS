@@ -228,12 +228,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)saveImage:(UIImage *)image toFileWithName:(NSString *)fileName {
-    NSString *directoryPath = [self directoryPathForCurrentTestCase];
-    NSString *imageName = [NSString stringWithFormat:@"/%@_%.2f_%.2f.png", fileName, image.size.width, image.size.height];
-    NSString *imagePath = [directoryPath stringByAppendingString:imageName];
-    
-    [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
-    [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
+    [self createDirectoryForCurrentTestCaseIfNeeded];
+    [UIImagePNGRepresentation(image) writeToFile:[self pathForImage:image withFileName:fileName] atomically:YES];
 }
 
 /**
@@ -251,6 +247,24 @@ NS_ASSUME_NONNULL_BEGIN
     
     NSString *directoryPath = [documentsPath stringByAppendingString:[NSString stringWithFormat:@"/snapshots/%@/%@", className, methodName]];
     return directoryPath;
+}
+
+- (void)createDirectoryForCurrentTestCaseIfNeeded {
+    NSString *directoryPath = [self directoryPathForCurrentTestCase];
+    BOOL isDirectory = NO;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDirectory]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+}
+
+/**
+ Returns the full path to the image with the given file name and the iamge size and width appended to it.
+ e.g. {DIRECTORY_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell/{FILE_NAME}_{IMAGE_WIDTH}_{IMAGE_HEIGHT}.png
+ */
+- (NSString *)pathForImage:(UIImage *)image withFileName:(NSString *)fileName {
+    NSString *directoryPath = [self directoryPathForCurrentTestCase];
+    NSString *imageName = [NSString stringWithFormat:@"/%@_%.2f_%.2f.png", fileName, image.size.width, image.size.height];
+    return [directoryPath stringByAppendingString:imageName];
 }
 
 #pragma mark - Private Functional (Class) Methods

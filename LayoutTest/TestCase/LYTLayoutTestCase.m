@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableSet *viewsAllowingOverlap;
 @property (nonatomic, strong) NSMutableSet *viewsAllowingAccessibilityErrors;
+@property (nonatomic, strong) UIView *viewUnderTest;
+@property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
 
 @end
 
@@ -50,6 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
                                                      limitResults:limitResults
                                                        validation:^(id view, NSDictionary *data, id _Nullable context) {
 
+                                                           self.viewUnderTest = view;
+                                                           self.dataForViewUnderTest = data;
+                                                           
                                                            // We must run this first to give the user a chance to add to viewsAllowingOverlap
                                                            validation(view, data, context);
 
@@ -60,6 +65,10 @@ NS_ASSUME_NONNULL_BEGIN
                                                            self.viewsAllowingOverlap = [NSMutableSet set];
                                                            self.viewsAllowingAccessibilityErrors = [NSMutableSet set];
                                                        }];
+}
+
+- (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
+    [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
 }
 
 #pragma mark - Test Lifecycle

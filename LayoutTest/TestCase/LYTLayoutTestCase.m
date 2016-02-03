@@ -41,6 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
                               limitResults:(LYTTesterLimitResults)limitResults
                                 validation:(void(^)(id view, NSDictionary *data, id _Nullable context))validation {
+    [self startNewLog];
+    
     // It's too early to do this in setUp because they may override this property in setUp. So, let's do it here. It's ok if we call this multiple times per test. We'll just clean up in tearDown.
     if (self.interceptsAutolayoutErrors) {
         [LYTAutolayoutFailureIntercepter interceptAutolayoutFailuresWithBlock:^{
@@ -65,6 +67,8 @@ NS_ASSUME_NONNULL_BEGIN
                                                            self.viewsAllowingOverlap = [NSMutableSet set];
                                                            self.viewsAllowingAccessibilityErrors = [NSMutableSet set];
                                                        }];
+    
+    [self finishLog];
 }
 
 #pragma mark - Test Lifecycle
@@ -233,12 +237,18 @@ NS_ASSUME_NONNULL_BEGIN
     [UIImagePNGRepresentation(image) writeToFile:[self pathForImage:image withFileName:fileName] atomically:YES];
 }
 
+
+- (NSString *)commonRootPath {
+    NSString *currentDirectory = [[NSBundle bundleForClass:[self class]] bundlePath];
+    return [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages"];
+}
+
 /**
  Returns the path to the directory to save snapshots of the current failing test. Path includes class and method name
  e.g. {FULL_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell
  */
 - (NSString *)directoryPathForCurrentTestCase {
-    NSString *documentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, true).firstObject;
+    NSString *documentsDirectory = [self commonRootPath];
     NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
     NSString *className = NSStringFromClass(self.class);
     //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
@@ -246,7 +256,7 @@ NS_ASSUME_NONNULL_BEGIN
         className = [className componentsSeparatedByString:@"."].lastObject;
     }
     
-    NSString *directoryPath = [documentsPath stringByAppendingString:[NSString stringWithFormat:@"/snapshots/%@/%@", className, methodName]];
+    NSString *directoryPath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@/%@", className, methodName]];
     return directoryPath;
 }
 
@@ -268,57 +278,68 @@ NS_ASSUME_NONNULL_BEGIN
     return [directoryPath stringByAppendingString:imageName];
 }
 
-- (void)appendToLog:(NSString *)description imagePath:(NSString *)imagePath testData:(NSDictionary *)testData {
+- (void)startNewLog {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *currentDirectory = [[NSBundle bundleForClass:[self class]] bundlePath];
-    NSError *error;
-    NSString *documentsDirectory = [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages"];
+    NSString *documentsDirectory = [self commonRootPath];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
+    NSError *error;
     BOOL isDirectory;
     
-    if (![fileManager fileExistsAtPath:filePath isDirectory:&isDirectory]) {
-        NSString *header = @"<HTML>\
-        <HEAD>\
-        </HEAD>\
-        <BODY>\
-        \
-        <TABLE style='width:100%'>\
-        \
-        <TR>\
-        <TH>Description</TH>\
-        <TH>Image</TH>\
-        <TH>Input Data</TH>\
-        </TR>";
-        
-        [fileManager createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
-        
-        [fileManager createFileAtPath:filePath contents:nil attributes:nil];
-        
-        // Write to the file
-        [header writeToFile:filePath atomically:YES
-                   encoding:NSUTF8StringEncoding error:&error];
+    if ([fileManager fileExistsAtPath:filePath isDirectory:&isDirectory]) {
+        NSError *error;
+        [fileManager removeItemAtPath:filePath error:&error];
     }
+    NSString *header = @"<HTML>\
+    <HEAD>\
+    </HEAD>\
+    <BODY>\
+    \
+    <TABLE style='width:100%'>\
+    \
+    <TR>\
+    <TH>Description</TH>\
+    <TH>Image</TH>\
+    <TH>Input Data</TH>\
+    </TR>";
+    
+    [fileManager createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+    
+    [fileManager createFileAtPath:filePath contents:nil attributes:nil];
+    
+    // Write to the file
+    [header writeToFile:filePath atomically:YES
+               encoding:NSUTF8StringEncoding error:&error];
+
+}
+
+- (void)finishLog {
+    NSString *documentsDirectory = [self commonRootPath];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
+    NSString *footer = @"</TABLE>\
+    \
+    </BODY>\
+    </HTML>\
+    ";
+    NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+    
+    [fileHandler seekToEndOfFile];
+    [fileHandler writeData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
+    [fileHandler closeFile];
+}
+
+- (void)appendToLog:(NSString *)description imagePath:(NSString *)imagePath testData:(NSDictionary *)testData {
+    NSString *documentsDirectory = [self commonRootPath];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
     NSString *errorHTML = [NSString stringWithFormat:@"<TR>\
                            <TD>%@</TD>\
                            <TD><IMG src='%@' alt='No Image'></TD>\
                            <TD>%@</TD>\
                            </TR>\
                            ", description, imagePath, testData.description];
-    
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+    
     [fileHandler seekToEndOfFile];
     [fileHandler writeData:[errorHTML dataUsingEncoding:NSUTF8StringEncoding]];
-    [fileHandler closeFile];
-    
-    NSString *footer = @"</TABLE>\
-    \
-    </BODY>\
-    </HTML>\
-    ";
-    
-    fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
-    [fileHandler seekToEndOfFile];
-    [fileHandler writeData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
     [fileHandler closeFile];
 }
 

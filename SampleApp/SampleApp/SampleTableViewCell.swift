@@ -38,10 +38,11 @@ public class SampleTableViewCell: UITableViewCell {
     }
 
     func setup(json: [NSObject: AnyObject]) {
+        let bun = NSBundle(forClass:object_getClass(self))
         if let imageType = json["imageType"] as? String {
             switch imageType {
             case "linkedin":
-                mainImageView.image = UIImage(named: "LinkedInLogo")
+                mainImageView.image = UIImage(named: "LinkedInLogo", inBundle: bun, compatibleWithTraitCollection: nil)
                 mainImageView.hidden = false
                 labelLeftEdge.constant = SampleTableViewCell.leftMaxEdge
             default:

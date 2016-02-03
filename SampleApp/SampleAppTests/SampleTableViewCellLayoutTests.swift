@@ -12,7 +12,38 @@ import XCTest
 import LayoutTest
 import LayoutTestBase
 
+public func saveImage(image: UIImage, fileName: String) {
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    let destinationPath = documentsPath.stringByAppendingString("/" + fileName + ".png")
+    UIImageJPEGRepresentation(image,1.0)!.writeToFile(destinationPath, atomically: true)
+}
+
 // If you are writing in Objective-C, you should use LYTLayoutTestCase instead
+public func LYTAssertTrue(view: UIView, @autoclosure expression: () -> BooleanType, _ message: String = "", file: String = "", line: UInt = 0) {
+    let result = expression();
+    if (result.boolValue == false) {
+        let image = renderLayer(view.layer)     //snapShot(view)
+        saveImage(image, fileName: "snapshot")
+    }
+    XCTAssertTrue(result);
+}
+
+public func renderLayer(layer: CALayer) -> UIImage {
+    let bounds = layer.bounds
+    
+    UIGraphicsBeginImageContextWithOptions(bounds.size, false, 1.0);
+    
+    if let context: CGContext! = UIGraphicsGetCurrentContext() {
+        CGContextSaveGState(context)
+        layer.renderInContext(context!)
+        CGContextRestoreGState(context)
+    }
+    
+    let snapshot = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    
+    return snapshot
+}
 
 class SampleTableViewCellLayoutTests : LayoutTestCase {
 
@@ -22,7 +53,7 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
         runLayoutTests() { (view: SampleTableViewCell, data: [NSObject: AnyObject], context: Any?) in
 
             // Verify that the label and image view are top aligned
-            XCTAssertTrue(view.titleLabel.lyt_topAligned(view.mainImageView))
+            //XCTAssertTrue(view, expression: view.titleLabel.lyt_bottomAligned(view.mainImageView))
 
             // Verify that the text gets set correctly
             XCTAssertEqual(view.titleLabel.text, data["text"] as? String)
@@ -49,6 +80,8 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
 
             // Verify that the right label is enabled iff the data specifies that it is enabled
             XCTAssertEqual(view.rightButton.enabled, data["buttonEnabled"] as? Bool ?? false)
+            
+            LYTAssertTrue(view, expression: view.titleLabel.lyt_bottomAligned(view.mainImageView))
         }
     }
 }

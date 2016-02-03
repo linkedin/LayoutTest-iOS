@@ -67,10 +67,6 @@ NS_ASSUME_NONNULL_BEGIN
                                                        }];
 }
 
-- (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
-    [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
-}
-
 #pragma mark - Test Lifecycle
 
 - (void)setUp {
@@ -194,6 +190,61 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)failTest:(NSString *)errorMessage view:(nullable UIView *)view {
     XCTFail(@"%@", errorMessage);
+}
+
+#pragma mark Failing Test Snapshots
+
+- (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
+    [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
+    //Create image
+    UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
+    
+    //Save image
+    [self saveImage:viewImage toFileWithName:@"TestFile"];
+    
+    //Save html with data
+}
+
+- (UIImage *)renderLayer:(CALayer *)layer {
+    CGRect bounds = layer.bounds;
+    
+    NSAssert1(CGRectGetWidth(bounds), @"Zero width for layer %@", layer);
+    NSAssert1(CGRectGetHeight(bounds), @"Zero height for layer %@", layer);
+    
+    UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    NSAssert1(context, @"Could not generate context for layer %@", layer);
+    
+    CGContextSaveGState(context);
+    {
+        [layer renderInContext:context];
+    }
+    CGContextRestoreGState(context);
+    
+    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return snapshot;
+}
+
+- (void)saveImage:(UIImage *)image toFileWithName:(NSString *)fileName {
+    
+    NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
+    NSString *className = NSStringFromClass(self.class);
+    
+    //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
+    if ([className containsString:@"."]) {
+        className = [className componentsSeparatedByString:@"."].lastObject;
+    }
+    
+    NSString *documentsPath = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, true).firstObject;
+    NSString *directoryToCreate = [NSString stringWithFormat:@"/snapshots/%@/%@", className, methodName];
+    NSString *directoryPath = [documentsPath stringByAppendingString:directoryToCreate];
+    NSString *imageName = [NSString stringWithFormat:@"/%@_%.2f_%.2f.png", fileName, image.size.width, image.size.height];
+    NSString *imagePath = [directoryPath stringByAppendingString:imageName];
+    
+    [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+    [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
 }
 
 #pragma mark - Private Functional (Class) Methods

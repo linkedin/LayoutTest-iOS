@@ -51,9 +51,6 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
     
     func testSampleTableViewCell() {
         runLayoutTests() { (view: SampleTableViewCell, data: [NSObject: AnyObject], context: Any?) in
-
-            let image = self.snapShot(view)
-            self.saveImage(image, fileName: "snapshot")
             
             // Verify that the label and image view are top aligned
             //XCTAssertTrue(view, expression: view.titleLabel.lyt_bottomAligned(view.mainImageView))
@@ -84,22 +81,8 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
             // Verify that the right label is enabled iff the data specifies that it is enabled
             XCTAssertEqual(view.rightButton.enabled, data["buttonEnabled"] as? Bool ?? false)
             
-            //LYTAssertTrue(view, expression: view.titleLabel.lyt_topAligned(view.mainImageView))
+            LYTAssertTrue(view, expression: view.titleLabel.lyt_topAligned(view.mainImageView))
         }
-    }
-    
-    func snapShot(view: UIView) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(view.bounds.size, true, 0)
-        view.drawViewHierarchyInRect(view.bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
-    }
-    
-    func saveImage(image: UIImage, fileName: String) {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        let destinationPath = documentsPath.stringByAppendingString("/" + fileName + ".png")
-        UIImageJPEGRepresentation(image,1.0)!.writeToFile(destinationPath, atomically: true)
     }
 
 }

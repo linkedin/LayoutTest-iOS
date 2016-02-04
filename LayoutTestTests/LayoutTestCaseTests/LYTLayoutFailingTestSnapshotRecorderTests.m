@@ -72,9 +72,7 @@
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation];
     
-    NSString *directoryPath = [self classDirectoryPath];
-    NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
-    directoryPath = [directoryPath stringByAppendingPathComponent:methodName];
+    NSString *directoryPath = [self pathForCurrentInvocation];
     BOOL isDirectory = NO;
     BOOL fileExisits = [[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDirectory];
     
@@ -87,9 +85,48 @@
     return [NSString stringWithContentsOfFile:indexFilePath encoding:NSUTF8StringEncoding error:nil];
 }
 
+- (void)testSaveImageOfCurrentViewSavesImageToDisk {
+    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    self.recorder.viewUnderTest = testView;
+    [self.recorder startNewLogForClass:self.class];
+    
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation];
+    
+    NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:@"/TestImage.png"];
+    XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
+}
+
+- (void)testSaveImageOfCurrentViewWhenViewHasWidthOfZeroDoesNotSaveImage {
+    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 0, 100}];
+    self.recorder.viewUnderTest = testView;
+    [self.recorder startNewLogForClass:self.class];
+    
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation];
+    
+    NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:@"/TestImage.png"];
+    XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
+}
+
+- (void)testSaveImageOfCurrentViewWhenViewHasHeightOfZeroDoesNotSaveImage {
+    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 0}];
+    self.recorder.viewUnderTest = testView;
+    [self.recorder startNewLogForClass:self.class];
+    
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation];
+    
+    NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:@"/TestImage.png"];
+    XCTAssertFalse([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
+}
+
 - (NSString *)classDirectoryPath {
     NSString *currentDirectory = [[NSBundle bundleForClass:self.class] bundlePath];
     return [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests"];
+}
+
+- (NSString *)pathForCurrentInvocation {
+    NSString *directoryPath = [self classDirectoryPath];
+    NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
+    return [directoryPath stringByAppendingPathComponent:methodName];
 }
 
 - (NSString *)expectedStartOfFileHTML {

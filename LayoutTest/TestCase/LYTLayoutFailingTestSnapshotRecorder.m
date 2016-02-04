@@ -72,6 +72,8 @@
 
 - (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation {
     [self createDirectoryForInvocationIfNeeded:invocation];
+    UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
+    [UIImagePNGRepresentation(viewImage) writeToFile:[self pathForImage:viewImage withInovation:invocation] atomically:YES];
 }
 
 - (void)createDirectoryForInvocationIfNeeded:(NSInvocation *)invocation {
@@ -103,6 +105,36 @@
     }
     
     return [currentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"LayoutTestImages/%@", className]];
+}
+
+/**
+ Returns the full path to the image with the given file name and the iamge size and width appended to it.
+ e.g. {DIRECTORY_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell/{FILE_NAME}_{IMAGE_WIDTH}_{IMAGE_HEIGHT}.png
+ */
+- (NSString *)pathForImage:(UIImage *)image withInovation:(NSInvocation *)invocation {
+    NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
+
+    return [directoryPath stringByAppendingPathComponent:@"TestImage.png"];
+}
+
+- (UIImage *)renderLayer:(CALayer *)layer {
+    UIImage *snapshot = nil;
+        CGRect bounds = layer.bounds;
+    if (CGRectGetWidth(bounds) > 0 && CGRectGetHeight(bounds) > 0) {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        CGContextSaveGState(context);
+        {
+            [layer renderInContext:context];
+        }
+        CGContextRestoreGState(context);
+        
+        snapshot = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    
+    return snapshot;
 }
 
 @end

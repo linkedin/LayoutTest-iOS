@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5667F6621C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 5667F6601C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h */; };
+		5667F6631C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5667F6611C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m */; };
+		5667F6651C6362540042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5667F6641C6362540042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m */; };
 		614FE6431C03EE3C00BB9EE6 /* LayoutTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614FE6391C03EE3C00BB9EE6 /* LayoutTest.framework */; };
 		614FE6A01C03EF6A00BB9EE6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6152970D187CAEEC00BAF959 /* XCTest.framework */; };
 		614FE6B31C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6A11C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m */; };
@@ -91,6 +94,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5667F6601C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTLayoutFailingTestSnapshotRecorder.h; sourceTree = "<group>"; };
+		5667F6611C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTLayoutFailingTestSnapshotRecorder.m; sourceTree = "<group>"; };
+		5667F6641C6362540042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTLayoutFailingTestSnapshotRecorderTests.m; sourceTree = "<group>"; };
 		613272E418A2BB7400036061 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		614FE6391C03EE3C00BB9EE6 /* LayoutTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LayoutTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614FE63D1C03EE3C00BB9EE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -241,9 +247,10 @@
 				614FE6AC1C03F05E00BB9EE6 /* LayoutTestCaseMissingLabelTests.m */,
 				614FE6AD1C03F05E00BB9EE6 /* LayoutTestCaseNestedAccessibilityTests.m */,
 				614FE6AE1C03F05E00BB9EE6 /* LayoutTestCaseOverlapTests.m */,
-				614FE6AF1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m */,
-				61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */,
 				61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */,
+				61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */,
+				614FE6AF1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m */,
+				5667F6641C6362540042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m */,
 			);
 			path = LayoutTestCaseTests;
 			sourceTree = "<group>";
@@ -407,6 +414,8 @@
 		61ADE2331C0CAFE900585946 /* TestCase */ = {
 			isa = PBXGroup;
 			children = (
+				5667F6601C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h */,
+				5667F6611C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m */,
 				61ADE2341C0CAFE900585946 /* LYTLayoutTestCase.h */,
 				61ADE2351C0CAFE900585946 /* LYTLayoutTestCase.m */,
 			);
@@ -433,6 +442,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5667F6621C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h in Headers */,
 				61A306681C125A8000CB3FEC /* LayoutTest.h in Headers */,
 				61ADE2491C0CAFE900585946 /* LYTLayoutTestCase.h in Headers */,
 			);
@@ -595,6 +605,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61ADE24A1C0CAFE900585946 /* LYTLayoutTestCase.m in Sources */,
+				5667F6631C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m in Sources */,
 				61ADE1E81C0CA81600585946 /* LayoutTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -609,6 +620,7 @@
 				614FE6C11C03F05E00BB9EE6 /* TestHelpersTests.m in Sources */,
 				614FE6B71C03F05E00BB9EE6 /* IteratorTests.m in Sources */,
 				614FE6BA1C03F05E00BB9EE6 /* LayoutTestCaseAutolayoutFailureTests.m in Sources */,
+				5667F6651C6362540042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m in Sources */,
 				614FE6B91C03F05E00BB9EE6 /* LayoutTestCaseAmbiguousTests.m in Sources */,
 				614FE6B51C03F05E00BB9EE6 /* DataValuesTests.m in Sources */,
 				614FE6B31C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m in Sources */,

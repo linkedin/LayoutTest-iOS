@@ -52,17 +52,29 @@
 }
 
 - (void)testStartNewLogCreatesIndexHTMLFileWithExpectedContent {
+    [self.recorder startNewLogForClass:self.class];
+    
+    NSString *actualHTML = [self indexHTMLFile];
+    XCTAssertEqualObjects([self expectedStartOfFileHTML], actualHTML);
+}
+
+- (void)testFinishLogAddsExpectedHTMLToIndexFile {
+    [self.recorder startNewLogForClass:self.class];
+    [self.recorder finishLog];
+    
+    NSString *actualHTML = [self indexHTMLFile];
+    NSString *expectedHTML = [NSString stringWithFormat:@"%@%@", [self expectedStartOfFileHTML], [self expectedEndOfFileHTML]];
+    XCTAssertEqualObjects(expectedHTML, actualHTML);
+}
+
+- (NSString *)indexHTMLFile {
     NSString *currentDirectory = [[NSBundle bundleForClass:self.class] bundlePath];
     NSString *classDirectory = [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests"];
     NSString *indexFilePath = [classDirectory stringByAppendingPathComponent:@"index.html"];
-    
-    [self.recorder startNewLogForClass:self.class];
-    
-    NSString *actualHTML = [NSString stringWithContentsOfFile:indexFilePath encoding:NSUTF8StringEncoding error:nil];
-    XCTAssertEqualObjects([self expectedInitialHTML], actualHTML);
+    return [NSString stringWithContentsOfFile:indexFilePath encoding:NSUTF8StringEncoding error:nil];
 }
 
-- (NSString *)expectedInitialHTML {
+- (NSString *)expectedStartOfFileHTML {
     return @"<HTML>\
     <HEAD>\
     </HEAD>\
@@ -75,6 +87,14 @@
     <TH>Image</TH>\
     <TH>Input Data</TH>\
     </TR>";
+}
+
+- (NSString *)expectedEndOfFileHTML {
+    return @"</TABLE>\
+    \
+    </BODY>\
+    </HTML>\
+    ";
 }
 
 @end

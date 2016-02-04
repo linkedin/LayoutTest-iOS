@@ -55,6 +55,21 @@
                encoding:NSUTF8StringEncoding error:&error];
 }
 
+- (void)finishLog {
+    NSString *documentsDirectory = [self commonRootPath];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
+    NSString *footer = @"</TABLE>\
+    \
+    </BODY>\
+    </HTML>\
+    ";
+    NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+    
+    [fileHandler seekToEndOfFile];
+    [fileHandler writeData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
+    [fileHandler closeFile];
+}
+
 - (NSString *)commonRootPath {
     NSString *currentDirectory = [[NSBundle bundleForClass:self.invocationClass] bundlePath];
     NSString *className = NSStringFromClass(self.invocationClass);

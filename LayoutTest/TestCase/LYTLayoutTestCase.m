@@ -240,7 +240,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)saveImage:(UIImage *)image {
-    [self createDirectoryForCurrentTestCaseIfNeeded];
+    [self createDirectoryForCurrentMethodIfNeeded];
     [UIImagePNGRepresentation(image) writeToFile:[self pathForImage:image] atomically:YES];
 }
 
@@ -259,7 +259,7 @@ NS_ASSUME_NONNULL_BEGIN
  Returns the path to the directory to save snapshots of the current failing test. Path includes class and method name
  e.g. {FULL_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell
  */
-- (NSString *)directoryPathForCurrentTestCase {
+- (NSString *)directoryPathForCurrentMethod {
     NSString *documentsDirectory = [[self class] commonRootPath];
     NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
     
@@ -267,8 +267,8 @@ NS_ASSUME_NONNULL_BEGIN
     return directoryPath;
 }
 
-- (void)createDirectoryForCurrentTestCaseIfNeeded {
-    NSString *directoryPath = [self directoryPathForCurrentTestCase];
+- (void)createDirectoryForCurrentMethodIfNeeded {
+    NSString *directoryPath = [self directoryPathForCurrentMethod];
     BOOL isDirectory = NO;
     if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDirectory]) {
         [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
@@ -280,7 +280,7 @@ NS_ASSUME_NONNULL_BEGIN
  e.g. {DIRECTORY_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell/{FILE_NAME}_{IMAGE_WIDTH}_{IMAGE_HEIGHT}.png
  */
 - (NSString *)pathForImage:(UIImage *)image {
-    NSString *directoryPath = [self directoryPathForCurrentTestCase];
+    NSString *directoryPath = [self directoryPathForCurrentMethod];
     NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%@", image.size.width, image.size.height, self.dataForViewUnderTest.description];
     NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_.]+" options:0 error:nil];
     imageName = [regex stringByReplacingMatchesInString:imageName options:0 range:NSMakeRange(0, imageName.length) withTemplate:@"-"];
@@ -293,16 +293,12 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (void)startNewLog {
+    [self deleteCurrentFailingSnapshots];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *documentsDirectory = [self commonRootPath];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
+    NSString *classNameDirectory = [self commonRootPath];
+    NSString *filePath = [classNameDirectory stringByAppendingPathComponent:@"index.html"];
     NSError *error;
-    BOOL isDirectory;
     
-    if ([fileManager fileExistsAtPath:filePath isDirectory:&isDirectory]) {
-        NSError *error;
-        [fileManager removeItemAtPath:filePath error:&error];
-    }
     NSString *header = @"<HTML>\
     <HEAD>\
     </HEAD>\
@@ -316,14 +312,18 @@ NS_ASSUME_NONNULL_BEGIN
     <TH>Input Data</TH>\
     </TR>";
     
-    [fileManager createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
-    
+    [fileManager createDirectoryAtPath:classNameDirectory withIntermediateDirectories:YES attributes:nil error:&error];
     [fileManager createFileAtPath:filePath contents:nil attributes:nil];
     
     // Write to the file
     [header writeToFile:filePath atomically:YES
                encoding:NSUTF8StringEncoding error:&error];
 
+}
+
++ (void)deleteCurrentFailingSnapshots {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:[self commonRootPath] error:nil];
 }
 
 + (void)finishLog {

@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class UIViewWithLabel;
 
 @interface UnitTestViews : NSObject
 
@@ -32,5 +33,7 @@
 + (UIView *)viewWithNestedAccessibility;
 
 + (UIView *)viewWithAccessibilityIDButNoLabel;
+
++ (UIViewWithLabel *)viewWithLongStringOverlappingLabel;
 
 @end

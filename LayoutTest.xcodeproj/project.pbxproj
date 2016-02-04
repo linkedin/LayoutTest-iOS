@@ -71,6 +71,8 @@
 		61CACFB41C1A4FF500369461 /* LYTDeviceConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFB21C1A4FF500369461 /* LYTDeviceConstants.m */; };
 		61CACFB61C1A560000369461 /* LayoutTestCaseViewSizesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */; };
 		61CACFB81C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */; };
+		C56317F11C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C56317F01C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m */; };
+		C56317F41C63746C00A8E8BA /* UIViewWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C56317F31C63746C00A8E8BA /* UIViewWithLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +166,9 @@
 		61CACFB21C1A4FF500369461 /* LYTDeviceConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTDeviceConstants.m; sourceTree = "<group>"; };
 		61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseViewSizesTests.m; sourceTree = "<group>"; };
 		61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseViewSizesConfigTests.m; sourceTree = "<group>"; };
+		C56317F01C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseMultipleDataOverlapTests.m; sourceTree = "<group>"; };
+		C56317F21C63746C00A8E8BA /* UIViewWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewWithLabel.h; sourceTree = "<group>"; };
+		C56317F31C63746C00A8E8BA /* UIViewWithLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewWithLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +233,8 @@
 			children = (
 				614FE6A51C03F05E00BB9EE6 /* UnitTestViews.h */,
 				614FE6A61C03F05E00BB9EE6 /* UnitTestViews.m */,
+				C56317F21C63746C00A8E8BA /* UIViewWithLabel.h */,
+				C56317F31C63746C00A8E8BA /* UIViewWithLabel.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -244,6 +251,7 @@
 				614FE6AF1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m */,
 				61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */,
 				61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */,
+				C56317F01C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m */,
 			);
 			path = LayoutTestCaseTests;
 			sourceTree = "<group>";
@@ -616,8 +624,10 @@
 				614FE6BB1C03F05E00BB9EE6 /* LayoutTestCaseMissingLabelTests.m in Sources */,
 				614FE6D01C050F4000BB9EE6 /* FrameComparisonTests.m in Sources */,
 				614FE6BE1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m in Sources */,
+				C56317F41C63746C00A8E8BA /* UIViewWithLabel.m in Sources */,
 				61CACFB61C1A560000369461 /* LayoutTestCaseViewSizesTests.m in Sources */,
 				614FE6BD1C03F05E00BB9EE6 /* LayoutTestCaseOverlapTests.m in Sources */,
+				C56317F11C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m in Sources */,
 				614FE6C31C03F11300BB9EE6 /* SwiftLayoutTestCaseTests.swift in Sources */,
 				614FE6B41C03F05E00BB9EE6 /* ConfigTests.m in Sources */,
 				614FE6B61C03F05E00BB9EE6 /* UnitTestViews.m in Sources */,

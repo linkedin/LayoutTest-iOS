@@ -55,6 +55,47 @@
                encoding:NSUTF8StringEncoding error:&error];
 }
 
+- (void)finishLog {
+    NSString *documentsDirectory = [self commonRootPath];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
+    NSString *footer = @"</TABLE>\
+    \
+    </BODY>\
+    </HTML>\
+    ";
+    NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+    
+    [fileHandler seekToEndOfFile];
+    [fileHandler writeData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
+    [fileHandler closeFile];
+}
+
+- (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation {
+    [self createDirectoryForInvocationIfNeeded:invocation];
+    UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
+    [UIImagePNGRepresentation(viewImage) writeToFile:[self pathForImage:viewImage withInovation:invocation] atomically:YES];
+}
+
+- (void)createDirectoryForInvocationIfNeeded:(NSInvocation *)invocation {
+    NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
+    BOOL isDirectory = NO;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDirectory]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+}
+
+/**
+ Returns the path to the directory to save snapshots of the current failing test. Path includes class and method name
+ e.g. {FULL_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell
+ */
+- (NSString *)directoryPathForCurrentInvocation:(NSInvocation *)invocation {
+    NSString *documentsDirectory = [self commonRootPath];
+    NSString *methodName = NSStringFromSelector((SEL)[invocation selector]);
+    
+    NSString *directoryPath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@", methodName]];
+    return directoryPath;
+}
+
 - (NSString *)commonRootPath {
     NSString *currentDirectory = [[NSBundle bundleForClass:self.invocationClass] bundlePath];
     NSString *className = NSStringFromClass(self.invocationClass);
@@ -64,6 +105,43 @@
     }
     
     return [currentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"LayoutTestImages/%@", className]];
+}
+
+/**
+ Returns the full path to the image with the given file name and the iamge size and width appended to it.
+ e.g. {DIRECTORY_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell/{FILE_NAME}_{IMAGE_WIDTH}_{IMAGE_HEIGHT}.png
+ */
+- (NSString *)pathForImage:(UIImage *)image withInovation:(NSInvocation *)invocation {
+    NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
+    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%@", image.size.width, image.size.height, self.dataForViewUnderTest.description];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_.]+" options:0 error:nil];
+    imageName = [regex stringByReplacingMatchesInString:imageName options:0 range:NSMakeRange(0, imageName.length) withTemplate:@"-"];
+    if (imageName.length > 250) {
+        imageName = [imageName substringToIndex:250];
+    }
+    
+    imageName = [imageName stringByAppendingPathExtension:@"png"];
+    return [directoryPath stringByAppendingPathComponent:imageName];
+}
+
+- (UIImage *)renderLayer:(CALayer *)layer {
+    UIImage *snapshot = nil;
+        CGRect bounds = layer.bounds;
+    if (CGRectGetWidth(bounds) > 0 && CGRectGetHeight(bounds) > 0) {
+        UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
+        CGContextRef context = UIGraphicsGetCurrentContext();
+        
+        CGContextSaveGState(context);
+        {
+            [layer renderInContext:context];
+        }
+        CGContextRestoreGState(context);
+        
+        snapshot = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    }
+    
+    return snapshot;
 }
 
 @end

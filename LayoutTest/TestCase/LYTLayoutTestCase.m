@@ -211,10 +211,10 @@ NS_ASSUME_NONNULL_BEGIN
     UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
     
     //Save image
-    [self saveImage:viewImage toFileWithName:@"TestFile"];
+    [self saveImage:viewImage];
     
     //Save html with data
-    [self appendToLog:description imagePath:[self pathForImage:viewImage withFileName:@"TestFile"] testData:self.dataForViewUnderTest];
+    [self appendToLog:description imagePath:[self pathForImage:viewImage] testData:self.dataForViewUnderTest];
 }
 
 - (UIImage *)renderLayer:(CALayer *)layer {
@@ -239,9 +239,9 @@ NS_ASSUME_NONNULL_BEGIN
     return snapshot;
 }
 
-- (void)saveImage:(UIImage *)image toFileWithName:(NSString *)fileName {
+- (void)saveImage:(UIImage *)image {
     [self createDirectoryForCurrentTestCaseIfNeeded];
-    [UIImagePNGRepresentation(image) writeToFile:[self pathForImage:image withFileName:fileName] atomically:YES];
+    [UIImagePNGRepresentation(image) writeToFile:[self pathForImage:image] atomically:YES];
 }
 
 + (NSString *)commonRootPath {
@@ -279,14 +279,15 @@ NS_ASSUME_NONNULL_BEGIN
  Returns the full path to the image with the given file name and the iamge size and width appended to it.
  e.g. {DIRECTORY_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell/{FILE_NAME}_{IMAGE_WIDTH}_{IMAGE_HEIGHT}.png
  */
-- (NSString *)pathForImage:(UIImage *)image withFileName:(NSString *)fileName {
+- (NSString *)pathForImage:(UIImage *)image {
     NSString *directoryPath = [self directoryPathForCurrentTestCase];
-    NSString *imageName = [NSString stringWithFormat:@"%@_%.2f_%.2f_%@", @"", image.size.width, image.size.height, self.dataForViewUnderTest.description];
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_]+" options:0 error:nil];
+    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%@", image.size.width, image.size.height, self.dataForViewUnderTest.description];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_.]+" options:0 error:nil];
     imageName = [regex stringByReplacingMatchesInString:imageName options:0 range:NSMakeRange(0, imageName.length) withTemplate:@"-"];
     if (imageName.length > 250) {
         imageName = [imageName substringToIndex:250];
     }
+    
     imageName = [imageName stringByAppendingPathExtension:@"png"];
     return [directoryPath stringByAppendingPathComponent:imageName];
 }

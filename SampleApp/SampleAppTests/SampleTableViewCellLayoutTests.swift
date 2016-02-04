@@ -12,45 +12,7 @@ import XCTest
 import LayoutTest
 import LayoutTestBase
 
-public func saveImage(image: UIImage, fileName: String) {
-    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-    let directoryPath = documentsPath.stringByAppendingString("/snapshots")
-    
-    let imagePath = directoryPath.stringByAppendingString("/" + fileName + "_" + String(image.size.width) + "_" + String(image.size.height) + ".png")
-    
-    do {
-        try NSFileManager.defaultManager().createDirectoryAtPath(directoryPath, withIntermediateDirectories: false, attributes: nil)
-    } catch {}
-    
-    UIImageJPEGRepresentation(image,1.0)!.writeToFile(imagePath, atomically: true)
-}
-
 // If you are writing in Objective-C, you should use LYTLayoutTestCase instead
-public func LYTAssertTrue(view: UIView, @autoclosure expression: () -> BooleanType, _ message: String = "", file: String = "", line: UInt = 0) {
-    let result = expression();
-    if (result.boolValue == false) {
-        let image = renderLayer(view.layer)     //snapShot(view)
-        saveImage(image, fileName: "snapshot")
-    }
-    XCTAssertTrue(result);
-}
-
-public func renderLayer(layer: CALayer) -> UIImage {
-    let bounds = layer.bounds
-    
-    UIGraphicsBeginImageContextWithOptions(bounds.size, false, 1.0);
-    
-    if let context: CGContext! = UIGraphicsGetCurrentContext() {
-        CGContextSaveGState(context)
-        layer.renderInContext(context!)
-        CGContextRestoreGState(context)
-    }
-    
-    let snapshot = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    
-    return snapshot
-}
 
 class SampleTableViewCellLayoutTests : LayoutTestCase {
 
@@ -58,7 +20,7 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
     
     func testSampleTableViewCell() {
         runLayoutTests() { (view: SampleTableViewCell, data: [NSObject: AnyObject], context: Any?) in
-            
+
             // Verify that the label and image view are top aligned
             XCTAssertTrue(view.titleLabel.lyt_topAligned(view.mainImageView))
 
@@ -89,7 +51,6 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
             XCTAssertEqual(view.rightButton.enabled, data["buttonEnabled"] as? Bool ?? false)
         }
     }
-
 }
 
 extension SampleTableViewCell : LYTViewProvider {

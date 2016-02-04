@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface LYTLayoutFailingTestSnapshotRecorder : NSObject
+
+@property (nonatomic, strong) UIView *viewUnderTest;
 
 @end

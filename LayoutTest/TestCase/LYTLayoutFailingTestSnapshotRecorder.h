@@ -14,4 +14,6 @@
 @property (nonatomic, strong) UIView *viewUnderTest;
 @property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
 
+- (void)startNewLog;
+
 @end

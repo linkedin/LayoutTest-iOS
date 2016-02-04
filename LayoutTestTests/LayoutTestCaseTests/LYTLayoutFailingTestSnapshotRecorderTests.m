@@ -20,4 +20,9 @@
     XCTAssertTrue([recorder respondsToSelector:@selector(setViewUnderTest:)]);
 }
 
+- (void)testCanSetDataForViewUnderTest {
+    LYTLayoutFailingTestSnapshotRecorder *recorder = [[LYTLayoutFailingTestSnapshotRecorder alloc] init];
+    XCTAssertTrue([recorder respondsToSelector:@selector(setDataForViewUnderTest:)]);
+}
+
 @end

@@ -12,5 +12,6 @@
 @interface LYTLayoutFailingTestSnapshotRecorder : NSObject
 
 @property (nonatomic, strong) UIView *viewUnderTest;
+@property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
 
 @end

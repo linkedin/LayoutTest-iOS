@@ -13,12 +13,14 @@
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A Beautiful Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L50-fe-ui2">
                     <rect key="frame" x="8" y="8" width="129" height="21"/>
+                    <accessibility key="accessibilityConfiguration" hint="A Beautiful Label" identifier="ABeautifulLabel" label="A Beautiful Label"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W6R-Y4-kjN">
                     <rect key="frame" x="422" y="8" width="124" height="30"/>
+                    <accessibility key="accessibilityConfiguration" hint="A Beautiful Button" identifier="ABeautifulButton" label="A Beautiful Button"/>
                     <state key="normal" title="A Beautiful Button"/>
                 </button>
             </subviews>

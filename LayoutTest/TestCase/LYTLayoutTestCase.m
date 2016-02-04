@@ -16,6 +16,51 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface LayoutSnapshotObserver : NSObject<XCTestObservation>
+
+@end
+
+@implementation LayoutSnapshotObserver {
+    NSMutableSet *failingTestsSnapshotFolder;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        failingTestsSnapshotFolder = [NSMutableSet set];
+    }
+    return self;
+}
+
+- (void)testBundleDidFinish:(NSBundle *)testBundle {
+    if (failingTestsSnapshotFolder.count > 0) {
+        MyLog(@"\nSnapshots of failing tests can be found in:\n");
+        for (NSString *path in failingTestsSnapshotFolder) {
+            MyLog(@"%@\n", path);
+        }
+    }
+}
+
+- (void)testCase:(XCTestCase *)testCase didFailWithDescription:(NSString *)description inFile:(nullable NSString *)filePath atLine:(NSUInteger)lineNumber {
+    if (![testCase isKindOfClass:[LYTLayoutTestCase class]]) {
+        return;
+    }
+    NSString *pathForSnapshots = [testCase.class performSelector:@selector(commonRootPath)];
+    pathForSnapshots = [pathForSnapshots stringByAppendingString:@"/index.html"];
+    [failingTestsSnapshotFolder addObject:pathForSnapshots];
+}
+
+void MyLog(NSString *format, ...) {
+    va_list args;
+    va_start(args, format);
+    NSString *formattedString = [[NSString alloc] initWithFormat:format
+                                                       arguments:args];
+    va_end(args);
+    [[NSFileHandle fileHandleWithStandardOutput] writeData:[formattedString dataUsingEncoding:NSNEXTSTEPStringEncoding]];
+}
+
+@end
+
 @interface LYTLayoutTestCase ()
 
 @property (nonatomic, strong) NSMutableSet *viewsAllowingOverlap;
@@ -30,6 +75,15 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Public
 
 #pragma mark - Running Tests
+
++ (void)initialize {
+    static dispatch_once_t once;
+    dispatch_once(&once, ^ {
+        XCTestObservationCenter *observationCenter = [XCTestObservationCenter sharedTestObservationCenter];
+        LayoutSnapshotObserver *testObserver = [LayoutSnapshotObserver new];
+        [observationCenter addTestObserver:testObserver];
+    });
+}
 
 + (void)setUp {
     [super setUp];

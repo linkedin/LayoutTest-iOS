@@ -31,6 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Running Tests
 
++ (void)setUp {
+    [super setUp];
+    [self startNewLog];
+}
+
++ (void)tearDown {
+    [super tearDown];
+    [self finishLog];
+}
+
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
                                 validation:(void(^)(id, NSDictionary *, id _Nullable))validation {
     [self runLayoutTestsWithViewProvider:viewProvider
@@ -41,7 +51,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
                               limitResults:(LYTTesterLimitResults)limitResults
                                 validation:(void(^)(id view, NSDictionary *data, id _Nullable context))validation {
-    [self startNewLog];
     
     // It's too early to do this in setUp because they may override this property in setUp. So, let's do it here. It's ok if we call this multiple times per test. We'll just clean up in tearDown.
     if (self.interceptsAutolayoutErrors) {
@@ -67,8 +76,6 @@ NS_ASSUME_NONNULL_BEGIN
                                                            self.viewsAllowingOverlap = [NSMutableSet set];
                                                            self.viewsAllowingAccessibilityErrors = [NSMutableSet set];
                                                        }];
-    
-    [self finishLog];
 }
 
 #pragma mark - Test Lifecycle
@@ -237,9 +244,15 @@ NS_ASSUME_NONNULL_BEGIN
     [UIImagePNGRepresentation(image) writeToFile:[self pathForImage:image withFileName:fileName] atomically:YES];
 }
 
-- (NSString *)commonRootPath {
++ (NSString *)commonRootPath {
     NSString *currentDirectory = [[NSBundle bundleForClass:[self class]] bundlePath];
-    return [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages"];
+    NSString *className = NSStringFromClass(self.class);
+    //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
+    if ([className containsString:@"."]) {
+        className = [className componentsSeparatedByString:@"."].lastObject;
+    }
+    
+    return [currentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"LayoutTestImages/%@", className]];
 }
 
 /**
@@ -247,15 +260,10 @@ NS_ASSUME_NONNULL_BEGIN
  e.g. {FULL_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell
  */
 - (NSString *)directoryPathForCurrentTestCase {
-    NSString *documentsDirectory = [self commonRootPath];
+    NSString *documentsDirectory = [[self class] commonRootPath];
     NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
-    NSString *className = NSStringFromClass(self.class);
-    //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
-    if ([className containsString:@"."]) {
-        className = [className componentsSeparatedByString:@"."].lastObject;
-    }
     
-    NSString *directoryPath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@/%@", className, methodName]];
+    NSString *directoryPath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@", methodName]];
     return directoryPath;
 }
 
@@ -283,7 +291,7 @@ NS_ASSUME_NONNULL_BEGIN
     return [directoryPath stringByAppendingPathComponent:imageName];
 }
 
-- (void)startNewLog {
++ (void)startNewLog {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *documentsDirectory = [self commonRootPath];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
@@ -317,7 +325,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 }
 
-- (void)finishLog {
++ (void)finishLog {
     NSString *documentsDirectory = [self commonRootPath];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
     NSString *footer = @"</TABLE>\
@@ -333,7 +341,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)appendToLog:(NSString *)description imagePath:(NSString *)imagePath testData:(NSDictionary *)testData {
-    NSString *documentsDirectory = [self commonRootPath];
+    NSString *documentsDirectory = [[self class] commonRootPath];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
     NSString *errorHTML = [NSString stringWithFormat:@"<TR>\
                            <TD>%@</TD>\

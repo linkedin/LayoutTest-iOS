@@ -10,6 +10,7 @@
 		5667F6621C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 5667F6601C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h */; };
 		5667F6631C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5667F6611C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m */; };
 		5667F6651C6362540042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5667F6641C6362540042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m */; };
+		5667F6671C6370A90042C3BB /* SwiftLYTLayoutFailingTestSnapshotRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5667F6661C6370A90042C3BB /* SwiftLYTLayoutFailingTestSnapshotRecorderTests.swift */; };
 		614FE6431C03EE3C00BB9EE6 /* LayoutTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 614FE6391C03EE3C00BB9EE6 /* LayoutTest.framework */; };
 		614FE6A01C03EF6A00BB9EE6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6152970D187CAEEC00BAF959 /* XCTest.framework */; };
 		614FE6B31C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 614FE6A11C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m */; };
@@ -97,6 +98,8 @@
 		5667F6601C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTLayoutFailingTestSnapshotRecorder.h; sourceTree = "<group>"; };
 		5667F6611C6362050042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTLayoutFailingTestSnapshotRecorder.m; sourceTree = "<group>"; };
 		5667F6641C6362540042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTLayoutFailingTestSnapshotRecorderTests.m; sourceTree = "<group>"; };
+		5667F6661C6370A90042C3BB /* SwiftLYTLayoutFailingTestSnapshotRecorderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLYTLayoutFailingTestSnapshotRecorderTests.swift; sourceTree = "<group>"; };
+		5667F6681C63758F0042C3BB /* LayoutTest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LayoutTest-Bridging-Header.h"; sourceTree = "<group>"; };
 		613272E418A2BB7400036061 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		614FE6391C03EE3C00BB9EE6 /* LayoutTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LayoutTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		614FE63D1C03EE3C00BB9EE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -203,10 +206,11 @@
 		614FE63A1C03EE3C00BB9EE6 /* LayoutTest */ = {
 			isa = PBXGroup;
 			children = (
+				614FE63D1C03EE3C00BB9EE6 /* Info.plist */,
+				5667F6681C63758F0042C3BB /* LayoutTest-Bridging-Header.h */,
 				61A306671C125A8000CB3FEC /* LayoutTest.h */,
 				61ADE1C31C0CA81600585946 /* Swift */,
 				61ADE2331C0CAFE900585946 /* TestCase */,
-				614FE63D1C03EE3C00BB9EE6 /* Info.plist */,
 			);
 			path = LayoutTest;
 			sourceTree = "<group>";
@@ -251,6 +255,7 @@
 				61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */,
 				614FE6AF1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m */,
 				5667F6641C6362540042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m */,
+				5667F6661C6370A90042C3BB /* SwiftLYTLayoutFailingTestSnapshotRecorderTests.swift */,
 			);
 			path = LayoutTestCaseTests;
 			sourceTree = "<group>";
@@ -624,6 +629,7 @@
 				614FE6B91C03F05E00BB9EE6 /* LayoutTestCaseAmbiguousTests.m in Sources */,
 				614FE6B51C03F05E00BB9EE6 /* DataValuesTests.m in Sources */,
 				614FE6B31C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m in Sources */,
+				5667F6671C6370A90042C3BB /* SwiftLYTLayoutFailingTestSnapshotRecorderTests.swift in Sources */,
 				614FE6B81C03F05E00BB9EE6 /* LayoutTestCaseAccessibilityControlTests.m in Sources */,
 				614FE6BB1C03F05E00BB9EE6 /* LayoutTestCaseMissingLabelTests.m in Sources */,
 				614FE6D01C050F4000BB9EE6 /* FrameComparisonTests.m in Sources */,
@@ -818,6 +824,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "LayoutTest/LayoutTest-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -849,6 +856,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "LayoutTest/LayoutTest-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

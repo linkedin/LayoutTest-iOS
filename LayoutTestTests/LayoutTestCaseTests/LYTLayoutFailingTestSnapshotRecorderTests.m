@@ -67,11 +67,29 @@
     XCTAssertEqualObjects(expectedHTML, actualHTML);
 }
 
+- (void)testSaveImageOfCurrentViewCreatesDirectoryFromInvocationSelectorName {
+    [self.recorder startNewLogForClass:self.class];
+    
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation];
+    
+    NSString *directoryPath = [self classDirectoryPath];
+    NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
+    directoryPath = [directoryPath stringByAppendingPathComponent:methodName];
+    BOOL isDirectory = NO;
+    BOOL fileExisits = [[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDirectory];
+    
+    XCTAssertTrue(fileExisits);
+    XCTAssertTrue(isDirectory);
+}
+
 - (NSString *)indexHTMLFile {
-    NSString *currentDirectory = [[NSBundle bundleForClass:self.class] bundlePath];
-    NSString *classDirectory = [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests"];
-    NSString *indexFilePath = [classDirectory stringByAppendingPathComponent:@"index.html"];
+    NSString *indexFilePath = [[self classDirectoryPath] stringByAppendingPathComponent:@"index.html"];
     return [NSString stringWithContentsOfFile:indexFilePath encoding:NSUTF8StringEncoding error:nil];
+}
+
+- (NSString *)classDirectoryPath {
+    NSString *currentDirectory = [[NSBundle bundleForClass:self.class] bundlePath];
+    return [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests"];
 }
 
 - (NSString *)expectedStartOfFileHTML {

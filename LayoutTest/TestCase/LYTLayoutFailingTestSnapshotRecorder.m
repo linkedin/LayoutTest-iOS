@@ -70,6 +70,30 @@
     [fileHandler closeFile];
 }
 
+- (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation {
+    [self createDirectoryForInvocationIfNeeded:invocation];
+}
+
+- (void)createDirectoryForInvocationIfNeeded:(NSInvocation *)invocation {
+    NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
+    BOOL isDirectory = NO;
+    if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDirectory]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+}
+
+/**
+ Returns the path to the directory to save snapshots of the current failing test. Path includes class and method name
+ e.g. {FULL_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell
+ */
+- (NSString *)directoryPathForCurrentInvocation:(NSInvocation *)invocation {
+    NSString *documentsDirectory = [self commonRootPath];
+    NSString *methodName = NSStringFromSelector((SEL)[invocation selector]);
+    
+    NSString *directoryPath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@", methodName]];
+    return directoryPath;
+}
+
 - (NSString *)commonRootPath {
     NSString *currentDirectory = [[NSBundle bundleForClass:self.invocationClass] bundlePath];
     NSString *className = NSStringFromClass(self.invocationClass);

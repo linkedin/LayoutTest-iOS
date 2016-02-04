@@ -15,6 +15,9 @@
 @property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
 
 - (void)startNewLogForClass:(Class)invocationClass;
+
 - (void)finishLog;
+
+- (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation;
 
 @end

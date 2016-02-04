@@ -18,6 +18,6 @@
 
 - (void)finishLog;
 
-- (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation;
+- (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription;
 
 @end

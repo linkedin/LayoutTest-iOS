@@ -20,18 +20,19 @@
     self.invocationClass = invocationClass;
     [self deleteCurrentFailingSnapshots];
     [self createIndexHTMLFile];
-    
 }
-- (void)deleteCurrentFailingSnapshots {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:[self commonRootPath] error:nil];
-    
+
+- (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription {
+    [self createDirectoryForInvocationIfNeeded:invocation];
+    UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
+    [UIImagePNGRepresentation(viewImage) writeToFile:[self pathForImage:viewImage withInovation:invocation] atomically:YES];
+    [self appendToLog:failureDescription imagePath:[self pathForImage:viewImage withInovation:invocation]];
 }
 
 - (void)createIndexHTMLFile {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *classNameDirectory = [self commonRootPath];
-    NSString *filePath = [classNameDirectory stringByAppendingPathComponent:@"index.html"];
+    NSString *filePath = [self indexHTMLFilePath];
     NSError *error;
     
     NSString *header = @"<HTML>\
@@ -56,8 +57,7 @@
 }
 
 - (void)finishLog {
-    NSString *documentsDirectory = [self commonRootPath];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
+    NSString *filePath = [self indexHTMLFilePath];
     NSString *footer = @"</TABLE>\
     \
     </BODY>\
@@ -70,10 +70,29 @@
     [fileHandler closeFile];
 }
 
-- (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation {
-    [self createDirectoryForInvocationIfNeeded:invocation];
-    UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
-    [UIImagePNGRepresentation(viewImage) writeToFile:[self pathForImage:viewImage withInovation:invocation] atomically:YES];
+- (void)appendToLog:(NSString *)description imagePath:(NSString *)imagePath {
+    if (!description) {
+        description = @"";
+    }
+    
+    NSString *filePath = [self indexHTMLFilePath];
+    NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", description, imagePath, self.dataForViewUnderTest.description];
+    NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
+    
+    [fileHandler seekToEndOfFile];
+    [fileHandler writeData:[errorHTML dataUsingEncoding:NSUTF8StringEncoding]];
+    [fileHandler closeFile];
+}
+
+- (NSString *)indexHTMLFilePath {
+    NSString *documentsDirectory = [self commonRootPath];
+    return [documentsDirectory stringByAppendingPathComponent:@"index.html"];
+}
+
+- (void)deleteCurrentFailingSnapshots {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:[self commonRootPath] error:nil];
+    
 }
 
 - (void)createDirectoryForInvocationIfNeeded:(NSInvocation *)invocation {

@@ -51,4 +51,30 @@
     XCTAssertFalse([fileManager fileExistsAtPath:testFilePath]);
 }
 
+- (void)testStartNewLogCreatesIndexHTMLFileWithExpectedContent {
+    NSString *currentDirectory = [[NSBundle bundleForClass:self.class] bundlePath];
+    NSString *classDirectory = [currentDirectory stringByAppendingPathComponent:@"LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests"];
+    NSString *indexFilePath = [classDirectory stringByAppendingPathComponent:@"index.html"];
+    
+    [self.recorder startNewLogForClass:self.class];
+    
+    NSString *actualHTML = [NSString stringWithContentsOfFile:indexFilePath encoding:NSUTF8StringEncoding error:nil];
+    XCTAssertEqualObjects([self expectedInitialHTML], actualHTML);
+}
+
+- (NSString *)expectedInitialHTML {
+    return @"<HTML>\
+    <HEAD>\
+    </HEAD>\
+    <BODY>\
+    \
+    <TABLE style='width:100%'>\
+    \
+    <TR>\
+    <TH>Description</TH>\
+    <TH>Image</TH>\
+    <TH>Input Data</TH>\
+    </TR>";
+}
+
 @end

@@ -19,13 +19,40 @@
 - (void)startNewLogForClass:(Class)invocationClass {
     self.invocationClass = invocationClass;
     [self deleteCurrentFailingSnapshots];
+    [self createIndexHTMLFile];
     
 }
-
 - (void)deleteCurrentFailingSnapshots {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:[self commonRootPath] error:nil];
     
+}
+
+- (void)createIndexHTMLFile {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *classNameDirectory = [self commonRootPath];
+    NSString *filePath = [classNameDirectory stringByAppendingPathComponent:@"index.html"];
+    NSError *error;
+    
+    NSString *header = @"<HTML>\
+    <HEAD>\
+    </HEAD>\
+    <BODY>\
+    \
+    <TABLE style='width:100%'>\
+    \
+    <TR>\
+    <TH>Description</TH>\
+    <TH>Image</TH>\
+    <TH>Input Data</TH>\
+    </TR>";
+    
+    [fileManager createDirectoryAtPath:classNameDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+    [fileManager createFileAtPath:filePath contents:nil attributes:nil];
+    
+    // Write to the file
+    [header writeToFile:filePath atomically:YES
+               encoding:NSUTF8StringEncoding error:&error];
 }
 
 - (NSString *)commonRootPath {

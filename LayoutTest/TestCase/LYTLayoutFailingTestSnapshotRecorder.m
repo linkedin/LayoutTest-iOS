@@ -113,8 +113,15 @@
  */
 - (NSString *)pathForImage:(UIImage *)image withInovation:(NSInvocation *)invocation {
     NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
-
-    return [directoryPath stringByAppendingPathComponent:@"TestImage.png"];
+    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%@", image.size.width, image.size.height, self.dataForViewUnderTest.description];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_.]+" options:0 error:nil];
+    imageName = [regex stringByReplacingMatchesInString:imageName options:0 range:NSMakeRange(0, imageName.length) withTemplate:@"-"];
+    if (imageName.length > 250) {
+        imageName = [imageName substringToIndex:250];
+    }
+    
+    imageName = [imageName stringByAppendingPathExtension:@"png"];
+    return [directoryPath stringByAppendingPathComponent:imageName];
 }
 
 - (UIImage *)renderLayer:(CALayer *)layer {

@@ -163,6 +163,11 @@
     
     view2.translatesAutoresizingMaskIntoConstraints = NO;
     
+    // Constraints for
+    // - the label pinned to the left but using it's intrinsic content size to determine it's width
+    // - the second view pinned to the right with a fixed width
+    // - the superview with a fixed width and height
+    // With these constraints the label on the left will overlap the second view with a long string
     [superview addSubview:label];
     [superview addSubview:view2];
     superview.label = label;

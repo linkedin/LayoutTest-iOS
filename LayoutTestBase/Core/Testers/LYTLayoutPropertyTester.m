@@ -145,6 +145,7 @@
     if ([(id)viewProvider respondsToSelector:@selector(adjustViewSize:data:size:context:)]) {
         [viewProvider adjustViewSize:view data:data size:size context:context];
     }
+    [view setNeedsLayout];
     [view layoutIfNeeded];
     validation(view, data, context);
     return view;

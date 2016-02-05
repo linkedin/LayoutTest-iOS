@@ -42,7 +42,7 @@
 + (NSDictionary *)dataSpecForTest {
     return @{
              @"view": [UnitTestViews viewWithLongStringOverlappingLabel],
-             @"text": [[LYTDataValues alloc] initWithValues:@[@"X", @"A long string that will cause overlap"]]
+             @"text": [[LYTStringValues alloc] initWithValues:@[@"X", @"A long string that will cause overlap"]]
              };
 }
 

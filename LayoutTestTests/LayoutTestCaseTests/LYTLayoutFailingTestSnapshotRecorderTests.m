@@ -19,7 +19,7 @@
 
 - (void)setUp {
     [super setUp];
-    self.recorder = [[LYTLayoutFailingTestSnapshotRecorder alloc] init];
+    self.recorder = [[LYTLayoutFailingTestSnapshotRecorder alloc] initWithInvocationClass:self.class];
 }
 
 - (void)tearDown {
@@ -46,20 +46,20 @@
     [fileManager createDirectoryAtPath:classDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     [fileManager createFileAtPath:testFilePath contents:nil attributes:nil];
 
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     XCTAssertFalse([fileManager fileExistsAtPath:testFilePath]);
 }
 
 - (void)testStartNewLogCreatesIndexHTMLFileWithExpectedContent {
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     NSString *actualHTML = [self indexHTMLFile];
     XCTAssertEqualObjects([self expectedStartOfFileHTML], actualHTML);
 }
 
 - (void)testFinishLogAddsExpectedHTMLToIndexFile {
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     [self.recorder finishLog];
     
     NSString *actualHTML = [self indexHTMLFile];
@@ -68,7 +68,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewCreatesDirectoryFromInvocationSelectorName {
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
@@ -84,7 +84,7 @@
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
     self.recorder.viewUnderTest = testView;
     self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
@@ -95,7 +95,7 @@
 - (void)testSaveImageOfCurrentViewWhenViewHasWidthOfZeroDoesNotSaveImage {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 0, 100}];
     self.recorder.viewUnderTest = testView;
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
@@ -106,7 +106,7 @@
 - (void)testSaveImageOfCurrentViewWhenViewHasHeightOfZeroDoesNotSaveImage {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 0}];
     self.recorder.viewUnderTest = testView;
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
@@ -118,7 +118,7 @@
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
     self.recorder.viewUnderTest = testView;
     self.recorder.dataForViewUnderTest = @{@"key" : @"漢語 ♔ 🚂 ☎ Here are some more special characters ˆ™£‡‹·Ú‹˜ƒª•"};
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
@@ -131,7 +131,7 @@
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
     self.recorder.viewUnderTest = testView;
     self.recorder.dataForViewUnderTest = @{@"key" : [self threeHunderedAndSixtyFourCharacterString]};
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
@@ -144,7 +144,7 @@
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
     self.recorder.viewUnderTest = testView;
     self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     self.recorder.dataForViewUnderTest = @{@"key" : @"value1"};
@@ -165,7 +165,7 @@
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
     self.recorder.viewUnderTest = testView;
     self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@"This is a test failure description"];
     [self.recorder finishLog];
@@ -182,7 +182,7 @@
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 1000, 100}];
     self.recorder.viewUnderTest = testView;
     self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
-    [self.recorder startNewLogForClass:self.class];
+    [self.recorder startNewLog];
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:nil];
     [self.recorder finishLog];

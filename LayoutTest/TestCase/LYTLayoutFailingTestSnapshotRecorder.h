@@ -14,7 +14,9 @@
 @property (nonatomic, strong) UIView *viewUnderTest;
 @property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
 
-- (void)startNewLogForClass:(Class)invocationClass;
+- (instancetype)initWithInvocationClass:(Class)invocationClass;
+
+- (void)startNewLog;
 
 - (void)finishLog;
 

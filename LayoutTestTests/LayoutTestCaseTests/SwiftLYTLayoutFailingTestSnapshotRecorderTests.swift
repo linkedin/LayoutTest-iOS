@@ -21,8 +21,8 @@ class SwiftLYTLayoutFailingTestSnapshotRecorderTests: XCTestCase {
         } catch{}
         fileManager.createFileAtPath(testFilePath, contents: nil, attributes: nil)
         
-        let recorder = LYTLayoutFailingTestSnapshotRecorder()
-        recorder.startNewLogForClass(self.dynamicType)
+        let recorder = LYTLayoutFailingTestSnapshotRecorder(invocationClass: self.dynamicType)
+        recorder.startNewLog()
         
         XCTAssertFalse(fileManager.fileExistsAtPath(testFilePath))
     }

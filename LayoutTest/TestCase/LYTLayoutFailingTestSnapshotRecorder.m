@@ -140,7 +140,7 @@
  */
 - (NSString *)pathForImage:(UIImage *)image withInovation:(NSInvocation *)invocation {
     NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
-    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", image.size.width, image.size.height, (unsigned long)self.dataForViewUnderTest.hash];
+    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", image.size.width, image.size.height, (unsigned long)self.dataForViewUnderTest.description.hash];
     imageName = [imageName stringByAppendingPathExtension:@"png"];
     return [directoryPath stringByAppendingPathComponent:imageName];
 }
@@ -165,18 +165,4 @@
     return snapshot;
 }
 
-@end
-
-@implementation NSDictionary (Extensions)
-
-- (NSUInteger) hash {
-    NSUInteger prime = 31;
-    NSUInteger result = 1;
-    for (NSObject *key in [[self allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
-        result = prime * result + [key hash];
-        result = prime * result + [self[key] hash];
-    }
-    
-    return result;
-}
 @end

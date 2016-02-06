@@ -88,7 +88,14 @@
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
-    NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:@"/Width-100.00_Height-100.00_Data-19920687747319.png"];
+    NSString *dataHash = @"";
+#ifdef __LP64__
+    dataHash = @"11921695704359177406";
+#else
+    dataHash = @"1252068542";
+#endif
+    NSString *imageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", dataHash];
+    NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:imageName];
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
 }
 
@@ -122,7 +129,13 @@
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
-    NSString*expectedImageName = @"/Width-100.00_Height-100.00_Data-15534241200359575295.png";
+    NSString *dataHash = @"";
+#ifdef __LP64__
+    dataHash = @"7040999336831705875";
+#else
+    dataHash = @"2409456403";
+#endif
+    NSString*expectedImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", dataHash];
     NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedImageName];
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
 }
@@ -135,7 +148,13 @@
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
-    NSString*expectedImageName = @"/Width-100.00_Height-100.00_Data-4096502861068069301.png";
+    NSString *dataHash = @"";
+#ifdef __LP64__
+    dataHash = @"18202946166865061037";
+#else
+    dataHash = @"1837950125";
+#endif
+    NSString*expectedImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", dataHash];
     NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedImageName];
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
 }
@@ -150,9 +169,19 @@
     self.recorder.dataForViewUnderTest = @{@"key" : @"value1"};
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
-    NSString*expectedFirstImageName = @"/Width-100.00_Height-100.00_Data-10365719165069801.png";
+    
+    NSString *expectedFirstDataHash = @"";
+    NSString *expectedSecondDataHash = @"";
+#ifdef __LP64__
+    expectedFirstDataHash = @"11921695704359177406";
+    expectedSecondDataHash = @"3294889149843288304";
+#else
+    expectedFirstDataHash = @"1252068542";
+    expectedSecondDataHash = @"2259857648";
+#endif
+    NSString*expectedFirstImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", expectedFirstDataHash];
     NSString *firstImagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedFirstImageName];
-    NSString*expectedSecondImageName = @"/Width-100.00_Height-100.00_Data-19920687747319.png";
+    NSString*expectedSecondImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", expectedSecondDataHash];
     NSString *secondImagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedSecondImageName];
     
     NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];
@@ -170,10 +199,16 @@
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@"This is a test failure description"];
     [self.recorder finishLog];
     
+    NSString *dataHash = @"";
+#ifdef __LP64__
+    dataHash = @"11921695704359177406";
+#else
+    dataHash = @"1252068542";
+#endif
     NSString *actualHTML = [self indexHTMLFile];
-    NSString *expectedBodyHTML = @"<TR><TD>This is a test failure description</TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-100.00_Data-19920687747319.png' alt='No Image'></TD><TD>{\n\
+    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD>This is a test failure description</TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-100.00_Data-%@.png' alt='No Image'></TD><TD>{\n\
     key = value;\n\
-}</TD></TR>";
+}</TD></TR>", dataHash];
     NSString *expectedHTML = [NSString stringWithFormat:@"%@%@%@", [self expectedStartOfFileHTML], expectedBodyHTML, [self expectedEndOfFileHTML]];
     XCTAssertEqualObjects(expectedHTML, actualHTML);
 }
@@ -187,10 +222,16 @@
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:nil];
     [self.recorder finishLog];
     
+    NSString *dataHash = @"";
+#ifdef __LP64__
+    dataHash = @"11921695704359177406";
+#else
+    dataHash = @"1252068542";
+#endif
     NSString *actualHTML = [self indexHTMLFile];
-    NSString *expectedBodyHTML = @"<TR><TD></TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewWithNilFailureDescriptionAddsBlankDescriptionToIndexFile/Width-1000.00_Height-100.00_Data-19920687747319.png' alt='No Image'></TD><TD>{\n\
+    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD></TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewWithNilFailureDescriptionAddsBlankDescriptionToIndexFile/Width-1000.00_Height-100.00_Data-%@.png' alt='No Image'></TD><TD>{\n\
     key = value;\n\
-}</TD></TR>";
+}</TD></TR>", dataHash];
     NSString *expectedHTML = [NSString stringWithFormat:@"%@%@%@", [self expectedStartOfFileHTML], expectedBodyHTML, [self expectedEndOfFileHTML]];
     XCTAssertEqualObjects(expectedHTML, actualHTML);
 }

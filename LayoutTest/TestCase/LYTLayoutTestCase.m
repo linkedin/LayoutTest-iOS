@@ -11,8 +11,8 @@
 #import "LYTConfig.h"
 #import "LYTLayoutPropertyTester.h"
 #import "UIView+LYTTestHelpers.h"
-#import "LYTLayoutFailingTestSnapshotRecorder.h"
 #import "LYTAutolayoutFailureIntercepter.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -67,7 +67,6 @@ void MyLog(NSString *format, ...) {
 @property (nonatomic, strong) NSMutableSet *viewsAllowingAccessibilityErrors;
 @property (nonatomic, strong) UIView *viewUnderTest;
 @property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
-@property (nonatomic, strong) LYTLayoutFailingTestSnapshotRecorder *snapshotRecorder;
 
 @end
 
@@ -84,15 +83,6 @@ void MyLog(NSString *format, ...) {
         LayoutSnapshotObserver *testObserver = [LayoutSnapshotObserver new];
         [observationCenter addTestObserver:testObserver];
     });
-}
-
-- (instancetype)initWithInvocation:(nullable NSInvocation *)invocation {
-    self = [super initWithInvocation:invocation];
-    if (self) {
-        self.snapshotRecorder = [[LYTLayoutFailingTestSnapshotRecorder alloc] initWithInvocationClass:self.class];
-    }
-    
-    return self;
 }
 
 + (void)setUp {

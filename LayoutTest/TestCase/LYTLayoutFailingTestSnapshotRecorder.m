@@ -16,16 +16,8 @@
 
 @implementation LYTLayoutFailingTestSnapshotRecorder
 
-- (instancetype)initWithInvocationClass:(Class)invocationClass {
-    self = [super init];
-    if (self) {
-        self.invocationClass = invocationClass;
-    }
-    
-    return self;
-}
-
-- (void)startNewLog {
+- (void)startNewLogForClass:(Class)invocationClass {
+    self.invocationClass = invocationClass;
     [self deleteCurrentFailingSnapshots];
     [self createIndexHTMLFile];
 }

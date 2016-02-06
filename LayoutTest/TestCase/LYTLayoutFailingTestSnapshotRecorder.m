@@ -16,6 +16,15 @@
 
 @implementation LYTLayoutFailingTestSnapshotRecorder
 
++ (instancetype)sharedInstance {
+    static LYTLayoutFailingTestSnapshotRecorder *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[LYTLayoutFailingTestSnapshotRecorder alloc] init];
+    });
+    return sharedInstance;
+}
+
 - (void)startNewLogForClass:(Class)invocationClass {
     self.invocationClass = invocationClass;
     [self deleteCurrentFailingSnapshots];

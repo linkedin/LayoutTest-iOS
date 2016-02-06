@@ -132,7 +132,7 @@
  */
 - (NSString *)pathForImage:(UIImage *)image withInovation:(NSInvocation *)invocation {
     NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
-    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", image.size.width, image.size.height, self.dataForViewUnderTest.hash];
+    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", image.size.width, image.size.height, (unsigned long)self.dataForViewUnderTest.hash];
     imageName = [imageName stringByAppendingPathExtension:@"png"];
     return [directoryPath stringByAppendingPathComponent:imageName];
 }

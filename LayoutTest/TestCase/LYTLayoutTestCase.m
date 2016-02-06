@@ -12,7 +12,7 @@
 #import "LYTLayoutPropertyTester.h"
 #import "UIView+LYTTestHelpers.h"
 #import "LYTAutolayoutFailureIntercepter.h"
-
+#import "LYTLayoutFailingTestSnapshotRecorder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -87,12 +87,12 @@ void MyLog(NSString *format, ...) {
 
 + (void)setUp {
     [super setUp];
-    [self startNewLog];
+    [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] startNewLogForClass:self.class];
 }
 
 + (void)tearDown {
     [super tearDown];
-    [self finishLog];
+    [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] finishLog];
 }
 
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
@@ -262,41 +262,9 @@ void MyLog(NSString *format, ...) {
 
 - (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
     [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
-    //Create image
-    UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
-    
-    //Save image
-    [self saveImage:viewImage];
-    
-    //Save html with data
-    [self appendToLog:description imagePath:[self pathForImage:viewImage] testData:self.dataForViewUnderTest];
-}
-
-- (UIImage *)renderLayer:(CALayer *)layer {
-    CGRect bounds = layer.bounds;
-    
-    NSAssert1(CGRectGetWidth(bounds), @"Zero width for layer %@", layer);
-    NSAssert1(CGRectGetHeight(bounds), @"Zero height for layer %@", layer);
-    
-    UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    NSAssert1(context, @"Could not generate context for layer %@", layer);
-    
-    CGContextSaveGState(context);
-    {
-        [layer renderInContext:context];
+    if (self.enableFailingTestSnapshots) {
+        [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:description];
     }
-    CGContextRestoreGState(context);
-    
-    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return snapshot;
-}
-
-- (void)saveImage:(UIImage *)image {
-    [self createDirectoryForCurrentMethodIfNeeded];
-    [UIImagePNGRepresentation(image) writeToFile:[self pathForImage:image] atomically:YES];
 }
 
 + (NSString *)commonRootPath {
@@ -308,108 +276,6 @@ void MyLog(NSString *format, ...) {
     }
     
     return [currentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"LayoutTestImages/%@", className]];
-}
-
-/**
- Returns the path to the directory to save snapshots of the current failing test. Path includes class and method name
- e.g. {FULL_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell
- */
-- (NSString *)directoryPathForCurrentMethod {
-    NSString *documentsDirectory = [[self class] commonRootPath];
-    NSString *methodName = NSStringFromSelector((SEL)[self.invocation selector]);
-    
-    NSString *directoryPath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@", methodName]];
-    return directoryPath;
-}
-
-- (void)createDirectoryForCurrentMethodIfNeeded {
-    NSString *directoryPath = [self directoryPathForCurrentMethod];
-    BOOL isDirectory = NO;
-    if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDirectory]) {
-        [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
-    }
-}
-
-/**
- Returns the full path to the image with the given file name and the iamge size and width appended to it.
- e.g. {DIRECTORY_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell/{FILE_NAME}_{IMAGE_WIDTH}_{IMAGE_HEIGHT}.png
- */
-- (NSString *)pathForImage:(UIImage *)image {
-    NSString *directoryPath = [self directoryPathForCurrentMethod];
-    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%@", image.size.width, image.size.height, self.dataForViewUnderTest.description];
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_.]+" options:0 error:nil];
-    imageName = [regex stringByReplacingMatchesInString:imageName options:0 range:NSMakeRange(0, imageName.length) withTemplate:@"-"];
-    if (imageName.length > 250) {
-        imageName = [imageName substringToIndex:250];
-    }
-    
-    imageName = [imageName stringByAppendingPathExtension:@"png"];
-    return [directoryPath stringByAppendingPathComponent:imageName];
-}
-
-+ (void)startNewLog {
-    [self deleteCurrentFailingSnapshots];
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *classNameDirectory = [self commonRootPath];
-    NSString *filePath = [classNameDirectory stringByAppendingPathComponent:@"index.html"];
-    NSError *error;
-    
-    NSString *header = @"<HTML>\
-    <HEAD>\
-    </HEAD>\
-    <BODY>\
-    \
-    <TABLE style='width:100%'>\
-    \
-    <TR>\
-    <TH>Description</TH>\
-    <TH>Image</TH>\
-    <TH>Input Data</TH>\
-    </TR>";
-    
-    [fileManager createDirectoryAtPath:classNameDirectory withIntermediateDirectories:YES attributes:nil error:&error];
-    [fileManager createFileAtPath:filePath contents:nil attributes:nil];
-    
-    // Write to the file
-    [header writeToFile:filePath atomically:YES
-               encoding:NSUTF8StringEncoding error:&error];
-
-}
-
-+ (void)deleteCurrentFailingSnapshots {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:[self commonRootPath] error:nil];
-}
-
-+ (void)finishLog {
-    NSString *documentsDirectory = [self commonRootPath];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
-    NSString *footer = @"</TABLE>\
-    \
-    </BODY>\
-    </HTML>\
-    ";
-    NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
-    
-    [fileHandler seekToEndOfFile];
-    [fileHandler writeData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
-    [fileHandler closeFile];
-}
-
-- (void)appendToLog:(NSString *)description imagePath:(NSString *)imagePath testData:(NSDictionary *)testData {
-    NSString *documentsDirectory = [[self class] commonRootPath];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"index.html"];
-    NSString *errorHTML = [NSString stringWithFormat:@"<TR>\
-                           <TD>%@</TD>\
-                           <TD><IMG src='%@' alt='No Image'></TD>\
-                           <TD>%@</TD>\
-                           </TR>\
-                           ", description, imagePath, testData.description];
-    NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
-    
-    [fileHandler seekToEndOfFile];
-    [fileHandler writeData:[errorHTML dataUsingEncoding:NSUTF8StringEncoding]];
-    [fileHandler closeFile];
 }
 
 #pragma mark - Private Functional (Class) Methods

@@ -88,7 +88,7 @@
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
-    NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:@"/Width-100.00_Height-100.00_Data-key-value-.png"];
+    NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:@"/Width-100.00_Height-100.00_Data-19920687747319.png"];
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
 }
 
@@ -111,7 +111,7 @@
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
     NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];
-    XCTAssertFalse(filelist.count == 1);
+    XCTAssertEqual(0, filelist.count);
 }
 
 - (void)testSaveImageOfCurrentViewWhenDataHasSpecialCharactersImageSavedWithExpectedName {
@@ -122,7 +122,7 @@
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
-    NSString*expectedImageName = @"/Width-100.00_Height-100.00_Data-key-U6f22-U8a9e-U2654-Ud83d-Ude82-U260e-Here-are-some-more-special-characters-U02c6-U2122-U00a3-U2021-U2039-U00b7-U00da-U2039-U02dc-U0192-U00aa-U2022-.png";
+    NSString*expectedImageName = @"/Width-100.00_Height-100.00_Data-15534241200359575295.png";
     NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedImageName];
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
 }
@@ -135,9 +135,30 @@
     
     [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
     
-    NSString*expectedImageName = @"/Width-100.00_Height-100.00_Data-key-Very-long-string.-This-string-is-so-long-that-it-s-longer-than-I-want-it-to-be.-Just-a-really-really-long-string.-In-fact-it-s-just-long-as-long-can-be.-I-m-just-lengthening-the-longest-string-by-making-it-longer-w.png";
+    NSString*expectedImageName = @"/Width-100.00_Height-100.00_Data-4096502861068069301.png";
     NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedImageName];
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
+}
+
+- (void)testSaveImageOfCurrentViewWhenCalledTwiceWithSlightlyDifferentDataSavesTwoImages {
+    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    self.recorder.viewUnderTest = testView;
+    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
+    [self.recorder startNewLogForClass:self.class];
+    
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    self.recorder.dataForViewUnderTest = @{@"key" : @"value1"};
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    
+    NSString*expectedFirstImageName = @"/Width-100.00_Height-100.00_Data-10365719165069801.png";
+    NSString *firstImagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedFirstImageName];
+    NSString*expectedSecondImageName = @"/Width-100.00_Height-100.00_Data-19920687747319.png";
+    NSString *secondImagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedSecondImageName];
+    
+    NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];
+    XCTAssertEqual(2, filelist.count);
+    XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:firstImagePath]);
+    XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:secondImagePath]);
 }
 
 - (void)testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile {
@@ -150,7 +171,7 @@
     [self.recorder finishLog];
     
     NSString *actualHTML = [self indexHTMLFile];
-    NSString *expectedBodyHTML = @"<TR><TD>This is a test failure description</TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-100.00_Data-key-value-.png' alt='No Image'></TD><TD>{\n\
+    NSString *expectedBodyHTML = @"<TR><TD>This is a test failure description</TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-100.00_Data-19920687747319.png' alt='No Image'></TD><TD>{\n\
     key = value;\n\
 }</TD></TR>";
     NSString *expectedHTML = [NSString stringWithFormat:@"%@%@%@", [self expectedStartOfFileHTML], expectedBodyHTML, [self expectedEndOfFileHTML]];
@@ -167,7 +188,7 @@
     [self.recorder finishLog];
     
     NSString *actualHTML = [self indexHTMLFile];
-    NSString *expectedBodyHTML = @"<TR><TD></TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewWithNilFailureDescriptionAddsBlankDescriptionToIndexFile/Width-1000.00_Height-100.00_Data-key-value-.png' alt='No Image'></TD><TD>{\n\
+    NSString *expectedBodyHTML = @"<TR><TD></TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewWithNilFailureDescriptionAddsBlankDescriptionToIndexFile/Width-1000.00_Height-100.00_Data-19920687747319.png' alt='No Image'></TD><TD>{\n\
     key = value;\n\
 }</TD></TR>";
     NSString *expectedHTML = [NSString stringWithFormat:@"%@%@%@", [self expectedStartOfFileHTML], expectedBodyHTML, [self expectedEndOfFileHTML]];

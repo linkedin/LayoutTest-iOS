@@ -132,13 +132,7 @@
  */
 - (NSString *)pathForImage:(UIImage *)image withInovation:(NSInvocation *)invocation {
     NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
-    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%@", image.size.width, image.size.height, self.dataForViewUnderTest.description];
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"[^a-zA-Z0-9_.]+" options:0 error:nil];
-    imageName = [regex stringByReplacingMatchesInString:imageName options:0 range:NSMakeRange(0, imageName.length) withTemplate:@"-"];
-    if (imageName.length > 250) {
-        imageName = [imageName substringToIndex:250];
-    }
-    
+    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", image.size.width, image.size.height, self.dataForViewUnderTest.hash];
     imageName = [imageName stringByAppendingPathExtension:@"png"];
     return [directoryPath stringByAppendingPathComponent:imageName];
 }
@@ -163,4 +157,18 @@
     return snapshot;
 }
 
+@end
+
+@implementation NSDictionary (Extensions)
+
+- (NSUInteger) hash {
+    NSUInteger prime = 31;
+    NSUInteger result = 1;
+    for (NSObject *key in [[self allKeys] sortedArrayUsingSelector:@selector(compare:)]) {
+        result = prime * result + [key hash];
+        result = prime * result + [self[key] hash];
+    }
+    
+    return result;
+}
 @end

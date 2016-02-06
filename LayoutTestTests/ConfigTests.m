@@ -29,6 +29,7 @@
     [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled = NO;
     [LYTConfig sharedInstance].interceptsAutolayoutErrors = NO;
     [LYTConfig sharedInstance].accessibilityTestsEnabled = NO;
+    [LYTConfig sharedInstance].enableFailingTestSnapshots = NO;
     [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors = [NSSet set];
     [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels = [NSSet set];
 
@@ -39,6 +40,7 @@
     XCTAssertEqual(testCase.ambiguousAutolayoutTestsEnabled, [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled);
     XCTAssertEqual(testCase.interceptsAutolayoutErrors, [LYTConfig sharedInstance].interceptsAutolayoutErrors);
     XCTAssertEqual(testCase.accessibilityTestsEnabled, [LYTConfig sharedInstance].accessibilityTestsEnabled);
+    XCTAssertEqual(testCase.enableFailingTestSnapshots, [LYTConfig sharedInstance].enableFailingTestSnapshots);
     XCTAssertEqual(testCase.viewClassesAllowingSubviewErrors, [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors);
     XCTAssertEqual(testCase.viewClassesRequiringAccessibilityLabels, [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels);
 }
@@ -51,8 +53,34 @@
     XCTAssertEqual(testCase.ambiguousAutolayoutTestsEnabled, [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled);
     XCTAssertEqual(testCase.interceptsAutolayoutErrors, [LYTConfig sharedInstance].interceptsAutolayoutErrors);
     XCTAssertEqual(testCase.accessibilityTestsEnabled, [LYTConfig sharedInstance].accessibilityTestsEnabled);
+    XCTAssertEqual(testCase.enableFailingTestSnapshots, [LYTConfig sharedInstance].enableFailingTestSnapshots);
     XCTAssertEqual(testCase.viewClassesAllowingSubviewErrors, [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors);
     XCTAssertEqual(testCase.viewClassesRequiringAccessibilityLabels, [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels);
+}
+
+- (void)testResetDefaultsResetsToExpectedValues {
+    [LYTConfig sharedInstance].viewOverlapTestsEnabled = NO;
+    [LYTConfig sharedInstance].viewWithinSuperviewTestsEnabled = NO;
+    [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled = NO;
+    [LYTConfig sharedInstance].interceptsAutolayoutErrors = NO;
+    [LYTConfig sharedInstance].accessibilityTestsEnabled = NO;
+    [LYTConfig sharedInstance].enableFailingTestSnapshots = NO;
+    [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors = [NSSet setWithObjects:self.class, nil];
+    [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels = [NSSet setWithObjects:self.class, nil];
+    
+    [[LYTConfig sharedInstance] resetDefaults];
+    
+    XCTAssertEqual(YES, [LYTConfig sharedInstance].viewOverlapTestsEnabled);
+    XCTAssertEqual(YES, [LYTConfig sharedInstance].viewWithinSuperviewTestsEnabled);
+    XCTAssertEqual(YES, [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled);
+    XCTAssertEqual(YES, [LYTConfig sharedInstance].interceptsAutolayoutErrors);
+    XCTAssertEqual(YES, [LYTConfig sharedInstance].accessibilityTestsEnabled);
+    XCTAssertEqual(YES, [LYTConfig sharedInstance].enableFailingTestSnapshots);
+
+    NSSet *viewClassesAllowingSubviewErrorsSet = [NSSet setWithObjects:[UITextView class], [UISwitch class], nil];
+    NSSet *viewClassesRequiringAccessibilityLabelsSets = [NSSet setWithObjects:[UIControl class], nil];
+    XCTAssertEqualObjects(viewClassesAllowingSubviewErrorsSet, [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors);
+    XCTAssertEqualObjects(viewClassesRequiringAccessibilityLabelsSets, [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels);
 }
 
 @end

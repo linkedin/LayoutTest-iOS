@@ -144,6 +144,7 @@ void MyLog(NSString *format, ...) {
     self.ambiguousAutolayoutTestsEnabled = [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled;
     self.interceptsAutolayoutErrors = [LYTConfig sharedInstance].interceptsAutolayoutErrors;
     self.accessibilityTestsEnabled = [LYTConfig sharedInstance].accessibilityTestsEnabled;
+    self.enableFailingTestSnapshots = [LYTConfig sharedInstance].enableFailingTestSnapshots;
     self.viewClassesRequiringAccessibilityLabels = [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels;
     self.viewClassesAllowingSubviewErrors = [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors;
 

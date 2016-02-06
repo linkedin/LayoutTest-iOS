@@ -166,6 +166,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL accessibilityTestsEnabled;
 
 /**
+ If on, a snapshot of the view for the current failing test will be saved to the derived data folder. The data for the failing test is also logged in the index.html file for each LYTLayoutTestCase sub class. The path to the folder is logged after the test suite has finished.
+ 
+ You can also globally set this as a default in LYTConfig.
+ 
+ Default: true
+ */
+@property (nonatomic) BOOL enableFailingTestSnapshots;
+
+/**
  When we traverse the view hierarchy, we expect some elements to always have accessibility labels. For instance, UIControls should have accessibility
  labels or they won't be useable by accessibility users. Any element which subclasses one of these classes should have an accessibility label.
  

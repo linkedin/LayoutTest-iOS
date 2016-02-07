@@ -32,10 +32,13 @@
 }
 
 - (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription {
-    [self createDirectoryForInvocationIfNeeded:invocation];
-    UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
-    [UIImagePNGRepresentation(viewImage) writeToFile:[self pathForImage:viewImage withInovation:invocation] atomically:YES];
-    [self appendToLog:failureDescription imagePath:[self pathForImage:viewImage withInovation:invocation]];
+    NSString *imagePath = [self pathForImageWithWidth:self.viewUnderTest.frame.size.width height:self.viewUnderTest.frame.size.height withInovation:invocation];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+        [self createDirectoryForInvocationIfNeeded:invocation];
+        UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
+        [UIImagePNGRepresentation(viewImage) writeToFile:imagePath atomically:YES];
+        [self appendToLog:failureDescription imagePath:imagePath];
+    }
 }
 
 - (void)createIndexHTMLFile {
@@ -44,18 +47,7 @@
     NSString *filePath = [self indexHTMLFilePath];
     NSError *error;
     
-    NSString *header = @"<HTML>\
-    <HEAD>\
-    </HEAD>\
-    <BODY>\
-    \
-    <TABLE style='width:100%'>\
-    \
-    <TR>\
-    <TH>Description</TH>\
-    <TH>Image</TH>\
-    <TH>Input Data</TH>\
-    </TR>";
+    NSString *header = @"<HTML><HEAD></HEAD><BODY><TABLE style='width:100%'><TR><TH>Description</TH><TH>Image</TH><TH>Input Data</TH></TR>";
     
     [fileManager createDirectoryAtPath:classNameDirectory withIntermediateDirectories:YES attributes:nil error:&error];
     [fileManager createFileAtPath:filePath contents:nil attributes:nil];
@@ -67,11 +59,7 @@
 
 - (void)finishLog {
     NSString *filePath = [self indexHTMLFilePath];
-    NSString *footer = @"</TABLE>\
-    \
-    </BODY>\
-    </HTML>\
-    ";
+    NSString *footer = @"</TABLE></BODY></HTML>";
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
     
     [fileHandler seekToEndOfFile];
@@ -86,6 +74,7 @@
     
     NSString *filePath = [self indexHTMLFilePath];
     NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", description, imagePath, self.dataForViewUnderTest.description];
+    errorHTML = [errorHTML stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
     
     [fileHandler seekToEndOfFile];
@@ -139,9 +128,9 @@
  Returns the full path to the image with the given file name and the iamge size and width appended to it.
  e.g. {DIRECTORY_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell/{FILE_NAME}_{IMAGE_WIDTH}_{IMAGE_HEIGHT}.png
  */
-- (NSString *)pathForImage:(UIImage *)image withInovation:(NSInvocation *)invocation {
+- (NSString *)pathForImageWithWidth:(CGFloat)width height:(CGFloat)height withInovation:(NSInvocation *)invocation {
     NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
-    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", image.size.width, image.size.height, (unsigned long)self.dataForViewUnderTest.description.hash];
+    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", width, height, (unsigned long)self.dataForViewUnderTest.description.hash];
     imageName = [imageName stringByAppendingPathExtension:@"png"];
     return [directoryPath stringByAppendingPathComponent:imageName];
 }

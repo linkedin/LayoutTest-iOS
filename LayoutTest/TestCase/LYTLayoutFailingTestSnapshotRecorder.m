@@ -7,6 +7,7 @@
 //
 
 #import "LYTLayoutFailingTestSnapshotRecorder.h"
+#import "LYTConfig.h"
 
 @interface LYTLayoutFailingTestSnapshotRecorder ()
 
@@ -32,13 +33,29 @@
 }
 
 - (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription {
-    NSString *imagePath = [self pathForImageWithWidth:self.viewUnderTest.frame.size.width height:self.viewUnderTest.frame.size.height withInovation:invocation];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+    if ([self shouldSaveImageWithInvocation:invocation]) {
+        NSString *imagePath = [self pathForImageWithWidth:self.viewUnderTest.frame.size.width height:self.viewUnderTest.frame.size.height withInovation:invocation];
         [self createDirectoryForInvocationIfNeeded:invocation];
         UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
         [UIImagePNGRepresentation(viewImage) writeToFile:imagePath atomically:YES];
         [self appendToLog:failureDescription imagePath:imagePath];
     }
+}
+
+- (BOOL)shouldSaveImageWithInvocation:(NSInvocation *)invocation {
+    NSString *imagePath = [self pathForImageWithWidth:self.viewUnderTest.frame.size.width height:self.viewUnderTest.frame.size.height withInovation:invocation];
+    if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
+        return NO;
+    } else if ([LYTConfig sharedInstance].snapshotsToSavePerMethod != -1 &&
+               [self numberOfImagesSavedForInvocation:invocation] >= [LYTConfig sharedInstance].snapshotsToSavePerMethod) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSUInteger)numberOfImagesSavedForInvocation:(NSInvocation *)invocation {
+    return [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self directoryPathForCurrentInvocation:invocation] error:nil].count;
 }
 
 - (void)createIndexHTMLFile {

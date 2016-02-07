@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "LYTLayoutFailingTestSnapshotRecorder.h"
+#import "LYTConfig.h"
 
 @interface LYTLayoutFailingTestSnapshotRecorderTests : XCTestCase
 
@@ -188,6 +189,45 @@
     XCTAssertEqual(2, filelist.count);
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:firstImagePath]);
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:secondImagePath]);
+}
+
+- (void)testSaveImageWhenConfigHasNumberOfImagesToSaveSetToZeroDoesNotSaveImage {
+    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    self.recorder.viewUnderTest = testView;
+    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
+    [self.recorder startNewLogForClass:self.class];
+    [LYTConfig sharedInstance].snapshotsToSavePerMethod = 0;
+    
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    
+    NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];
+    XCTAssertEqual(0, filelist.count);
+}
+
+- (void)testSaveImageWhenConfigHasNumberOfImagesToSaveSetToFourOnlySavesFourImages {
+    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    self.recorder.viewUnderTest = testView;
+    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
+    [self.recorder startNewLogForClass:self.class];
+    [LYTConfig sharedInstance].snapshotsToSavePerMethod = 4;
+    
+    //Should be saved
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    self.recorder.dataForViewUnderTest = @{@"key1" : @"value"};
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    self.recorder.dataForViewUnderTest = @{@"key2" : @"value"};
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    self.recorder.dataForViewUnderTest = @{@"key3" : @"value"};
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    //
+    
+    //Shoudln't be saved
+    self.recorder.dataForViewUnderTest = @{@"key4" : @"value"};
+    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    //
+    
+    NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];
+    XCTAssertEqual(4, filelist.count);
 }
 
 - (void)testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile {

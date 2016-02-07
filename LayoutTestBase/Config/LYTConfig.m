@@ -45,6 +45,7 @@
      */
     self.viewClassesRequiringAccessibilityLabels = [NSSet setWithObjects:[UIControl class], nil];
     self.cgFloatEpsilon = 1e-5;
+    self.snapshotsToSavePerMethod = -1;
 }
 
 @end

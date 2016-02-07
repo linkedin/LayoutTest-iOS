@@ -67,6 +67,8 @@
     [LYTConfig sharedInstance].enableFailingTestSnapshots = NO;
     [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors = [NSSet setWithObjects:self.class, nil];
     [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels = [NSSet setWithObjects:self.class, nil];
+    [LYTConfig sharedInstance].cgFloatEpsilon = 100;
+    [LYTConfig sharedInstance].snapshotsToSavePerMethod = 100;
     
     [[LYTConfig sharedInstance] resetDefaults];
     
@@ -81,6 +83,8 @@
     NSSet *viewClassesRequiringAccessibilityLabelsSets = [NSSet setWithObjects:[UIControl class], nil];
     XCTAssertEqualObjects(viewClassesAllowingSubviewErrorsSet, [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors);
     XCTAssertEqualObjects(viewClassesRequiringAccessibilityLabelsSets, [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels);
+    XCTAssertEqual(1e-5, [LYTConfig sharedInstance].cgFloatEpsilon);
+    XCTAssertEqual(-1, [LYTConfig sharedInstance].snapshotsToSavePerMethod);
 }
 
 @end

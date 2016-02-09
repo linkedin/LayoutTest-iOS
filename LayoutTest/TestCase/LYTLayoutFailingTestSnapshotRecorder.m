@@ -47,7 +47,7 @@
     NSString *imagePath = [self pathForImageWithWidth:self.viewUnderTest.frame.size.width height:self.viewUnderTest.frame.size.height withInovation:invocation];
     if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
         return NO;
-    } else if ([LYTConfig sharedInstance].snapshotsToSavePerMethod != -1 &&
+    } else if ([LYTConfig sharedInstance].snapshotsToSavePerMethod != SaveUnlimitedSnapshotsPerMethod &&
                [self numberOfImagesSavedForInvocation:invocation] >= [LYTConfig sharedInstance].snapshotsToSavePerMethod) {
         return NO;
     }

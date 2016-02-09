@@ -116,12 +116,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic) CGFloat cgFloatEpsilon;
 
+
+/**
+ Default snapshots to save per method.
+ */
+#define SaveUnlimitedSnapshotsPerMethod -1
+
 /**
  Limits the number of snapshots that will be saved for each method in a LYTLayoutTestCase. If a test has multiple XCTAsserts which can fail for each size/data iteration there is the possiblity that hundreds of snapshots will be produced. Setting this to a value of 0 or greater will limit the number of images saved.
  
  This property can only be set in the config.
  
- Default: -1 (Representing unlimited)
+ Default: SaveUnlimitedSnapshotsPerMethod(-1) (Representing unlimited)
  */
 @property (nonatomic) NSUInteger snapshotsToSavePerMethod;
 

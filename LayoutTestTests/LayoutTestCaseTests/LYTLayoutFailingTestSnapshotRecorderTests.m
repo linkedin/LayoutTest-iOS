@@ -247,7 +247,7 @@
     dataHash = @"1252068542";
 #endif
     NSString *actualHTML = [self indexHTMLFile];
-    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD>This is a test failure description</TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-100.00_Data-%@.png' alt='No Image'></TD><TD>{    key = value;}</TD></TR>", dataHash];
+    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD>This is a test failure description</TD><TD><IMG src='testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-100.00_Data-%@.png' alt='No Image'></TD><TD>{    key = value;}</TD></TR>", dataHash];
     NSString *expectedHTML = [NSString stringWithFormat:@"%@%@%@", [self expectedStartOfFileHTML], expectedBodyHTML, [self expectedEndOfFileHTML]];
     XCTAssertEqualObjects(expectedHTML, actualHTML);
 }
@@ -269,7 +269,7 @@
     dataHash = @"1252068542";
 #endif
     NSString *actualHTML = [self indexHTMLFile];
-    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD>This is a test failure description</TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewWhenViewAndDataAlreadySavedDoesNotReaddFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-100.00_Data-%@.png' alt='No Image'></TD><TD>{    key = value;}</TD></TR>", dataHash];
+    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD>This is a test failure description</TD><TD><IMG src='testSaveImageOfCurrentViewWhenViewAndDataAlreadySavedDoesNotReaddFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-100.00_Data-%@.png' alt='No Image'></TD><TD>{    key = value;}</TD></TR>", dataHash];
     NSString *expectedHTML = [NSString stringWithFormat:@"%@%@%@", [self expectedStartOfFileHTML], expectedBodyHTML, [self expectedEndOfFileHTML]];
     XCTAssertEqualObjects(expectedHTML, actualHTML);
 }
@@ -290,7 +290,7 @@
     dataHash = @"1252068542";
 #endif
     NSString *actualHTML = [self indexHTMLFile];
-    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD></TD><TD><IMG src='/Users/liamdouglas/Library/Developer/Xcode/DerivedData/LayoutTest-cgmqhbwpcfxotbbipumzghiiiwok/Build/Products/Debug-iphonesimulator/LayoutTestTests.xctest/LayoutTestImages/LYTLayoutFailingTestSnapshotRecorderTests/testSaveImageOfCurrentViewWithNilFailureDescriptionAddsBlankDescriptionToIndexFile/Width-1000.00_Height-100.00_Data-%@.png' alt='No Image'></TD><TD>{    key = value;}</TD></TR>", dataHash];
+    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD></TD><TD><IMG src='testSaveImageOfCurrentViewWithNilFailureDescriptionAddsBlankDescriptionToIndexFile/Width-1000.00_Height-100.00_Data-%@.png' alt='No Image'></TD><TD>{    key = value;}</TD></TR>", dataHash];
     NSString *expectedHTML = [NSString stringWithFormat:@"%@%@%@", [self expectedStartOfFileHTML], expectedBodyHTML, [self expectedEndOfFileHTML]];
     XCTAssertEqualObjects(expectedHTML, actualHTML);
 }

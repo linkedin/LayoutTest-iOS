@@ -79,7 +79,7 @@ void SimpleLog(NSString *format, ...) {
         [self createDirectoryForInvocationIfNeeded:invocation];
         UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
         [UIImagePNGRepresentation(viewImage) writeToFile:imagePath atomically:YES];
-        [self appendToLog:failureDescription imagePath:imagePath];
+        [self appendToLog:failureDescription withInvocation:invocation];
     }
 }
 
@@ -125,12 +125,13 @@ void SimpleLog(NSString *format, ...) {
     [fileHandler closeFile];
 }
 
-- (void)appendToLog:(NSString *)description imagePath:(NSString *)imagePath {
+- (void)appendToLog:(NSString *)description withInvocation:(NSInvocation *)invocation {
     if (!description) {
         description = @"";
     }
     
     NSString *filePath = [self indexHTMLFilePath];
+    NSString *imagePath = [NSString stringWithFormat:@"%@/%@", [self methodNameForInvocation:invocation], [self nameForImageWithWidth:self.viewUnderTest.frame.size.width height:self.viewUnderTest.frame.size.height]];
     NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", description, imagePath, self.dataForViewUnderTest.description];
     errorHTML = [errorHTML stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
@@ -165,10 +166,13 @@ void SimpleLog(NSString *format, ...) {
  */
 - (NSString *)directoryPathForCurrentInvocation:(NSInvocation *)invocation {
     NSString *documentsDirectory = [self commonRootPath];
-    NSString *methodName = NSStringFromSelector((SEL)[invocation selector]);
     
-    NSString *directoryPath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@", methodName]];
+    NSString *directoryPath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@", [self methodNameForInvocation:invocation]]];
     return directoryPath;
+}
+
+- (NSString *)methodNameForInvocation:(NSInvocation *)invocation {
+    return NSStringFromSelector((SEL)[invocation selector]);
 }
 
 - (NSString *)commonRootPath {
@@ -192,9 +196,13 @@ void SimpleLog(NSString *format, ...) {
  */
 - (NSString *)pathForImageWithWidth:(CGFloat)width height:(CGFloat)height withInovation:(NSInvocation *)invocation {
     NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
-    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", width, height, (unsigned long)self.dataForViewUnderTest.description.hash];
-    imageName = [imageName stringByAppendingPathExtension:@"png"];
+    NSString *imageName = [self nameForImageWithWidth:width height:height];
     return [directoryPath stringByAppendingPathComponent:imageName];
+}
+
+- (NSString *)nameForImageWithWidth:(CGFloat)width height:(CGFloat)height {
+    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", width, height, (unsigned long)self.dataForViewUnderTest.description.hash];
+    return [imageName stringByAppendingString:@".png"];
 }
 
 - (UIImage *)renderLayer:(CALayer *)layer {

@@ -78,6 +78,7 @@
 		61CACFB81C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */; };
 		C56317F11C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C56317F01C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m */; };
 		C56317F41C63746C00A8E8BA /* UIViewWithLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = C56317F31C63746C00A8E8BA /* UIViewWithLabel.m */; };
+		C59A16451C6A2C20002AC07C /* LayoutReportSnapshotLocationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C59A16441C6A2C20002AC07C /* LayoutReportSnapshotLocationsTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,6 +180,7 @@
 		C56317F01C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseMultipleDataOverlapTests.m; sourceTree = "<group>"; };
 		C56317F21C63746C00A8E8BA /* UIViewWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewWithLabel.h; sourceTree = "<group>"; };
 		C56317F31C63746C00A8E8BA /* UIViewWithLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewWithLabel.m; sourceTree = "<group>"; };
+		C59A16441C6A2C20002AC07C /* LayoutReportSnapshotLocationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutReportSnapshotLocationsTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +267,7 @@
 				61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */,
 				61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */,
 				C56317F01C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m */,
+				C59A16441C6A2C20002AC07C /* LayoutReportSnapshotLocationsTests.m */,
 			);
 			path = LayoutTestCaseTests;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				614FE6B91C03F05E00BB9EE6 /* LayoutTestCaseAmbiguousTests.m in Sources */,
 				614FE6B51C03F05E00BB9EE6 /* DataValuesTests.m in Sources */,
 				614FE6B31C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m in Sources */,
+				C59A16451C6A2C20002AC07C /* LayoutReportSnapshotLocationsTests.m in Sources */,
 				5667F66F1C6600FA0042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m in Sources */,
 				614FE6B81C03F05E00BB9EE6 /* LayoutTestCaseAccessibilityControlTests.m in Sources */,
 				614FE6BB1C03F05E00BB9EE6 /* LayoutTestCaseMissingLabelTests.m in Sources */,

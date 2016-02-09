@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <XCTest/XCTest.h>
 
-@interface LYTLayoutFailingTestSnapshotRecorder : NSObject
+@interface LYTLayoutFailingTestSnapshotRecorder : NSObject<XCTestObservation>
 
 @property (nonatomic, strong) UIView *viewUnderTest;
 @property (nonatomic, strong) NSDictionary *dataForViewUnderTest;

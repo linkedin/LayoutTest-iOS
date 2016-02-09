@@ -9,10 +9,22 @@
 
 #import "LYTLayoutFailingTestSnapshotRecorder.h"
 #import "LYTConfig.h"
+#import "LYTLayoutTestCase.h"
+
+void SimpleLog(NSString *format, ...) {
+    // Log to the console without timestamp that NSLog gives us
+    va_list args;
+    va_start(args, format);
+    NSString *formattedString = [[NSString alloc] initWithFormat:format
+                                                       arguments:args];
+    va_end(args);
+    [[NSFileHandle fileHandleWithStandardOutput] writeData:[formattedString dataUsingEncoding:NSNEXTSTEPStringEncoding]];
+}
 
 @interface LYTLayoutFailingTestSnapshotRecorder ()
 
 @property (nonatomic) Class invocationClass;
+@property (nonatomic) NSMutableSet *failingTestsSnapshotFolders;
 
 @end
 
@@ -25,6 +37,34 @@
         sharedInstance = [[LYTLayoutFailingTestSnapshotRecorder alloc] init];
     });
     return sharedInstance;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.failingTestsSnapshotFolders = [NSMutableSet set];
+        XCTestObservationCenter *observationCenter = [XCTestObservationCenter sharedTestObservationCenter];
+        [observationCenter addTestObserver:self];
+    }
+    return self;
+}
+
+- (void)testBundleDidFinish:(NSBundle *)testBundle {
+    if (self.failingTestsSnapshotFolders.count > 0) {
+        SimpleLog(@"\nSnapshots of failing tests can be found in:\n");
+        for (NSString *path in self.failingTestsSnapshotFolders) {
+            SimpleLog(@"%@\n", path);
+        }
+        [self.failingTestsSnapshotFolders removeAllObjects];
+    }
+}
+
+- (void)testCase:(XCTestCase *)testCase didFailWithDescription:(NSString *)description inFile:(nullable NSString *)filePath atLine:(NSUInteger)lineNumber {
+    if ([testCase isKindOfClass:[LYTLayoutTestCase class]]) {
+        NSString *pathForSnapshots = [self commonRootPathForInvocationClass:[testCase class]];
+        pathForSnapshots = [pathForSnapshots stringByAppendingString:@"/index.html"];
+        [self.failingTestsSnapshotFolders addObject:pathForSnapshots];
+    }
 }
 
 - (void)startNewLogForClass:(Class)invocationClass {
@@ -136,8 +176,12 @@
 }
 
 - (NSString *)commonRootPath {
-    NSString *currentDirectory = [[NSBundle bundleForClass:self.invocationClass] bundlePath];
-    NSString *className = NSStringFromClass(self.invocationClass);
+    return [self commonRootPathForInvocationClass:self.invocationClass];
+}
+
+- (NSString *)commonRootPathForInvocationClass:(Class)classForRoot {
+    NSString *currentDirectory = [[NSBundle bundleForClass:classForRoot] bundlePath];
+    NSString *className = NSStringFromClass(classForRoot);
     //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
     if ([className containsString:@"."]) {
         className = [className componentsSeparatedByString:@"."].lastObject;

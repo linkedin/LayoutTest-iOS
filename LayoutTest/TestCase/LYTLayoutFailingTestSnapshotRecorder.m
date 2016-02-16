@@ -73,18 +73,21 @@ void SimpleLog(NSString *format, ...) {
     [self createIndexHTMLFile];
 }
 
-- (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription {
-    if ([self shouldSaveImageWithInvocation:invocation]) {
-        NSString *imagePath = [self pathForImageWithWidth:self.viewUnderTest.frame.size.width height:self.viewUnderTest.frame.size.height withInovation:invocation];
+- (void)saveImageOfView:(UIView *)view withData:(NSDictionary *)data fromInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription {
+    NSString *imagePath = [self pathForImageWithWidth:view.frame.size.width height:view.frame.size.height data:data invocation:invocation];
+    if ([self shouldSaveImageOfViewatPath:imagePath withInvocation:invocation]) {
         [self createDirectoryForInvocationIfNeeded:invocation];
-        UIImage *viewImage = [self renderLayer:self.viewUnderTest.layer];
+        UIImage *viewImage = [self renderLayer:view.layer];
         [UIImagePNGRepresentation(viewImage) writeToFile:imagePath atomically:YES];
-        [self appendToLog:failureDescription withInvocation:invocation];
+        [self appendViewWithWidth:view.frame.size.width
+                           height:view.frame.size.height
+                         viewData:data
+      toLogWithFailureDescription:failureDescription
+                   withInvocation:invocation];
     }
 }
 
-- (BOOL)shouldSaveImageWithInvocation:(NSInvocation *)invocation {
-    NSString *imagePath = [self pathForImageWithWidth:self.viewUnderTest.frame.size.width height:self.viewUnderTest.frame.size.height withInovation:invocation];
+- (BOOL)shouldSaveImageOfViewatPath:(NSString *)imagePath withInvocation:(NSInvocation *)invocation {
     if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
         return NO;
     } else if ([LYTConfig sharedInstance].snapshotsToSavePerMethod != SaveUnlimitedSnapshotsPerMethod &&
@@ -125,14 +128,17 @@ void SimpleLog(NSString *format, ...) {
     [fileHandler closeFile];
 }
 
-- (void)appendToLog:(NSString *)description withInvocation:(NSInvocation *)invocation {
+- (void)appendViewWithWidth:(CGFloat)width
+                     height:(CGFloat)height viewData:(NSDictionary *)data
+            toLogWithFailureDescription:(NSString *)description
+             withInvocation:(NSInvocation *)invocation {
     if (!description) {
         description = @"";
     }
     
     NSString *filePath = [self indexHTMLFilePath];
-    NSString *imagePath = [NSString stringWithFormat:@"%@/%@", [self methodNameForInvocation:invocation], [self nameForImageWithWidth:self.viewUnderTest.frame.size.width height:self.viewUnderTest.frame.size.height]];
-    NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", description, imagePath, self.dataForViewUnderTest.description];
+    NSString *imagePath = [NSString stringWithFormat:@"%@/%@", [self methodNameForInvocation:invocation], [self nameForImageWithWidth:width height:height data:data]];
+    NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", description, imagePath, data.description];
     errorHTML = [errorHTML stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
     
@@ -194,14 +200,14 @@ void SimpleLog(NSString *format, ...) {
  Returns the full path to the image with the given file name and the iamge size and width appended to it.
  e.g. {DIRECTORY_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell/{FILE_NAME}_{IMAGE_WIDTH}_{IMAGE_HEIGHT}.png
  */
-- (NSString *)pathForImageWithWidth:(CGFloat)width height:(CGFloat)height withInovation:(NSInvocation *)invocation {
+- (NSString *)pathForImageWithWidth:(CGFloat)width height:(CGFloat)height data:(NSDictionary *)data invocation:(NSInvocation *)invocation {
     NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
-    NSString *imageName = [self nameForImageWithWidth:width height:height];
+    NSString *imageName = [self nameForImageWithWidth:width height:height data:data];
     return [directoryPath stringByAppendingPathComponent:imageName];
 }
 
-- (NSString *)nameForImageWithWidth:(CGFloat)width height:(CGFloat)height {
-    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", width, height, (unsigned long)self.dataForViewUnderTest.description.hash];
+- (NSString *)nameForImageWithWidth:(CGFloat)width height:(CGFloat)height data:(NSDictionary *)data {
+    NSString *imageName = [NSString stringWithFormat:@"Width-%.2f_Height-%.2f_Data-%lu", width, height, (unsigned long)data.description.hash];
     return [imageName stringByAppendingString:@".png"];
 }
 

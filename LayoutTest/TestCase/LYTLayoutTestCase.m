@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableSet *viewsAllowingOverlap;
 @property (nonatomic, strong) NSMutableSet *viewsAllowingAccessibilityErrors;
+@property (nonatomic, strong) UIView *viewUnderTest;
+@property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
 
 @end
 
@@ -61,8 +63,9 @@ NS_ASSUME_NONNULL_BEGIN
                                                      limitResults:limitResults
                                                        validation:^(id view, NSDictionary *data, id _Nullable context) {
                                                            
-                                                           [LYTLayoutFailingTestSnapshotRecorder sharedInstance].viewUnderTest = view;
-                                                           [LYTLayoutFailingTestSnapshotRecorder sharedInstance].dataForViewUnderTest = data;
+                                                           //Keep a reference to the view and the data so that we can render a snapshot of them if the test fails
+                                                           self.viewUnderTest = view;
+                                                           self.dataForViewUnderTest = data;
                                                            
                                                            // We must run this first to give the user a chance to add to viewsAllowingOverlap
                                                            validation(view, data, context);
@@ -207,7 +210,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
     [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
     if (self.enableFailingTestSnapshots) {
-        [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:description];
+        [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] saveImageOfView:self.viewUnderTest withData:self.dataForViewUnderTest fromInvocation:self.invocation failureDescription:description];
     }
 }
 

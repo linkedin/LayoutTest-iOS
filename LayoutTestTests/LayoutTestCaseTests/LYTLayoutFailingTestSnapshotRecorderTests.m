@@ -29,16 +29,6 @@
     [super tearDown];
 }
 
--(void)testCanSetViewUnderTest {
-    LYTLayoutFailingTestSnapshotRecorder *recorder = [[LYTLayoutFailingTestSnapshotRecorder alloc] init];
-    XCTAssertTrue([recorder respondsToSelector:@selector(setViewUnderTest:)]);
-}
-
-- (void)testCanSetDataForViewUnderTest {
-    LYTLayoutFailingTestSnapshotRecorder *recorder = [[LYTLayoutFailingTestSnapshotRecorder alloc] init];
-    XCTAssertTrue([recorder respondsToSelector:@selector(setDataForViewUnderTest:)]);
-}
-
 - (void)testStartNewLogDeletesExisitingClassSnapshotDirectory {
     //Setup directory and file to make sure file is deleted when we start a new log.
     NSString *currentDirectory = [[NSBundle bundleForClass:self.class] bundlePath];
@@ -72,7 +62,7 @@
 - (void)testSaveImageOfCurrentViewCreatesDirectoryFromInvocationSelectorName {
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    [self.recorder saveImageOfView:nil withData:nil fromInvocation:self.invocation failureDescription:@""];
     
     NSString *directoryPath = [self pathForCurrentInvocation];
     BOOL isDirectory = NO;
@@ -84,11 +74,9 @@
 
 - (void)testSaveImageOfCurrentViewSavesImageToDisk {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
-    self.recorder.viewUnderTest = testView;
-    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    [self.recorder saveImageOfView:testView withData:@{@"key" : @"value"} fromInvocation:self.invocation failureDescription:@""];
     
     NSString *dataHash = @"";
 #ifdef __LP64__
@@ -103,10 +91,9 @@
 
 - (void)testSaveImageOfCurrentViewWhenViewHasWidthOfZeroDoesNotSaveImage {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 0, 100}];
-    self.recorder.viewUnderTest = testView;
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    [self.recorder saveImageOfView:testView withData:nil fromInvocation:self.invocation failureDescription:@""];
     
     NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];
     XCTAssertFalse(filelist.count == 1);
@@ -114,10 +101,9 @@
 
 - (void)testSaveImageOfCurrentViewWhenViewHasHeightOfZeroDoesNotSaveImage {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 0}];
-    self.recorder.viewUnderTest = testView;
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    [self.recorder saveImageOfView:testView withData:nil fromInvocation:self.invocation failureDescription:@""];
     
     NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];
     XCTAssertEqual(0, filelist.count);
@@ -125,11 +111,10 @@
 
 - (void)testSaveImageOfCurrentViewWhenDataHasSpecialCharactersImageSavedWithExpectedName {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
-    self.recorder.viewUnderTest = testView;
-    self.recorder.dataForViewUnderTest = @{@"key" : @"漢語 ♔ 🚂 ☎ Here are some more special characters ˆ™£‡‹·Ú‹˜ƒª•"};
+    NSDictionary *data = @{@"key" : @"漢語 ♔ 🚂 ☎ Here are some more special characters ˆ™£‡‹·Ú‹˜ƒª•"};
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     
     NSString *dataHash = @"";
 #ifdef __LP64__
@@ -144,11 +129,10 @@
 
 - (void)testSaveImageOfCurrentViewWhenDataDescriptionIsOverTwoHunderedCharactersImageSavedWithExpectedName {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
-    self.recorder.viewUnderTest = testView;
-    self.recorder.dataForViewUnderTest = @{@"key" : [self threeHunderedAndSixtyFourCharacterString]};
+    NSDictionary *data = @{@"key" : [self threeHunderedAndSixtyFourCharacterString]};
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     
     NSString *dataHash = @"";
 #ifdef __LP64__
@@ -163,13 +147,12 @@
 
 - (void)testSaveImageOfCurrentViewWhenCalledTwiceWithSlightlyDifferentDataSavesTwoImages {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
-    self.recorder.viewUnderTest = testView;
-    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
+    NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
-    self.recorder.dataForViewUnderTest = @{@"key" : @"value1"};
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
+    data = @{@"key" : @"value1"};
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     
     
     NSString *expectedFirstDataHash = @"";
@@ -194,12 +177,11 @@
 
 - (void)testSaveImageWhenConfigHasNumberOfImagesToSaveSetToZeroDoesNotSaveImage {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
-    self.recorder.viewUnderTest = testView;
-    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
+    NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     [LYTConfig sharedInstance].snapshotsToSavePerMethod = 0;
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     
     NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];
     XCTAssertEqual(0, filelist.count);
@@ -207,24 +189,23 @@
 
 - (void)testSaveImageWhenConfigHasNumberOfImagesToSaveSetToFourOnlySavesFourImages {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
-    self.recorder.viewUnderTest = testView;
-    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
+    NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     [LYTConfig sharedInstance].snapshotsToSavePerMethod = 4;
     
     //Should be saved
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
-    self.recorder.dataForViewUnderTest = @{@"key1" : @"value"};
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
-    self.recorder.dataForViewUnderTest = @{@"key2" : @"value"};
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
-    self.recorder.dataForViewUnderTest = @{@"key3" : @"value"};
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
+    data = @{@"key1" : @"value"};
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
+    data = @{@"key2" : @"value"};
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
+    data = @{@"key3" : @"value"};
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     //
     
     //Shoudln't be saved
-    self.recorder.dataForViewUnderTest = @{@"key4" : @"value"};
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@""];
+    data = @{@"key4" : @"value"};
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     //
     
     NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];
@@ -233,11 +214,10 @@
 
 - (void)testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
-    self.recorder.viewUnderTest = testView;
-    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
+    NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@"This is a test failure description"];
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@"This is a test failure description"];
     [self.recorder finishLog];
     
     NSString *dataHash = @"";
@@ -253,13 +233,12 @@
 }
 
 - (void)testSaveImageOfCurrentViewWhenViewAndDataAlreadySavedDoesNotReaddFailureDescriptionImageAndDataToIndexFile {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
-    self.recorder.viewUnderTest = testView;
-    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
+    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 1000}];
+    NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@"This is a test failure description"];
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:@"This is a test failure description"];
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@"This is a test failure description"];
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@"This is a test failure description"];
     [self.recorder finishLog];
     
     NSString *dataHash = @"";
@@ -269,18 +248,17 @@
     dataHash = @"1252068542";
 #endif
     NSString *actualHTML = [self indexHTMLFile];
-    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD>This is a test failure description</TD><TD><IMG src='testSaveImageOfCurrentViewWhenViewAndDataAlreadySavedDoesNotReaddFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-100.00_Data-%@.png' alt='No Image'></TD><TD>{    key = value;}</TD></TR>", dataHash];
+    NSString *expectedBodyHTML = [NSString stringWithFormat:@"<TR><TD>This is a test failure description</TD><TD><IMG src='testSaveImageOfCurrentViewWhenViewAndDataAlreadySavedDoesNotReaddFailureDescriptionImageAndDataToIndexFile/Width-100.00_Height-1000.00_Data-%@.png' alt='No Image'></TD><TD>{    key = value;}</TD></TR>", dataHash];
     NSString *expectedHTML = [NSString stringWithFormat:@"%@%@%@", [self expectedStartOfFileHTML], expectedBodyHTML, [self expectedEndOfFileHTML]];
     XCTAssertEqualObjects(expectedHTML, actualHTML);
 }
 
 - (void)testSaveImageOfCurrentViewWithNilFailureDescriptionAddsBlankDescriptionToIndexFile {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 1000, 100}];
-    self.recorder.viewUnderTest = testView;
-    self.recorder.dataForViewUnderTest = @{@"key" : @"value"};
+    NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     
-    [self.recorder saveImageOfCurrentViewWithInvocation:self.invocation failureDescription:nil];
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:nil];
     [self.recorder finishLog];
     
     NSString *dataHash = @"";

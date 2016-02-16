@@ -13,15 +13,12 @@
 
 @interface LYTLayoutFailingTestSnapshotRecorder : NSObject<XCTestObservation>
 
-@property (nonatomic, strong) UIView *viewUnderTest;
-@property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
-
 + (instancetype)sharedInstance;
 
 - (void)startNewLogForClass:(Class)invocationClass;
 
 - (void)finishLog;
 
-- (void)saveImageOfCurrentViewWithInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription;
+- (void)saveImageOfView:(UIView *)view withData:(NSDictionary *)data fromInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription;
 
 @end

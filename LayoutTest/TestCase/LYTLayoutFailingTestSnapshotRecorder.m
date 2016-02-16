@@ -155,7 +155,6 @@ void SimpleLog(NSString *format, ...) {
 - (void)deleteCurrentFailingSnapshots {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:[self commonRootPath] error:nil];
-    
 }
 
 - (void)createDirectoryForInvocationIfNeeded:(NSInvocation *)invocation {

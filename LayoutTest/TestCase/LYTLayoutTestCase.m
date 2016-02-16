@@ -211,17 +211,6 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-+ (NSString *)commonRootPath {
-    NSString *currentDirectory = [[NSBundle bundleForClass:[self class]] bundlePath];
-    NSString *className = NSStringFromClass(self.class);
-    //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
-    if ([className containsString:@"."]) {
-        className = [className componentsSeparatedByString:@"."].lastObject;
-    }
-    
-    return [currentDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"LayoutTestImages/%@", className]];
-}
-
 #pragma mark - Private Functional (Class) Methods
 
 /**

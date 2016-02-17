@@ -12,6 +12,8 @@
 
 @implementation LYTConfig
 
+NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod = -1;
+
 + (instancetype)sharedInstance {
     static LYTConfig *sharedInstance = nil;
     static dispatch_once_t onceToken;
@@ -34,6 +36,7 @@
     self.ambiguousAutolayoutTestsEnabled = YES;
     self.interceptsAutolayoutErrors = YES;
     self.accessibilityTestsEnabled = YES;
+    self.failingTestSnapshotsEnabled = YES;
     /*
      UISwitch - This is a known class which has internal overlapping subviews.
      UITextView - If you use attributed text, UIKit may add UIImage views which can overlap with the internal text containers.
@@ -44,6 +47,7 @@
      */
     self.viewClassesRequiringAccessibilityLabels = [NSSet setWithObjects:[UIControl class], nil];
     self.cgFloatEpsilon = 1e-5;
+    self.snapshotsToSavePerMethod = LYTSaveUnlimitedSnapshotsPerMethod;
 }
 
 @end

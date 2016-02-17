@@ -75,7 +75,7 @@ void SimpleLog(NSString *format, ...) {
 
 - (void)saveImageOfView:(UIView *)view withData:(NSDictionary *)data fromInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription {
     NSString *imagePath = [self pathForImageWithWidth:view.frame.size.width height:view.frame.size.height data:data invocation:invocation];
-    if ([self shouldSaveImageOfViewatPath:imagePath withInvocation:invocation]) {
+    if ([self shouldSaveImageOfViewAtPath:imagePath withInvocation:invocation]) {
         [self createDirectoryForInvocationIfNeeded:invocation];
         UIImage *viewImage = [self renderLayer:view.layer];
         [UIImagePNGRepresentation(viewImage) writeToFile:imagePath atomically:YES];
@@ -87,7 +87,7 @@ void SimpleLog(NSString *format, ...) {
     }
 }
 
-- (BOOL)shouldSaveImageOfViewatPath:(NSString *)imagePath withInvocation:(NSInvocation *)invocation {
+- (BOOL)shouldSaveImageOfViewAtPath:(NSString *)imagePath withInvocation:(NSInvocation *)invocation {
     if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
         return NO;
     } else if ([LYTConfig sharedInstance].snapshotsToSavePerMethod != SaveUnlimitedSnapshotsPerMethod &&

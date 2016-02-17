@@ -24,7 +24,7 @@ class SampleFailingLayoutTestsWithSnapshots : LayoutTestCase {
 extension SampleFailingView : LYTViewProvider {
     public class func dataSpecForTest() -> [NSObject: AnyObject] {
         return [
-            "text": "A really, really, really, really, really, really, really, long string",
+            "text": LYTStringValues(),
             "buttonText": LYTStringValues()
         ]
     }

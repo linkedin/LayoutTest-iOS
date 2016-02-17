@@ -75,16 +75,10 @@
 - (void)testSaveImageOfCurrentViewSavesImageToDisk {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
     [self.recorder startNewLogForClass:self.class];
+    NSDictionary *data = @{@"key" : @"value"};
+    [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     
-    [self.recorder saveImageOfView:testView withData:@{@"key" : @"value"} fromInvocation:self.invocation failureDescription:@""];
-    
-    NSString *dataHash = @"";
-#ifdef __LP64__
-    dataHash = @"11921695704359177406";
-#else
-    dataHash = @"1252068542";
-#endif
-    NSString *imageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", dataHash];
+    NSString *imageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%lu.png", (unsigned long)data.description.hash];
     NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:imageName];
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
 }
@@ -116,13 +110,7 @@
     
     [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     
-    NSString *dataHash = @"";
-#ifdef __LP64__
-    dataHash = @"7040999336831705875";
-#else
-    dataHash = @"2409456403";
-#endif
-    NSString*expectedImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", dataHash];
+    NSString*expectedImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%lu.png", (unsigned long)data.description.hash];
     NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedImageName];
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
 }
@@ -134,13 +122,7 @@
     
     [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     
-    NSString *dataHash = @"";
-#ifdef __LP64__
-    dataHash = @"18202946166865061037";
-#else
-    dataHash = @"1837950125";
-#endif
-    NSString*expectedImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", dataHash];
+    NSString*expectedImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%lu.png", (unsigned long)data.description.hash];
     NSString *imagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedImageName];
     XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:imagePath]);
 }
@@ -148,6 +130,7 @@
 - (void)testSaveImageOfCurrentViewWhenCalledTwiceWithSlightlyDifferentDataSavesTwoImages {
     UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
     NSDictionary *data = @{@"key" : @"value"};
+    NSDictionary *data1 = @{@"key" : @"value1"};
     [self.recorder startNewLogForClass:self.class];
     
     [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
@@ -155,18 +138,9 @@
     [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
     
     
-    NSString *expectedFirstDataHash = @"";
-    NSString *expectedSecondDataHash = @"";
-#ifdef __LP64__
-    expectedFirstDataHash = @"11921695704359177406";
-    expectedSecondDataHash = @"3294889149843288304";
-#else
-    expectedFirstDataHash = @"1252068542";
-    expectedSecondDataHash = @"2259857648";
-#endif
-    NSString*expectedFirstImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", expectedFirstDataHash];
+    NSString*expectedFirstImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%lu.png", (unsigned long)data.description.hash];
     NSString *firstImagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedFirstImageName];
-    NSString*expectedSecondImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%@.png", expectedSecondDataHash];
+    NSString*expectedSecondImageName = [NSString stringWithFormat:@"/Width-100.00_Height-100.00_Data-%lu.png", (unsigned long)data1.description.hash];
     NSString *secondImagePath = [[self pathForCurrentInvocation] stringByAppendingString:expectedSecondImageName];
     
     NSArray *filelist = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self pathForCurrentInvocation] error:nil];

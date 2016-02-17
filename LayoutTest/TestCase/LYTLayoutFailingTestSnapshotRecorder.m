@@ -69,7 +69,7 @@ void SimpleLog(NSString *format, ...) {
 
 - (void)startNewLogForClass:(Class)invocationClass {
     self.invocationClass = invocationClass;
-    [self deleteCurrentFailingSnapshots];
+    [self deleteCurrentFailingSnapshotsForInvocationClass:invocationClass];
     [self createIndexHTMLFile];
 }
 
@@ -151,9 +151,9 @@ void SimpleLog(NSString *format, ...) {
     return [documentsDirectory stringByAppendingPathComponent:@"index.html"];
 }
 
-- (void)deleteCurrentFailingSnapshots {
+- (void)deleteCurrentFailingSnapshotsForInvocationClass:(Class)invocationClass {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    [fileManager removeItemAtPath:[self commonRootPath] error:nil];
+    [fileManager removeItemAtPath:[self commonRootPathForInvocationClass:invocationClass] error:nil];
 }
 
 - (void)createDirectoryForInvocationIfNeeded:(NSInvocation *)invocation {

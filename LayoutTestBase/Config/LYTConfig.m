@@ -34,7 +34,7 @@
     self.ambiguousAutolayoutTestsEnabled = YES;
     self.interceptsAutolayoutErrors = YES;
     self.accessibilityTestsEnabled = YES;
-    self.enableFailingTestSnapshots = YES;
+    self.failingTestSnapshotsEnabled = YES;
     /*
      UISwitch - This is a known class which has internal overlapping subviews.
      UITextView - If you use attributed text, UIKit may add UIImage views which can overlap with the internal text containers.

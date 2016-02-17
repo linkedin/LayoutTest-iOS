@@ -91,7 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
     self.ambiguousAutolayoutTestsEnabled = [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled;
     self.interceptsAutolayoutErrors = [LYTConfig sharedInstance].interceptsAutolayoutErrors;
     self.accessibilityTestsEnabled = [LYTConfig sharedInstance].accessibilityTestsEnabled;
-    self.enableFailingTestSnapshots = [LYTConfig sharedInstance].enableFailingTestSnapshots;
+    self.failingTestSnapshotsEnabled = [LYTConfig sharedInstance].failingTestSnapshotsEnabled;
     self.viewClassesRequiringAccessibilityLabels = [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels;
     self.viewClassesAllowingSubviewErrors = [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors;
 
@@ -209,7 +209,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
     [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
-    if (self.enableFailingTestSnapshots) {
+    if (self.failingTestSnapshotsEnabled) {
         [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] saveImageOfView:self.viewUnderTest withData:self.dataForViewUnderTest fromInvocation:self.invocation failureDescription:description];
     }
 }

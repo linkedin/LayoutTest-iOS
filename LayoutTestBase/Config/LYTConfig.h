@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  Default: true
  */
-@property (nonatomic) BOOL enableFailingTestSnapshots;
+@property (nonatomic) BOOL failingTestSnapshotsEnabled;
 
 /**
  When we traverse the view hierarchy, we expect some elements to always have accessibility labels. For instance, UIControls should have accessibility

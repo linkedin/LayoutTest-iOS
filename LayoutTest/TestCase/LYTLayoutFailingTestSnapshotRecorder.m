@@ -128,7 +128,8 @@ void SimpleLog(NSString *format, ...) {
 }
 
 - (void)appendViewWithWidth:(CGFloat)width
-                     height:(CGFloat)height viewData:(NSDictionary *)data
+                     height:(CGFloat)height
+                   viewData:(NSDictionary *)data
             toLogWithFailureDescription:(NSString *)description
              withInvocation:(NSInvocation *)invocation {
     if (!description) {

@@ -106,16 +106,15 @@ void SimpleLog(NSString *format, ...) {
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *classNameDirectory = [self commonRootPath];
     NSString *filePath = [self indexHTMLFilePath];
-    NSError *error;
     
     NSString *header = @"<HTML><HEAD></HEAD><BODY><TABLE style='width:100%'><TR><TH>Description</TH><TH>Image</TH><TH>Input Data</TH></TR>";
     
-    [fileManager createDirectoryAtPath:classNameDirectory withIntermediateDirectories:YES attributes:nil error:&error];
+    [fileManager createDirectoryAtPath:classNameDirectory withIntermediateDirectories:YES attributes:nil error:nil];
     [fileManager createFileAtPath:filePath contents:nil attributes:nil];
     
     // Write to the file
     [header writeToFile:filePath atomically:YES
-               encoding:NSUTF8StringEncoding error:&error];
+               encoding:NSUTF8StringEncoding error:nil];
 }
 
 - (void)finishLog {

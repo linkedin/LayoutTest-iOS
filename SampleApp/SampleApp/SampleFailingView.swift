@@ -22,6 +22,6 @@ public class SampleFailingView: UIView {
 
     func setup(json: [NSObject: AnyObject]) {
         label.text = json["text"] as? String
-        button.titleLabel?.text = json["buttonText"] as? String
+        button.setTitle(json["buttonText"] as? String, forState: .Normal)
     }
 }

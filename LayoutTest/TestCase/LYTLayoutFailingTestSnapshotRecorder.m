@@ -104,7 +104,7 @@ void SimpleLog(NSString *format, ...) {
 
 - (void)createIndexHTMLFile {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *classNameDirectory = [self commonRootPath];
+    NSString *classNameDirectory = [self commonRootPathForInvocationClass:self.invocationClass];
     NSString *filePath = [self indexHTMLFilePath];
     
     NSString *header = @"<HTML><HEAD></HEAD><BODY><TABLE style='width:100%'><TR><TH>Description</TH><TH>Image</TH><TH>Input Data</TH></TR>";
@@ -148,7 +148,7 @@ void SimpleLog(NSString *format, ...) {
 }
 
 - (NSString *)indexHTMLFilePath {
-    NSString *documentsDirectory = [self commonRootPath];
+    NSString *documentsDirectory = [self commonRootPathForInvocationClass:self.invocationClass];
     return [documentsDirectory stringByAppendingPathComponent:@"index.html"];
 }
 
@@ -169,7 +169,7 @@ void SimpleLog(NSString *format, ...) {
  e.g. {FULL_PATH}/SamepleTableViewCellLayoutTests/testSampleTableViewCell
  */
 - (NSString *)directoryPathForCurrentInvocation:(NSInvocation *)invocation {
-    NSString *documentsDirectory = [self commonRootPath];
+    NSString *documentsDirectory = [self commonRootPathForInvocationClass:self.invocationClass];
     
     NSString *directoryPath = [documentsDirectory stringByAppendingString:[NSString stringWithFormat:@"/%@", [self methodNameForInvocation:invocation]]];
     return directoryPath;
@@ -177,10 +177,6 @@ void SimpleLog(NSString *format, ...) {
 
 - (NSString *)methodNameForInvocation:(NSInvocation *)invocation {
     return NSStringFromSelector((SEL)[invocation selector]);
-}
-
-- (NSString *)commonRootPath {
-    return [self commonRootPathForInvocationClass:self.invocationClass];
 }
 
 - (NSString *)commonRootPathForInvocationClass:(Class)classForRoot {

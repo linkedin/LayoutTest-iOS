@@ -30,7 +30,7 @@
 
 /**
  Finishes the index.html log for the current invocation class by adding closing html tags.
- Can be called safely without calling startNetLogForClass: as no index.html file for the class with exists so nothing will happen. 
+ Can be called safely without calling startNewLogForClass: as no index.html file for the class with exists so nothing will happen.
  
  Then file path to the index.html file for the current class is saved after all of the tests in the test class finish running. Once all test classes in  have finished all saved failing test index.html file paths are logged to the console.
  */
@@ -44,7 +44,7 @@
  \param view The view to save a image of.
  \param data The data that was used to poulate the view
  \param invocation The invocation for the current test. When used from a XCTestCase subclass the invocation will include the name of the test method currently being run.
- \param failureDescription The description of why the view that is being saved failed it's layout tests.
+ \param failureDescription The description of why the view that is being saved failed its layout tests.
  */
 - (void)saveImageOfView:(UIView *)view withData:(NSDictionary *)data fromInvocation:(NSInvocation *)invocation failureDescription:(NSString *)failureDescription;
 

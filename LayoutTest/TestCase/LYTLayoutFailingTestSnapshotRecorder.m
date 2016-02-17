@@ -159,8 +159,7 @@ void SimpleLog(NSString *format, ...) {
 
 - (void)createDirectoryForInvocationIfNeeded:(NSInvocation *)invocation {
     NSString *directoryPath = [self directoryPathForCurrentInvocation:invocation];
-    BOOL isDirectory = NO;
-    if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:&isDirectory]) {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:directoryPath isDirectory:nil]) {
         [[NSFileManager defaultManager] createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
 }

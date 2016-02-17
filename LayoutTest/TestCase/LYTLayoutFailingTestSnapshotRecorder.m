@@ -207,11 +207,11 @@ void SimpleLog(NSString *format, ...) {
 
 - (UIImage *)renderLayer:(CALayer *)layer {
     UIImage *snapshot = nil;
-        CGRect bounds = layer.bounds;
+    CGRect bounds = layer.bounds;
     if (CGRectGetWidth(bounds) > 0 && CGRectGetHeight(bounds) > 0) {
         UIGraphicsBeginImageContextWithOptions(bounds.size, NO, 0);
         CGContextRef context = UIGraphicsGetCurrentContext();
-        
+
         CGContextSaveGState(context);
         {
             [layer renderInContext:context];

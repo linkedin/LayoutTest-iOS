@@ -12,6 +12,8 @@
 
 @implementation LYTConfig
 
+NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod = -1;
+
 + (instancetype)sharedInstance {
     static LYTConfig *sharedInstance = nil;
     static dispatch_once_t onceToken;
@@ -45,7 +47,7 @@
      */
     self.viewClassesRequiringAccessibilityLabels = [NSSet setWithObjects:[UIControl class], nil];
     self.cgFloatEpsilon = 1e-5;
-    self.snapshotsToSavePerMethod = SaveUnlimitedSnapshotsPerMethod;
+    self.snapshotsToSavePerMethod = LYTSaveUnlimitedSnapshotsPerMethod;
 }
 
 @end

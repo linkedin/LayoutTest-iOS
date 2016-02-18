@@ -83,7 +83,8 @@
     NSSet *viewClassesRequiringAccessibilityLabelsSets = [NSSet setWithObjects:[UIControl class], nil];
     XCTAssertEqualObjects(viewClassesAllowingSubviewErrorsSet, [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors);
     XCTAssertEqualObjects(viewClassesRequiringAccessibilityLabelsSets, [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels);
-    XCTAssertEqual(1e-5, [LYTConfig sharedInstance].cgFloatEpsilon);
+    // Testing epsilon values is naturally difficult. This failed on iOS 8 if you do XCTAssertEqual, but this works
+    XCTAssertTrue([LYTConfig sharedInstance].cgFloatEpsilon > 0.0000099 && [LYTConfig sharedInstance].cgFloatEpsilon < 0.0000101);
     XCTAssertEqual(-1, [LYTConfig sharedInstance].snapshotsToSavePerMethod);
 }
 

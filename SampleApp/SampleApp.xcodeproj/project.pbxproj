@@ -13,7 +13,6 @@
 		61A305E41C12583100CB3FEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A305E31C12583100CB3FEC /* AppDelegate.swift */; };
 		61A305EB1C12583100CB3FEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61A305EA1C12583100CB3FEC /* Assets.xcassets */; };
 		61A305EE1C12583100CB3FEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61A305EC1C12583100CB3FEC /* LaunchScreen.storyboard */; };
-		61A306041C12587100CB3FEC /* SampleTableViewCellLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A306031C12587100CB3FEC /* SampleTableViewCellLayoutTests.swift */; };
 		61A306091C12588700CB3FEC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A306051C12588700CB3FEC /* HomeViewController.swift */; };
 		61A3060A1C12588700CB3FEC /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A306061C12588700CB3FEC /* HomeViewController.xib */; };
 		61A3060B1C12588700CB3FEC /* SampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A306071C12588700CB3FEC /* SampleTableViewCell.swift */; };
@@ -23,6 +22,10 @@
 		61F42D7E1C18878700A21677 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61F42D7C1C18878700A21677 /* LaunchScreen.storyboard */; };
 		80D929B7BEDDE2B3BB220B59 /* Pods_CatalogSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F204CD35FFC3C2EC6A56E828 /* Pods_CatalogSample.framework */; };
 		AF642C19C9DA1CBDF87E8127 /* Pods_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20C92A33C23683C87FF5EC96 /* Pods_SampleApp.framework */; };
+		C56317EB1C63589900A8E8BA /* SampleFailingLayoutTestsWithSnapshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56317EA1C63589900A8E8BA /* SampleFailingLayoutTestsWithSnapshots.swift */; };
+		C56317ED1C6358F800A8E8BA /* SampleFailingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C56317EC1C6358F800A8E8BA /* SampleFailingView.xib */; };
+		C56317EF1C63596400A8E8BA /* SampleFailingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56317EE1C63596400A8E8BA /* SampleFailingView.swift */; };
+		C5CE8F9E1C621E2500250812 /* SampleTableViewCellLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A306031C12587100CB3FEC /* SampleTableViewCellLayoutTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +63,9 @@
 		61F42D7D1C18878700A21677 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61F42D7F1C18878700A21677 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E137A0CBD23A2BC2E834EDF /* Pods-SampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp/Pods-SampleApp.debug.xcconfig"; sourceTree = "<group>"; };
+		C56317EA1C63589900A8E8BA /* SampleFailingLayoutTestsWithSnapshots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleFailingLayoutTestsWithSnapshots.swift; sourceTree = "<group>"; };
+		C56317EC1C6358F800A8E8BA /* SampleFailingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SampleFailingView.xib; sourceTree = "<group>"; };
+		C56317EE1C63596400A8E8BA /* SampleFailingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleFailingView.swift; sourceTree = "<group>"; };
 		C8E3A016ED97012DB64C99EA /* Pods-SampleAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleAppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleAppTests/Pods-SampleAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		F204CD35FFC3C2EC6A56E828 /* Pods_CatalogSample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CatalogSample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -138,6 +144,8 @@
 				61A305EA1C12583100CB3FEC /* Assets.xcassets */,
 				61A305EC1C12583100CB3FEC /* LaunchScreen.storyboard */,
 				61A305EF1C12583100CB3FEC /* Info.plist */,
+				C56317EC1C6358F800A8E8BA /* SampleFailingView.xib */,
+				C56317EE1C63596400A8E8BA /* SampleFailingView.swift */,
 			);
 			path = SampleApp;
 			sourceTree = "<group>";
@@ -147,6 +155,7 @@
 			children = (
 				61A306031C12587100CB3FEC /* SampleTableViewCellLayoutTests.swift */,
 				61A305FA1C12583100CB3FEC /* Info.plist */,
+				C56317EA1C63589900A8E8BA /* SampleFailingLayoutTestsWithSnapshots.swift */,
 			);
 			path = SampleAppTests;
 			sourceTree = "<group>";
@@ -286,6 +295,7 @@
 				61A305EE1C12583100CB3FEC /* LaunchScreen.storyboard in Resources */,
 				61A3060C1C12588700CB3FEC /* SampleTableViewCell.xib in Resources */,
 				61A305EB1C12583100CB3FEC /* Assets.xcassets in Resources */,
+				C56317ED1C6358F800A8E8BA /* SampleFailingView.xib in Resources */,
 				61A3060A1C12588700CB3FEC /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -453,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				61A3060B1C12588700CB3FEC /* SampleTableViewCell.swift in Sources */,
+				C56317EF1C63596400A8E8BA /* SampleFailingView.swift in Sources */,
 				61A305E41C12583100CB3FEC /* AppDelegate.swift in Sources */,
 				61A306091C12588700CB3FEC /* HomeViewController.swift in Sources */,
 			);
@@ -462,7 +473,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61A306041C12587100CB3FEC /* SampleTableViewCellLayoutTests.swift in Sources */,
+				C56317EB1C63589900A8E8BA /* SampleFailingLayoutTestsWithSnapshots.swift in Sources */,
+				C5CE8F9E1C621E2500250812 /* SampleTableViewCellLayoutTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,5 @@
+target :SampleAppiOS7Tests do
+  pod 'LayoutTestBase', :path => '../..'
+  pod 'LayoutTest', :path => '../..'
+end
+

@@ -8,8 +8,18 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 #import <XCTest/XCTest.h>
-@import LayoutTestBase;
 
+/*
+ This is a work around for an issue where we don't know how LayoutTestBase doesn't exist.
+ See https://github.com/linkedin/LayoutTest-iOS/issues/8 for more info.
+ It looks like this will be fixed in CocoaPods 1.0.0, so we should be able to remove this at some point https://github.com/CocoaPods/CocoaPods/issues/4420
+ We have a project which ensures this behavior works (TestProjects/SampleAppiOS7).
+ */
+#if __has_include(<LayoutTestBase/LayoutTestBase-BridgingHeader.h>)
+@import LayoutTestBase;
+#else
+#import <LayoutTestBase/LYTLayoutPropertyTester.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

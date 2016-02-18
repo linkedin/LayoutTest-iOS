@@ -12,7 +12,7 @@
 #import "LYTLayoutPropertyTester.h"
 #import "UIView+LYTTestHelpers.h"
 #import "LYTAutolayoutFailureIntercepter.h"
-
+#import "LYTLayoutFailingTestSnapshotRecorder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableSet *viewsAllowingOverlap;
 @property (nonatomic, strong) NSMutableSet *viewsAllowingAccessibilityErrors;
+@property (nonatomic, strong) UIView *viewUnderTest;
+@property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
 
 @end
 
@@ -28,6 +30,16 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Public
 
 #pragma mark - Running Tests
+
++ (void)setUp {
+    [super setUp];
+    [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] startNewLogForClass:self.class];
+}
+
++ (void)tearDown {
+    [super tearDown];
+    [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] finishLog];
+}
 
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
                                 validation:(void(^)(id, NSDictionary *, id _Nullable))validation {
@@ -39,6 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
                               limitResults:(LYTTesterLimitResults)limitResults
                                 validation:(void(^)(id view, NSDictionary *data, id _Nullable context))validation {
+    
     // It's too early to do this in setUp because they may override this property in setUp. So, let's do it here. It's ok if we call this multiple times per test. We'll just clean up in tearDown.
     if (self.interceptsAutolayoutErrors) {
         [LYTAutolayoutFailureIntercepter interceptAutolayoutFailuresWithBlock:^{
@@ -49,7 +62,11 @@ NS_ASSUME_NONNULL_BEGIN
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:viewProvider
                                                      limitResults:limitResults
                                                        validation:^(id view, NSDictionary *data, id _Nullable context) {
-
+                                                           
+                                                           //Keep a reference to the view and the data so that we can render a snapshot of them if the test fails
+                                                           self.viewUnderTest = view;
+                                                           self.dataForViewUnderTest = data;
+                                                           
                                                            // We must run this first to give the user a chance to add to viewsAllowingOverlap
                                                            validation(view, data, context);
 
@@ -74,6 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
     self.ambiguousAutolayoutTestsEnabled = [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled;
     self.interceptsAutolayoutErrors = [LYTConfig sharedInstance].interceptsAutolayoutErrors;
     self.accessibilityTestsEnabled = [LYTConfig sharedInstance].accessibilityTestsEnabled;
+    self.failingTestSnapshotsEnabled = [LYTConfig sharedInstance].failingTestSnapshotsEnabled;
     self.viewClassesRequiringAccessibilityLabels = [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels;
     self.viewClassesAllowingSubviewErrors = [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors;
 
@@ -185,6 +203,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)failTest:(NSString *)errorMessage view:(nullable UIView *)view {
     XCTFail(@"%@", errorMessage);
+}
+
+#pragma mark Failing Test Snapshots
+
+- (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
+    [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
+    if (self.failingTestSnapshotsEnabled) {
+        [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] saveImageOfView:self.viewUnderTest withData:self.dataForViewUnderTest fromInvocation:self.invocation failureDescription:description];
+    }
 }
 
 #pragma mark - Private Functional (Class) Methods

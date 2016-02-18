@@ -71,6 +71,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) BOOL accessibilityTestsEnabled;
 
 /**
+ If on, a snapshot of the view for the current failing test will be saved to the derived data folder. The data for the failing test is also logged in the index.html file for each LYTLayoutTestCase sub class. The path to the folder is logged after the test suite has finished.
+ 
+ This property can also be turned on/off on each LayoutTestCase.
+ 
+ Default: true
+ */
+@property (nonatomic) BOOL failingTestSnapshotsEnabled;
+
+/**
  When we traverse the view hierarchy, we expect some elements to always have accessibility labels. For instance, UIControls should have accessibility
  labels or they won't be useable by accessibility users. Any element which subclasses one of these classes should have an accessibility label.
 
@@ -106,6 +115,22 @@ NS_ASSUME_NONNULL_BEGIN
  Default: 1e-5
  */
 @property (nonatomic) CGFloat cgFloatEpsilon;
+
+
+/**
+ Default snapshots to save per method.
+ */
+
+extern NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod;
+
+/**
+ Limits the number of snapshots that will be saved for each method in a LYTLayoutTestCase. If a test has multiple XCTAsserts which can fail for each size/data iteration there is the possiblity that hundreds of snapshots will be produced. Setting this to a value of 0 or greater will limit the number of images saved.
+ 
+ This property can only be set in the config.
+ 
+ Default: SaveUnlimitedSnapshotsPerMethod(-1) (Representing unlimited)
+ */
+@property (nonatomic) NSUInteger snapshotsToSavePerMethod;
 
 /**
  Singleton accessor.

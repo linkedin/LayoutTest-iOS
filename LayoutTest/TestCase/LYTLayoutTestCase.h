@@ -15,7 +15,7 @@
  It looks like this will be fixed in CocoaPods 1.0.0, so we should be able to remove this at some point https://github.com/CocoaPods/CocoaPods/issues/4420
  We have a project which ensures this behavior works (TestProjects/SampleAppiOS7).
  */
-#if __has_include(<LayoutTestBase/LayoutTestBase-BridgingHeader.h>)
+#if __has_include(<LayoutTestBase/LayoutTestBase-umbrella.h>)
 @import LayoutTestBase;
 #else
 #import <LayoutTestBase/LYTLayoutPropertyTester.h>

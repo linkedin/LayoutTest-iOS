@@ -156,7 +156,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 22, 10)];
     UIView *view2 = [[UIView alloc] initWithFrame:CGRectMake(23, 0, 10, 10)];
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(label, view2);
-    UIViewWithLabel *superview = [[UIViewWithLabel alloc] initWithFrame:CGRectMake(0, 0, 272, 22)];
+    UIViewWithLabel *superview = [[UIViewWithLabel alloc] initWithFrame:CGRectMake(0, 0, 273, 22)];
     
     label.translatesAutoresizingMaskIntoConstraints = NO;
     label.text = @"X";
@@ -176,7 +176,7 @@
     [superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[view2(10)]-0-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewsDictionary]];
     [superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[label]-0-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewsDictionary]];
     [superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[view2]-0-|" options:NSLayoutFormatAlignAllTop metrics:nil views:viewsDictionary]];
-    [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:272]];
+    [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:273]];
     [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:22]];
     
     return superview;

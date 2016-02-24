@@ -1,38 +1,38 @@
 PODS:
-  - LayoutTest/ModuleHeader (1.1.1):
-    - LayoutTestBase (= 1.1.1)
-  - LayoutTest/Swift (1.1.1):
+  - LayoutTest/ModuleHeader (1.2.0):
+    - LayoutTestBase (= 1.2.0)
+  - LayoutTest/Swift (1.2.0):
     - LayoutTest/ModuleHeader
     - LayoutTest/SwiftSubspec
     - LayoutTest/TestCase
-    - LayoutTestBase (= 1.1.1)
+    - LayoutTestBase (= 1.2.0)
     - LayoutTestBase/Autolayout
     - LayoutTestBase/Catalog
     - LayoutTestBase/Config
     - LayoutTestBase/Core
     - LayoutTestBase/UIViewHelpers
-  - LayoutTest/SwiftSubspec (1.1.1):
+  - LayoutTest/SwiftSubspec (1.2.0):
     - LayoutTest/ModuleHeader
     - LayoutTest/TestCase
-    - LayoutTestBase (= 1.1.1)
-  - LayoutTest/TestCase (1.1.1):
+    - LayoutTestBase (= 1.2.0)
+  - LayoutTest/TestCase (1.2.0):
     - LayoutTest/ModuleHeader
-    - LayoutTestBase (= 1.1.1)
+    - LayoutTestBase (= 1.2.0)
     - LayoutTestBase/Config
     - LayoutTestBase/Core
-  - LayoutTestBase (1.1.1):
-    - LayoutTestBase/Autolayout (= 1.1.1)
-    - LayoutTestBase/Catalog (= 1.1.1)
-    - LayoutTestBase/Config (= 1.1.1)
-    - LayoutTestBase/Core (= 1.1.1)
-    - LayoutTestBase/UIViewHelpers (= 1.1.1)
-  - LayoutTestBase/Autolayout (1.1.1)
-  - LayoutTestBase/Catalog (1.1.1):
+  - LayoutTestBase (1.2.0):
+    - LayoutTestBase/Autolayout (= 1.2.0)
+    - LayoutTestBase/Catalog (= 1.2.0)
+    - LayoutTestBase/Config (= 1.2.0)
+    - LayoutTestBase/Core (= 1.2.0)
+    - LayoutTestBase/UIViewHelpers (= 1.2.0)
+  - LayoutTestBase/Autolayout (1.2.0)
+  - LayoutTestBase/Catalog (1.2.0):
     - LayoutTestBase/Core
-  - LayoutTestBase/Config (1.1.1)
-  - LayoutTestBase/Core (1.1.1):
+  - LayoutTestBase/Config (1.2.0)
+  - LayoutTestBase/Core (1.2.0):
     - LayoutTestBase/Config
-  - LayoutTestBase/UIViewHelpers (1.1.1):
+  - LayoutTestBase/UIViewHelpers (1.2.0):
     - LayoutTestBase/Config
 
 DEPENDENCIES:
@@ -46,7 +46,7 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  LayoutTest: 04b0a8894b3f9fe093a6ff5881e9b44c64cef066
-  LayoutTestBase: 93d8f19820743852760491874d75480d573c60a8
+  LayoutTest: a9c4d129a6ddf34d2d2b7be9b04a68968ed8481f
+  LayoutTestBase: 89a19743c89063021e4dff015dac30604b5e0efc
 
 COCOAPODS: 0.39.0

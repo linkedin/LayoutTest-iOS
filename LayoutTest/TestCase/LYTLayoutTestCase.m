@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableSet *viewsAllowingOverlap;
 @property (nonatomic, strong) NSMutableSet *viewsAllowingAccessibilityErrors;
-@property (nonatomic, strong) UIView *viewUnderTest;
+@property (nonatomic, strong, nullable) UIView *viewUnderTest;
 @property (nonatomic, strong) NSDictionary *dataForViewUnderTest;
 
 @end
@@ -105,6 +105,10 @@ NS_ASSUME_NONNULL_BEGIN
     if (self.interceptsAutolayoutErrors) {
         [LYTAutolayoutFailureIntercepter stopInterceptingAutolayoutFailures];
     }
+
+    // This just ensures that we will release the view on tear down so we clean up our state
+    // It will eventually get released when the test case object is deallocated, but this actually isn't done immediately
+    self.viewUnderTest = nil;
 
     [super tearDown];
 }

@@ -200,7 +200,10 @@ void SimpleLog(NSString *format, ...) {
 }
 
 - (NSString *)commonRootPathForInvocationClass:(Class)classForRoot {
-    NSString *currentDirectory = [[NSBundle bundleForClass:classForRoot] bundlePath];
+    NSString *currentDirectory = [NSProcessInfo processInfo].environment[@"LYT_FAILING_TEST_SNAPSHOT_DIR"];
+    if (!currentDirectory) {
+        currentDirectory = [[NSBundle bundleForClass:classForRoot] bundlePath];
+    }
     NSString *className = NSStringFromClass(classForRoot);
     //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
     if ([className containsString:@"."]) {

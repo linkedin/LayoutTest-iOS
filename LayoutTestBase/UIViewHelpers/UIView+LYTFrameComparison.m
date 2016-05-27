@@ -21,7 +21,7 @@
     CGFloat epsilon = [LYTConfig sharedInstance].cgFloatEpsilon;
 
     if ([self lyt_leftToRight]) {
-        return self.bounds.size.width <= otherViewBounds.origin.x + epsilon;
+        return self.bounds.origin.x + self.bounds.size.width <= otherViewBounds.origin.x + epsilon;
     } else {
         return self.bounds.origin.x + epsilon >= otherViewBounds.origin.x + otherViewBounds.size.width;
     }
@@ -35,7 +35,7 @@
     CGRect otherViewBounds = [self convertRect:otherView.bounds fromView:otherView];
     CGFloat epsilon = [LYTConfig sharedInstance].cgFloatEpsilon;
 
-    return self.bounds.size.height <= otherViewBounds.origin.y + epsilon;
+    return self.bounds.origin.y + self.bounds.size.height <= otherViewBounds.origin.y + epsilon;
 }
 
 - (BOOL)lyt_below:(UIView *)otherView {

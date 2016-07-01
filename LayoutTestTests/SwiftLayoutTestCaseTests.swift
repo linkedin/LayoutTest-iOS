@@ -22,7 +22,7 @@ class SwiftTest: LayoutTestCase {
         var timesCalled = 0
         runLayoutTests { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
-            timesCalled++;
+            timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, exponentialCombinations * 2)
     }
@@ -31,7 +31,7 @@ class SwiftTest: LayoutTestCase {
         var timesCalled = 0
         runLayoutTests(limitResults: .LimitDataCombinations) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
-            timesCalled++;
+            timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, polynomialCombinations * 2)
     }
@@ -40,7 +40,7 @@ class SwiftTest: LayoutTestCase {
         var timesCalled = 0
         runLayoutTests(limitResults: .NoSizes) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
-            timesCalled++;
+            timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, exponentialCombinations)
     }
@@ -49,7 +49,7 @@ class SwiftTest: LayoutTestCase {
         var timesCalled = 0
         runLayoutTests(limitResults: [.LimitDataCombinations, .NoSizes]) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
-            timesCalled++;
+            timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, polynomialCombinations)
     }
@@ -58,7 +58,7 @@ class SwiftTest: LayoutTestCase {
         var timesCalled = 0
         runLayoutTestsWithViewProvider(NonViewCreationProtocol.self) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
-            timesCalled++;
+            timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, exponentialCombinations * 2)
     }
@@ -67,7 +67,7 @@ class SwiftTest: LayoutTestCase {
         var timesCalled = 0
         runLayoutTestsWithViewProvider(NonViewCreationProtocol.self, limitResults: .LimitDataCombinations) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
-            timesCalled++;
+            timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, polynomialCombinations * 2)
     }
@@ -76,7 +76,7 @@ class SwiftTest: LayoutTestCase {
         var timesCalled = 0
         runLayoutTestsWithViewProvider(NonViewCreationProtocol.self, limitResults: .NoSizes) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
-            timesCalled++;
+            timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, exponentialCombinations)
     }
@@ -85,7 +85,7 @@ class SwiftTest: LayoutTestCase {
         var timesCalled = 0
         runLayoutTestsWithViewProvider(NonViewCreationProtocol.self, limitResults: [.LimitDataCombinations, .NoSizes]) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
-            timesCalled++;
+            timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, polynomialCombinations)
     }

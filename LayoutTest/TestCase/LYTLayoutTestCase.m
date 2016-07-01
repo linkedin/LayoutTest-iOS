@@ -133,7 +133,8 @@ NS_ASSUME_NONNULL_BEGIN
     view = [LYTLayoutTestCase viewForSubviewTesting:view];
 
     [view lyt_recursivelyTraverseViewHierarchyWithStop:^(UIView *subview, BOOL *stopBranch) {
-        if ([LYTLayoutTestCase class:[subview class] includedInSet:self.viewClassesAllowingSubviewErrors]) {
+        if ([LYTLayoutTestCase class:[subview class] includedInSet:self.viewClassesAllowingSubviewErrors] ||
+            subview.hidden) {
             *stopBranch = YES;
         } else {
             [self runSubviewsOverlapTestsWithSubview:subview view:view];

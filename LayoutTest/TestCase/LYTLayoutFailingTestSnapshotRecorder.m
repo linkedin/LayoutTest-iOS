@@ -21,6 +21,26 @@ void SimpleLog(NSString *format, ...) {
     [[NSFileHandle fileHandleWithStandardOutput] writeData:[formattedString dataUsingEncoding:NSNEXTSTEPStringEncoding]];
 }
 
+@interface NSString (XMLEscape)
+
+- (NSString *)lyt_stringByAddingXMLEscaping;
+
+@end
+
+@implementation NSString (XMLEscape)
+
+- (NSString *)lyt_stringByAddingXMLEscaping {
+    NSString *string = [self stringByReplacingOccurrencesOfString:@"&" withString:@"&amp;"];
+    string = [string stringByReplacingOccurrencesOfString:@"<" withString:@"&lt;"];
+    string = [string stringByReplacingOccurrencesOfString:@">" withString:@"&gt;"];
+    string = [string stringByReplacingOccurrencesOfString:@"'" withString:@"&#39;"];
+    string = [string stringByReplacingOccurrencesOfString:@"\"" withString:@"&quot;"];
+    return string;
+}
+
+@end
+
+
 @interface LYTLayoutFailingTestSnapshotRecorder ()
 
 @property (nonatomic) Class invocationClass;
@@ -138,7 +158,7 @@ void SimpleLog(NSString *format, ...) {
     
     NSString *filePath = [self indexHTMLFilePath];
     NSString *imagePath = [NSString stringWithFormat:@"%@/%@", [self methodNameForInvocation:invocation], [self nameForImageWithWidth:width height:height data:data]];
-    NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", description, imagePath, data.description];
+    NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", [description lyt_stringByAddingXMLEscaping], imagePath, data.description];
     errorHTML = [errorHTML stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
     
@@ -180,7 +200,10 @@ void SimpleLog(NSString *format, ...) {
 }
 
 - (NSString *)commonRootPathForInvocationClass:(Class)classForRoot {
-    NSString *currentDirectory = [[NSBundle bundleForClass:classForRoot] bundlePath];
+    NSString *currentDirectory = [NSProcessInfo processInfo].environment[@"LYT_FAILING_TEST_SNAPSHOT_DIR"];
+    if (!currentDirectory) {
+        currentDirectory = [[NSBundle bundleForClass:classForRoot] bundlePath];
+    }
     NSString *className = NSStringFromClass(classForRoot);
     //Check incase the class name includes a ".", if so we the actual class name will be everything after the "."
     if ([className containsString:@"."]) {

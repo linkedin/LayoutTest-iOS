@@ -113,7 +113,7 @@
                                 limitResults:(LYTTesterLimitResults)limitResults
                                        block:(void(^)(UIView *view, NSDictionary *data, id context))validation {
     NSArray *sizes = [self viewSizesForProviderProtocol:viewProvider limitResults:limitResults];
-    if (sizes) {
+    if (sizes.count) {
         for (LYTViewSize *size in sizes) {
             reuseView = [self runSingleTestWithProviderProtocol:viewProvider
                                                            data:data

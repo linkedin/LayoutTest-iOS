@@ -182,6 +182,16 @@
     return superview;
 }
 
++ (UIButton *)buttonWithBackgroundImage {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 44, 44);
+    [button setBackgroundImage:[[UIImage alloc] init] forState:UIControlStateNormal];
+    [button setTitle:@"Button" forState:UIControlStateNormal];
+    [button setImage:[[UIImage alloc] init] forState:UIControlStateNormal];
+    button.accessibilityLabel = @"Button with background image.";
+    return button;
+}
+
 @end
 
 /**

@@ -26,7 +26,7 @@
         timesCalled++;
     }];
 
-    XCTAssertEqual(timesCalled, 3);
+    XCTAssertEqual(timesCalled, 4);
     // We should have failed once for the view that overlaps
     XCTAssertEqual(self.testFailures, 1);
 }
@@ -39,7 +39,7 @@
         view.subviews[0].hidden = YES;
     }];
 
-    XCTAssertEqual(timesCalled, 3);
+    XCTAssertEqual(timesCalled, 4);
     XCTAssertEqual(self.testFailures, 0);
 }
 
@@ -51,7 +51,7 @@
         [self.viewsAllowingOverlap addObject:view.subviews[0]];
     }];
 
-    XCTAssertEqual(timesCalled, 3);
+    XCTAssertEqual(timesCalled, 4);
     XCTAssertEqual(self.testFailures, 0);
 }
 
@@ -69,7 +69,7 @@
         }
     }];
 
-    XCTAssertEqual(timesCalled, 3);
+    XCTAssertEqual(timesCalled, 4);
     // This will fail multiple times for a UISwitch because it has many overlapping subviews
     XCTAssertTrue(self.testFailures > 0);
 
@@ -91,7 +91,8 @@
              @"view": [[LYTDataValues alloc] initWithValues:@[
                                                                    [UnitTestViews viewWithNoProblems],
                                                                    [UnitTestViews viewWithOverlappingViews],
-                                                                   [UnitTestViews viewWithUISwitchSubview]
+                                                                   [UnitTestViews viewWithUISwitchSubview],
+                                                                   [UnitTestViews buttonWithBackgroundImage]
                                                                    ]]
              };
 }

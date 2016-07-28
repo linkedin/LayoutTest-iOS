@@ -40,8 +40,9 @@ NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod = -1;
     /*
      UISwitch - This is a known class which has internal overlapping subviews.
      UITextView - If you use attributed text, UIKit may add UIImage views which can overlap with the internal text containers.
+     UIButton - If you set a background image, then this will overlap with other internal views.
      */
-    self.viewClassesAllowingSubviewErrors = [NSSet setWithObjects:[UISwitch class], [UITextView class], nil];
+    self.viewClassesAllowingSubviewErrors = [NSSet setWithObjects:[UISwitch class], [UITextView class], [UIButton class], nil];
     /*
      UIControl - Subclasses of UIControl should all have accessibility labels.
      */

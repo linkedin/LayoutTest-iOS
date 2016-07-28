@@ -103,8 +103,8 @@ NS_ASSUME_NONNULL_BEGIN
 
  Defaults:
  - UISwitch
- - UIButton
  - UITextView
+ - UIButton
  */
 @property (nonatomic, strong) NSSet<Class> *viewClassesAllowingSubviewErrors;
 

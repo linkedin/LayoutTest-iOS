@@ -79,7 +79,7 @@
     XCTAssertEqual(YES, [LYTConfig sharedInstance].accessibilityTestsEnabled);
     XCTAssertEqual(YES, [LYTConfig sharedInstance].failingTestSnapshotsEnabled);
 
-    NSSet *viewClassesAllowingSubviewErrorsSet = [NSSet setWithObjects:[UITextView class], [UISwitch class], nil];
+    NSSet *viewClassesAllowingSubviewErrorsSet = [NSSet setWithObjects:[UITextView class], [UISwitch class], [UIButton class], nil];
     NSSet *viewClassesRequiringAccessibilityLabelsSets = [NSSet setWithObjects:[UIControl class], nil];
     XCTAssertEqualObjects(viewClassesAllowingSubviewErrorsSet, [LYTConfig sharedInstance].viewClassesAllowingSubviewErrors);
     XCTAssertEqualObjects(viewClassesRequiringAccessibilityLabelsSets, [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels);

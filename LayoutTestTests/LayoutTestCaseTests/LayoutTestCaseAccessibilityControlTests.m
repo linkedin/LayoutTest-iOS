@@ -82,7 +82,7 @@
 #pragma mark - LYTViewProvider
 
 + (NSDictionary *)dataSpecForTest {
-    // Return 3 views to test. One correct view, on view with overlapping subviews and one view with a switch subview.
+    // Return 2 views to test. One with a button with accessibility, the other a button without accessibility.
     return @{
              @"view": [[LYTDataValues alloc] initWithValues:@[
                                                                   [UnitTestViews viewWithButtonAndAccessibility],

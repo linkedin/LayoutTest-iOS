@@ -61,8 +61,11 @@
 }
 
 + (UIView *)viewWithUISwitchSubview {
-    UIView *view1 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 20, 10)];
-    UIView *superview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, 10)];
+    // initWithFrame actually doesn't do much. It always creates a switch of this size.
+    UIView *view1 = [[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 51, 31)];
+    view1.accessibilityLabel = @"Regular switch";
+    // Make sure it's big enough to contain the switch
+    UIView *superview = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     [superview addSubview:view1];
 
     view1.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -180,6 +183,16 @@
     [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:22]];
     
     return superview;
+}
+
++ (UIButton *)buttonWithBackgroundImage {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.frame = CGRectMake(0, 0, 44, 44);
+    [button setBackgroundImage:[[UIImage alloc] init] forState:UIControlStateNormal];
+    [button setTitle:@"Button" forState:UIControlStateNormal];
+    [button setImage:[[UIImage alloc] init] forState:UIControlStateNormal];
+    button.accessibilityLabel = @"Button with background image.";
+    return button;
 }
 
 @end

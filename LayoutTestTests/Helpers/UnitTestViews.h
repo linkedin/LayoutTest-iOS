@@ -36,4 +36,6 @@
 
 + (UIViewWithLabel *)viewWithLongStringOverlappingLabel;
 
++ (UIButton *)buttonWithBackgroundImage;
+
 @end

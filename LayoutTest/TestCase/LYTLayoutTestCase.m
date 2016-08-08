@@ -133,14 +133,22 @@ NS_ASSUME_NONNULL_BEGIN
     view = [LYTLayoutTestCase viewForSubviewTesting:view];
 
     [view lyt_recursivelyTraverseViewHierarchyWithStop:^(UIView *subview, BOOL *stopBranch) {
-        if ([LYTLayoutTestCase class:[subview class] includedInSet:self.viewClassesAllowingSubviewErrors] ||
-            subview.hidden) {
+         if (subview.hidden) {
+             // If the subview is hidden, let's not run any tests
             *stopBranch = YES;
         } else {
-            [self runSubviewsOverlapTestsWithSubview:subview view:view];
-            [self runSubviewWithSuperviewTestsWithSubview:subview view:view];
+            // We always want to run these tests, even if the we don't want to continue further
             [self runAccessibilityTestsWithSubview:subview view:view];
+            [self runSubviewWithSuperviewTestsWithSubview:subview view:view];
             [self runAmbiguousLayoutTestsWithSubview:subview view:view];
+            
+            if ([LYTLayoutTestCase class:[subview class] includedInSet:self.viewClassesAllowingSubviewErrors]) {
+                // We shouldn't continue
+                *stopBranch = YES;
+            } else {
+                // We only want to run this test if we want to test subviews of this view
+                [self runSubviewsOverlapTestsWithSubview:subview view:view];
+            }
         }
     }];
 }

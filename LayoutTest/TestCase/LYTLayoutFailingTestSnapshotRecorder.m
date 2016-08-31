@@ -158,7 +158,14 @@ void SimpleLog(NSString *format, ...) {
     
     NSString *filePath = [self indexHTMLFilePath];
     NSString *imagePath = [NSString stringWithFormat:@"%@/%@", [self methodNameForInvocation:invocation], [self nameForImageWithWidth:width height:height data:data]];
-    NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", [description lyt_stringByAddingXMLEscaping], imagePath, data.description];
+    NSString *dataDescription = nil;
+    if (data) {
+        NSData *serializedJSON = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+        if (serializedJSON) {
+            dataDescription = [[NSString alloc] initWithData:serializedJSON encoding:NSUTF8StringEncoding];
+        }
+    }
+    NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", [description lyt_stringByAddingXMLEscaping], imagePath, dataDescription];
     errorHTML = [errorHTML stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
     

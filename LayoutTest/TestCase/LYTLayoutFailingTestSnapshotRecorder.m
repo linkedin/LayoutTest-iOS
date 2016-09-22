@@ -45,10 +45,15 @@ void SimpleLog(NSString *format, ...) {
 
 @property (nonatomic) Class invocationClass;
 @property (nonatomic) NSMutableSet *failingTestsSnapshotFolders;
+@property (nonatomic) NSInteger failedTestsDuringTestSuite;
 
 @end
 
 @implementation LYTLayoutFailingTestSnapshotRecorder
+
++ (void)initialize {
+    [LYTLayoutFailingTestSnapshotRecorder sharedInstance];
+}
 
 + (instancetype)sharedInstance {
     static LYTLayoutFailingTestSnapshotRecorder *sharedInstance = nil;
@@ -69,7 +74,22 @@ void SimpleLog(NSString *format, ...) {
     return self;
 }
 
+- (void)testSuiteWillStart:(XCTestSuite *)testSuite {
+    self.failedTestsDuringTestSuite = 0;
+}
+
+- (void)testSuiteDidFinish:(XCTestSuite *)testSuite {
+    if (self.failedTestsDuringTestSuite > 0 && self.failingTestsSnapshotFolders.count > 0) {
+        SimpleLog(@"\nSnapshots of failing tests can be found in:\n");
+        for (NSString *path in self.failingTestsSnapshotFolders) {
+            SimpleLog(@"%@\n", path);
+        }
+    }
+}
+
 - (void)testBundleDidFinish:(NSBundle *)testBundle {
+    // NOTE: For some reason, this never gets called
+    // See #28 on Github
     if (self.failingTestsSnapshotFolders.count > 0) {
         SimpleLog(@"\nSnapshots of failing tests can be found in:\n");
         for (NSString *path in self.failingTestsSnapshotFolders) {
@@ -84,6 +104,7 @@ void SimpleLog(NSString *format, ...) {
         NSString *pathForSnapshots = [self commonRootPathForInvocationClass:[testCase class]];
         pathForSnapshots = [pathForSnapshots stringByAppendingString:@"/index.html"];
         [self.failingTestsSnapshotFolders addObject:pathForSnapshots];
+        self.failedTestsDuringTestSuite += 1;
     }
 }
 

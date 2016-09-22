@@ -84,6 +84,7 @@ void SimpleLog(NSString *format, ...) {
         for (NSString *path in self.failingTestsSnapshotFolders) {
             SimpleLog(@"%@\n", path);
         }
+        SimpleLog(@"\n");
     }
 }
 
@@ -95,6 +96,7 @@ void SimpleLog(NSString *format, ...) {
         for (NSString *path in self.failingTestsSnapshotFolders) {
             SimpleLog(@"%@\n", path);
         }
+        SimpleLog(@"\n");
         [self.failingTestsSnapshotFolders removeAllObjects];
     }
 }

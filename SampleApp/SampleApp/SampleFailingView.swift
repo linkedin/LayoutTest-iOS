@@ -17,7 +17,7 @@ public class SampleFailingView: UIView {
     @IBOutlet weak var button: UIButton!
     
     class func loadFromNib() -> SampleFailingView {
-        return NSBundle.mainBundle().loadNibNamed(SampleFailingView.nibName, owner: nil, options: nil)[0] as! SampleFailingView
+        return NSBundle.mainBundle().loadNibNamed(SampleFailingView.nibName, owner: nil, options: nil)![0] as! SampleFailingView
     }
 
     func setup(json: [NSObject: AnyObject]) {

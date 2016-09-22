@@ -1,38 +1,38 @@
 PODS:
-  - LayoutTest/ModuleHeader (1.2.1):
-    - LayoutTestBase (= 1.2.1)
-  - LayoutTest/Swift (1.2.1):
+  - LayoutTest/ModuleHeader (1.3.0):
+    - LayoutTestBase (= 1.3.0)
+  - LayoutTest/Swift (1.3.0):
     - LayoutTest/ModuleHeader
     - LayoutTest/SwiftSubspec
     - LayoutTest/TestCase
-    - LayoutTestBase (= 1.2.1)
+    - LayoutTestBase (= 1.3.0)
     - LayoutTestBase/Autolayout
     - LayoutTestBase/Catalog
     - LayoutTestBase/Config
     - LayoutTestBase/Core
     - LayoutTestBase/UIViewHelpers
-  - LayoutTest/SwiftSubspec (1.2.1):
+  - LayoutTest/SwiftSubspec (1.3.0):
     - LayoutTest/ModuleHeader
     - LayoutTest/TestCase
-    - LayoutTestBase (= 1.2.1)
-  - LayoutTest/TestCase (1.2.1):
+    - LayoutTestBase (= 1.3.0)
+  - LayoutTest/TestCase (1.3.0):
     - LayoutTest/ModuleHeader
-    - LayoutTestBase (= 1.2.1)
+    - LayoutTestBase (= 1.3.0)
     - LayoutTestBase/Config
     - LayoutTestBase/Core
-  - LayoutTestBase (1.2.1):
-    - LayoutTestBase/Autolayout (= 1.2.1)
-    - LayoutTestBase/Catalog (= 1.2.1)
-    - LayoutTestBase/Config (= 1.2.1)
-    - LayoutTestBase/Core (= 1.2.1)
-    - LayoutTestBase/UIViewHelpers (= 1.2.1)
-  - LayoutTestBase/Autolayout (1.2.1)
-  - LayoutTestBase/Catalog (1.2.1):
+  - LayoutTestBase (1.3.0):
+    - LayoutTestBase/Autolayout (= 1.3.0)
+    - LayoutTestBase/Catalog (= 1.3.0)
+    - LayoutTestBase/Config (= 1.3.0)
+    - LayoutTestBase/Core (= 1.3.0)
+    - LayoutTestBase/UIViewHelpers (= 1.3.0)
+  - LayoutTestBase/Autolayout (1.3.0)
+  - LayoutTestBase/Catalog (1.3.0):
     - LayoutTestBase/Core
-  - LayoutTestBase/Config (1.2.1)
-  - LayoutTestBase/Core (1.2.1):
+  - LayoutTestBase/Config (1.3.0)
+  - LayoutTestBase/Core (1.3.0):
     - LayoutTestBase/Config
-  - LayoutTestBase/UIViewHelpers (1.2.1):
+  - LayoutTestBase/UIViewHelpers (1.3.0):
     - LayoutTestBase/Config
 
 DEPENDENCIES:
@@ -46,9 +46,9 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  LayoutTest: 55dbb73093fe424107895c1e52e7cf506b8183cb
-  LayoutTestBase: 5564ede8f8f7a6c8d9fb37874048dbc4115c577c
+  LayoutTest: d03e54adfec57236f0f44e4d3b2b905731516dde
+  LayoutTestBase: f5286c3751065de5eb42e8a1f781237c5b5c6eef
 
-PODFILE CHECKSUM: a8facff5fad656f6e0450da6179999d82b6baaa4
+PODFILE CHECKSUM: 3f2420eb489cc0f10b880a3af950f8701bc45d05
 
 COCOAPODS: 1.0.1

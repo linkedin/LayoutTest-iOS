@@ -1,11 +1,11 @@
 use_frameworks!
 
+pod 'LayoutTestBase', :path => '..'
+
 target :SampleApp do
-  pod 'LayoutTestBase', :path => '..'
 end
 
 target :CatalogSample do
-  pod 'LayoutTestBase', :path => '..'
 end
 
 target :SampleAppTests do

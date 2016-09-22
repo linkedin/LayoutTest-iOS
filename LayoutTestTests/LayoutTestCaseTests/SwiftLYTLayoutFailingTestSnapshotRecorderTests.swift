@@ -14,7 +14,7 @@ class SwiftLYTLayoutFailingTestSnapshotRecorderTests: XCTestCase {
     
     func testStartNewLogDeletesExisitingClassSnapshotDirectory() {
         let fileManager = FileManager.default
-        let currentDirectory = Bundle(for:type(of: self)).bundlePath
+        let currentDirectory = Bundle(for: type(of: self)).bundlePath
         let classDirectory = currentDirectory + "/LayoutTestImages/SwiftLYTLayoutFailingTestSnapshotRecorderTests"
         let testFilePath = classDirectory + "/testFile.html"
         do {

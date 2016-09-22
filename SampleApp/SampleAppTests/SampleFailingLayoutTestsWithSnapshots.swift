@@ -15,21 +15,21 @@ import LayoutTestBase
 class SampleFailingLayoutTestsWithSnapshots : LayoutTestCase {
     
     func testSampleFailingViewWithSnapshots() {
-        runLayoutTests() { (view: SampleFailingView, data: [NSObject: AnyObject], context: Any?) in
+        runLayoutTests() { (view: SampleFailingView, data: [AnyHashable: Any], context: Any?) in
             // Expecting one of the auto-layout tests to fail when the really long string causes the label to overlap with the button
         }
     }
 }
 
 extension SampleFailingView : LYTViewProvider {
-    public class func dataSpecForTest() -> [NSObject: AnyObject] {
+    public class func dataSpecForTest() -> [AnyHashable: Any] {
         return [
             "text": LYTStringValues(),
             "buttonText": LYTStringValues()
         ]
     }
     
-    public class func viewForData(data: [NSObject: AnyObject], reuseView: UIView?, size: LYTViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>) -> UIView {
+    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: LYTViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
         let view = reuseView as? SampleFailingView ?? SampleFailingView.loadFromNib()
         view.setup(data)
         return view

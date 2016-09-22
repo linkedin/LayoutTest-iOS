@@ -9,7 +9,7 @@
 
 import UIKit
 
-public class SampleTableViewCell: UITableViewCell {
+open class SampleTableViewCell: UITableViewCell {
 
     private static let leftMaxEdge: CGFloat = 38
     private static let leftMinEdge: CGFloat = 0
@@ -24,47 +24,47 @@ public class SampleTableViewCell: UITableViewCell {
     @IBOutlet private var labelLeftEdge: NSLayoutConstraint!
     @IBOutlet private var buttonWidth: NSLayoutConstraint!
 
-    public class func registerForTableView(tableView: UITableView) {
-        tableView.registerNib(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: nibName)
+    open class func registerForTableView(_ tableView: UITableView) {
+        tableView.register(UINib(nibName: nibName, bundle: nil), forCellReuseIdentifier: nibName)
     }
 
-    public class func dequeueForTableView(tableView: UITableView, indexPath: NSIndexPath) -> SampleTableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(nibName, forIndexPath: indexPath) as! SampleTableViewCell
+    open class func dequeueForTableView(_ tableView: UITableView, indexPath: IndexPath) -> SampleTableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: nibName, for: indexPath) as! SampleTableViewCell
     }
 
     class func loadFromNib() -> SampleTableViewCell {
-        return NSBundle.mainBundle().loadNibNamed(SampleTableViewCell.nibName, owner: nil, options: nil)![0] as! SampleTableViewCell
+        return Bundle.main.loadNibNamed(SampleTableViewCell.nibName, owner: nil, options: nil)![0] as! SampleTableViewCell
     }
 
-    func setup(json: [NSObject: AnyObject]) {
+    func setup(_ json: [AnyHashable: Any]) {
         if let imageType = json["imageType"] as? String {
             switch imageType {
             case "linkedin":
                 mainImageView.image = UIImage(named: "LinkedInLogo")
-                mainImageView.hidden = false
+                mainImageView.isHidden = false
                 labelLeftEdge.constant = SampleTableViewCell.leftMaxEdge
             default:
                 mainImageView.image = nil
-                mainImageView.hidden = true
+                mainImageView.isHidden = true
                 labelLeftEdge.constant = 0
             }
         } else {
             mainImageView.image = nil
-            mainImageView.hidden = true
+            mainImageView.isHidden = true
             labelLeftEdge.constant = 0
         }
 
         if let buttonText = json["buttonText"] as? String {
-            rightButton.hidden = false
-            rightButton.setTitle(buttonText, forState: .Normal)
+            rightButton.isHidden = false
+            rightButton.setTitle(buttonText, for: UIControlState())
             rightButton.accessibilityLabel = "Double tap to " + buttonText
             buttonWidth.constant = SampleTableViewCell.buttonWidth
         } else {
-            rightButton.hidden = true
+            rightButton.isHidden = true
             buttonWidth.constant = 0
         }
 
-        rightButton.enabled = json["buttonEnabled"] as? Bool ?? false
+        rightButton.isEnabled = json["buttonEnabled"] as? Bool ?? false
 
         titleLabel.text = json["text"] as? String
     }

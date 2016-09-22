@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \returns True if the view is laid out before another view.
  */
-- (BOOL)lyt_before:(UIView *)otherView;
+- (BOOL)lyt_before:(UIView *)otherView NS_SWIFT_NAME(lyt_before(_:));
 
 /**
  Returns whether a view is after another view on the horizontal axis. It returns false if they are overlapping in any way.
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \returns True if the view is laid out after another view.
  */
-- (BOOL)lyt_after:(UIView *)otherView;
+- (BOOL)lyt_after:(UIView *)otherView NS_SWIFT_NAME(lyt_after(_:));
 
 /**
  Returns whether a view is above another view on the vertical axis. It returns false if they are overlapping in any way.
@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \returns True if the view is laid out above another view.
  */
-- (BOOL)lyt_above:(UIView *)otherView;
+- (BOOL)lyt_above:(UIView *)otherView NS_SWIFT_NAME(lyt_above(_:));
 
 /**
  Returns whether a view is below another view on the vertical axis. It returns false if they are overlapping in any way.
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \returns True if the view is laid out below another view.
  */
-- (BOOL)lyt_below:(UIView *)otherView;
+- (BOOL)lyt_below:(UIView *)otherView NS_SWIFT_NAME(lyt_below(_:));
 
 /**
  Returns whether the start of a view is aligned with another view on the horizontal axis. It allows views to overlap.
@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \returns True if the view is start aligned with another view.
  */
-- (BOOL)lyt_leadingAligned:(UIView *)otherView;
+- (BOOL)lyt_leadingAligned:(UIView *)otherView NS_SWIFT_NAME(lyt_leadingAligned(_:));
 
 /**
  Returns whether the end of a view is aligned with another view on the horizontal axis. It allows views to overlap.
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \returns True if the view is end aligned with another view.
  */
-- (BOOL)lyt_trailingAligned:(UIView *)otherView;
+- (BOOL)lyt_trailingAligned:(UIView *)otherView NS_SWIFT_NAME(lyt_trailingAligned(_:));
 
 /**
  Returns whether the top of a view is aligned with another view on the vertical axis. It allows views to overlap.
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \returns True if the view is top aligned with another view.
  */
-- (BOOL)lyt_topAligned:(UIView *)otherView;
+- (BOOL)lyt_topAligned:(UIView *)otherView NS_SWIFT_NAME(lyt_topAligned(_:));
 
 /**
  Returns whether the bottom of a view is aligned with another view on the vertical axis. It allows views to overlap.
@@ -99,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \returns True if the view is bottom aligned with another view.
  */
-- (BOOL)lyt_bottomAligned:(UIView *)otherView;
+- (BOOL)lyt_bottomAligned:(UIView *)otherView NS_SWIFT_NAME(lyt_bottomAligned(_:));
 
 @end
 

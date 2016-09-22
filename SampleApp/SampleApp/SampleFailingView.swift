@@ -9,7 +9,7 @@
 
 import UIKit
 
-public class SampleFailingView: UIView {
+open class SampleFailingView: UIView {
 
     private static let nibName = "SampleFailingView"
     
@@ -17,11 +17,11 @@ public class SampleFailingView: UIView {
     @IBOutlet weak var button: UIButton!
     
     class func loadFromNib() -> SampleFailingView {
-        return NSBundle.mainBundle().loadNibNamed(SampleFailingView.nibName, owner: nil, options: nil)![0] as! SampleFailingView
+        return Bundle.main.loadNibNamed(SampleFailingView.nibName, owner: nil, options: nil)![0] as! SampleFailingView
     }
 
-    func setup(json: [NSObject: AnyObject]) {
+    func setup(_ json: [AnyHashable: Any]) {
         label.text = json["text"] as? String
-        button.setTitle(json["buttonText"] as? String, forState: .Normal)
+        button.setTitle(json["buttonText"] as? String, for: UIControlState())
     }
 }

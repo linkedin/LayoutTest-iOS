@@ -9,17 +9,7 @@
 
 #import <XCTest/XCTest.h>
 
-/*
- This is a work around for an issue where we don't know how LayoutTestBase doesn't exist.
- See https://github.com/linkedin/LayoutTest-iOS/issues/8 for more info.
- It looks like this will be fixed in CocoaPods 1.0.0, so we should be able to remove this at some point https://github.com/CocoaPods/CocoaPods/issues/4420
- We have a project which ensures this behavior works (TestProjects/SampleAppiOS7).
- */
-#if __has_include(<LayoutTestBase/LayoutTestBase-umbrella.h>)
 @import LayoutTestBase;
-#else
-#import <LayoutTestBase/LYTLayoutPropertyTester.h>
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -79,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
  it will be passed back here.
  */
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
-                            validation:(void(^)(id view, NSDictionary *data, id _Nullable context))validation;
+                            validation:(__attribute__((noescape)) void(^)(id view, NSDictionary *data, id _Nullable context))validation;
 
 /**
  This is the main method that runs your tests. You pass in a class that conforms to LYTViewProvider and it will run multiple combinations 
@@ -108,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
                           limitResults:(LYTTesterLimitResults)limitResults
-                            validation:(void(^)(id view, NSDictionary *data, id _Nullable context))validation;
+                            validation:(__attribute__((noescape)) void(^)(id view, NSDictionary *data, id _Nullable context))validation;
 
 /**
  This method recusively adds all of the subviews of a view to viewsAllowingOverlap. It does NOT add the view you pass in. This is useful if a 

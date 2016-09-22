@@ -13,19 +13,19 @@ import LayoutTest
 class SwiftLYTLayoutFailingTestSnapshotRecorderTests: XCTestCase {
     
     func testStartNewLogDeletesExisitingClassSnapshotDirectory() {
-        let fileManager = NSFileManager.defaultManager()
-        let currentDirectory = NSBundle(forClass:self.dynamicType).bundlePath
-        let classDirectory = currentDirectory.stringByAppendingString("/LayoutTestImages/SwiftLYTLayoutFailingTestSnapshotRecorderTests")
-        let testFilePath = classDirectory.stringByAppendingString("/testFile.html")
+        let fileManager = FileManager.default
+        let currentDirectory = Bundle(for:type(of: self)).bundlePath
+        let classDirectory = currentDirectory + "/LayoutTestImages/SwiftLYTLayoutFailingTestSnapshotRecorderTests"
+        let testFilePath = classDirectory + "/testFile.html"
         do {
-            try fileManager.createDirectoryAtPath(classDirectory, withIntermediateDirectories: true, attributes: nil)
+            try fileManager.createDirectory(atPath: classDirectory, withIntermediateDirectories: true, attributes: nil)
         } catch{}
-        fileManager.createFileAtPath(testFilePath, contents: nil, attributes: nil)
+        fileManager.createFile(atPath: testFilePath, contents: nil, attributes: nil)
         
         let recorder = LYTLayoutFailingTestSnapshotRecorder()
-        recorder.startNewLogForClass(self.dynamicType)
+        recorder.startNewLog(for: type(of: self))
         
-        XCTAssertFalse(fileManager.fileExistsAtPath(testFilePath))
+        XCTAssertFalse(fileManager.fileExists(atPath: testFilePath))
     }
     
 }

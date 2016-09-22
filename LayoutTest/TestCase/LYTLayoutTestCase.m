@@ -42,16 +42,16 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
-                                validation:(void(^)(id, NSDictionary *, id _Nullable))validation {
+                            validation:(void(^)(id, NSDictionary *, id _Nullable))validation {
     [self runLayoutTestsWithViewProvider:viewProvider
-                                limitResults:LYTTesterLimitResultsNone
-                                  validation:validation];
+                            limitResults:LYTTesterLimitResultsNone
+                              validation:validation];
 }
 
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
-                              limitResults:(LYTTesterLimitResults)limitResults
-                                validation:(void(^)(id view, NSDictionary *data, id _Nullable context))validation {
-    
+                          limitResults:(LYTTesterLimitResults)limitResults
+                            validation:(void(^)(id view, NSDictionary *data, id _Nullable context))validation {
+
     // It's too early to do this in setUp because they may override this property in setUp. So, let's do it here. It's ok if we call this multiple times per test. We'll just clean up in tearDown.
     if (self.interceptsAutolayoutErrors) {
         [LYTAutolayoutFailureIntercepter interceptAutolayoutFailuresWithBlock:^{
@@ -60,23 +60,23 @@ NS_ASSUME_NONNULL_BEGIN
     }
 
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:viewProvider
-                                                     limitResults:limitResults
-                                                       validation:^(id view, NSDictionary *data, id _Nullable context) {
-                                                           
-                                                           //Keep a reference to the view and the data so that we can render a snapshot of them if the test fails
-                                                           self.viewUnderTest = view;
-                                                           self.dataForViewUnderTest = data;
-                                                           
-                                                           // We must run this first to give the user a chance to add to viewsAllowingOverlap
-                                                           validation(view, data, context);
+                                                 limitResults:limitResults
+                                                   validation:^(id view, NSDictionary *data, id _Nullable context) {
 
-                                                           // Now, let's run our tests
-                                                           [self runBasicRecursiveViewTests:view];
+                                                       //Keep a reference to the view and the data so that we can render a snapshot of them if the test fails
+                                                       self.viewUnderTest = view;
+                                                       self.dataForViewUnderTest = data;
 
-                                                           // Now, let's reset these for the next run
-                                                           self.viewsAllowingOverlap = [NSMutableSet set];
-                                                           self.viewsAllowingAccessibilityErrors = [NSMutableSet set];
-                                                       }];
+                                                       // We must run this first to give the user a chance to add to viewsAllowingOverlap
+                                                       validation(view, data, context);
+                                                       
+                                                       // Now, let's run our tests
+                                                       [self runBasicRecursiveViewTests:view];
+
+                                                       // Now, let's reset these for the next run
+                                                       self.viewsAllowingOverlap = [NSMutableSet set];
+                                                       self.viewsAllowingAccessibilityErrors = [NSMutableSet set];
+                                                   }];
 }
 
 #pragma mark - Test Lifecycle

@@ -15,11 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         let rootViewController = LYTCatalogTableViewController()
-        rootViewController.ViewProviderClass = SampleTableViewCell.self
+        rootViewController.viewProviderClass = SampleTableViewCell.self
         window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.makeKeyAndVisible()
 
@@ -28,27 +28,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension SampleTableViewCell: LYTViewCatalogProvider {
-    public class func dataSpecForTest() -> [NSObject: AnyObject] {
+    public class func dataSpecForTest() -> [AnyHashable: Any] {
         return [
-            "text": LYTStringValues(),
-            "buttonText": LYTDataValues(values: ["Share", "Like", NSNull()]),
-            "buttonEnabled": LYTBoolValues(),
-            "imageType": LYTDataValues(values: ["linkedin", NSNull()])
+            "text" as NSObject: LYTStringValues(),
+            "buttonText" as NSObject: LYTDataValues(values: ["Share", "Like", NSNull()]),
+            "buttonEnabled" as NSObject: LYTBoolValues(),
+            "imageType" as NSObject: LYTDataValues(values: ["linkedin", NSNull()])
         ]
     }
 
-    public class func viewForData(data: [NSObject: AnyObject], reuseView: UIView?, size: LYTViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>) -> UIView {
-        let view = reuseView as? SampleTableViewCell ?? NSBundle.mainBundle().loadNibNamed("SampleTableViewCell", owner: nil, options: nil)[0] as! SampleTableViewCell
+    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: LYTViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
+        let view = reuseView as? SampleTableViewCell ?? Bundle.main.loadNibNamed("SampleTableViewCell", owner: nil, options: nil)?[0] as! SampleTableViewCell
         view.setup(data)
         return view
     }
 
-    public static func registerClassOnTableView(tableView: UITableView) {
+    public static func registerClass(on tableView: UITableView) {
         SampleTableViewCell.registerForTableView(tableView)
         tableView.estimatedRowHeight = 100
     }
 
-    public static func heightForTableViewCellForCatalogFromData(data: [NSObject : AnyObject]) -> CGFloat {
+    public static func heightForTableViewCellForCatalog(fromData data: [AnyHashable: Any]) -> CGFloat {
         return UITableViewAutomaticDimension
     }
 

@@ -20,7 +20,7 @@ The basic test will just call one of the methods starting with runLayoutTests. T
 It's also recommended that you create your own subclass of this for your own project, and have all your other tests subclass this class. This allows you to add
  and remove features in the future. There is a category in the superclass which lists some methods you may want to consider overriding.
 */
-public class LayoutTestCase: LYTLayoutTestCase {
+open class LayoutTestCase: LYTLayoutTestCase {
 
     /**
     This is the main method that runs your tests. It is a more Swift friendly version than its Objective-C counterparts. This method assumes your view 
@@ -47,14 +47,14 @@ public class LayoutTestCase: LYTLayoutTestCase {
     - Parameter validation: (view, data, context) Closure to validate the view given the data. The data here will not contain any LYTDataValues subclasses. 
      Here you should assert on the properties of the view. If you set a context in your viewForData: method, it will be passed back here.
     */
-    public func runLayoutTests<TestableView: LYTViewProvider where TestableView: UIView>(limitResults limitResults: LYTTesterLimitResults = .None,
-        validation: (TestableView, [NSObject : AnyObject], Any?) -> Void) {
-        runLayoutTestsWithViewProvider(TestableView.self, limitResults: limitResults) { (view, data, context) in
+    open func runLayoutTests<TestableView: LYTViewProvider>(limitResults: LYTTesterLimitResults = LYTTesterLimitResults(),
+                             validation: (TestableView, [AnyHashable: Any], Any?) -> Void) where TestableView: UIView {
+        self.runLayoutTests(withViewProvider: TestableView.self, limitResults: limitResults) { (view, data, context) in
             if let view = view as? TestableView {
                 validation(view, data, context)
             } else {
                 self.failTest("The view wasn't of the expected type. Change your method signature to declare the view in the validation closure " +
-                    "of the correct type. Expected: \(TestableView.self) Actual: \(view.dynamicType)", view: view as? UIView)
+                    "of the correct type. Expected: \(TestableView.self) Actual: \(type(of: (view) as AnyObject))", view: view as? UIView)
             }
         }
     }
@@ -86,14 +86,15 @@ public class LayoutTestCase: LYTLayoutTestCase {
     - Parameter validation: (view, data, context) Block to validate the view given the data. The data here will not contain any LYTDataValues subclasses. 
      Here you should assert on the properties of the view. If you set a context in your viewForData: method, it will be passed back here.
     */
-    public func runLayoutTestsWithViewProvider<TestableView: UIView, ViewProvider: LYTViewProvider>(viewProvider: ViewProvider.Type,
-        limitResults: LYTTesterLimitResults = .None, validation: (TestableView, [NSObject : AnyObject], Any?) -> Void) {
-        runLayoutTestsWithViewProvider(viewProvider, limitResults: limitResults) { (view: AnyObject, data, context) in
+    open func runLayoutTestsWithViewProvider<TestableView: UIView, ViewProvider: LYTViewProvider>(_ viewProvider: ViewProvider.Type,
+                                             limitResults: LYTTesterLimitResults = LYTTesterLimitResults(),
+                                             validation: (TestableView, [AnyHashable: Any], Any?) -> Void) {
+        self.runLayoutTests(withViewProvider: viewProvider, limitResults: limitResults) { (view: Any, data, context) in
             if let view = view as? TestableView {
                 validation(view, data, context)
             } else {
                 self.failTest("The view wasn't of the expected type. Change your method signature to declare the view in the validation closure " +
-                    "of the correct type. Expected: \(TestableView.self) Actual: \(view.dynamicType)", view: view as? UIView)
+                    "of the correct type. Expected: \(TestableView.self) Actual: \(type(of: view))", view: view as? UIView)
             }
         }
     }

@@ -68,6 +68,7 @@
 		61ADE1E81C0CA81600585946 /* LayoutTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ADE1C41C0CA81600585946 /* LayoutTestCase.swift */; };
 		61ADE2491C0CAFE900585946 /* LYTLayoutTestCase.h in Headers */ = {isa = PBXBuildFile; fileRef = 61ADE2341C0CAFE900585946 /* LYTLayoutTestCase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61ADE24A1C0CAFE900585946 /* LYTLayoutTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ADE2351C0CAFE900585946 /* LYTLayoutTestCase.m */; };
+		61BCF9E31D930B010034F8BA /* DeviceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BCF9E21D930B010034F8BA /* DeviceConstants.swift */; };
 		61CACFAD1C1A4F7300369461 /* LYTViewSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 61CACFA91C1A4F7300369461 /* LYTViewSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		61CACFAE1C1A4F7300369461 /* LYTViewSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CACFAA1C1A4F7300369461 /* LYTViewSize.m */; };
 		61CACFAF1C1A4F7300369461 /* UIView+LYTViewSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 61CACFAB1C1A4F7300369461 /* UIView+LYTViewSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -169,6 +170,7 @@
 		61ADE1C41C0CA81600585946 /* LayoutTestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutTestCase.swift; sourceTree = "<group>"; };
 		61ADE2341C0CAFE900585946 /* LYTLayoutTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTLayoutTestCase.h; sourceTree = "<group>"; };
 		61ADE2351C0CAFE900585946 /* LYTLayoutTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTLayoutTestCase.m; sourceTree = "<group>"; };
+		61BCF9E21D930B010034F8BA /* DeviceConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceConstants.swift; sourceTree = "<group>"; };
 		61CACFA91C1A4F7300369461 /* LYTViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTViewSize.h; sourceTree = "<group>"; };
 		61CACFAA1C1A4F7300369461 /* LYTViewSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTViewSize.m; sourceTree = "<group>"; };
 		61CACFAB1C1A4F7300369461 /* UIView+LYTViewSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LYTViewSize.h"; sourceTree = "<group>"; };
@@ -424,6 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				61ADE1C41C0CA81600585946 /* LayoutTestCase.swift */,
+				61BCF9E21D930B010034F8BA /* DeviceConstants.swift */,
 			);
 			path = Swift;
 			sourceTree = "<group>";
@@ -431,10 +434,10 @@
 		61ADE2331C0CAFE900585946 /* TestCase */ = {
 			isa = PBXGroup;
 			children = (
-				5667F6691C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h */,
-				5667F66A1C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m */,
 				61ADE2341C0CAFE900585946 /* LYTLayoutTestCase.h */,
 				61ADE2351C0CAFE900585946 /* LYTLayoutTestCase.m */,
+				5667F6691C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h */,
+				5667F66A1C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m */,
 			);
 			path = TestCase;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 			files = (
 				61ADE24A1C0CAFE900585946 /* LYTLayoutTestCase.m in Sources */,
 				5667F66C1C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m in Sources */,
+				61BCF9E31D930B010034F8BA /* DeviceConstants.swift in Sources */,
 				61ADE1E81C0CA81600585946 /* LayoutTestCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -728,7 +732,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -762,7 +766,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -787,7 +791,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.LayoutTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -809,7 +813,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.LayoutTestTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -921,7 +925,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -953,7 +957,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = LinkedIn.LayoutTestBase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

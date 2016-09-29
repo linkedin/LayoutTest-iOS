@@ -56,7 +56,7 @@ class SwiftTest: LayoutTestCase {
 
     func testBasicMoreGenericTests() {
         var timesCalled = 0
-        runLayoutTestsWithViewProvider(NonViewCreationProtocol.self) { (view: TestView, data, context) in
+        runLayoutTests(withViewProvider: NonViewCreationProtocol.self) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
@@ -65,7 +65,7 @@ class SwiftTest: LayoutTestCase {
 
     func testBasicMoreGenericTestsWithLimitResultsCombinations() {
         var timesCalled = 0
-        runLayoutTestsWithViewProvider(NonViewCreationProtocol.self, limitResults: .limitDataCombinations) { (view: TestView, data, context) in
+        runLayoutTests(withViewProvider: NonViewCreationProtocol.self, limitResults: .limitDataCombinations) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
@@ -74,7 +74,7 @@ class SwiftTest: LayoutTestCase {
 
     func testBasicMoreGenericTestsWithLimitResultsSizes() {
         var timesCalled = 0
-        runLayoutTestsWithViewProvider(NonViewCreationProtocol.self, limitResults: .noSizes) { (view: TestView, data, context) in
+        runLayoutTests(withViewProvider: NonViewCreationProtocol.self, limitResults: .noSizes) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
@@ -83,7 +83,7 @@ class SwiftTest: LayoutTestCase {
 
     func testBasicMoreGenericTestsWithLimitResultsCombinationsAndSizes() {
         var timesCalled = 0
-        runLayoutTestsWithViewProvider(NonViewCreationProtocol.self, limitResults: [.limitDataCombinations, .noSizes]) { (view: TestView, data, context) in
+        runLayoutTests(withViewProvider: NonViewCreationProtocol.self, limitResults: [.limitDataCombinations, .noSizes]) { (view: TestView, data, context) in
             XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }

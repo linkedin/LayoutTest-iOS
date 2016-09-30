@@ -30,10 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension SampleTableViewCell: LYTViewCatalogProvider {
     public class func dataSpecForTest() -> [AnyHashable: Any] {
         return [
-            "text" as NSObject: LYTStringValues(),
-            "buttonText" as NSObject: LYTDataValues(values: ["Share", "Like", NSNull()]),
-            "buttonEnabled" as NSObject: LYTBoolValues(),
-            "imageType" as NSObject: LYTDataValues(values: ["linkedin", NSNull()])
+            "text": LYTStringValues(),
+            "buttonText": LYTDataValues(values: ["Share", "Like", nil]),
+            "buttonEnabled": LYTBoolValues(),
+            "imageType": LYTDataValues(values: ["linkedin", nil])
         ]
     }
 

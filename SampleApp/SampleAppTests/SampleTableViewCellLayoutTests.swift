@@ -75,11 +75,11 @@ extension SampleTableViewCell : LYTViewProvider {
             // Test the view with a specific width
             LYTViewSize(width: 300),
             // Test the view with the same width as an iPhone 4
-            LYTViewSize(width: iPhone4Width),
+            LYTViewSize(width: LYTiPhone4Width),
             // Test the view by setting the width to the iPad width
-            LYTViewSize(width: iPadWidth),
+            LYTViewSize(width: LYTiPadWidth),
             // Test the view by setting the width to the iPad height
-            LYTViewSize(width: iPadHeight)
+            LYTViewSize(width: LYTiPadHeight)
         ]
     }
 }

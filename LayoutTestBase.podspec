@@ -10,6 +10,21 @@ Pod::Spec.new do |spec|
   spec.frameworks       = 'Foundation', 'UIKit'
   spec.default_subspecs = 'Core', 'Autolayout', 'Catalog', 'Config', 'UIViewHelpers'
 
+  spec.subspec 'Swift' do |sp|
+    sp.dependency 'LayoutTestBase/Core'
+    sp.dependency 'LayoutTestBase/Autolayout'
+    sp.dependency 'LayoutTestBase/Catalog'
+    sp.dependency 'LayoutTestBase/Config'
+    sp.dependency 'LayoutTestBase/UIViewHelpers'
+    sp.dependency 'LayoutTestBase/SwiftSubspec'
+  end
+
+  spec.subspec 'SwiftSubspec' do |sp|
+    sp.source_files = 'LayoutTestBase/Swift/**/*'
+    sp.dependency 'LayoutTestBase/Core'
+    sp.dependency 'LayoutTestBase/ModuleHeader'
+  end
+
   spec.subspec 'Core' do |sp|
     sp.source_files = 'LayoutTestBase/Core/**/*'
     sp.dependency 'LayoutTestBase/Config'
@@ -31,5 +46,9 @@ Pod::Spec.new do |spec|
   spec.subspec 'UIViewHelpers' do |sp|
     sp.source_files = 'LayoutTestBase/UIViewHelpers'
     sp.dependency 'LayoutTestBase/Config'
+  end
+
+  spec.subspec 'ModuleHeader' do |sp|
+    sp.source_files = 'LayoutTestBase/LayoutTestBase.h'
   end
 end

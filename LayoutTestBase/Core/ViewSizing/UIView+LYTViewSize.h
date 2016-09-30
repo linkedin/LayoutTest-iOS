@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (LYTViewSize)
 
-- (void)lyt_setSize:(nullable LYTViewSize *)size;
+- (void)lyt_setSize:(nullable LYTViewSize *)size NS_SWIFT_NAME(setSize(_:));
 
 @end
 

@@ -122,7 +122,6 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Default snapshots to save per method.
  */
-
 extern NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod;
 
 /**

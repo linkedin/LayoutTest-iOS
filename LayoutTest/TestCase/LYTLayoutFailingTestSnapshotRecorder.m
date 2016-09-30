@@ -266,9 +266,7 @@ void SimpleLog(NSString *format, ...) {
         CGContextRef context = UIGraphicsGetCurrentContext();
 
         CGContextSaveGState(context);
-        {
-            [layer renderInContext:context];
-        }
+        [layer renderInContext:context];
         CGContextRestoreGState(context);
         
         snapshot = UIGraphicsGetImageFromCurrentImageContext();

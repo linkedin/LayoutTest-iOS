@@ -40,22 +40,22 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Returns LYTDataValues with all values.
  */
-- (id)init;
+- (instancetype)init;
 
 /**
  Returns LYTDataValues with all values except nil. Use this for required fields.
  */
-- (id)initWithRequired:(BOOL)required;
+- (instancetype)initWithRequired:(BOOL)required;
 
 /**
  Returns LYTDataValues with these specific values and overrides any subclass's behavior.
  */
-- (id)initWithValues:(NSArray *)values;
+- (instancetype)initWithValues:(NSArray *)values NS_REFINED_FOR_SWIFT;
 
 /**
  Returns LYTDataValues with all the values that return true from the filter block.
  */
-- (id)initWithFilter:(BOOL(^ _Nullable)(id value))filter;
+- (instancetype)initWithFilter:(BOOL(^ _Nullable)(id value))filter;
 
 /**
  Returns the number of values this object contains.

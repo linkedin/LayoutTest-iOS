@@ -32,27 +32,27 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The width for the view. If nil, do not edit the width.
  */
-@property (nonatomic, strong, readonly, nullable) NSNumber *width;
+@property (nonatomic, strong, readonly, nullable) NSNumber *width NS_REFINED_FOR_SWIFT;
 /**
  The height for the view. If nil, do not edit the height.
  */
-@property (nonatomic, strong, readonly, nullable) NSNumber *height;
+@property (nonatomic, strong, readonly, nullable) NSNumber *height NS_REFINED_FOR_SWIFT;
 
 /**
  Creates a view size which will change both the width and the height of the view.
  */
-- (instancetype)initWithWidth:(nullable NSNumber *)width height:(nullable NSNumber *)height;
+- (instancetype)initWithWidth:(nullable NSNumber *)width height:(nullable NSNumber *)height NS_REFINED_FOR_SWIFT;
 
 /**
  Creates a view size which will only change the width of the view.
  */
-- (instancetype)initWithWidth:(NSNumber *)width;
+- (instancetype)initWithWidth:(NSNumber *)width NS_SWIFT_UNAVAILABLE("init(width:height:) takes optional arguments instead");
 
 /**
  Creates a view size which will only change the height of the view.
  */
 
-- (instancetype)initWithHeight:(NSNumber *)height;
+- (instancetype)initWithHeight:(NSNumber *)height NS_SWIFT_UNAVAILABLE("init(width:height:) takes optional arguments instead");
 
 @end
 

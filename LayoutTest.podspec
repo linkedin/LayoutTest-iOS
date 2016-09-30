@@ -32,7 +32,8 @@ Pod::Spec.new do |spec|
   spec.subspec 'SwiftSubspec' do |sp|
     sp.source_files = 'LayoutTest/Swift'
     sp.dependency 'LayoutTest/TestCase'
-    sp.dependency 'LayoutTest/ModuleHeader' 
+    sp.dependency 'LayoutTest/ModuleHeader'
+    sp.dependency 'LayoutTestBase/Swift'
   end
 
   spec.subspec 'ModuleHeader' do |sp|

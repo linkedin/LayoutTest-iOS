@@ -106,8 +106,8 @@ class SwiftTest: LayoutTestCase {
 
         @objc static func sizesForView() -> [LYTViewSize] {
             return [
-                LYTViewSize(width: iPhone6Width),
-                LYTViewSize(width: iPadWidth)
+                LYTViewSize(width: LYTiPhone6Width),
+                LYTViewSize(width: LYTiPadWidth)
             ]
         }
     }
@@ -131,8 +131,8 @@ class SwiftTest: LayoutTestCase {
 
         @objc static func sizesForView() -> [LYTViewSize] {
             return [
-                LYTViewSize(width: iPhone6Width),
-                LYTViewSize(width: iPadWidth)
+                LYTViewSize(width: LYTiPhone6Width),
+                LYTViewSize(width: LYTiPadWidth)
             ]
         }
     }

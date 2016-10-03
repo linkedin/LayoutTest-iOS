@@ -54,7 +54,7 @@ open class LayoutTestCase: LYTLayoutTestCase {
                 validation(view, data, context)
             } else {
                 self.failTest("The view wasn't of the expected type. Change your method signature to declare the view in the validation closure " +
-                    "of the correct type. Expected: \(TestableView.self) Actual: \(type(of: (view) as AnyObject))", view: view as? UIView)
+                    "of the correct type. Expected: \(TestableView.self) Actual: \(type(of: (view) as AnyObject))", view: view)
             }
         }
     }
@@ -71,24 +71,24 @@ open class LayoutTestCase: LYTLayoutTestCase {
     - Tests that that no sibling subviews are overlapping.
     - Tests that that no subview is out of the bounds of its parent view.
     - Tests that that autolayout is not ambiguous.
-    - Tests that autolayout doesn't throw any errors.
-    - Performs some accessibility sanity checks.
-      - Verifies that all UIControl elements have an accessibilityLabel.
-      - Verifies that no accessibility elements are nested (otherwise they aren't available to accessibility users).
-      - Verifies that all views with accessibility identifiers have accessibility labels. If a view has an identifier and does not have a label, voice over 
+     - Tests that autolayout doesn't throw any errors.
+     - Performs some accessibility sanity checks.
+     - Verifies that all UIControl elements have an accessibilityLabel.
+     - Verifies that no accessibility elements are nested (otherwise they aren't available to accessibility users).
+     - Verifies that all views with accessibility identifiers have accessibility labels. If a view has an identifier and does not have a label, voice over
      will read out the identifier to the user.
 
-    All of these automatic tests can be turned off using the properties in LYTLayoutTestCase or globally with LYTConfig.
+     All of these automatic tests can be turned off using the properties in LYTLayoutTestCase or globally with LYTConfig.
 
-    - Parameter viewProvider: Class to test. Must conform to LYTViewProvider.
-    - Parameter limitResults: Use this parameter to run less combinations. This is useful if you're running into performance problems. See 
+     - Parameter viewProvider: Class to test. Must conform to LYTViewProvider.
+     - Parameter limitResults: Use this parameter to run less combinations. This is useful if you're running into performance problems. See
      LYTTesterLimitResults docs for more info.
-    - Parameter validation: (view, data, context) Block to validate the view given the data. The data here will not contain any LYTDataValues subclasses. 
+     - Parameter validation: (view, data, context) Block to validate the view given the data. The data here will not contain any LYTDataValues subclasses.
      Here you should assert on the properties of the view. If you set a context in your viewForData: method, it will be passed back here.
-    */
-    open func runLayoutTestsWithViewProvider<TestableView: UIView, ViewProvider: LYTViewProvider>(_ viewProvider: ViewProvider.Type,
-                                             limitResults: LYTTesterLimitResults = LYTTesterLimitResults(),
-                                             validation: (TestableView, [AnyHashable: Any], Any?) -> Void) {
+     */
+    open func runLayoutTests<TestableView: UIView, ViewProvider: LYTViewProvider>(withViewProvider viewProvider: ViewProvider.Type,
+                             limitResults: LYTTesterLimitResults = LYTTesterLimitResults(),
+                             validation: (TestableView, [AnyHashable: Any], Any?) -> Void) {
         self.runLayoutTests(withViewProvider: viewProvider, limitResults: limitResults) { (view: Any, data, context) in
             if let view = view as? TestableView {
                 validation(view, data, context)

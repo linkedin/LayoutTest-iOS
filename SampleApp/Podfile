@@ -1,6 +1,6 @@
 use_frameworks!
 
-pod 'LayoutTestBase', :path => '..'
+pod 'LayoutTestBase/Swift', :path => '..'
 
 target :SampleApp do
 end

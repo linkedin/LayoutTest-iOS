@@ -1,43 +1,55 @@
 PODS:
-  - LayoutTest/ModuleHeader (1.3.0):
-    - LayoutTestBase (= 1.3.0)
-  - LayoutTest/Swift (1.3.0):
+  - LayoutTest/ModuleHeader (2.0.0):
+    - LayoutTestBase (= 2.0.0)
+  - LayoutTest/Swift (2.0.0):
     - LayoutTest/ModuleHeader
     - LayoutTest/SwiftSubspec
     - LayoutTest/TestCase
-    - LayoutTestBase (= 1.3.0)
+    - LayoutTestBase (= 2.0.0)
     - LayoutTestBase/Autolayout
     - LayoutTestBase/Catalog
     - LayoutTestBase/Config
     - LayoutTestBase/Core
     - LayoutTestBase/UIViewHelpers
-  - LayoutTest/SwiftSubspec (1.3.0):
+  - LayoutTest/SwiftSubspec (2.0.0):
     - LayoutTest/ModuleHeader
     - LayoutTest/TestCase
-    - LayoutTestBase (= 1.3.0)
-  - LayoutTest/TestCase (1.3.0):
+    - LayoutTestBase (= 2.0.0)
+    - LayoutTestBase/Swift
+  - LayoutTest/TestCase (2.0.0):
     - LayoutTest/ModuleHeader
-    - LayoutTestBase (= 1.3.0)
+    - LayoutTestBase (= 2.0.0)
     - LayoutTestBase/Config
     - LayoutTestBase/Core
-  - LayoutTestBase (1.3.0):
-    - LayoutTestBase/Autolayout (= 1.3.0)
-    - LayoutTestBase/Catalog (= 1.3.0)
-    - LayoutTestBase/Config (= 1.3.0)
-    - LayoutTestBase/Core (= 1.3.0)
-    - LayoutTestBase/UIViewHelpers (= 1.3.0)
-  - LayoutTestBase/Autolayout (1.3.0)
-  - LayoutTestBase/Catalog (1.3.0):
+  - LayoutTestBase (2.0.0):
+    - LayoutTestBase/Autolayout (= 2.0.0)
+    - LayoutTestBase/Catalog (= 2.0.0)
+    - LayoutTestBase/Config (= 2.0.0)
+    - LayoutTestBase/Core (= 2.0.0)
+    - LayoutTestBase/UIViewHelpers (= 2.0.0)
+  - LayoutTestBase/Autolayout (2.0.0)
+  - LayoutTestBase/Catalog (2.0.0):
     - LayoutTestBase/Core
-  - LayoutTestBase/Config (1.3.0)
-  - LayoutTestBase/Core (1.3.0):
+  - LayoutTestBase/Config (2.0.0)
+  - LayoutTestBase/Core (2.0.0):
     - LayoutTestBase/Config
-  - LayoutTestBase/UIViewHelpers (1.3.0):
+  - LayoutTestBase/ModuleHeader (2.0.0)
+  - LayoutTestBase/Swift (2.0.0):
+    - LayoutTestBase/Autolayout
+    - LayoutTestBase/Catalog
+    - LayoutTestBase/Config
+    - LayoutTestBase/Core
+    - LayoutTestBase/SwiftSubspec
+    - LayoutTestBase/UIViewHelpers
+  - LayoutTestBase/SwiftSubspec (2.0.0):
+    - LayoutTestBase/Core
+    - LayoutTestBase/ModuleHeader
+  - LayoutTestBase/UIViewHelpers (2.0.0):
     - LayoutTestBase/Config
 
 DEPENDENCIES:
   - LayoutTest/Swift (from `..`)
-  - LayoutTestBase (from `..`)
+  - LayoutTestBase/Swift (from `..`)
 
 EXTERNAL SOURCES:
   LayoutTest:
@@ -46,9 +58,9 @@ EXTERNAL SOURCES:
     :path: ..
 
 SPEC CHECKSUMS:
-  LayoutTest: d03e54adfec57236f0f44e4d3b2b905731516dde
-  LayoutTestBase: f5286c3751065de5eb42e8a1f781237c5b5c6eef
+  LayoutTest: 2d414566b20e470b2c069321de39488c52675ff1
+  LayoutTestBase: 94603cca806d017a446d29060674518606b6e193
 
-PODFILE CHECKSUM: cef94bf5f86f605c72698504f37d77b5ab7fc59e
+PODFILE CHECKSUM: 49d61240f50937629372e86aec364a859466c5d8
 
 COCOAPODS: 1.0.1

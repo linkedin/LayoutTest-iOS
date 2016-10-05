@@ -183,9 +183,13 @@ void SimpleLog(NSString *format, ...) {
     NSString *imagePath = [NSString stringWithFormat:@"%@/%@", [self methodNameForInvocation:invocation], [self nameForImageWithWidth:width height:height data:data]];
     NSString *dataDescription = nil;
     if (data) {
-        NSData *serializedJSON = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
-        if (serializedJSON) {
-            dataDescription = [[NSString alloc] initWithData:serializedJSON encoding:NSUTF8StringEncoding];
+        if ([NSJSONSerialization isValidJSONObject:data])  {
+            NSData *serializedJSON = [NSJSONSerialization dataWithJSONObject:data options:NSJSONWritingPrettyPrinted error:nil];
+            if (serializedJSON) {
+                dataDescription = [[NSString alloc] initWithData:serializedJSON encoding:NSUTF8StringEncoding];
+            }
+        } else {
+            dataDescription = [data description];
         }
     }
     NSString *errorHTML = [NSString stringWithFormat:@"<TR><TD>%@</TD><TD><IMG src='%@' alt='No Image'></TD><TD>%@</TD></TR>", [description lyt_stringByAddingXMLEscaping], imagePath, dataDescription];

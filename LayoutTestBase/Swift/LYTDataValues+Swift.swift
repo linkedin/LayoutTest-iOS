@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension LYTDataValues {
+extension DataValues {
     /**
      Returns LYTDataValues with these specific values and overrides any subclass's behavior.
      This function converts all nil values to NSNull which is what the library expects.

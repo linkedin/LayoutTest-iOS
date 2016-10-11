@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  If you put NSNull into the values array, it will be converted to nil (as in, remove the key from the final JSON).
  */
+NS_SWIFT_NAME(DataValues)
 @interface LYTDataValues : NSObject
 
 /**

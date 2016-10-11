@@ -8,7 +8,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 /**
- This file is included in cocoapods because without it, XCode refuses to build the project. It shouldn't cause any harm.
+ This file is included in cocoapods because without it, Xcode refuses to build the project. It shouldn't cause any harm.
  */
 
 #import <Foundation/Foundation.h>

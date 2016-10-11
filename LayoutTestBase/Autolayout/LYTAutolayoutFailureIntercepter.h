@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  If Apple updates their implementation, this class will need to be changed.
  */
+NS_SWIFT_NAME(AutolayoutFailureIntercepter)
 @interface LYTAutolayoutFailureIntercepter : NSObject
 
 /**

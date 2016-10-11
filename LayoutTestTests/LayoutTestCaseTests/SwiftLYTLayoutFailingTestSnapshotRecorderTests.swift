@@ -22,7 +22,7 @@ class SwiftLYTLayoutFailingTestSnapshotRecorderTests: XCTestCase {
         } catch{}
         fileManager.createFile(atPath: testFilePath, contents: nil, attributes: nil)
         
-        let recorder = LYTLayoutFailingTestSnapshotRecorder()
+        let recorder = LayoutFailingTestSnapshotRecorder()
         recorder.startNewLog(for: type(of: self))
         
         XCTAssertFalse(fileManager.fileExists(atPath: testFilePath))

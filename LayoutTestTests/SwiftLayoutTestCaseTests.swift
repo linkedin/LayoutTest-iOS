@@ -15,13 +15,13 @@ import LayoutTestBase
 */
 class SwiftTest: LayoutTestCase {
 
-    let exponentialCombinations = LYTIntegerValues().numberOfValues() * LYTIntegerValues().numberOfValues()
-    let polynomialCombinations = (LYTIntegerValues().numberOfValues() * 2 - 1)
+    let exponentialCombinations = IntegerValues().numberOfValues() * IntegerValues().numberOfValues()
+    let polynomialCombinations = (IntegerValues().numberOfValues() * 2 - 1)
 
     func testBasicTests() {
         var timesCalled = 0
         runLayoutTests { (view: TestView, data, context) in
-            XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
+            XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, exponentialCombinations * 2)
@@ -30,7 +30,7 @@ class SwiftTest: LayoutTestCase {
     func testWithLimitResultsCombinations() {
         var timesCalled = 0
         runLayoutTests(limitResults: .limitDataCombinations) { (view: TestView, data, context) in
-            XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
+            XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, polynomialCombinations * 2)
@@ -39,7 +39,7 @@ class SwiftTest: LayoutTestCase {
     func testWithLimitResultsSizes() {
         var timesCalled = 0
         runLayoutTests(limitResults: .noSizes) { (view: TestView, data, context) in
-            XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
+            XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, exponentialCombinations)
@@ -48,7 +48,7 @@ class SwiftTest: LayoutTestCase {
     func testWithLimitResultsCombinationsAndSizes() {
         var timesCalled = 0
         runLayoutTests(limitResults: [.limitDataCombinations, .noSizes]) { (view: TestView, data, context) in
-            XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
+            XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, polynomialCombinations)
@@ -57,7 +57,7 @@ class SwiftTest: LayoutTestCase {
     func testBasicMoreGenericTests() {
         var timesCalled = 0
         runLayoutTests(withViewProvider: NonViewCreationProtocol.self) { (view: TestView, data, context) in
-            XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
+            XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, exponentialCombinations * 2)
@@ -66,7 +66,7 @@ class SwiftTest: LayoutTestCase {
     func testBasicMoreGenericTestsWithLimitResultsCombinations() {
         var timesCalled = 0
         runLayoutTests(withViewProvider: NonViewCreationProtocol.self, limitResults: .limitDataCombinations) { (view: TestView, data, context) in
-            XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
+            XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, polynomialCombinations * 2)
@@ -75,7 +75,7 @@ class SwiftTest: LayoutTestCase {
     func testBasicMoreGenericTestsWithLimitResultsSizes() {
         var timesCalled = 0
         runLayoutTests(withViewProvider: NonViewCreationProtocol.self, limitResults: .noSizes) { (view: TestView, data, context) in
-            XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
+            XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, exponentialCombinations)
@@ -84,30 +84,30 @@ class SwiftTest: LayoutTestCase {
     func testBasicMoreGenericTestsWithLimitResultsCombinationsAndSizes() {
         var timesCalled = 0
         runLayoutTests(withViewProvider: NonViewCreationProtocol.self, limitResults: [.limitDataCombinations, .noSizes]) { (view: TestView, data, context) in
-            XCTAssertTrue(LYTIntegerValues().values.contains { $0 as? Int == context as? Int })
+            XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
         }
         XCTAssertEqual(timesCalled, polynomialCombinations)
     }
 
-    class TestView: UIView, LYTViewProvider {
+    class TestView: UIView, ViewProvider {
         @objc static func dataSpecForTest() -> [AnyHashable: Any] {
             return [
-                "context": LYTIntegerValues(),
-                "otherVariable": LYTIntegerValues()
+                "context": IntegerValues(),
+                "otherVariable": IntegerValues()
             ]
         }
 
-        static func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: LYTViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
+        static func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
             // Let's verify that this context works correctly
             context?.pointee = data["context"] as AnyObject?
             return TestView()
         }
 
-        @objc static func sizesForView() -> [LYTViewSize] {
+        @objc static func sizesForView() -> [ViewSize] {
             return [
-                LYTViewSize(width: LYTiPhone6Width),
-                LYTViewSize(width: LYTiPadWidth)
+                ViewSize(width: LYTiPhone6Width),
+                ViewSize(width: LYTiPadWidth)
             ]
         }
     }
@@ -115,24 +115,24 @@ class SwiftTest: LayoutTestCase {
     /**
     This is identical to TestView, but it doesn't implement the view creation protocol.
     */
-    class NonViewCreationProtocol: NSObject, LYTViewProvider {
+    class NonViewCreationProtocol: NSObject, ViewProvider {
         @objc static func dataSpecForTest() -> [AnyHashable: Any] {
             return [
-                "context": LYTIntegerValues(),
-                "otherVariable": LYTIntegerValues()
+                "context": IntegerValues(),
+                "otherVariable": IntegerValues()
             ]
         }
 
-        @objc static func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: LYTViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
+        @objc static func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
             // Let's verify that this context works correctly
             context?.pointee = data["context"] as AnyObject?
             return TestView()
         }
 
-        @objc static func sizesForView() -> [LYTViewSize] {
+        @objc static func sizesForView() -> [ViewSize] {
             return [
-                LYTViewSize(width: LYTiPhone6Width),
-                LYTViewSize(width: LYTiPadWidth)
+                ViewSize(width: LYTiPhone6Width),
+                ViewSize(width: LYTiPadWidth)
             ]
         }
     }

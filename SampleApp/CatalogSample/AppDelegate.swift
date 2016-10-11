@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        let rootViewController = LYTCatalogTableViewController()
+        let rootViewController = CatalogTableViewController()
         rootViewController.viewProviderClass = SampleTableViewCell.self
         window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.makeKeyAndVisible()
@@ -27,17 +27,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-extension SampleTableViewCell: LYTViewCatalogProvider {
+extension SampleTableViewCell: ViewCatalogProvider {
     public class func dataSpecForTest() -> [AnyHashable: Any] {
         return [
-            "text": LYTStringValues(),
-            "buttonText": LYTDataValues(values: ["Share", "Like", nil]),
-            "buttonEnabled": LYTBoolValues(),
-            "imageType": LYTDataValues(values: ["linkedin", nil])
+            "text": StringValues(),
+            "buttonText": DataValues(values: ["Share", "Like", nil]),
+            "buttonEnabled": BoolValues(),
+            "imageType": DataValues(values: ["linkedin", nil])
         ]
     }
 
-    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: LYTViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
+    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
         let view = reuseView as? SampleTableViewCell ?? Bundle.main.loadNibNamed("SampleTableViewCell", owner: nil, options: nil)?[0] as! SampleTableViewCell
         view.setup(data)
         return view

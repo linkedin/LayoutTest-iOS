@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol LYTViewCatalogProvider;
 
+NS_SWIFT_NAME(CatalogCollectionViewController)
 @interface LYTCatalogCollectionViewController : UICollectionViewController
 
 @property (nonatomic, nullable) Class <LYTViewCatalogProvider> ViewProviderClass;

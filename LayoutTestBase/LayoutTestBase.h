@@ -9,7 +9,6 @@
 
 /**
  This file is included in cocoapods because without it, XCode refuses to build the project. It shouldn't cause any harm.
- Because of this, it only include thes core classes (otherwise, some subspecs won't build).
  */
 
 #import <Foundation/Foundation.h>
@@ -24,5 +23,35 @@ FOUNDATION_EXPORT const unsigned char LayoutTestBaseVersionString[];
 #pragma mark - Main Classes
 
 #import "LYTViewProvider.h"
+#import "LYTViewCatalogProvider.h"
 #import "LYTConfig.h"
 #import "LYTLayoutPropertyTester.h"
+
+#pragma mark - View Sizing
+
+#import "LYTViewSize.h"
+#import "UIView+LYTViewSize.h"
+#import "LYTDeviceConstants.h"
+
+#pragma mark - Autolayout
+
+#import "LYTAutolayoutFailureIntercepter.h"
+
+#pragma mark - DataValues
+
+#import "LYTDataValues.h"
+#import "LYTBoolValues.h"
+#import "LYTFloatValues.h"
+#import "LYTIntegerValues.h"
+#import "LYTStringValues.h"
+
+#pragma mark - Test Helpers
+
+#import "UIView+LYTHelpers.h"
+#import "UIView+LYTTestHelpers.h"
+#import "UIView+LYTFrameComparison.h"
+
+#pragma mark - Catalog
+
+#import "LYTCatalogCollectionViewController.h"
+#import "LYTCatalogTableViewController.h"

@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  You can utitilize predefined constants or enter a custom value.
  */
+NS_SWIFT_NAME(ViewSize)
 @interface LYTViewSize : NSObject
 
 /**

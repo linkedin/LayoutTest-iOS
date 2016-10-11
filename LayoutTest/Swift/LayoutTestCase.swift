@@ -47,7 +47,7 @@ open class LayoutTestCase: LYTLayoutTestCase {
     - Parameter validation: (view, data, context) Closure to validate the view given the data. The data here will not contain any LYTDataValues subclasses. 
      Here you should assert on the properties of the view. If you set a context in your viewForData: method, it will be passed back here.
     */
-    open func runLayoutTests<TestableView: LYTViewProvider>(limitResults: LYTTesterLimitResults = LYTTesterLimitResults(),
+    open func runLayoutTests<TestableView: ViewProvider>(limitResults: LYTTesterLimitResults = LYTTesterLimitResults(),
                              validation: (TestableView, [AnyHashable: Any], Any?) -> Void) where TestableView: UIView {
         self.runLayoutTests(withViewProvider: TestableView.self, limitResults: limitResults) { (view, data, context) in
             if let view = view as? TestableView {
@@ -86,7 +86,7 @@ open class LayoutTestCase: LYTLayoutTestCase {
      - Parameter validation: (view, data, context) Block to validate the view given the data. The data here will not contain any LYTDataValues subclasses.
      Here you should assert on the properties of the view. If you set a context in your viewForData: method, it will be passed back here.
      */
-    open func runLayoutTests<TestableView: UIView, ViewProvider: LYTViewProvider>(withViewProvider viewProvider: ViewProvider.Type,
+    open func runLayoutTests<TestableView: UIView, ViewProviderType: ViewProvider>(withViewProvider viewProvider: ViewProviderType.Type,
                              limitResults: LYTTesterLimitResults = LYTTesterLimitResults(),
                              validation: (TestableView, [AnyHashable: Any], Any?) -> Void) {
         self.runLayoutTests(withViewProvider: viewProvider, limitResults: limitResults) { (view: Any, data, context) in

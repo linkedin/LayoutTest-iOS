@@ -11,6 +11,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
+NS_SWIFT_NAME(LayoutFailingTestSnapshotRecorder)
 @interface LYTLayoutFailingTestSnapshotRecorder : NSObject<XCTestObservation>
 
 /**

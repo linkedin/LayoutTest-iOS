@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class LYTDataValues;
 
+NS_SWIFT_NAME(ValuesIterator)
 @interface LYTValuesIterator : NSObject
 
 @property (nonatomic, strong, nullable) LYTDataValues *dataValues;

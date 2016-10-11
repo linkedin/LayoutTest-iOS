@@ -21,23 +21,23 @@ class SampleFailingLayoutTestsWithSnapshots : LayoutTestCase {
     }
 }
 
-extension SampleFailingView : LYTViewProvider {
+extension SampleFailingView : ViewProvider {
     public class func dataSpecForTest() -> [AnyHashable: Any] {
         return [
-            "text": LYTStringValues(),
-            "buttonText": LYTStringValues()
+            "text": StringValues(),
+            "buttonText": StringValues()
         ]
     }
     
-    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: LYTViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
+    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
         let view = reuseView as? SampleFailingView ?? SampleFailingView.loadFromNib()
         view.setup(data)
         return view
     }
     
-    public class func sizesForView() -> [LYTViewSize] {
+    public class func sizesForView() -> [ViewSize] {
         return [
-            LYTViewSize(width: 300),
+            ViewSize(width: 300),
         ]
     }
 }

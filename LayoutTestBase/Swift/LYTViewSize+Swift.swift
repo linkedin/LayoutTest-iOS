@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension LYTViewSize {
+extension ViewSize {
 
     /**
      The width for the view. If nil, do not edit the width.

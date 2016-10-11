@@ -20,12 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
  set of options instead of exponential. Every value in the data set will be run at least once, but not all possible combinations will be run.
  LYTTesterLimitResultsNoSizes - This will ignore any view sizes that are set in the LYTViewProvider or the LYTConfig.
  */
+NS_SWIFT_NAME(TesterLimitResults)
 typedef NS_OPTIONS(NSInteger, LYTTesterLimitResults) {
     LYTTesterLimitResultsNone                   = 0,
     LYTTesterLimitResultsLimitDataCombinations  = 1 << 0,
     LYTTesterLimitResultsNoSizes                = 1 << 1
 };
 
+NS_SWIFT_NAME(LayoutPropertyTester)
 @interface LYTLayoutPropertyTester : NSObject
 
 /**

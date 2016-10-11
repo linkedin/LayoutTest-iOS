@@ -53,33 +53,33 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
     }
 }
 
-extension SampleTableViewCell : LYTViewProvider {
+extension SampleTableViewCell : ViewProvider {
     public class func dataSpecForTest() -> [AnyHashable: Any] {
         return [
-            "text": LYTStringValues(),
-            "buttonText": LYTStringValues(),
-            "buttonEnabled": LYTBoolValues(),
-            "imageType": LYTDataValues(values: ["linkedin", "garbageString", NSNull()])
+            "text": StringValues(),
+            "buttonText": StringValues(),
+            "buttonEnabled": BoolValues(),
+            "imageType": DataValues(values: ["linkedin", "garbageString", NSNull()])
         ]
     }
 
-    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: LYTViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
+    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
         let view = reuseView as? SampleTableViewCell ?? SampleTableViewCell.loadFromNib()
         view.setup(data)
         return view
     }
 
     // This is an optional method and can also be specified globally in the config.
-    public class func sizesForView() -> [LYTViewSize] {
+    public class func sizesForView() -> [ViewSize] {
         return [
             // Test the view with a specific width
-            LYTViewSize(width: 300),
+            ViewSize(width: 300),
             // Test the view with the same width as an iPhone 4
-            LYTViewSize(width: LYTiPhone4Width),
+            ViewSize(width: LYTiPhone4Width),
             // Test the view by setting the width to the iPad width
-            LYTViewSize(width: LYTiPadWidth),
+            ViewSize(width: LYTiPadWidth),
             // Test the view by setting the width to the iPad height
-            LYTViewSize(width: LYTiPadHeight)
+            ViewSize(width: LYTiPadHeight)
         ]
     }
 }

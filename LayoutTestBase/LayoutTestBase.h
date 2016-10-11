@@ -8,7 +8,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 /**
- This file is included in cocoapods because without it, XCode refuses to build the project. It shouldn't cause any harm.
+ This file is included in cocoapods because without it, Xcode refuses to build the project. It shouldn't cause any harm.
  */
 
 #import <Foundation/Foundation.h>
@@ -20,24 +20,24 @@ FOUNDATION_EXPORT double LayoutTestBaseVersionNumber;
 //! Project version string for LayoutTest.
 FOUNDATION_EXPORT const unsigned char LayoutTestBaseVersionString[];
 
-#pragma mark - Main Classes
+#pragma mark Main Classes
 
 #import "LYTViewProvider.h"
 #import "LYTViewCatalogProvider.h"
 #import "LYTConfig.h"
 #import "LYTLayoutPropertyTester.h"
 
-#pragma mark - View Sizing
+#pragma mark View Sizing
 
 #import "LYTViewSize.h"
 #import "UIView+LYTViewSize.h"
 #import "LYTDeviceConstants.h"
 
-#pragma mark - Autolayout
+#pragma mark Auto Layout
 
 #import "LYTAutolayoutFailureIntercepter.h"
 
-#pragma mark - DataValues
+#pragma mark Data Values
 
 #import "LYTDataValues.h"
 #import "LYTBoolValues.h"
@@ -45,13 +45,13 @@ FOUNDATION_EXPORT const unsigned char LayoutTestBaseVersionString[];
 #import "LYTIntegerValues.h"
 #import "LYTStringValues.h"
 
-#pragma mark - Test Helpers
+#pragma mark Test Helpers
 
 #import "UIView+LYTHelpers.h"
 #import "UIView+LYTTestHelpers.h"
 #import "UIView+LYTFrameComparison.h"
 
-#pragma mark - Catalog
+#pragma mark Catalog
 
 #import "LYTCatalogCollectionViewController.h"
 #import "LYTCatalogTableViewController.h"

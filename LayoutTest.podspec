@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'LayoutTest'
-  spec.version          = '3.0.0'
+  spec.version          = '3.0.0-beta4'
   spec.license          = { :type => 'Apache License, Version 2.0' }
   spec.homepage         = 'https://linkedin.github.io/LayoutTest-iOS'
   spec.authors          = 'LinkedIn'
@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
   spec.source           = { :git => 'https://github.com/linkedin/LayoutTest-iOS.git', :tag => spec.version }
   spec.platform         = :ios, '7.0'
   spec.default_subspecs = 'TestCase'
-  spec.dependency         'LayoutTestBase', '3.0.0'
+  spec.dependency         'LayoutTestBase', '3.0.0-beta4'
 
   spec.subspec 'Swift' do |sp|
     sp.dependency 'LayoutTestBase/Core'
@@ -18,26 +18,19 @@ Pod::Spec.new do |spec|
     sp.dependency 'LayoutTestBase/Config'
     sp.dependency 'LayoutTestBase/UIViewHelpers'
     sp.dependency 'LayoutTest/SwiftSubspec'
-    sp.dependency 'LayoutTest/ModuleHeader'
   end
 
   spec.subspec 'TestCase' do |sp|
     sp.source_files = 'LayoutTest/TestCase'
     sp.dependency 'LayoutTestBase/Core'
     sp.dependency 'LayoutTestBase/Config'
-    sp.dependency 'LayoutTest/ModuleHeader'
     sp.framework  = 'XCTest'
   end
 
   spec.subspec 'SwiftSubspec' do |sp|
-    sp.source_files = 'LayoutTest/Swift'
+    sp.source_files = 'LayoutTest/Swift', 'LayoutTest/LayoutTest.h'
     sp.dependency 'LayoutTest/TestCase'
-    sp.dependency 'LayoutTest/ModuleHeader'
     sp.dependency 'LayoutTestBase/Swift'
-  end
-
-  spec.subspec 'ModuleHeader' do |sp|
-    sp.source_files = 'LayoutTest/LayoutTest.h'
   end
 end
 

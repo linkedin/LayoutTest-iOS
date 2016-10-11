@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'LayoutTestBase'
-  spec.version          = '3.0.0'
+  spec.version          = '3.0.0-beta4'
   spec.license          = { :type => 'Apache License, Version 2.0' }
   spec.homepage         = 'https://linkedin.github.io/LayoutTest-iOS'
   spec.authors          = 'LinkedIn'
@@ -11,13 +11,12 @@ Pod::Spec.new do |spec|
   spec.default_subspecs = 'Core', 'Autolayout', 'Catalog', 'Config', 'UIViewHelpers'
 
   spec.subspec 'Swift' do |sp|
-    sp.source_files = 'LayoutTestBase/Swift/**/*'
+    sp.source_files = 'LayoutTestBase/Swift/**/*', 'LayoutTestBase/LayoutTestBase.h'
     sp.dependency 'LayoutTestBase/Core'
     sp.dependency 'LayoutTestBase/Autolayout'
     sp.dependency 'LayoutTestBase/Catalog'
     sp.dependency 'LayoutTestBase/Config'
     sp.dependency 'LayoutTestBase/UIViewHelpers'
-    sp.dependency 'LayoutTestBase/ModuleHeader'
     sp.platform = :ios, '8.0'
   end
 
@@ -43,8 +42,5 @@ Pod::Spec.new do |spec|
     sp.source_files = 'LayoutTestBase/UIViewHelpers'
     sp.dependency 'LayoutTestBase/Config'
   end
-
-  spec.subspec 'ModuleHeader' do |sp|
-    sp.source_files = 'LayoutTestBase/LayoutTestBase.h'
-  end
 end
+

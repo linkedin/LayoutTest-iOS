@@ -155,6 +155,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)runSubviewsOverlapTestsWithSubview:(UIView *)subview view:(UIView *)view {
     if (self.viewOverlapTestsEnabled) {
+        NSArray *viewsAllowingOverlap = [LYTLayoutTestCase subviewsAllowingOverlapInView:subview];
+        if (viewsAllowingOverlap.count > 0) {
+            [self.viewsAllowingOverlap addObjectsFromArray:viewsAllowingOverlap];
+        }
+        
         [subview lyt_assertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
             if (![self.viewsAllowingOverlap containsObject:view1] &&
                 ![self.viewsAllowingOverlap containsObject:view2] &&
@@ -259,6 +264,18 @@ NS_ASSUME_NONNULL_BEGIN
     } else {
         return [self firstSuperviewWithAccessibilityLabel:view.superview];
     }
+}
+
++ (NSArray *)subviewsAllowingOverlapInView:(UIView *)view {
+    if ([view isKindOfClass:[UIButton class]]) {
+        for (UIView *subview in view.subviews) {
+            if ([subview isKindOfClass:[UIImageView class]] &&
+                ((UIImageView *)subview).image == [((UIButton *)view) currentBackgroundImage]) {
+                return @[subview];
+            }
+        }
+    }
+    return nil;
 }
 
 @end

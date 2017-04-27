@@ -54,7 +54,7 @@ open class LayoutTestCase: LYTLayoutTestCase {
                 validation(view, data, context)
             } else {
                 self.failTest("The view wasn't of the expected type. Change your method signature to declare the view in the validation closure " +
-                    "of the correct type. Expected: \(TestableView.self) Actual: \(type(of: (view) as AnyObject))", view: view)
+                    "of the correct type. Expected: \(TestableView.self) Actual: \(type(of: (view) as AnyObject))", view: view as? UIView)
             }
         }
     }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'LayoutTest'
-  spec.version          = '3.0.0'
+  spec.version          = '3.0.1'
   spec.license          = { :type => 'Apache License, Version 2.0' }
   spec.homepage         = 'https://linkedin.github.io/LayoutTest-iOS'
   spec.authors          = 'LinkedIn'
@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
   spec.source           = { :git => 'https://github.com/linkedin/LayoutTest-iOS.git', :tag => spec.version }
   spec.platform         = :ios, '7.0'
   spec.default_subspecs = 'TestCase'
-  spec.dependency         'LayoutTestBase', '3.0.0'
+  spec.dependency         'LayoutTestBase', '3.0.1'
 
   spec.subspec 'Swift' do |sp|
     sp.dependency 'LayoutTestBase/Core'

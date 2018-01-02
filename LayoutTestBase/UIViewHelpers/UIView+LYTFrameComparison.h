@@ -28,13 +28,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Version of lyt_before that takes a fromCenter param. If fromCenter is YES, the comparison starts from the center of the view rather than the
  edge, allowing an overlap of up to half of the view. So for example, if this view is at x=0 with a width=10, and another view is at x=6, width=10,
- the function will return YES if fromCenter==YES, NO otherwise. The function honors the epsilon vlaue and right-to-left.
+ the function will return YES if fromCenter==YES, NO otherwise. The function honors the epsilon value and right-to-left.
  
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \param fromCenter If YES, allow an overlap up to the center of otherView. If NO, behavior is the same as without the param
  \returns True if the view is laid out before another view, allowing for an overlap up to the center if fromCenter is YES.
  */
-- (BOOL)lyt_before:(UIView *)otherView fromCenter:(BOOL)fromCenter NS_SWIFT_NAME(before(_:_:));
+- (BOOL)lyt_before:(UIView *)otherView fromCenter:(BOOL)fromCenter NS_SWIFT_NAME(before(_:fromCenter:));
 
 /**
  Returns whether a view is after another view on the horizontal axis. It returns false if they are overlapping in any way.
@@ -51,13 +51,13 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Version of lyt_after that takes a fromCenter param. If fromCenter is YES, the comparison starts from the center of the view rather than the
  edge, allowing an overlap of up to half of the view. So for example, if this view is at x=6 with a width=10, and another view is at x=0, width=10,
- the function will return YES if fromCenter==YES, NO otherwise. The function honors the epsilon vlaue and right-to-left.
+ the function will return YES if fromCenter==YES, NO otherwise. The function honors the epsilon value and right-to-left.
  
  \param otherView The view you want to compare to. It does not need to have the same superview, but MUST share some ancestor view.
  \param fromCenter If YES, allow an overlap up to the center of otherView. If NO, behavior is the same as without the param
  \returns True if the view is laid out before another view, allowing for an overlap up to the center if fromCenter is YES.
  */
-- (BOOL)lyt_after:(UIView *)otherView : (BOOL)fromCenter NS_SWIFT_NAME(after(_:_:));
+- (BOOL)lyt_after:(UIView *)otherView fromCenter:(BOOL)fromCenter NS_SWIFT_NAME(after(_:fromCenter:));
 
 /**
  Returns whether a view is above another view on the vertical axis. It returns false if they are overlapping in any way.

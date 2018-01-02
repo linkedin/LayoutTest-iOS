@@ -17,14 +17,7 @@
 #pragma mark - Frames
 
 - (BOOL)lyt_before:(UIView *)otherView {
-    CGRect otherViewBounds = [self convertRect:otherView.bounds fromView:otherView];
-    CGFloat epsilon = [LYTConfig sharedInstance].cgFloatEpsilon;
-
-    if ([self lyt_leftToRight]) {
-        return self.bounds.origin.x + self.bounds.size.width <= otherViewBounds.origin.x + epsilon;
-    } else {
-        return self.bounds.origin.x + epsilon >= otherViewBounds.origin.x + otherViewBounds.size.width;
-    }
+    return [otherView lyt_before:self fromCenter:NO];
 }
 
 - (BOOL)lyt_before:(UIView *)otherView fromCenter:(BOOL)fromCenter {
@@ -34,15 +27,13 @@
     if ([self lyt_leftToRight]) {
         if (fromCenter) {
             return self.center.x <= otherViewBounds.origin.x + epsilon;
-        }
-        else {
+        } else {
             return self.bounds.origin.x + self.bounds.size.width <= otherViewBounds.origin.x + epsilon;
        }
     } else {
         if (fromCenter) {
             return self.bounds.origin.x + epsilon >= (otherViewBounds.origin.x + otherViewBounds.size.width/2);
-        }
-        else {
+        } else {
             return self.bounds.origin.x + epsilon >= otherViewBounds.origin.x + otherViewBounds.size.width;
         }
     }

@@ -27,8 +27,33 @@
     }
 }
 
+- (BOOL)lyt_before:(UIView *)otherView fromCenter:(BOOL)fromCenter {
+    CGRect otherViewBounds = [self convertRect:otherView.bounds fromView:otherView];
+    CGFloat epsilon = [LYTConfig sharedInstance].cgFloatEpsilon;
+    
+    if ([self lyt_leftToRight]) {
+        if (fromCenter) {
+            return self.center.x <= otherViewBounds.origin.x + epsilon;
+        }
+        else {
+            return self.bounds.origin.x + self.bounds.size.width <= otherViewBounds.origin.x + epsilon;
+       }
+    } else {
+        if (fromCenter) {
+            return self.bounds.origin.x + epsilon >= (otherViewBounds.origin.x + otherViewBounds.size.width/2);
+        }
+        else {
+            return self.bounds.origin.x + epsilon >= otherViewBounds.origin.x + otherViewBounds.size.width;
+        }
+    }
+}
+
 - (BOOL)lyt_after:(UIView *)otherView {
     return [otherView lyt_before:self];
+}
+
+- (BOOL)lyt_after:(UIView *)otherView fromCenter:(BOOL)fromCenter {
+    return [otherView lyt_before:self fromCenter:fromCenter];
 }
 
 - (BOOL)lyt_above:(UIView *)otherView {

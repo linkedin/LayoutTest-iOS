@@ -21,7 +21,6 @@
 @property (nonatomic, strong) LanguageChangingView *superview;
 @property (nonatomic, strong) LanguageChangingView *innerSubview1;
 @property (nonatomic, strong) LanguageChangingView *innerSubview2;
-
 @end
 
 static BOOL isLeftToRight = YES;
@@ -52,6 +51,8 @@ static BOOL isLeftToRight = YES;
     XCTAssertTrue([self.innerSubview1 lyt_before:self.innerSubview2]);
     self.innerSubview1.lyt_left = 0.0000001;
     XCTAssertTrue([self.innerSubview1 lyt_before:self.innerSubview2]);
+    self.innerSubview1.lyt_left = 1;
+    XCTAssertTrue([self.innerSubview1 lyt_before:self.innerSubview2 fromCenter:YES]);
 
     // Failure expected
 
@@ -59,6 +60,10 @@ static BOOL isLeftToRight = YES;
     XCTAssertFalse([self.innerSubview1 lyt_before:self.innerSubview2]);
     self.innerSubview1.lyt_left = 0;
     XCTAssertFalse([self.innerSubview2 lyt_before:self.innerSubview1]);
+    self.innerSubview1.lyt_left = 3;
+    XCTAssertFalse([self.innerSubview1 lyt_before:self.innerSubview2 fromCenter:YES]);
+    self.innerSubview1.lyt_left = 1;
+    XCTAssertFalse([self.innerSubview1 lyt_before:self.innerSubview2 fromCenter:NO]);
 }
 
 - (void)testBeforeRightToLeft {
@@ -72,6 +77,8 @@ static BOOL isLeftToRight = YES;
     XCTAssertTrue([self.innerSubview2 lyt_before:self.innerSubview1]);
     self.innerSubview2.lyt_left = 4.999999;
     XCTAssertTrue([self.innerSubview2 lyt_before:self.innerSubview1]);
+    self.innerSubview2.lyt_left = 8;
+    XCTAssertTrue([self.innerSubview2 lyt_before:self.innerSubview1 fromCenter:YES]);
 
     // Failure expected
 
@@ -79,6 +86,11 @@ static BOOL isLeftToRight = YES;
     XCTAssertFalse([self.innerSubview1 lyt_before:self.innerSubview2]);
     self.innerSubview2.lyt_left = 5;
     XCTAssertFalse([self.innerSubview1 lyt_before:self.innerSubview2]);
+    self.innerSubview2.lyt_left = 8;
+    XCTAssertFalse([self.innerSubview1 lyt_before:self.innerSubview2 fromCenter:YES]);
+    self.innerSubview2.lyt_left = 4;
+    XCTAssertFalse([self.innerSubview2 lyt_before:self.innerSubview1 fromCenter:NO]);
+
 }
 
 #pragma mark - After
@@ -92,6 +104,8 @@ static BOOL isLeftToRight = YES;
     XCTAssertTrue([self.innerSubview2 lyt_after:self.innerSubview1]);
     self.innerSubview2.lyt_left = 4.999999;
     XCTAssertTrue([self.innerSubview2 lyt_after:self.innerSubview1]);
+    self.innerSubview2.lyt_left = 4;
+    XCTAssertTrue([self.innerSubview2 lyt_after:self.innerSubview1 fromCenter:TRUE]);
 
     // Failure expected
 
@@ -99,6 +113,10 @@ static BOOL isLeftToRight = YES;
     XCTAssertFalse([self.innerSubview1 lyt_after:self.innerSubview2]);
     self.innerSubview2.lyt_left = 5;
     XCTAssertFalse([self.innerSubview1 lyt_after:self.innerSubview2]);
+    self.innerSubview2.lyt_left = 2;
+    XCTAssertFalse([self.innerSubview1 lyt_after:self.innerSubview2 fromCenter:YES]);
+    self.innerSubview2.lyt_left = 2;
+    XCTAssertFalse([self.innerSubview2 lyt_after:self.innerSubview1 fromCenter:FALSE]);
 }
 
 - (void)testAfterRightToLeft {
@@ -112,6 +130,8 @@ static BOOL isLeftToRight = YES;
     XCTAssertTrue([self.innerSubview1 lyt_after:self.innerSubview2]);
     self.innerSubview1.lyt_left = 0.0000001;
     XCTAssertTrue([self.innerSubview1 lyt_after:self.innerSubview2]);
+    self.innerSubview1.lyt_left = 2;
+    XCTAssertTrue([self.innerSubview1 lyt_after:self.innerSubview2 fromCenter:YES]);
 
     // Failure expected
 
@@ -119,6 +139,10 @@ static BOOL isLeftToRight = YES;
     XCTAssertFalse([self.innerSubview1 lyt_after:self.innerSubview2]);
     self.innerSubview1.lyt_left = 0;
     XCTAssertFalse([self.innerSubview2 lyt_after:self.innerSubview1]);
+    self.innerSubview1.lyt_left = 3;
+    XCTAssertFalse([self.innerSubview1 lyt_after:self.innerSubview2 fromCenter:YES]);
+    self.innerSubview1.lyt_left = 2;
+    XCTAssertFalse([self.innerSubview1 lyt_after:self.innerSubview2 fromCenter:NO]);
 }
 
 #pragma mark - Above

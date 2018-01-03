@@ -17,7 +17,7 @@
 #pragma mark - Frames
 
 - (BOOL)lyt_before:(UIView *)otherView {
-    return [otherView lyt_before:self fromCenter:NO];
+    return [self lyt_before:otherView fromCenter:NO];
 }
 
 - (BOOL)lyt_before:(UIView *)otherView fromCenter:(BOOL)fromCenter {

@@ -15,7 +15,7 @@ extension ViewSize {
      */
     open var width: CGFloat? {
         get {
-            return __width.flatMap { CGFloat($0) }
+            return __width.flatMap { CGFloat(truncating: $0) }
         }
     }
 
@@ -24,7 +24,7 @@ extension ViewSize {
      */
     open var height: CGFloat? {
         get {
-            return __height.flatMap { CGFloat($0) }
+            return __height.flatMap {  CGFloat(truncating: $0) }
         }
     }
 

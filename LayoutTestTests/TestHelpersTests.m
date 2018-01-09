@@ -47,12 +47,15 @@
 
 - (void)testNoErrorsByDefault {
     __block NSInteger numberOfErrors = 0;
-    void(^block)() = ^void() {
+    void(^block)(NSString *error, UIView *view1, UIView *view2) = ^void(NSString *error, UIView *view1, UIView *view2) {
+        numberOfErrors++;
+    };
+    void(^block2)(NSString *error, UIView *view1) = ^void(NSString *error, UIView *view1) {
         numberOfErrors++;
     };
 
     [self.superview lyt_recursivelyAssertNoSubviewsOverlap:block];
-    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:block];
+    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:block2];
 
     XCTAssertEqual(numberOfErrors, 0);
 }

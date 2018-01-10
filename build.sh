@@ -4,7 +4,7 @@ set -o pipefail &&
 time xcodebuild clean test \
     -project LayoutTest.xcodeproj \
     -scheme LayoutTest \
-    -sdk iphonesimulator10.0 \
+    -sdk iphonesimulator11.1 \
     -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.0' \
     -destination 'platform=iOS Simulator,name=iPhone 8,OS=11.0' \
 | xcpretty

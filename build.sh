@@ -1,12 +1,14 @@
 #!/bin/sh
 
+instruments -s devices
+
 set -o pipefail &&
 time xcodebuild clean test \
     -project LayoutTest.xcodeproj \
     -scheme LayoutTest \
-    -sdk iphonesimulator10.0 \
-    -destination 'platform=iOS Simulator,name=iPhone 6,OS=9.3' \
-    -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.0' \
+    -sdk iphonesimulator11.2 \
+    -destination 'platform=iOS Simulator,name=iPhone 6,OS=11.2' \
+    -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2' \
 | xcpretty
 
 # Disabling tests on 8.4 for now, because they seem to fail because of simulator problems

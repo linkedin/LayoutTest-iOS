@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'LayoutTestBase'
-  spec.version          = '3.0.2'
+  spec.version          = '4.0.0'
   spec.license          = { :type => 'Apache License, Version 2.0' }
   spec.homepage         = 'https://linkedin.github.io/LayoutTest-iOS'
   spec.authors          = 'LinkedIn'

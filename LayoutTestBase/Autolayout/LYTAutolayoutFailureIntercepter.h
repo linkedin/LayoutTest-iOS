@@ -29,7 +29,7 @@ NS_SWIFT_NAME(AutolayoutFailureIntercepter)
  
  Calling this method multiple times will cause the block to be reset.
  */
-+ (void)interceptAutolayoutFailuresWithBlock:(void(^)())block;
++ (void)interceptAutolayoutFailuresWithBlock:(void(^)(void))block;
 
 /**
  Stops intercepting autolayout failures and nils out the current block (releasing it from memory).

@@ -8,7 +8,7 @@ Pod::Spec.new do |spec|
   spec.source           = { :git => 'https://github.com/linkedin/LayoutTest-iOS.git', :tag => spec.version }
   spec.platform         = :ios, '7.0'
   spec.default_subspecs = 'TestCase'
-  spec.dependency         'LayoutTestBase', '4.0.0'
+  spec.dependency         'LayoutTestBase', '4.0.1'
 
   spec.subspec 'Swift' do |sp|
     sp.dependency 'LayoutTestBase/Core'

@@ -2,6 +2,8 @@
 
 This library enables you to write unit tests which test the layout of a view in multiple configurations. It tests the view with different data combinations and different view sizes. The library works in both Objective-C and Swift.
 
+To learn how to use this library, there is a LinkedIn Learning course you can access completely for free authored by [Kyle Sherman](http://github.com/drumnkyle/). You can access it [here](https://www.linkedin.com/learning/learning-layouttest-for-ios-development). It will teach you how to use LayoutTest and all of its features by video tutorial.
+
 ## Motivation
 
 When creating views, apps often have conditional logic which depends on the data used to setup the view. LayoutTest provides an easy way to define a data spec (a dictionary) which is then used to generate many different combinations of data. The library then uses this data to layout your view multiple times. For example, this is a small portion of the tests ran in our sample app:

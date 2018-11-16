@@ -66,19 +66,19 @@ static BOOL swizzledAutolayout = false;
     // This will either turn on or turn off the feature
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-    Method original = class_getInstanceMethod(objc_getClass(CStringISEngineClassName), @selector(handleUnsatisfiableRowWithHead:body:usingInfeasibilityHandlingBehavior:mutuallyExclusiveConstraints:));
+    Method original = class_getInstanceMethod(objc_getClass(CStringISEngineClassName), @selector(handleUnsatisfiableRow:usingInfeasibilityHandlingBehavior:prospectiveRowHead:mutuallyExclusiveConstraints:));
 #pragma clang diagnostic pop
 
-    Method swizzled = class_getInstanceMethod(self, @selector(swizzle_handleUnsatisfiableRowWithHead:body:usingInfeasibilityHandlingBehavior:mutuallyExclusiveConstraints:));
+    Method swizzled = class_getInstanceMethod(self, @selector(swizzle_handleUnsatisfiableRow:usingInfeasibilityHandlingBehavior:prospectiveRowHead:mutuallyExclusiveConstraints:));
     method_exchangeImplementations(original, swizzled);
 }
 
-- (id)swizzle_handleUnsatisfiableRowWithHead:(void *)head body:(void *)body usingInfeasibilityHandlingBehavior:(void *)behavior mutuallyExclusiveConstraints:(void *)constraints {
+- (id)swizzle_handleUnsatisfiableRow:(void *)row usingInfeasibilityHandlingBehavior:(void *)behavior prospectiveRowHead:(void *)prospectiveRowHead mutuallyExclusiveConstraints:(void *)constraints {
     savedBlock();
 
     // After running our block, we call the original implementation
     // This looks like an infinite loop, but it isn't because we switched the implementations. So now, this goes to the original method.
-    return [self swizzle_handleUnsatisfiableRowWithHead:head body:body usingInfeasibilityHandlingBehavior:behavior mutuallyExclusiveConstraints:constraints];
+    return [self swizzle_handleUnsatisfiableRow:row usingInfeasibilityHandlingBehavior:behavior prospectiveRowHead:prospectiveRowHead mutuallyExclusiveConstraints:constraints];
 }
 
 @end

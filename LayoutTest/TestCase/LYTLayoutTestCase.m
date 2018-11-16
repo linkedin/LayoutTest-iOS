@@ -74,8 +74,10 @@ NS_ASSUME_NONNULL_BEGIN
                                                        // We must run this first to give the user a chance to add to viewsAllowingOverlap
                                                        validation(view, data, context);
 
-                                                       if (self.maxNumberOfCombinations != nil && numberOfCombinationsExecuted > self.maxNumberOfCombinations.integerValue) {
-                                                           [self failTest:@"Max number of combinations exceeded" view:view];
+                                                       if (self.maxNumberOfCombinations != nil &&
+                                                           numberOfCombinationsExecuted > self.maxNumberOfCombinations.integerValue) {
+                                                           NSString *errorMessage = [NSString stringWithFormat:@"Max number of layout combinations (%ld) exceeded.", self.maxNumberOfCombinations.integerValue];
+                                                           [self failTest:errorMessage view:view];
                                                        }
                                                        
                                                        // Now, let's run our tests

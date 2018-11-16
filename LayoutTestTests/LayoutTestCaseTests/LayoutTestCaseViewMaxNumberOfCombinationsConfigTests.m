@@ -15,10 +15,17 @@
 @interface LayoutTestCaseViewMaxNumberOfCombinationsConfigTests : LYTLayoutTestCase <LYTViewProvider>
 
 @property (nonatomic) NSInteger testFailures;
+@property (nonatomic, strong) NSString *lastTestFailureMessage;
 
 @end
 
 @implementation LayoutTestCaseViewMaxNumberOfCombinationsConfigTests
+
+- (void)setUp {
+    [super setUp];
+    self.testFailures = 0;
+    self.lastTestFailureMessage = nil;
+}
 
 - (void)testThatTestDoesNotFailIfMaxNumberOfCombinationsNilBeforeRunningTests {
     self.maxNumberOfCombinations = nil;
@@ -80,8 +87,17 @@
     XCTAssertEqual(self.testFailures, 4);
 }
 
+- (void)testThatTestFailureMessageIndicatesMaxNumberOfCombinations {
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) {
+        self.maxNumberOfCombinations = @(5);
+    }];
+
+    XCTAssertEqualObjects(self.lastTestFailureMessage, @"Max number of layout combinations (5) exceeded.");
+}
+
 - (void)failTest:(NSString *)errorMessage view:(UIView *)view {
     self.testFailures++;
+    self.lastTestFailureMessage = errorMessage;
 }
 
 #pragma mark - LYTViewProvider

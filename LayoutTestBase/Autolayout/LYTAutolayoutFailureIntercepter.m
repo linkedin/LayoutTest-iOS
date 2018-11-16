@@ -47,8 +47,7 @@ static BOOL swizzledAutolayout = false;
     if (!swizzledAutolayout) {
         swizzledAutolayout = YES;
 
-        [self swizzleAutolayoutMethodForPreXcode10];
-        [self swizzleAutolayoutMethodForXcode10];
+        [self swizzleAutolayoutMethod];
     }
 }
 
@@ -58,32 +57,11 @@ static BOOL swizzledAutolayout = false;
     if (swizzledAutolayout) {
         swizzledAutolayout = NO;
 
-        [self swizzleAutolayoutMethodForPreXcode10];
-        [self swizzleAutolayoutMethodForXcode10];
+        [self swizzleAutolayoutMethod];
     }
 }
 
-+ (void)swizzleAutolayoutMethodForPreXcode10 {
-    // Here we switch the implementations of our method and the actual method
-    // This will either turn on or turn off the feature
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-    Method original = class_getInstanceMethod(objc_getClass(CStringISEngineClassName), @selector(handleUnsatisfiableRowWithHead:body:usingInfeasibilityHandlingBehavior:mutuallyExclusiveConstraints:));
-#pragma clang diagnostic pop
-
-    Method swizzled = class_getInstanceMethod(self, @selector(swizzle_handleUnsatisfiableRowWithHead:body:usingInfeasibilityHandlingBehavior:mutuallyExclusiveConstraints:));
-    method_exchangeImplementations(original, swizzled);
-}
-
-- (id)swizzle_handleUnsatisfiableRowWithHead:(void *)head body:(void *)body usingInfeasibilityHandlingBehavior:(void *)behavior mutuallyExclusiveConstraints:(void *)constraints {
-    savedBlock();
-
-    // After running our block, we call the original implementation
-    // This looks like an infinite loop, but it isn't because we switched the implementations. So now, this goes to the original method.
-    return [self swizzle_handleUnsatisfiableRowWithHead:head body:body usingInfeasibilityHandlingBehavior:behavior mutuallyExclusiveConstraints:constraints];
-}
-
-+ (void)swizzleAutolayoutMethodForXcode10 {
++ (void)swizzleAutolayoutMethod {
     // Here we switch the implementations of our method and the actual method
     // This will either turn on or turn off the feature
 #pragma clang diagnostic push

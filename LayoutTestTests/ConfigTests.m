@@ -24,6 +24,7 @@
 }
 
 - (void)testConfigEditsLayoutTest {
+    [LYTConfig sharedInstance].maxNumberOfCombinations = @(10);
     [LYTConfig sharedInstance].viewOverlapTestsEnabled = NO;
     [LYTConfig sharedInstance].viewWithinSuperviewTestsEnabled = NO;
     [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled = NO;
@@ -34,7 +35,9 @@
     [LYTConfig sharedInstance].viewClassesRequiringAccessibilityLabels = [NSSet set];
 
     LYTLayoutTestCase *testCase = [[LYTLayoutTestCase alloc] init];
+
     [testCase setUp];
+    XCTAssertEqual(testCase.maxNumberOfCombinations, @(10));
     XCTAssertEqual(testCase.viewOverlapTestsEnabled, [LYTConfig sharedInstance].viewOverlapTestsEnabled);
     XCTAssertEqual(testCase.viewWithinSuperviewTestsEnabled, [LYTConfig sharedInstance].viewWithinSuperviewTestsEnabled);
     XCTAssertEqual(testCase.ambiguousAutolayoutTestsEnabled, [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled);
@@ -59,6 +62,7 @@
 }
 
 - (void)testResetDefaultsResetsToExpectedValues {
+    [LYTConfig sharedInstance].maxNumberOfCombinations = @(100);
     [LYTConfig sharedInstance].viewOverlapTestsEnabled = NO;
     [LYTConfig sharedInstance].viewWithinSuperviewTestsEnabled = NO;
     [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled = NO;
@@ -71,7 +75,8 @@
     [LYTConfig sharedInstance].snapshotsToSavePerMethod = 100;
     
     [[LYTConfig sharedInstance] resetDefaults];
-    
+
+    XCTAssertNil([LYTConfig sharedInstance].maxNumberOfCombinations);
     XCTAssertEqual(YES, [LYTConfig sharedInstance].viewOverlapTestsEnabled);
     XCTAssertEqual(YES, [LYTConfig sharedInstance].viewWithinSuperviewTestsEnabled);
     XCTAssertEqual(YES, [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled);

@@ -30,6 +30,7 @@ NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod = -1;
 }
 
 - (void)resetDefaults {
+    self.maxNumberOfCombinations = nil;
     self.viewSizesToTest = nil;
     self.viewOverlapTestsEnabled = YES;
     self.viewWithinSuperviewTestsEnabled = YES;

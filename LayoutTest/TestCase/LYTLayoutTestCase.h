@@ -115,6 +115,15 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Config
 
 /**
+ If set, when running a LYTLayoutTestCase, it will fail the test if there are more combinations than this value.
+
+ You can also globally set this as a default in LYTConfig.
+
+ Default: nil
+ */
+@property (nonatomic, nullable) NSNumber *maxNumberOfCombinations;
+
+/**
  If on, when running a LYTLayoutTestCase, it will automatically check to make sure subviews don't overlap.
 
  You can also globally set this as a default in LYTConfig.

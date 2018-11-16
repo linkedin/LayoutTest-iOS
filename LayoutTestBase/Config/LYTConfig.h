@@ -16,6 +16,13 @@ NS_SWIFT_NAME(Config)
 @interface LYTConfig : NSObject
 
 /**
+ If set, when running a LYTLayoutTestCase, it will fail the test if there are more combinations than this value.
+
+ Default: nil
+ */
+@property (nonatomic, nullable) NSNumber *maxNumberOfCombinations;
+
+/**
  An NSArray of LYTViewSizes. If a test does not specify any view sizes with sizesForView in the LYTViewProvider it will instead use these sizes.
  */
 @property (nonatomic, strong, nullable) NSArray *viewSizesToTest;

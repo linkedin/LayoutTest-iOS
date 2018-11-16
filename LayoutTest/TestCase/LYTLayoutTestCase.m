@@ -59,6 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
         }];
     }
 
+    __block NSInteger numberOfCombinationsExecuted = 0;
+    
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:viewProvider
                                                  limitResults:limitResults
                                                    validation:^(id view, NSDictionary *data, id _Nullable context) {
@@ -67,8 +69,16 @@ NS_ASSUME_NONNULL_BEGIN
                                                        self.viewUnderTest = view;
                                                        self.dataForViewUnderTest = data;
 
+                                                       numberOfCombinationsExecuted++;
+
                                                        // We must run this first to give the user a chance to add to viewsAllowingOverlap
                                                        validation(view, data, context);
+
+                                                       if (self.maxNumberOfCombinations != nil &&
+                                                           numberOfCombinationsExecuted > self.maxNumberOfCombinations.integerValue) {
+                                                           NSString *errorMessage = [NSString stringWithFormat:@"Max number of layout combinations (%ld) exceeded.", self.maxNumberOfCombinations.integerValue];
+                                                           [self failTest:errorMessage view:view];
+                                                       }
                                                        
                                                        // Now, let's run our tests
                                                        [self runBasicRecursiveViewTests:view];
@@ -76,6 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
                                                        // Now, let's reset these for the next run
                                                        self.viewsAllowingOverlap = [NSMutableSet set];
                                                        self.viewsAllowingAccessibilityErrors = [NSMutableSet set];
+
                                                    }];
 }
 
@@ -86,6 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
 
     // Config
 
+    self.maxNumberOfCombinations = [LYTConfig sharedInstance].maxNumberOfCombinations;
     self.viewOverlapTestsEnabled = [LYTConfig sharedInstance].viewOverlapTestsEnabled;
     self.viewWithinSuperviewTestsEnabled = [LYTConfig sharedInstance].viewWithinSuperviewTestsEnabled;
     self.ambiguousAutolayoutTestsEnabled = [LYTConfig sharedInstance].ambiguousAutolayoutTestsEnabled;

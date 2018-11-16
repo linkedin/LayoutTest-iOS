@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		49E33B02219F3F15009398FA /* LayoutTestCaseViewMaxNumberOfCombinationsConfigTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49E33B01219F3F14009398FA /* LayoutTestCaseViewMaxNumberOfCombinationsConfigTests.m */; };
 		5667F66B1C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = 5667F6691C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h */; };
 		5667F66C1C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 5667F66A1C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m */; };
 		5667F66F1C6600FA0042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5667F66D1C6600FA0042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m */; };
@@ -101,6 +102,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		49E33B01219F3F14009398FA /* LayoutTestCaseViewMaxNumberOfCombinationsConfigTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LayoutTestCaseViewMaxNumberOfCombinationsConfigTests.m; sourceTree = "<group>"; };
 		5667F6691C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LYTLayoutFailingTestSnapshotRecorder.h; sourceTree = "<group>"; };
 		5667F66A1C65FCE50042C3BB /* LYTLayoutFailingTestSnapshotRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTLayoutFailingTestSnapshotRecorder.m; sourceTree = "<group>"; };
 		5667F66D1C6600FA0042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LYTLayoutFailingTestSnapshotRecorderTests.m; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				614FE6AE1C03F05E00BB9EE6 /* LayoutTestCaseOverlapTests.m */,
 				614FE6AF1C03F05E00BB9EE6 /* LayoutTestCaseWithinSuperviewTests.m */,
 				61CACFB51C1A560000369461 /* LayoutTestCaseViewSizesTests.m */,
+				49E33B01219F3F14009398FA /* LayoutTestCaseViewMaxNumberOfCombinationsConfigTests.m */,
 				61CACFB71C1A592000369461 /* LayoutTestCaseViewSizesConfigTests.m */,
 				C56317F01C6373FE00A8E8BA /* LayoutTestCaseMultipleDataOverlapTests.m */,
 				C59A16441C6A2C20002AC07C /* LayoutReportSnapshotLocationsTests.m */,
@@ -658,6 +661,7 @@
 				614FE6B91C03F05E00BB9EE6 /* LayoutTestCaseAmbiguousTests.m in Sources */,
 				614FE6B51C03F05E00BB9EE6 /* DataValuesTests.m in Sources */,
 				614FE6B31C03F05E00BB9EE6 /* AutolayoutFailureInterceptorTests.m in Sources */,
+				49E33B02219F3F15009398FA /* LayoutTestCaseViewMaxNumberOfCombinationsConfigTests.m in Sources */,
 				C59A16451C6A2C20002AC07C /* LayoutReportSnapshotLocationsTests.m in Sources */,
 				5667F66F1C6600FA0042C3BB /* LYTLayoutFailingTestSnapshotRecorderTests.m in Sources */,
 				614FE6B81C03F05E00BB9EE6 /* LayoutTestCaseAccessibilityControlTests.m in Sources */,

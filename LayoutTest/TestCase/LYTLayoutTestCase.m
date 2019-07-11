@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
-                            validation:(void(^)(id, NSDictionary *, id _Nullable))validation {
+                            validation:(NS_NOESCAPE void(^)(id, NSDictionary *, id _Nullable))validation {
     [self runLayoutTestsWithViewProvider:viewProvider
                             limitResults:LYTTesterLimitResultsNone
                               validation:validation];
@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
                           limitResults:(LYTTesterLimitResults)limitResults
-                            validation:(void(^)(id view, NSDictionary *data, id _Nullable context))validation {
+                            validation:(NS_NOESCAPE void(^)(id view, NSDictionary *data, id _Nullable context))validation {
 
     // It's too early to do this in setUp because they may override this property in setUp. So, let's do it here. It's ok if we call this multiple times per test. We'll just clean up in tearDown.
     if (self.interceptsAutolayoutErrors) {
@@ -263,7 +263,7 @@ NS_ASSUME_NONNULL_BEGIN
     return NO;
 }
 
-+ (UIView *)firstSuperviewWithAccessibilityLabel:(UIView *)view {
++ (nullable UIView *)firstSuperviewWithAccessibilityLabel:(UIView *)view {
     if (view.superview == nil) {
         return nil;
     } else if (view.superview.accessibilityLabel != nil) {

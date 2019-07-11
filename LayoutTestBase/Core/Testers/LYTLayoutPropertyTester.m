@@ -25,13 +25,13 @@
 
 #pragma mark - Public
 
-+ (void)runPropertyTestsWithViewProvider:(Class)viewProvider validation:(void(^)(id view, NSDictionary *data, id context))validation {
++ (void)runPropertyTestsWithViewProvider:(Class)viewProvider validation:(NS_NOESCAPE void(^)(id view, NSDictionary *data, id context))validation {
     [self runPropertyTestsWithViewProvider:viewProvider
                                   limitResults:LYTTesterLimitResultsNone
                                     validation:validation];
 }
 
-+ (void)runPropertyTestsWithViewProvider:(Class)viewProvider limitResults:(LYTTesterLimitResults)limitResults validation:(void(^)(id view, NSDictionary *data, id context))validation {
++ (void)runPropertyTestsWithViewProvider:(Class)viewProvider limitResults:(LYTTesterLimitResults)limitResults validation:(NS_NOESCAPE void(^)(id view, NSDictionary *data, id context))validation {
     NSAssert([viewProvider conformsToProtocol:@protocol(LYTViewProvider)], @"You must pass in a class which conforms to LYTViewProvider");
     NSAssert(validation, @"You must pass in a validation block");
 

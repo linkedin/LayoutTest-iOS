@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)lyt_assertNoSubviewsOverlap:(void(^)(NSString *error, UIView *view1, UIView *view2))errorBlock {
+- (void)lyt_assertNoSubviewsOverlap:(NS_NOESCAPE void(^)(NSString *error, UIView *view1, UIView *view2))errorBlock {
     NSInteger subviewsCount = [self.subviews count];
 
     CGFloat epsilon = [LYTConfig sharedInstance].cgFloatEpsilon;
@@ -77,25 +77,25 @@ NS_ASSUME_NONNULL_BEGIN
     }
 }
 
-- (void)lyt_recursivelyAssertViewWithinSuperViewBounds:(void(^)(NSString *error, UIView *view))errorBlock {
+- (void)lyt_recursivelyAssertViewWithinSuperViewBounds:(NS_NOESCAPE void(^)(NSString *error, UIView *view))errorBlock {
     [self lyt_recursivelyTraverseViewHierarchy:^(UIView *subview) {
         [subview lyt_assertViewWithinSuperViewBounds:errorBlock];
     }];
 }
 
-- (void)lyt_recursivelyAssertNoSubviewsOverlap:(void(^)(NSString *error, UIView *view1, UIView *view2))errorBlock {
+- (void)lyt_recursivelyAssertNoSubviewsOverlap:(NS_NOESCAPE void(^)(NSString *error, UIView *view1, UIView *view2))errorBlock {
     [self lyt_recursivelyTraverseViewHierarchy:^(UIView *subview) {
         [subview lyt_assertNoSubviewsOverlap:errorBlock];
     }];
 }
 
-- (void)lyt_recursivelyTraverseViewHierarchy:(void(^)(UIView *))subviewBlock {
+- (void)lyt_recursivelyTraverseViewHierarchy:(NS_NOESCAPE void(^)(UIView *))subviewBlock {
     [self lyt_recursivelyTraverseViewHierarchyWithStop:^(UIView *subview, BOOL *stopBranch) {
         subviewBlock(subview);
     }];
 }
 
-- (void)lyt_recursivelyTraverseViewHierarchyWithStop:(void(^)(UIView *subview, BOOL *stopBranch))subviewBlock {
+- (void)lyt_recursivelyTraverseViewHierarchyWithStop:(NS_NOESCAPE void(^)(UIView *subview, BOOL *stopBranch))subviewBlock {
     BOOL stopRecursing = NO;
     subviewBlock(self, &stopRecursing);
 

@@ -39,7 +39,7 @@ NS_SWIFT_NAME(LayoutPropertyTester)
  \param validation Block to validate the view given the data. The data here will not contain any LYTDataValues subclasses and both the view and data
  will never be nil. Here you should assert on the properties of the view. If you set a context in your viewForData: method, it will be passed back here.
  */
-+ (void)runPropertyTestsWithViewProvider:(Class)viewProvider validation:(__attribute__((noescape)) void(^)(id view, NSDictionary *data, _Nullable id context))validation;
++ (void)runPropertyTestsWithViewProvider:(Class)viewProvider validation:(NS_NOESCAPE void(^)(id view, NSDictionary *data, _Nullable id context))validation;
 
 /**
  Runs a suite of tests on a given viewProvider. This is the main method to be used for your unit tests.
@@ -52,7 +52,7 @@ NS_SWIFT_NAME(LayoutPropertyTester)
  \param limitResults Use this parameter to run less combinations. This is useful if you're running into performance problems. See LYTTesterLimitResults 
  docs for more info.
  */
-+ (void)runPropertyTestsWithViewProvider:(Class)viewProvider limitResults:(LYTTesterLimitResults)limitResults validation:(__attribute__((noescape)) void(^)(id view, NSDictionary *data, id _Nullable context))validation;
++ (void)runPropertyTestsWithViewProvider:(Class)viewProvider limitResults:(LYTTesterLimitResults)limitResults validation:(NS_NOESCAPE void(^)(id view, NSDictionary *data, id _Nullable context))validation;
 
 @end
 

@@ -68,7 +68,7 @@ NS_ASSUME_NONNULL_BEGIN
  it will be passed back here.
  */
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
-                            validation:(__attribute__((noescape)) void(^)(id view, NSDictionary *data, id _Nullable context))validation;
+                            validation:(NS_NOESCAPE void(^)(id view, NSDictionary *data, id _Nullable context))validation;
 
 /**
  This is the main method that runs your tests. You pass in a class that conforms to LYTViewProvider and it will run multiple combinations 
@@ -97,7 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)runLayoutTestsWithViewProvider:(Class)viewProvider
                           limitResults:(LYTTesterLimitResults)limitResults
-                            validation:(__attribute__((noescape)) void(^)(id view, NSDictionary *data, id _Nullable context))validation;
+                            validation:(NS_NOESCAPE void(^)(id view, NSDictionary *data, id _Nullable context))validation;
 
 /**
  This method recusively adds all of the subviews of a view to viewsAllowingOverlap. It does NOT add the view you pass in. This is useful if a 

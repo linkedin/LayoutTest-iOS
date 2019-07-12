@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
 
                                                        if (self.maxNumberOfCombinations != nil &&
                                                            numberOfCombinationsExecuted > self.maxNumberOfCombinations.integerValue) {
-                                                           NSString *errorMessage = [NSString stringWithFormat:@"Max number of layout combinations (%ld) exceeded.", self.maxNumberOfCombinations.integerValue];
+                                                           NSString *errorMessage = [NSString stringWithFormat:@"Max number of layout combinations (%ld) exceeded.", self.maxNumberOfCombinations.longValue];
                                                            [self failTest:errorMessage view:view];
                                                        }
                                                        

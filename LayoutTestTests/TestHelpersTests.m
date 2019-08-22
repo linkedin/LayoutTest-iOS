@@ -47,10 +47,10 @@
 
 - (void)testNoErrorsByDefault {
     __block NSInteger numberOfErrors = 0;
-    void(^block)(NSString *error, UIView *view1, UIView *view2) = ^void(NSString *error, UIView *view1, UIView *view2) {
+    void(^block)(NSString *error, UIView *view1, UIView *view2) = ^void(__unused NSString *error, __unused UIView *view1, __unused UIView *view2) {
         numberOfErrors++;
     };
-    void(^block2)(NSString *error, UIView *view1) = ^void(NSString *error, UIView *view1) {
+    void(^block2)(NSString *error, UIView *view1) = ^void(__unused NSString *error, __unused UIView *view1) {
         numberOfErrors++;
     };
 
@@ -66,14 +66,14 @@
     self.subview.lyt_top = -1;
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
     XCTAssertEqual(numberOfErrors, 1);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
@@ -84,14 +84,14 @@
     self.subview.lyt_left = -1;
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
     XCTAssertEqual(numberOfErrors, 1);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
@@ -102,14 +102,14 @@
     self.subview.lyt_left = 1;
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
     XCTAssertEqual(numberOfErrors, 1);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
@@ -120,14 +120,14 @@
     self.subview.lyt_top = 1;
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
     XCTAssertEqual(numberOfErrors, 1);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
@@ -138,14 +138,14 @@
     self.subview.lyt_top = -0.0000001;
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
     XCTAssertEqual(numberOfErrors, 0);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
@@ -156,14 +156,14 @@
     self.subview.lyt_left = -0.0000001;
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
     XCTAssertEqual(numberOfErrors, 0);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
@@ -174,14 +174,14 @@
     self.subview.lyt_left = 0.0000001;
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
     XCTAssertEqual(numberOfErrors, 0);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
@@ -192,14 +192,14 @@
     self.subview.lyt_top = 0.0000001;
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
     XCTAssertEqual(numberOfErrors, 0);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(NSString *error, UIView *view) {
+    [self.superview lyt_recursivelyAssertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
         numberOfErrors++;
     }];
 
@@ -213,7 +213,7 @@
     self.innerSubview2.frame = CGRectMake(5, 0, 5, 6);
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -222,7 +222,7 @@
     XCTAssertEqual(numberOfErrors, 1);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -236,7 +236,7 @@
     self.innerSubview2.frame = CGRectMake(0, 0, 6, 6);
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         // View one is always on the left
         XCTAssertEqual(view2, self.innerSubview1);
         XCTAssertEqual(view1, self.innerSubview2);
@@ -246,7 +246,7 @@
     XCTAssertEqual(numberOfErrors, 1);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         // View one is always on the left
         XCTAssertEqual(view2, self.innerSubview1);
         XCTAssertEqual(view1, self.innerSubview2);
@@ -261,7 +261,7 @@
     self.innerSubview2.frame = CGRectMake(5, 5, 5, 5);
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -270,7 +270,7 @@
     XCTAssertEqual(numberOfErrors, 1);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -284,7 +284,7 @@
     self.innerSubview2.frame = CGRectMake(0, 5, 6, 5);
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view2, self.innerSubview1);
         XCTAssertEqual(view1, self.innerSubview2);
         numberOfErrors++;
@@ -293,7 +293,7 @@
     XCTAssertEqual(numberOfErrors, 1);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         // View one is always on the left
         XCTAssertEqual(view2, self.innerSubview1);
         XCTAssertEqual(view1, self.innerSubview2);
@@ -308,7 +308,7 @@
     self.innerSubview2.frame = CGRectMake(5, 0, 5, 5.0000001);
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -317,7 +317,7 @@
     XCTAssertEqual(numberOfErrors, 0);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -331,7 +331,7 @@
     self.innerSubview2.frame = CGRectMake(0, 0, 5.0000001, 5.0000001);
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         // View one is always on the left
         XCTAssertEqual(view2, self.innerSubview1);
         XCTAssertEqual(view1, self.innerSubview2);
@@ -341,7 +341,7 @@
     XCTAssertEqual(numberOfErrors, 0);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -355,7 +355,7 @@
     self.innerSubview2.frame = CGRectMake(5, 5, 5, 5);
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -364,7 +364,7 @@
     XCTAssertEqual(numberOfErrors, 0);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -378,7 +378,7 @@
     self.innerSubview2.frame = CGRectMake(0, 5, 5.0000001, 5);
 
     __block NSInteger numberOfErrors = 0;
-    [self.subview lyt_assertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view2, self.innerSubview1);
         XCTAssertEqual(view1, self.innerSubview2);
         numberOfErrors++;
@@ -387,7 +387,7 @@
     XCTAssertEqual(numberOfErrors, 0);
 
     numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -403,7 +403,7 @@
     self.innerSubview2.frame = CGRectMake(5, 0, 5, 6);
 
     __block NSInteger numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -417,7 +417,7 @@
     self.innerSubview2.frame = CGRectMake(0, 0, 6, 6);
 
     __block NSInteger numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         // View one is always on the left
         XCTAssertEqual(view2, self.innerSubview1);
         XCTAssertEqual(view1, self.innerSubview2);
@@ -432,7 +432,7 @@
     self.innerSubview2.frame = CGRectMake(5, 5, 5, 5);
 
     __block NSInteger numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view1, self.innerSubview1);
         XCTAssertEqual(view2, self.innerSubview2);
         numberOfErrors++;
@@ -446,7 +446,7 @@
     self.innerSubview2.frame = CGRectMake(0, 5, 6, 5);
 
     __block NSInteger numberOfErrors = 0;
-    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(NSString *error, UIView *view1, UIView *view2) {
+    [self.superview lyt_recursivelyAssertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
         XCTAssertEqual(view2, self.innerSubview1);
         XCTAssertEqual(view1, self.innerSubview2);
         numberOfErrors++;

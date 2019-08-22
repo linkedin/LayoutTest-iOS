@@ -72,9 +72,8 @@
         for (LYTValuesIterator *iterator in iterators) {
             // Remember, start at 1
             for (iterator.index = 1; iterator.index < iterator.dataValues.numberOfValues; iterator.index++) {
-                NSDictionary *actualData = [self dataFromDataWithIterators:dataWithIterators];
                 reuseView = [self validateViewWithProviderProtocol:viewProvider
-                                                              data:actualData
+                                                              data:[self dataFromDataWithIterators:dataWithIterators]
                                                          reuseView:reuseView
                                                       limitResults:limitResults
                                                              block:validation];
@@ -86,13 +85,10 @@
         // Run every combination of values in the LYTDataValues subclasses
         // This is O(m^n) where n is number of LYTDataValues subclasses and m is the length of the LYTDataValues subclasses
         [self runCombinationOfIterators:iterators
-                           withCallback:^(NSArray *iterators) {
-
-                               NSDictionary *actualData = [self dataFromDataWithIterators:dataWithIterators];
-
+                           withCallback:^(__unused NSArray *itr) {
                                // Finally, let's run the test
                                reuseView = [self validateViewWithProviderProtocol:viewProvider
-                                                                             data:actualData
+                                                                             data:[self dataFromDataWithIterators:dataWithIterators]
                                                                         reuseView:reuseView
                                                                      limitResults:limitResults
                                                                             block:validation];

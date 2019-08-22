@@ -36,7 +36,7 @@
 
 - (void)testNoOptions {
     __block NSInteger timesCalled = 0;
-    [self runLayoutTestsWithViewProvider:[self class] validation:^(UIView * view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] validation:^(UIView * view, __unused NSDictionary * data, __unused id context) {
         switch (timesCalled) {
             case 0:
                 XCTAssertEqual(view.lyt_width, 100);
@@ -61,7 +61,9 @@
 
 - (void)testNoViewSizes {
     __block NSInteger timesCalled = 0;
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNoSizes validation:^(UIView * view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNoSizes validation:^(UIView * view,
+                                                                                                             __unused NSDictionary * data,
+                                                                                                             __unused id context) {
         XCTAssertEqual(view.lyt_width, 300);
         XCTAssertEqual(view.lyt_height, 300);
         timesCalled++;
@@ -78,11 +80,14 @@
              };
 }
 
-+ (UIView *)viewForData:(NSDictionary *)data reuseView:(UIView *)view size:(LYTViewSize *)size context:(id *)context {
++ (UIView *)viewForData:(__unused NSDictionary *)data
+              reuseView:(UIView *)view
+                   size:(__unused LYTViewSize *)size
+                context:(__unused id __autoreleasing *)context {
     return view ?: [UnitTestViews viewWithNoProblems];
 }
 
-+ (void)adjustViewSize:(UIView *)view data:(NSDictionary *)data size:(LYTViewSize *)size context:(id)context {
++ (void)adjustViewSize:(UIView *)view data:(__unused NSDictionary *)data size:(LYTViewSize *)size context:(__unused id)context {
     if (!size.width) {
         view.lyt_width = 300;
     }

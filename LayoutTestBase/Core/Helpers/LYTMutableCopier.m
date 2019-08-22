@@ -14,12 +14,13 @@
 - (NSDictionary *)lyt_mutableDeepCopyWithReplaceBlock:(id(^)(id object))replacementBlock {
     NSMutableDictionary *newDictionary = [NSMutableDictionary dictionary];
     for (id key in [self allKeys]) {
-        id object = [self objectForKey:key];
+        id object = self[key];
         // Default is just to set it to the same value
         id newObject = object;
-        if ([object isKindOfClass:[NSDictionary class]] ||
-            [object isKindOfClass:[NSArray class]]) {
-            newObject = [object lyt_mutableDeepCopyWithReplaceBlock:replacementBlock];
+        if ([object isKindOfClass:[NSArray class]]) {
+            newObject = [(NSArray *)object lyt_mutableDeepCopyWithReplaceBlock:replacementBlock];
+        } else if ([object isKindOfClass:[NSDictionary class]]) {
+            newObject = [(NSDictionary *)object lyt_mutableDeepCopyWithReplaceBlock:replacementBlock];
         } else if (replacementBlock) {
             newObject = replacementBlock(object);
         }
@@ -40,9 +41,10 @@
     for (id object in self) {
         // Default is just to set it to the same value
         id newObject = object;
-        if ([object isKindOfClass:[NSDictionary class]] ||
-            [object isKindOfClass:[NSArray class]]) {
-            newObject = [object lyt_mutableDeepCopyWithReplaceBlock:replacementBlock];
+        if ([object isKindOfClass:[NSArray class]]) {
+            newObject = [(NSArray *)object lyt_mutableDeepCopyWithReplaceBlock:replacementBlock];
+        } else if ([object isKindOfClass:[NSDictionary class]]) {
+            newObject = [(NSDictionary *)object lyt_mutableDeepCopyWithReplaceBlock:replacementBlock];
         } else if (replacementBlock) {
             newObject = replacementBlock(object);
         }

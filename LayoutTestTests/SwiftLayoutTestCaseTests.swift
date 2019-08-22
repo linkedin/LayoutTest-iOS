@@ -19,7 +19,7 @@ class SwiftTest: LayoutTestCase {
     let polynomialCombinations = (IntegerValues().numberOfValues() * 2 - 1)
 
     func testBasicTests() {
-        var timesCalled = 0
+        var timesCalled: UInt = 0
         runLayoutTests { (view: TestView, data, context) in
             XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
@@ -28,7 +28,7 @@ class SwiftTest: LayoutTestCase {
     }
 
     func testWithLimitResultsCombinations() {
-        var timesCalled = 0
+        var timesCalled: UInt = 0
         runLayoutTests(limitResults: .limitDataCombinations) { (view: TestView, data, context) in
             XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
@@ -37,7 +37,7 @@ class SwiftTest: LayoutTestCase {
     }
 
     func testWithLimitResultsSizes() {
-        var timesCalled = 0
+        var timesCalled: UInt = 0
         runLayoutTests(limitResults: .noSizes) { (view: TestView, data, context) in
             XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
@@ -46,7 +46,7 @@ class SwiftTest: LayoutTestCase {
     }
 
     func testWithLimitResultsCombinationsAndSizes() {
-        var timesCalled = 0
+        var timesCalled: UInt = 0
         runLayoutTests(limitResults: [.limitDataCombinations, .noSizes]) { (view: TestView, data, context) in
             XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
@@ -55,7 +55,7 @@ class SwiftTest: LayoutTestCase {
     }
 
     func testBasicMoreGenericTests() {
-        var timesCalled = 0
+        var timesCalled: UInt = 0
         runLayoutTests(withViewProvider: NonViewCreationProtocol.self) { (view: TestView, data, context) in
             XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
@@ -64,7 +64,7 @@ class SwiftTest: LayoutTestCase {
     }
 
     func testBasicMoreGenericTestsWithLimitResultsCombinations() {
-        var timesCalled = 0
+        var timesCalled: UInt = 0
         runLayoutTests(withViewProvider: NonViewCreationProtocol.self, limitResults: .limitDataCombinations) { (view: TestView, data, context) in
             XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
@@ -73,7 +73,7 @@ class SwiftTest: LayoutTestCase {
     }
 
     func testBasicMoreGenericTestsWithLimitResultsSizes() {
-        var timesCalled = 0
+        var timesCalled: UInt = 0
         runLayoutTests(withViewProvider: NonViewCreationProtocol.self, limitResults: .noSizes) { (view: TestView, data, context) in
             XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;
@@ -82,7 +82,7 @@ class SwiftTest: LayoutTestCase {
     }
 
     func testBasicMoreGenericTestsWithLimitResultsCombinationsAndSizes() {
-        var timesCalled = 0
+        var timesCalled: UInt = 0
         runLayoutTests(withViewProvider: NonViewCreationProtocol.self, limitResults: [.limitDataCombinations, .noSizes]) { (view: TestView, data, context) in
             XCTAssertTrue(IntegerValues().values.contains { $0 as? Int == context as? Int })
             timesCalled += 1;

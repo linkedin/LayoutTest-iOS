@@ -18,7 +18,11 @@ void SimpleLog(NSString *format, ...) {
     NSString *formattedString = [[NSString alloc] initWithFormat:format
                                                        arguments:args];
     va_end(args);
-    [[NSFileHandle fileHandleWithStandardOutput] writeData:[formattedString dataUsingEncoding:NSNEXTSTEPStringEncoding]];
+
+    NSData *data = [formattedString dataUsingEncoding:NSNEXTSTEPStringEncoding];
+    if (data) {
+        [[NSFileHandle fileHandleWithStandardOutput] writeData:data];
+    }
 }
 
 @interface NSString (XMLEscape)
@@ -74,11 +78,11 @@ void SimpleLog(NSString *format, ...) {
     return self;
 }
 
-- (void)testSuiteWillStart:(XCTestSuite *)testSuite {
+- (void)testSuiteWillStart:(__unused XCTestSuite *)testSuite {
     self.failedTestsDuringTestSuite = 0;
 }
 
-- (void)testSuiteDidFinish:(XCTestSuite *)testSuite {
+- (void)testSuiteDidFinish:(__unused XCTestSuite *)testSuite {
     if (self.failedTestsDuringTestSuite > 0 && self.failingTestsSnapshotFolders.count > 0) {
         SimpleLog(@"\nSnapshots of failing tests can be found in:\n");
         for (NSString *path in self.failingTestsSnapshotFolders) {
@@ -88,7 +92,7 @@ void SimpleLog(NSString *format, ...) {
     }
 }
 
-- (void)testBundleDidFinish:(NSBundle *)testBundle {
+- (void)testBundleDidFinish:(__unused NSBundle *)testBundle {
     // NOTE: For some reason, this never gets called
     // See #28 on Github
     if (self.failingTestsSnapshotFolders.count > 0) {
@@ -101,7 +105,7 @@ void SimpleLog(NSString *format, ...) {
     }
 }
 
-- (void)testCase:(XCTestCase *)testCase didFailWithDescription:(NSString *)description inFile:(nullable NSString *)filePath atLine:(NSUInteger)lineNumber {
+- (void)testCase:(XCTestCase *)testCase didFailWithDescription:(__unused NSString *)description inFile:(nullable __unused NSString *)filePath atLine:(__unused NSUInteger)lineNumber {
     if ([testCase isKindOfClass:[LYTLayoutTestCase class]]) {
         NSString *pathForSnapshots = [self commonRootPathForInvocationClass:[testCase class]];
         pathForSnapshots = [pathForSnapshots stringByAppendingString:@"/index.html"];
@@ -133,7 +137,7 @@ void SimpleLog(NSString *format, ...) {
 - (BOOL)shouldSaveImageOfViewAtPath:(NSString *)imagePath withInvocation:(NSInvocation *)invocation {
     if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
         return NO;
-    } else if ([LYTConfig sharedInstance].snapshotsToSavePerMethod != LYTSaveUnlimitedSnapshotsPerMethod &&
+    } else if ([LYTConfig sharedInstance].snapshotsToSavePerMethod >= 0 &&
                [self numberOfImagesSavedForInvocation:invocation] >= [LYTConfig sharedInstance].snapshotsToSavePerMethod) {
         return NO;
     }
@@ -166,7 +170,10 @@ void SimpleLog(NSString *format, ...) {
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
     
     [fileHandler seekToEndOfFile];
-    [fileHandler writeData:[footer dataUsingEncoding:NSUTF8StringEncoding]];
+    NSData *footerData = [footer dataUsingEncoding:NSUTF8StringEncoding];
+    if (footerData) {
+        [fileHandler writeData:footerData];
+    }
     [fileHandler closeFile];
 }
 
@@ -197,7 +204,10 @@ void SimpleLog(NSString *format, ...) {
     NSFileHandle *fileHandler = [NSFileHandle fileHandleForUpdatingAtPath:filePath];
     
     [fileHandler seekToEndOfFile];
-    [fileHandler writeData:[errorHTML dataUsingEncoding:NSUTF8StringEncoding]];
+    NSData *errorData = [errorHTML dataUsingEncoding:NSUTF8StringEncoding];
+    if (errorData) {
+        [fileHandler writeData:errorData];
+    }
     [fileHandler closeFile];
 }
 

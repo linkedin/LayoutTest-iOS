@@ -29,13 +29,17 @@
 
 - (void)testThatTestDoesNotFailIfMaxNumberOfCombinationsNilBeforeRunningTests {
     self.maxNumberOfCombinations = nil;
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) { }];
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(__unused UIView * view,
+                                                                                                          __unused NSDictionary * data,
+                                                                                                          __unused id context) { }];
 
     XCTAssertEqual(self.testFailures, 0);
 }
 
 - (void)testThatTestDoesNotFailIfMaxNumberOfCombinationsSetToNilInValidationBlock {
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(__unused UIView * view,
+                                                                                                          __unused NSDictionary * data,
+                                                                                                          __unused id context) {
         self.maxNumberOfCombinations = nil;
     }];
 
@@ -44,13 +48,17 @@
 
 - (void)testThatTestFailsIfMaxNumberOfCombinationsSetToZeroBeforeRunningTests {
     self.maxNumberOfCombinations = @(0);
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) { }];
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(__unused UIView * view,
+                                                                                                          __unused NSDictionary * data,
+                                                                                                          __unused id context) { }];
 
     XCTAssertEqual(self.testFailures, 9);
 }
 
 - (void)testThatTestFailsIfMaxNumberOfCombinationsSetToZeroInValidationBlock {
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(__unused UIView * view,
+                                                                                                          __unused NSDictionary * data,
+                                                                                                          __unused id context) {
         self.maxNumberOfCombinations = @(0);
     }];
 
@@ -59,13 +67,17 @@
 
 - (void)testThatTestFailsIfNumberOfCombinationsExceedesMaxNumberOfCombinationsSetBeforeRunningTests {
     self.maxNumberOfCombinations = @(1);
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) { }];
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(__unused UIView * view,
+                                                                                                          __unused NSDictionary * data,
+                                                                                                          __unused id context) { }];
 
     XCTAssertEqual(self.testFailures, 8);
 }
 
 - (void)testThatTestFailsIfNumberOfCombinationsExceedesMaxNumberOfCombinationsSetInValidationBlock {
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(__unused UIView * view,
+                                                                                                          __unused NSDictionary * data,
+                                                                                                          __unused id context) {
         self.maxNumberOfCombinations = @(3);
     }];
 
@@ -74,13 +86,17 @@
 
 - (void)testThatTestSucceedsIfNumberOfCombinationsDoesNotExceedesMaxNumberOfCombinationsSetBeforeRunningTests {
     self.maxNumberOfCombinations = @(4);
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) { }];
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(__unused UIView * view,
+                                                                                                          __unused NSDictionary * data,
+                                                                                                          __unused id context) { }];
 
     XCTAssertEqual(self.testFailures, 5);
 }
 
 - (void)testThatTestSucceedsIfNumberOfCombinationsDoesNotExceedesMaxNumberOfCombinationsSetInValidationBlock {
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(__unused UIView * view,
+                                                                                                          __unused NSDictionary * data,
+                                                                                                          __unused id context) {
         self.maxNumberOfCombinations = @(5);
     }];
 
@@ -88,14 +104,16 @@
 }
 
 - (void)testThatTestFailureMessageIndicatesMaxNumberOfCombinations {
-    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(UIView * view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] limitResults:LYTTesterLimitResultsNone validation:^(__unused UIView * view,
+                                                                                                          __unused NSDictionary * data,
+                                                                                                          __unused id context) {
         self.maxNumberOfCombinations = @(5);
     }];
 
     XCTAssertEqualObjects(self.lastTestFailureMessage, @"Max number of layout combinations (5) exceeded.");
 }
 
-- (void)failTest:(NSString *)errorMessage view:(UIView *)view {
+- (void)failTest:(NSString *)errorMessage view:(__unused UIView *)view {
     self.testFailures++;
     self.lastTestFailureMessage = errorMessage;
 }
@@ -108,7 +126,10 @@
              };
 }
 
-+ (UIView *)viewForData:(NSDictionary *)data reuseView:(UIView *)view size:(LYTViewSize *)size context:(id *)context {
++ (UIView *)viewForData:(__unused NSDictionary *)data
+              reuseView:(UIView *)view
+                   size:(__unused LYTViewSize *)size
+                context:(__unused id __autoreleasing *)context {
     return view ?: [UnitTestViews viewWithNoProblems];
 }
 

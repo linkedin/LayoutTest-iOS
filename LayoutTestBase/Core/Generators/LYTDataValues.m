@@ -60,12 +60,12 @@
     return self;
 }
 
-- (NSInteger)numberOfValues {
+- (NSUInteger)numberOfValues {
     return [self.filteredValues count];
 }
 
-- (id)valueAtIndex:(NSInteger)index {
-    return [self.filteredValues objectAtIndex:index];
+- (id)valueAtIndex:(NSUInteger)index {
+    return self.filteredValues[index];
 }
 
 @end

@@ -61,12 +61,12 @@ NS_SWIFT_NAME(DataValues)
 /**
  Returns the number of values this object contains.
  */
-- (NSInteger)numberOfValues;
+- (NSUInteger)numberOfValues;
 
 /**
  Returns a value for a certain index. If out of range, it will throw and exception.
  */
-- (id)valueAtIndex:(NSInteger)index;
+- (id)valueAtIndex:(NSUInteger)index;
 
 @end
 

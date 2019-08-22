@@ -22,7 +22,7 @@
 
 - (void)testFails {
     __block NSInteger timesCalled = 0;
-    [self runLayoutTestsWithViewProvider:[self class] validation:^(UIView * view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] validation:^(__unused UIView * view, __unused NSDictionary * data, __unused id context) {
         timesCalled++;
     }];
 
@@ -34,7 +34,7 @@
     self.interceptsAutolayoutErrors = NO;
 
     __block NSInteger timesCalled = 0;
-    [self runLayoutTestsWithViewProvider:[self class] validation:^(UIView *view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] validation:^(__unused UIView *view, __unused NSDictionary * data, __unused id context) {
         timesCalled++;
     }];
 
@@ -46,7 +46,7 @@
 
 #pragma mark - Override
 
-- (void)failTest:(NSString *)errorMessage view:(UIView *)view {
+- (void)failTest:(__unused NSString *)errorMessage view:(__unused UIView *)view {
     self.testFailures++;
 }
 
@@ -62,8 +62,11 @@
              };
 }
 
-+ (UIView *)viewForData:(NSDictionary *)data reuseView:(UIView *)view size:(LYTViewSize *)size context:(id *)context {
-    return data[@"view"];
++ (UIView *)viewForData:(NSDictionary *)data
+              reuseView:(__unused UIView *)view
+                   size:(__unused LYTViewSize *)size
+                context:(__unused id __autoreleasing *)context {
+    return (UIView *)data[@"view"];
 }
 
 @end

@@ -20,7 +20,7 @@
 
 - (void)testRequiredGeneratorTrue {
     LYTDataValues *generator = [[LYTStringValues alloc] initWithRequired:YES];
-    for (int i = 0; i<[generator numberOfValues]; i++) {
+    for (NSUInteger i = 0; i<[generator numberOfValues]; i++) {
         XCTAssertNotEqualObjects([NSNull null], [generator valueAtIndex:i]);
     }
 }
@@ -28,7 +28,7 @@
 - (void)testRequiredGeneratorFalse {
     LYTDataValues *generator = [[LYTStringValues alloc] initWithRequired:NO];
     BOOL foundNull = false;
-    for (int i = 0; i<[generator numberOfValues]; i++) {
+    for (NSUInteger i = 0; i<[generator numberOfValues]; i++) {
         foundNull = foundNull || [[generator valueAtIndex:i] isEqual:[NSNull null]];
     }
     XCTAssertTrue(foundNull);

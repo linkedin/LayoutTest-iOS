@@ -23,7 +23,7 @@
 - (void)testPassWithoutOverlappingTextAndFailWithOverlappingText {
     __block NSInteger timesCalled = 0;
     
-    [self runLayoutTestsWithViewProvider:[self class] validation:^(UIView * view, NSDictionary * data, id context) {
+    [self runLayoutTestsWithViewProvider:[self class] validation:^(__unused UIView * view, __unused NSDictionary * data, __unused id context) {
         timesCalled++;
     }];
     
@@ -33,7 +33,7 @@
 
 #pragma mark - Override
 
-- (void)failTest:(NSString *)errorMessage view:(UIView *)view {
+- (void)failTest:(__unused NSString *)errorMessage view:(__unused UIView *)view {
     self.testFailures++;
 }
 
@@ -46,7 +46,10 @@
              };
 }
 
-+ (UIView *)viewForData:(NSDictionary *)data reuseView:(UIView *)view size:(LYTViewSize *)size context:(id *)context {
++ (UIView *)viewForData:(NSDictionary *)data
+              reuseView:(UIView *)view
+                   size:(__unused LYTViewSize *)size
+                context:(__unused id __autoreleasing *)context {
     UIViewWithLabel *reuseView = (UIViewWithLabel *)(view ? view : data[@"view"]);
     reuseView.label.text = data[@"text"];
     return reuseView;

@@ -12,7 +12,7 @@
 
 @implementation LYTConfig
 
-NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod = -1;
+NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod = (NSUInteger)-1;
 
 + (instancetype)sharedInstance {
     static LYTConfig *sharedInstance = nil;

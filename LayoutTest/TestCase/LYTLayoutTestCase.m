@@ -226,7 +226,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Testing
 
-- (void)failTest:(NSString *)errorMessage view:(nullable UIView *)view {
+- (void)failTest:(NSString *)errorMessage view:(nullable __unused UIView *)view {
     XCTFail(@"%@", errorMessage);
 }
 
@@ -264,12 +264,13 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (nullable UIView *)firstSuperviewWithAccessibilityLabel:(UIView *)view {
-    if (view.superview == nil) {
+    UIView *superview = view.superview;
+    if (superview == nil) {
         return nil;
-    } else if (view.superview.accessibilityLabel != nil) {
-        return view.superview;
+    } else if (superview.accessibilityLabel != nil) {
+        return superview;
     } else {
-        return [self firstSuperviewWithAccessibilityLabel:view.superview];
+        return [self firstSuperviewWithAccessibilityLabel:superview];
     }
 }
 

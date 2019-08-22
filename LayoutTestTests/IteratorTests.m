@@ -46,12 +46,12 @@ static NSDictionary *testData = nil;
                  };
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
+                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
                                                            numberTimesCalled++;
-                                                           XCTAssertEqualObjects([testData objectForKey:@"key"], [data objectForKey:@"key"], @"Object should match test data");
-                                                           XCTAssertEqualObjects([[testData objectForKey:@"array"] objectAtIndex:0], [[data objectForKey:@"array"] objectAtIndex:0], @"Object should match test data");
-                                                           XCTAssertEqualObjects([[testData objectForKey:@"array"] objectAtIndex:1], [[data objectForKey:@"array"] objectAtIndex:1], @"Object should match test data");
-                                                           XCTAssertEqualObjects([[testData objectForKey:@"dict"] objectForKey:@"dk1"], [[data objectForKey:@"dict"] objectForKey:@"dk1"], @"Object should match test data");
+                                                           XCTAssertEqualObjects(testData[@"key"], data[@"key"], @"Object should match test data");
+                                                           XCTAssertEqualObjects(testData[@"array"][0], data[@"array"][0], @"Object should match test data");
+                                                           XCTAssertEqualObjects(testData[@"array"][1], data[@"array"][1], @"Object should match test data");
+                                                           XCTAssertEqualObjects(testData[@"dict"][@"dk1"], data[@"dict"][@"dk1"], @"Object should match test data");
                                                        }];
     XCTAssertEqual(numberTimesCalled, 1, @"Should have been called exactly once");
 
@@ -64,12 +64,12 @@ static NSDictionary *testData = nil;
     numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
                                                      limitResults:LYTTesterLimitResultsLimitDataCombinations
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
+                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
                                                            numberTimesCalled++;
-                                                           XCTAssertEqualObjects([testData objectForKey:@"key"], [data objectForKey:@"key"], @"Object should match test data");
-                                                           XCTAssertEqualObjects([[testData objectForKey:@"array"] objectAtIndex:0], [[data objectForKey:@"array"] objectAtIndex:0], @"Object should match test data");
-                                                           XCTAssertEqualObjects([[testData objectForKey:@"array"] objectAtIndex:1], [[data objectForKey:@"array"] objectAtIndex:1], @"Object should match test data");
-                                                           XCTAssertEqualObjects([[testData objectForKey:@"dict"] objectForKey:@"dk1"], [[data objectForKey:@"dict"] objectForKey:@"dk1"], @"Object should match test data");
+                                                           XCTAssertEqualObjects(testData[@"key"], data[@"key"], @"Object should match test data");
+                                                           XCTAssertEqualObjects(testData[@"array"][0], data[@"array"][0], @"Object should match test data");
+                                                           XCTAssertEqualObjects(testData[@"array"][1], data[@"array"][1], @"Object should match test data");
+                                                           XCTAssertEqualObjects(testData[@"dict"][@"dk1"], data[@"dict"][@"dk1"], @"Object should match test data");
                                                        }];
     XCTAssertEqual(numberTimesCalled, 1, @"Should have been called exactly once");
 }
@@ -80,8 +80,8 @@ static NSDictionary *testData = nil;
                  };
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
-                                                           XCTAssertEqualObjects([data objectForKey:@"gen"], @(numberTimesCalled), @"Generator should iterate through all values in order");
+                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
+                                                           XCTAssertEqualObjects(data[@"gen"], @(numberTimesCalled), @"Generator should iterate through all values in order");
                                                            numberTimesCalled++;
                                                        }];
     XCTAssertEqual(numberTimesCalled, 4, @"Should have been called 4 times");
@@ -94,8 +94,8 @@ static NSDictionary *testData = nil;
     numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
                                                      limitResults:LYTTesterLimitResultsLimitDataCombinations
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
-                                                           XCTAssertEqualObjects([data objectForKey:@"gen"], @(numberTimesCalled), @"Generator should iterate through all values in order");
+                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
+                                                           XCTAssertEqualObjects(data[@"gen"], @(numberTimesCalled), @"Generator should iterate through all values in order");
                                                            numberTimesCalled++;
                                                        }];
     XCTAssertEqual(numberTimesCalled, 4, @"Should have been called 4 times");
@@ -108,12 +108,11 @@ static NSDictionary *testData = nil;
                  };
 
     __block NSUInteger numberTimesCalled = 0;
-    NSMutableSet *context = [NSMutableSet set];
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
+                                                       validation:^(__unused UIView *view, NSDictionary *data, id context) {
                                                            NSArray *dataValues = @[
-                                                                                   [data objectForKey:@"gen1"],
-                                                                                   [data objectForKey:@"gen2"]
+                                                                                   (SampleGenerator *)data[@"gen1"],
+                                                                                   (SampleGenerator *)data[@"gen2"]
                                                                                    ];
                                                            [self validateGenerators:dataValues context:context];
                                                            numberTimesCalled++;
@@ -127,13 +126,12 @@ static NSDictionary *testData = nil;
                  };
 
     numberTimesCalled = 0;
-    context = [NSMutableSet set];
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
                                                      limitResults:LYTTesterLimitResultsLimitDataCombinations
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
+                                                       validation:^(__unused UIView *view, NSDictionary *data, id context) {
                                                            NSArray *dataValues = @[
-                                                                                   [data objectForKey:@"gen1"],
-                                                                                   [data objectForKey:@"gen2"]
+                                                                                   (SampleGenerator *)data[@"gen1"],
+                                                                                   (SampleGenerator *)data[@"gen2"]
                                                                                    ];
                                                            [self validateGenerators:dataValues context:context];
                                                            numberTimesCalled++;
@@ -149,14 +147,13 @@ static NSDictionary *testData = nil;
                  };
 
     __block NSUInteger numberTimesCalled = 0;
-    NSMutableSet *context = [NSMutableSet set];
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
+                                                       validation:^(__unused UIView *view, NSDictionary *data, id context) {
 
                                                            NSArray *dataValues = @[
-                                                                                   [data objectForKey:@"gen1"],
-                                                                                   [[data objectForKey:@"array"] objectAtIndex:1],
-                                                                                   [[data objectForKey:@"dict"] objectForKey:@"test"]
+                                                                                   (SampleGenerator *)data[@"gen1"],
+                                                                                   (SampleGenerator *)data[@"array"][1],
+                                                                                   (SampleGenerator *)data[@"dict"][@"test"]
                                                                                    ];
                                                            [self validateGenerators:dataValues context:context];
                                                            numberTimesCalled++;
@@ -171,15 +168,14 @@ static NSDictionary *testData = nil;
                  };
 
     numberTimesCalled = 0;
-    context = [NSMutableSet set];
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
                                                      limitResults:LYTTesterLimitResultsLimitDataCombinations
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
+                                                       validation:^(__unused UIView *view, NSDictionary *data, id context) {
 
                                                            NSArray *dataValues = @[
-                                                                                   [data objectForKey:@"gen1"],
-                                                                                   [[data objectForKey:@"array"] objectAtIndex:1],
-                                                                                   [[data objectForKey:@"dict"] objectForKey:@"test"]
+                                                                                   (SampleGenerator *)data[@"gen1"],
+                                                                                   (SampleGenerator *)data[@"array"][1],
+                                                                                   (SampleGenerator *)data[@"dict"][@"test"]
                                                                                    ];
                                                            [self validateGenerators:dataValues context:context];
                                                            numberTimesCalled++;
@@ -206,7 +202,10 @@ static NSDictionary *testData = nil;
     return testData;
 }
 
-+ (UIView *)viewForData:(NSDictionary *)data reuseView:(UIView *)view size:(LYTViewSize *)size context:(id *)context {
++ (UIView *)viewForData:(__unused NSDictionary *)data
+              reuseView:(__unused UIView *)view
+                   size:(__unused LYTViewSize *)size
+                context:(__unused id __autoreleasing *)context {
     return nil;
 }
 

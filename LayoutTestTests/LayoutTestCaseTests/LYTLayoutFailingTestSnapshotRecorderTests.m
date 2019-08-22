@@ -73,7 +73,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewSavesImageToDisk {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     [self.recorder startNewLogForClass:self.class];
     NSDictionary *data = @{@"key" : @"value"};
     [self.recorder saveImageOfView:testView withData:data fromInvocation:self.invocation failureDescription:@""];
@@ -84,7 +84,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewWhenViewHasWidthOfZeroDoesNotSaveImage {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 0, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 100)];
     [self.recorder startNewLogForClass:self.class];
     
     [self.recorder saveImageOfView:testView withData:nil fromInvocation:self.invocation failureDescription:@""];
@@ -94,7 +94,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewWhenViewHasHeightOfZeroDoesNotSaveImage {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 0}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 0)];
     [self.recorder startNewLogForClass:self.class];
     
     [self.recorder saveImageOfView:testView withData:nil fromInvocation:self.invocation failureDescription:@""];
@@ -104,7 +104,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewWhenDataHasSpecialCharactersImageSavedWithExpectedName {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     NSDictionary *data = @{@"key" : @"漢語 ♔ 🚂 ☎ Here are some more special characters ˆ™£‡‹·Ú‹˜ƒª•"};
     [self.recorder startNewLogForClass:self.class];
     
@@ -116,7 +116,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewWhenDataDescriptionIsOverTwoHunderedCharactersImageSavedWithExpectedName {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     NSDictionary *data = @{@"key" : [self threeHunderedAndSixtyFourCharacterString]};
     [self.recorder startNewLogForClass:self.class];
     
@@ -128,7 +128,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewWhenCalledTwiceWithSlightlyDifferentDataSavesTwoImages {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     NSDictionary *data = @{@"key" : @"value"};
     NSDictionary *data1 = @{@"key" : @"value1"};
     [self.recorder startNewLogForClass:self.class];
@@ -150,7 +150,7 @@
 }
 
 - (void)testSaveImageWhenConfigHasNumberOfImagesToSaveSetToZeroDoesNotSaveImage {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     [LYTConfig sharedInstance].snapshotsToSavePerMethod = 0;
@@ -162,7 +162,7 @@
 }
 
 - (void)testSaveImageWhenConfigHasNumberOfImagesToSaveSetToFourOnlySavesFourImages {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     [LYTConfig sharedInstance].snapshotsToSavePerMethod = 4;
@@ -187,7 +187,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewAddsFailureDescriptionImageAndDataToIndexFile {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     
@@ -207,7 +207,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewWhenViewAndDataAlreadySavedDoesNotReaddFailureDescriptionImageAndDataToIndexFile {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 100, 1000}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 1000)];
     NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     
@@ -228,7 +228,7 @@
 }
 
 - (void)testSaveImageOfCurrentViewWithNilFailureDescriptionAddsBlankDescriptionToIndexFile {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 1000, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1000, 100)];
     NSDictionary *data = @{@"key" : @"value"};
     [self.recorder startNewLogForClass:self.class];
     
@@ -248,7 +248,7 @@
 }
 
 - (void)testBooleanConversionCorrectForHTML {
-    UIView *testView = [[UIView alloc] initWithFrame:(CGRect){0, 0, 1000, 100}];
+    UIView *testView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1000, 100)];
     NSDictionary *data = @{@"key" : @(YES)};
     [self.recorder startNewLogForClass:self.class];
 

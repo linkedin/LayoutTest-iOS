@@ -34,39 +34,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.ViewProviderClass registerClassOnCollectionView:self.collectionView];
+    Class<LYTViewCatalogProvider> viewProviderClass = self.ViewProviderClass;
+    if (!viewProviderClass) {
+        NSAssert(NO, @"No ViewProviderClass set");
+        return;
+    }
+
+    [viewProviderClass registerClassOnCollectionView:self.collectionView];
 
     NSMutableArray *dataArray = [NSMutableArray array];
 
     LYTTesterLimitResults limitResults = LYTTesterLimitResultsNoSizes;
-    if ([(id)self.ViewProviderClass respondsToSelector:@selector(limitResultsForCatalogByAssumingDataValueIndependence)]) {
-        if ([self.ViewProviderClass limitResultsForCatalogByAssumingDataValueIndependence]) {
+    if ([viewProviderClass respondsToSelector:@selector(limitResultsForCatalogByAssumingDataValueIndependence)]) {
+        if ([viewProviderClass limitResultsForCatalogByAssumingDataValueIndependence]) {
             limitResults &= LYTTesterLimitResultsLimitDataCombinations;
         }
     }
-    [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:self.ViewProviderClass
-                                                     limitResults:limitResults
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
-                                                           [dataArray addObject:data];
-                                                       }];
+    [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:viewProviderClass
+                                                 limitResults:limitResults
+                                                   validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
+                                                       [dataArray addObject:data];
+                                                   }];
     self.dataArray = dataArray;
 }
 
 #pragma mark - Table view data source
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return [self.ViewProviderClass sizeForCollectionViewCellForCatalogFromData:self.dataArray[indexPath.row] viewWidth:self.view.frame.size.width];
+- (CGSize)collectionView:(__unused UICollectionView *)collectionView
+                  layout:(__unused UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.ViewProviderClass sizeForCollectionViewCellForCatalogFromData:self.dataArray[(NSUInteger)indexPath.row] viewWidth:self.view.frame.size.width];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
+- (NSInteger)collectionView:(__unused UICollectionView *)collectionView
+     numberOfItemsInSection:(__unused NSInteger)section {
+    return (NSInteger)self.dataArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionViewCell *)collectionView:(__unused UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:[self.ViewProviderClass reuseIdentifier] forIndexPath:indexPath];
 
     id context = nil;
-    cell = (UICollectionViewCell *)[self.ViewProviderClass viewForData:self.dataArray[indexPath.row] reuseView:cell size:nil context:&context];
+    cell = (UICollectionViewCell *)[self.ViewProviderClass viewForData:self.dataArray[(NSUInteger)indexPath.row] reuseView:cell size:nil context:&context];
     
     return cell;
 }

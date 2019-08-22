@@ -44,10 +44,10 @@ static NSDictionary *testData = nil;
                  };
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
-                                                           id object = [data objectForKey:@"null"];
+                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
+                                                           id object = data[@"null"];
                                                            if (numberTimesCalled < 2) {
-                                                               XCTAssertEqual([object integerValue], numberTimesCalled, @"Should be equal");
+                                                               XCTAssertEqual([object unsignedIntegerValue], numberTimesCalled, @"Should be equal");
                                                            } else {
                                                                XCTAssertNil(object, @"Object should be nil");
                                                            }
@@ -63,10 +63,10 @@ static NSDictionary *testData = nil;
                  };
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(UIView *view, NSDictionary *data, id context) {
-                                                           id object = [[data objectForKey:@"array"] objectAtIndex:1];
+                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
+                                                           id object = data[@"array"][1];
                                                            // if it's null, it should be @(2)
-                                                           XCTAssertEqual([object integerValue], numberTimesCalled, @"Should be equal");
+                                                           XCTAssertEqual([object unsignedIntegerValue], numberTimesCalled, @"Should be equal");
                                                            numberTimesCalled++;
                                                        }];
     XCTAssertEqual(numberTimesCalled, 3, @"Should have been called three times");
@@ -91,7 +91,10 @@ static NSDictionary *testData = nil;
     return testData;
 }
 
-+ (UIView *)viewForData:(NSDictionary *)data reuseView:(UIView *)view size:(LYTViewSize *)size context:(id *)context {
++ (UIView *)viewForData:(__unused NSDictionary *)data
+              reuseView:(__unused UIView *)view
+                   size:(__unused LYTViewSize *)size
+                context:(__unused id __autoreleasing *)context {
     return nil;
 }
 

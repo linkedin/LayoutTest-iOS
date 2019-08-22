@@ -40,15 +40,19 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)lyt_assertNoSubviewsOverlap:(NS_NOESCAPE void(^)(NSString *error, UIView *view1, UIView *view2))errorBlock {
-    NSInteger subviewsCount = [self.subviews count];
+    NSUInteger subviewsCount = [self.subviews count];
 
     CGFloat epsilon = [LYTConfig sharedInstance].cgFloatEpsilon;
 
+    if (subviewsCount == 0) {
+        return;
+    }
+
     // Using indexes to remove half of the checks
-    for (NSInteger i = 0; i < subviewsCount - 1; ++i) {
-        UIView *subview1 = [self.subviews objectAtIndex:i];
-        for (NSInteger j = i + 1; j < subviewsCount; ++j) {
-            UIView *subview2 = [self.subviews objectAtIndex:j];
+    for (NSUInteger i = 0; i < subviewsCount - 1; ++i) {
+        UIView *subview1 = self.subviews[i];
+        for (NSUInteger j = i + 1; j < subviewsCount; ++j) {
+            UIView *subview2 = self.subviews[j];
             // The check ensures two views intersect
             // Evading false positives due to computation tolerance
             if (subview1.lyt_bottom > subview2.lyt_top + epsilon &&
@@ -90,7 +94,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)lyt_recursivelyTraverseViewHierarchy:(NS_NOESCAPE void(^)(UIView *))subviewBlock {
-    [self lyt_recursivelyTraverseViewHierarchyWithStop:^(UIView *subview, BOOL *stopBranch) {
+    [self lyt_recursivelyTraverseViewHierarchyWithStop:^(UIView *subview, __unused BOOL *stopBranch) {
         subviewBlock(subview);
     }];
 }

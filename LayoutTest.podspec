@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name             = 'LayoutTest'
-  spec.version          = '5.0.2'
+  spec.version          = '5.0.3'
   spec.license          = { :type => 'Apache License, Version 2.0' }
   spec.homepage         = 'https://linkedin.github.io/LayoutTest-iOS'
   spec.authors          = 'LinkedIn'
@@ -16,18 +16,18 @@ Pod::Spec.new do |spec|
 
   spec.subspec 'TestCase' do |sp|
     sp.source_files = 'LayoutTest/TestCase'
-    sp.dependency 'LayoutTestBase/Autolayout', '5.0.2'
-    sp.dependency 'LayoutTestBase/Catalog', '5.0.2'
-    sp.dependency 'LayoutTestBase/Config', '5.0.2'
-    sp.dependency 'LayoutTestBase/Core', '5.0.2'
-    sp.dependency 'LayoutTestBase/UIViewHelpers', '5.0.2'
+    sp.dependency 'LayoutTestBase/Autolayout', '5.0.3'
+    sp.dependency 'LayoutTestBase/Catalog', '5.0.3'
+    sp.dependency 'LayoutTestBase/Config', '5.0.3'
+    sp.dependency 'LayoutTestBase/Core', '5.0.3'
+    sp.dependency 'LayoutTestBase/UIViewHelpers', '5.0.3'
     sp.framework  = 'XCTest'
   end
 
   spec.subspec 'SwiftSubspec' do |sp|
     sp.source_files = 'LayoutTest/Swift', 'LayoutTest/LayoutTest.h'
     sp.dependency 'LayoutTest/TestCase'
-    sp.dependency 'LayoutTestBase/Swift', '5.0.2'
+    sp.dependency 'LayoutTestBase/Swift', '5.0.3'
   end
 end
 

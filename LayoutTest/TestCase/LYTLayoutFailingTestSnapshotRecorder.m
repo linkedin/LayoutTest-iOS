@@ -137,7 +137,7 @@ void SimpleLog(NSString *format, ...) {
 - (BOOL)shouldSaveImageOfViewAtPath:(NSString *)imagePath withInvocation:(NSInvocation *)invocation {
     if ([[NSFileManager defaultManager] fileExistsAtPath:imagePath]) {
         return NO;
-    } else if ([LYTConfig sharedInstance].snapshotsToSavePerMethod != LYTSaveUnlimitedSnapshotsPerMethod &&
+    } else if ([LYTConfig sharedInstance].snapshotsToSavePerMethod >= 0 &&
                [self numberOfImagesSavedForInvocation:invocation] >= [LYTConfig sharedInstance].snapshotsToSavePerMethod) {
         return NO;
     }

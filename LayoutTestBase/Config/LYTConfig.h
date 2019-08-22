@@ -130,7 +130,7 @@ NS_SWIFT_NAME(Config)
 /**
  Default snapshots to save per method.
  */
-extern NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod;
+extern NSInteger const LYTSaveUnlimitedSnapshotsPerMethod;
 
 /**
  Limits the number of snapshots that will be saved for each method in a LYTLayoutTestCase. If a test has multiple XCTAsserts which can fail for each size/data iteration there is the possiblity that hundreds of snapshots will be produced. Setting this to a value of 0 or greater will limit the number of images saved.
@@ -139,7 +139,7 @@ extern NSUInteger const LYTSaveUnlimitedSnapshotsPerMethod;
  
  Default: SaveUnlimitedSnapshotsPerMethod(-1) (Representing unlimited)
  */
-@property (nonatomic) NSUInteger snapshotsToSavePerMethod;
+@property (nonatomic) NSInteger snapshotsToSavePerMethod;
 
 /**
  Singleton accessor.

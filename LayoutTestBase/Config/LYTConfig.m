@@ -48,7 +48,7 @@ NSInteger const LYTSaveUnlimitedSnapshotsPerMethod = -1;
      UIControl - Subclasses of UIControl should all have accessibility labels.
      */
     self.viewClassesRequiringAccessibilityLabels = [NSSet setWithObjects:[UIControl class], nil];
-    self.cgFloatEpsilon = 1e-5;
+    self.cgFloatEpsilon = 1e-5f;
     self.snapshotsToSavePerMethod = LYTSaveUnlimitedSnapshotsPerMethod;
 }
 

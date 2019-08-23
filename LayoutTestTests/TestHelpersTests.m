@@ -135,7 +135,7 @@
 }
 
 - (void)testWithinSuperviewBoundsUpperEpsilon {
-    self.subview.lyt_top = -0.0000001;
+    self.subview.lyt_top = -0.0000001f;
 
     __block NSInteger numberOfErrors = 0;
     [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
@@ -153,7 +153,7 @@
 }
 
 - (void)testWithinSuperviewBoundsLeftEpsilon {
-    self.subview.lyt_left = -0.0000001;
+    self.subview.lyt_left = -0.0000001f;
 
     __block NSInteger numberOfErrors = 0;
     [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
@@ -171,7 +171,7 @@
 }
 
 - (void)testWithinSuperviewBoundsRightEpsilon {
-    self.subview.lyt_left = 0.0000001;
+    self.subview.lyt_left = 0.0000001f;
 
     __block NSInteger numberOfErrors = 0;
     [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
@@ -189,7 +189,7 @@
 }
 
 - (void)testWithinSuperviewBoundsBottomEpsilon {
-    self.subview.lyt_top = 0.0000001;
+    self.subview.lyt_top = 0.0000001f;
 
     __block NSInteger numberOfErrors = 0;
     [self.subview lyt_assertViewWithinSuperViewBounds:^(__unused NSString *error, __unused UIView *view) {
@@ -304,8 +304,8 @@
 }
 
 - (void)testOverlapTopRightEpsilon {
-    self.innerSubview1.frame = CGRectMake(0, 5, 5.0000001, 5);
-    self.innerSubview2.frame = CGRectMake(5, 0, 5, 5.0000001);
+    self.innerSubview1.frame = CGRectMake(0.0f, 5.0f, 5.0000001f, 5.0f);
+    self.innerSubview2.frame = CGRectMake(5.0f, 0.0f, 5.0f, 5.0000001f);
 
     __block NSInteger numberOfErrors = 0;
     [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
@@ -327,8 +327,8 @@
 }
 
 - (void)testOverlapTopLeftEpsilon {
-    self.innerSubview1.frame = CGRectMake(5, 5, 5, 5);
-    self.innerSubview2.frame = CGRectMake(0, 0, 5.0000001, 5.0000001);
+    self.innerSubview1.frame = CGRectMake(5.0f, 5.0f, 5.0f, 5.0f);
+    self.innerSubview2.frame = CGRectMake(0.0f, 0.0f, 5.0000001f, 5.0000001f);
 
     __block NSInteger numberOfErrors = 0;
     [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {
@@ -351,7 +351,7 @@
 }
 
 - (void)testOverlapBottomRightEpsilon {
-    self.innerSubview1.frame = CGRectMake(0, 0, 5.0000001, 5.0000001);
+    self.innerSubview1.frame = CGRectMake(0, 0, 5.0000001f, 5.0000001f);
     self.innerSubview2.frame = CGRectMake(5, 5, 5, 5);
 
     __block NSInteger numberOfErrors = 0;
@@ -374,8 +374,8 @@
 }
 
 - (void)testOverlapBottomLeftEpsilon {
-    self.innerSubview1.frame = CGRectMake(5, 0, 5, 5.0000001);
-    self.innerSubview2.frame = CGRectMake(0, 5, 5.0000001, 5);
+    self.innerSubview1.frame = CGRectMake(5.0f, 0.0f, 5.0f, 5.0000001f);
+    self.innerSubview2.frame = CGRectMake(0.0f, 5.0f, 5.0000001f, 5.0f);
 
     __block NSInteger numberOfErrors = 0;
     [self.subview lyt_assertNoSubviewsOverlap:^(__unused NSString *error, UIView *view1, UIView *view2) {

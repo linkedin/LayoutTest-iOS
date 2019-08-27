@@ -21,38 +21,38 @@ NS_ASSUME_NONNULL_BEGIN
 
  When setting, it will keep the height and width constant and change frame.origin.y
  */
-@property (nonatomic) CGFloat lyt_top NS_SWIFT_NAME(top);
+@property (nonatomic) CGFloat lyt_top;
 
 /**
  Returns .frame.origin.x
 
  When setting, it will keep the height and width constant and change frame.origin.x
  */
-@property (nonatomic) CGFloat lyt_left NS_SWIFT_NAME(left);
+@property (nonatomic) CGFloat lyt_left;
 
 /**
  Returns .frame.origin.x + .frame.size.width
 
  When setting, it will keep the height and width constant and change frame.origin.x
  */
-@property (nonatomic) CGFloat lyt_right NS_SWIFT_NAME(right);
+@property (nonatomic) CGFloat lyt_right;
 
 /**
  Returns .frame.origin.y + .frame.size.height
 
  When setting, it will keep the height and width constant and change frame.origin.y
  */
-@property (nonatomic) CGFloat lyt_bottom NS_SWIFT_NAME(bottom);
+@property (nonatomic) CGFloat lyt_bottom;
 
 /**
  Returns the width of the view
  */
-@property (nonatomic) CGFloat lyt_width NS_SWIFT_NAME(width);
+@property (nonatomic) CGFloat lyt_width;
 
 /**
  Returns the height of the view
  */
-@property (nonatomic) CGFloat lyt_height NS_SWIFT_NAME(height);
+@property (nonatomic) CGFloat lyt_height;
 
 @end
 

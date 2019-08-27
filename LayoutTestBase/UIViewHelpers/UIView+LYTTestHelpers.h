@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  cell.contentView because it sometimes fails for the contentView in it's
  superview due to some UIKit weirdness.
  */
-- (void)lyt_assertViewWithinSuperViewBounds:(void(^)(NSString *error, UIView *view))errorBlock;
+- (void)lyt_assertViewWithinSuperViewBounds:(void(^)(NSString *error, UIView *view))errorBlock NS_SWIFT_NAME(lyt_assertViewWithinSuperViewBounds(_:));
 
 /**
  Useful helper for writing tests. Ensures recursively that all the subviews of the view are within the bounds of their superviews. If this condition breaks,
@@ -35,14 +35,14 @@ NS_ASSUME_NONNULL_BEGIN
  on cell.contentView because it sometimes fails for the contentView in it's
  superview due to some UIKit weirdness.
  */
-- (void)lyt_recursivelyAssertViewWithinSuperViewBounds:(NS_NOESCAPE void(^)(NSString *error, UIView *view))errorBlock;
+- (void)lyt_recursivelyAssertViewWithinSuperViewBounds:(NS_NOESCAPE void(^)(NSString *error, UIView *view))errorBlock NS_SWIFT_NAME(lyt_recursivelyAssertViewWithinSuperViewBounds(_:));
 
 /**
  Useful helper for writing tests. Ensures that none of the subviews of this view overlap.
  
  When comparing CGFloats, (x > y) if and only if (x > y + epsilon). This epsilon value is defined in LYTConfig.
  */
-- (void)lyt_assertNoSubviewsOverlap:(NS_NOESCAPE void(^)(NSString *error, UIView *view1, UIView *view2))errorBlock;
+- (void)lyt_assertNoSubviewsOverlap:(NS_NOESCAPE void(^)(NSString *error, UIView *view1, UIView *view2))errorBlock NS_SWIFT_NAME(lyt_assertNoSubviewsOverlap(_:));
 
 /**
  Useful helper for writing tests. Ensures that none of the subviews of this view overlap. It calls this recursively on subviews, but does not test all 
@@ -51,19 +51,19 @@ NS_ASSUME_NONNULL_BEGIN
  
  When comparing CGFloats, (x > y) if and only if (x > y + epsilon). This epsilon value is defined in LYTConfig.
  */
-- (void)lyt_recursivelyAssertNoSubviewsOverlap:(NS_NOESCAPE void(^)(NSString *error, UIView *view1, UIView *view2))errorBlock;
+- (void)lyt_recursivelyAssertNoSubviewsOverlap:(NS_NOESCAPE void(^)(NSString *error, UIView *view1, UIView *view2))errorBlock NS_SWIFT_NAME(lyt_recursivelyAssertNoSubviewsOverlap(_:));
 
 /**
  This method first returns the current view, then traverses the view hierarchy.
  */
-- (void)lyt_recursivelyTraverseViewHierarchy:(NS_NOESCAPE void(^)(UIView *subview))subviewBlock;
+- (void)lyt_recursivelyTraverseViewHierarchy:(NS_NOESCAPE void(^)(UIView *subview))subviewBlock NS_SWIFT_NAME(lyt_recursivelyTraverseViewHierarchy(_:));
 
 /**
  This method first returns the current view, then traverses the view hierarchy.
 
  It also provides a stop parameter. If you set this to true, then the method will stop recursing on this branch only.
  */
-- (void)lyt_recursivelyTraverseViewHierarchyWithStop:(NS_NOESCAPE void(^)(UIView *subview, BOOL *stopBranch))subviewBlock;
+- (void)lyt_recursivelyTraverseViewHierarchyWithStop:(NS_NOESCAPE void(^)(UIView *subview, BOOL *stopBranch))subviewBlock NS_SWIFT_NAME(lyt_recursivelyTraverseViewHierarchyWithStop(_:));
 
 @end
 

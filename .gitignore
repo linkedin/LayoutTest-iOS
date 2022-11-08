@@ -13,3 +13,5 @@ xcuserdata
 _build
 .buildinfo
 
+# macos
+.DS_Store

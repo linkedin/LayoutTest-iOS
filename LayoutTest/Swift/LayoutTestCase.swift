@@ -48,10 +48,14 @@ open class LayoutTestCase: LYTLayoutTestCase {
      Here you should assert on the properties of the view. If you set a context in your viewForData: method, it will be passed back here.
     */
     open func runLayoutTests<TestableView: ViewProvider>(limitResults: LYTTesterLimitResults = LYTTesterLimitResults(),
-                             validation: (TestableView, [AnyHashable: Any], Any?) -> Void) where TestableView: UIView {
+                             validation: (TestableView, [AnyHashable: Any], Any?) throws -> Void) where TestableView: UIView {
         self.runLayoutTests(withViewProvider: TestableView.self, limitResults: limitResults) { (view, data, context) in
             if let view = view as? TestableView {
-                validation(view, data, context)
+                do {
+                    try validation(view, data, context)
+                } catch {
+                    XCTFail(String(describing: error))
+                }
             } else {
                 self.failTest("The view wasn't of the expected type. Change your method signature to declare the view in the validation closure " +
                     "of the correct type. Expected: \(TestableView.self) Actual: \(type(of: (view) as AnyObject))", view: view as? UIView)
@@ -88,10 +92,14 @@ open class LayoutTestCase: LYTLayoutTestCase {
      */
     open func runLayoutTests<TestableView: UIView, ViewProviderType: ViewProvider>(withViewProvider viewProvider: ViewProviderType.Type,
                              limitResults: LYTTesterLimitResults = LYTTesterLimitResults(),
-                             validation: (TestableView, [AnyHashable: Any], Any?) -> Void) {
+                             validation: (TestableView, [AnyHashable: Any], Any?) throws -> Void) {
         self.runLayoutTests(withViewProvider: viewProvider, limitResults: limitResults) { (view: Any, data, context) in
             if let view = view as? TestableView {
-                validation(view, data, context)
+                do {
+                    try validation(view, data, context)
+                } catch {
+                    XCTFail(String(describing: error))
+                }
             } else {
                 self.failTest("The view wasn't of the expected type. Change your method signature to declare the view in the validation closure " +
                     "of the correct type. Expected: \(TestableView.self) Actual: \(type(of: view))", view: view as? UIView)

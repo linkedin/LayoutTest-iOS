@@ -16,18 +16,18 @@ Pod::Spec.new do |spec|
 
   spec.subspec 'TestCase' do |sp|
     sp.source_files = 'LayoutTest/TestCase'
-    sp.dependency 'LayoutTestBase/Autolayout', '6.0.1'
-    sp.dependency 'LayoutTestBase/Catalog', '6.0.1'
-    sp.dependency 'LayoutTestBase/Config', '6.0.1'
-    sp.dependency 'LayoutTestBase/Core', '6.0.1'
-    sp.dependency 'LayoutTestBase/UIViewHelpers', '6.0.1'
+    sp.dependency 'LayoutTestBase/Autolayout', '6.0.2'
+    sp.dependency 'LayoutTestBase/Catalog', '6.0.2'
+    sp.dependency 'LayoutTestBase/Config', '6.0.2'
+    sp.dependency 'LayoutTestBase/Core', '6.0.2'
+    sp.dependency 'LayoutTestBase/UIViewHelpers', '6.0.2'
     sp.framework  = 'XCTest'
   end
 
   spec.subspec 'SwiftSubspec' do |sp|
     sp.source_files = 'LayoutTest/Swift', 'LayoutTest/LayoutTest.h'
     sp.dependency 'LayoutTest/TestCase'
-    sp.dependency 'LayoutTestBase/Swift', '6.0.1'
+    sp.dependency 'LayoutTestBase/Swift', '6.0.2'
   end
 end
 

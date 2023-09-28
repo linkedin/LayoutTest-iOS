@@ -11,21 +11,31 @@
 #import <objc/runtime.h>
 
 
-#define NSStringISEngineClassName @"NSISEngine"
-#define CStringISEngineClassName "NSISEngine"
+#define NSStringViewClassName @"UIView"
+#define CStringViewClassName "UIView"
 
 @implementation LYTAutolayoutFailureIntercepter
 
 + (void)interceptAutolayoutFailuresWithBlock:(void(^)(void))block {
-    Class c = NSClassFromString(NSStringISEngineClassName);
-    NSAssert(c != nil, @"This class no longer exists which mean this method no longer works. This means that Apple has changed their implementation of Auto Layout and this code needs to be updated. Please file a bug with this information.");
-    [c interceptAutolayoutFailuresWithBlock:block];
+    Class class = NSClassFromString(NSStringViewClassName);
+    [self validateAutolayoutInterceptionForClass:class];
+    [class interceptAutolayoutFailuresWithBlock:block];
 }
 
 + (void)stopInterceptingAutolayoutFailures {
-    Class c = NSClassFromString(NSStringISEngineClassName);
-    NSAssert(c != nil, @"This class no longer exists which mean this method no longer works. This means that Apple has changed their implementation of Auto Layout and this code needs to be updated. Please file a bug with this information.");
-    [c stopInterceptingAutolayoutFailures];
+    Class class = NSClassFromString(NSStringViewClassName);
+    [self validateAutolayoutInterceptionForClass:class];
+    [class stopInterceptingAutolayoutFailures];
+}
+
++ (void)validateAutolayoutInterceptionForClass:(Class)class {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    if (class && [class instancesRespondToSelector:@selector(engine:willBreakConstraint:dueToMutuallyExclusiveConstraints:)]) {
+        return;
+    }
+#pragma clang diagnostic pop
+    NSAssert(false, @"This class no longer exists or it no longer implements the method we swizzle. This means that Apple has changed their implementation of Auto Layout and this code needs to be updated. Please file a bug with this information.");
 }
 
 @end
@@ -66,19 +76,19 @@ static BOOL swizzledAutolayout = false;
     // This will either turn on or turn off the feature
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-    Method original = class_getInstanceMethod(objc_getClass(CStringISEngineClassName), @selector(handleUnsatisfiableRow:usingInfeasibilityHandlingBehavior:prospectiveRowHead:mutuallyExclusiveConstraints:));
+    Method original = class_getInstanceMethod(objc_getClass(CStringViewClassName), @selector(engine:willBreakConstraint:dueToMutuallyExclusiveConstraints:));
 #pragma clang diagnostic pop
 
-    Method swizzled = class_getInstanceMethod(self, @selector(swizzle_handleUnsatisfiableRow:usingInfeasibilityHandlingBehavior:prospectiveRowHead:mutuallyExclusiveConstraints:));
+    Method swizzled = class_getInstanceMethod(self, @selector(swizzle_engine:willBreakConstraint:dueToMutuallyExclusiveConstraints:));
     method_exchangeImplementations(original, swizzled);
 }
 
-- (id)swizzle_handleUnsatisfiableRow:(void *)row usingInfeasibilityHandlingBehavior:(void *)behavior prospectiveRowHead:(void *)prospectiveRowHead mutuallyExclusiveConstraints:(void *)constraints {
+- (id)swizzle_engine:(void *)engine willBreakConstraint:(void *)constraints dueToMutuallyExclusiveConstraints:(void *)mutuallyExclusiveConstraints {
     savedBlock();
 
     // After running our block, we call the original implementation
     // This looks like an infinite loop, but it isn't because we switched the implementations. So now, this goes to the original method.
-    return [self swizzle_handleUnsatisfiableRow:row usingInfeasibilityHandlingBehavior:behavior prospectiveRowHead:prospectiveRowHead mutuallyExclusiveConstraints:constraints];
+    return [self swizzle_engine:engine willBreakConstraint:constraints dueToMutuallyExclusiveConstraints:mutuallyExclusiveConstraints];
 }
 
 @end

@@ -35,7 +35,7 @@
         return;
     }
 #pragma clang diagnostic pop
-    NSAssert(false, @"This class no longer exists which mean this method no longer works. This means that Apple has changed their implementation of Auto Layout and this code needs to be updated. Please file a bug with this information.");
+    NSAssert(false, @"This class no longer exists or it no longer implements the method we swizzle. This means that Apple has changed their implementation of Auto Layout and this code needs to be updated. Please file a bug with this information.");
 }
 
 @end

@@ -18,6 +18,7 @@ CGFloat const LYTiPhone6Width = 375;
 CGFloat const LYTiPhone6Height = 667;
 CGFloat const LYTiPhone6PlusWidth = 414;
 CGFloat const LYTiPhone6PlusHeight = 736;
+CGFloat const LYTiPhone15Width = 390;
 CGFloat const LYTiPhone15Height = 844;
 CGFloat const LYTiPhone15PlusWidth = 430;
 CGFloat const LYTiPhone15PlusHeight = 932;

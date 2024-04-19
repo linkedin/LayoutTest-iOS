@@ -84,11 +84,11 @@
 + (NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     // Return 2 views to test. One with a button with accessibility, the other a button without accessibility.
     return @{
-             @"view": [[LYTDataValues alloc] initWithValues:@[
-                                                                  [UnitTestViews viewWithButtonAndAccessibility],
-                                                                  [UnitTestViews viewWithButtonAndNoAccessibility]
-                                                                  ]]
-             };
+        @"view": [[LYTDataValues alloc] initWithValues:@[
+            [UnitTestViews viewWithButtonAndAccessibility],
+            [UnitTestViews viewWithButtonAndNoAccessibility]
+        ]]
+    };
 }
 
 + (UIView *)viewForData:(NSDictionary *)data

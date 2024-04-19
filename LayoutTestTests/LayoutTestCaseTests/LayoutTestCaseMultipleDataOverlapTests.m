@@ -41,9 +41,9 @@
 
 + (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     return @{
-             @"view": [UnitTestViews viewWithLongStringOverlappingLabel],
-             @"text": [[LYTStringValues alloc] initWithValues:@[@"X", @"A long string that will cause overlap"]]
-             };
+        @"view": [UnitTestViews viewWithLongStringOverlappingLabel],
+        @"text": [[LYTStringValues alloc] initWithValues:@[@"X", @"A long string that will cause overlap"]]
+    };
 }
 
 + (UIView *)viewForData:(NSDictionary *)data

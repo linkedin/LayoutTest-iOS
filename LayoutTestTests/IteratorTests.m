@@ -40,146 +40,146 @@ static NSDictionary *testData = nil;
 - (void)testNoGenerators
 {
     testData = @{
-                 @"array": @[@"a1", @"a2"],
-                 @"dict": @{@"dk1": @"dv1"},
-                 @"key": @"value"
-                 };
+        @"array": @[@"a1", @"a2"],
+        @"dict": @{@"dk1": @"dv1"},
+        @"key": @"value"
+    };
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
-                                                           numberTimesCalled++;
-                                                           XCTAssertEqualObjects(testData[@"key"], data[@"key"], @"Object should match test data");
-                                                           XCTAssertEqualObjects(testData[@"array"][0], data[@"array"][0], @"Object should match test data");
-                                                           XCTAssertEqualObjects(testData[@"array"][1], data[@"array"][1], @"Object should match test data");
-                                                           XCTAssertEqualObjects(testData[@"dict"][@"dk1"], data[@"dict"][@"dk1"], @"Object should match test data");
-                                                       }];
+                                                   validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
+        numberTimesCalled++;
+        XCTAssertEqualObjects(testData[@"key"], data[@"key"], @"Object should match test data");
+        XCTAssertEqualObjects(testData[@"array"][0], data[@"array"][0], @"Object should match test data");
+        XCTAssertEqualObjects(testData[@"array"][1], data[@"array"][1], @"Object should match test data");
+        XCTAssertEqualObjects(testData[@"dict"][@"dk1"], data[@"dict"][@"dk1"], @"Object should match test data");
+    }];
     XCTAssertEqual(numberTimesCalled, 1, @"Should have been called exactly once");
 
     // Limited
     testData = @{
-                 @"array": @[@"a1", @"a2"],
-                 @"dict": @{@"dk1": @"dv1"},
-                 @"key": @"value"
-                 };
+        @"array": @[@"a1", @"a2"],
+        @"dict": @{@"dk1": @"dv1"},
+        @"key": @"value"
+    };
     numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                     limitResults:LYTTesterLimitResultsLimitDataCombinations
-                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
-                                                           numberTimesCalled++;
-                                                           XCTAssertEqualObjects(testData[@"key"], data[@"key"], @"Object should match test data");
-                                                           XCTAssertEqualObjects(testData[@"array"][0], data[@"array"][0], @"Object should match test data");
-                                                           XCTAssertEqualObjects(testData[@"array"][1], data[@"array"][1], @"Object should match test data");
-                                                           XCTAssertEqualObjects(testData[@"dict"][@"dk1"], data[@"dict"][@"dk1"], @"Object should match test data");
-                                                       }];
+                                                 limitResults:LYTTesterLimitResultsLimitDataCombinations
+                                                   validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
+        numberTimesCalled++;
+        XCTAssertEqualObjects(testData[@"key"], data[@"key"], @"Object should match test data");
+        XCTAssertEqualObjects(testData[@"array"][0], data[@"array"][0], @"Object should match test data");
+        XCTAssertEqualObjects(testData[@"array"][1], data[@"array"][1], @"Object should match test data");
+        XCTAssertEqualObjects(testData[@"dict"][@"dk1"], data[@"dict"][@"dk1"], @"Object should match test data");
+    }];
     XCTAssertEqual(numberTimesCalled, 1, @"Should have been called exactly once");
 }
 
 - (void)testOneGeneratorSimple {
     testData = @{
-                 @"gen": [[SampleGenerator alloc] init]
-                 };
+        @"gen": [[SampleGenerator alloc] init]
+    };
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
-                                                           XCTAssertEqualObjects(data[@"gen"], @(numberTimesCalled), @"Generator should iterate through all values in order");
-                                                           numberTimesCalled++;
-                                                       }];
+                                                   validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
+        XCTAssertEqualObjects(data[@"gen"], @(numberTimesCalled), @"Generator should iterate through all values in order");
+        numberTimesCalled++;
+    }];
     XCTAssertEqual(numberTimesCalled, 4, @"Should have been called 4 times");
 
     // Limited
 
     testData = @{
-                 @"gen": [[SampleGenerator alloc] init]
-                 };
+        @"gen": [[SampleGenerator alloc] init]
+    };
     numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                     limitResults:LYTTesterLimitResultsLimitDataCombinations
-                                                       validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
-                                                           XCTAssertEqualObjects(data[@"gen"], @(numberTimesCalled), @"Generator should iterate through all values in order");
-                                                           numberTimesCalled++;
-                                                       }];
+                                                 limitResults:LYTTesterLimitResultsLimitDataCombinations
+                                                   validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
+        XCTAssertEqualObjects(data[@"gen"], @(numberTimesCalled), @"Generator should iterate through all values in order");
+        numberTimesCalled++;
+    }];
     XCTAssertEqual(numberTimesCalled, 4, @"Should have been called 4 times");
 }
 
 - (void)testTwoGeneratorsSimple {
     testData = @{
-                 @"gen1": [[SampleGenerator alloc] init],
-                 @"gen2": [[SampleGenerator alloc] init]
-                 };
+        @"gen1": [[SampleGenerator alloc] init],
+        @"gen2": [[SampleGenerator alloc] init]
+    };
 
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(__unused UIView *view, NSDictionary *data, id context) {
-                                                           NSArray *dataValues = @[
-                                                                                   (SampleGenerator *)data[@"gen1"],
-                                                                                   (SampleGenerator *)data[@"gen2"]
-                                                                                   ];
-                                                           [self validateGenerators:dataValues context:context];
-                                                           numberTimesCalled++;
-                                                       }];
+                                                   validation:^(__unused UIView *view, NSDictionary *data, id context) {
+        NSArray *dataValues = @[
+            (SampleGenerator *)data[@"gen1"],
+            (SampleGenerator *)data[@"gen2"]
+        ];
+        [self validateGenerators:dataValues context:context];
+        numberTimesCalled++;
+    }];
     XCTAssertEqual(numberTimesCalled, 16, @"Should have been called 16 times");
 
     // Limited
     testData = @{
-                 @"gen1": [[SampleGenerator alloc] init],
-                 @"gen2": [[SampleGenerator alloc] init]
-                 };
+        @"gen1": [[SampleGenerator alloc] init],
+        @"gen2": [[SampleGenerator alloc] init]
+    };
 
     numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                     limitResults:LYTTesterLimitResultsLimitDataCombinations
-                                                       validation:^(__unused UIView *view, NSDictionary *data, id context) {
-                                                           NSArray *dataValues = @[
-                                                                                   (SampleGenerator *)data[@"gen1"],
-                                                                                   (SampleGenerator *)data[@"gen2"]
-                                                                                   ];
-                                                           [self validateGenerators:dataValues context:context];
-                                                           numberTimesCalled++;
-                                                       }];
+                                                 limitResults:LYTTesterLimitResultsLimitDataCombinations
+                                                   validation:^(__unused UIView *view, NSDictionary *data, id context) {
+        NSArray *dataValues = @[
+            (SampleGenerator *)data[@"gen1"],
+            (SampleGenerator *)data[@"gen2"]
+        ];
+        [self validateGenerators:dataValues context:context];
+        numberTimesCalled++;
+    }];
     XCTAssertEqual(numberTimesCalled, 7, @"Should have been called 7 times (4 times each mins 1 for the duplicate 0-0)");
 }
 
 - (void)testNestedThreeIterators {
     testData = @{
-                 @"gen1": [[SampleGenerator alloc] init],
-                 @"array": @[@"test", [[SampleGenerator alloc] init]],
-                 @"dict": @{@"test": [[SampleGenerator alloc] init]}
-                 };
+        @"gen1": [[SampleGenerator alloc] init],
+        @"array": @[@"test", [[SampleGenerator alloc] init]],
+        @"dict": @{@"test": [[SampleGenerator alloc] init]}
+    };
 
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                       validation:^(__unused UIView *view, NSDictionary *data, id context) {
+                                                   validation:^(__unused UIView *view, NSDictionary *data, id context) {
 
-                                                           NSArray *dataValues = @[
-                                                                                   (SampleGenerator *)data[@"gen1"],
-                                                                                   (SampleGenerator *)data[@"array"][1],
-                                                                                   (SampleGenerator *)data[@"dict"][@"test"]
-                                                                                   ];
-                                                           [self validateGenerators:dataValues context:context];
-                                                           numberTimesCalled++;
-                                                       }];
+        NSArray *dataValues = @[
+            (SampleGenerator *)data[@"gen1"],
+            (SampleGenerator *)data[@"array"][1],
+            (SampleGenerator *)data[@"dict"][@"test"]
+        ];
+        [self validateGenerators:dataValues context:context];
+        numberTimesCalled++;
+    }];
     XCTAssertEqual(numberTimesCalled, 64, @"Should have been called 64 times");
 
     // Limited
     testData = @{
-                 @"gen1": [[SampleGenerator alloc] init],
-                 @"array": @[@"test", [[SampleGenerator alloc] init]],
-                 @"dict": @{@"test": [[SampleGenerator alloc] init]}
-                 };
+        @"gen1": [[SampleGenerator alloc] init],
+        @"array": @[@"test", [[SampleGenerator alloc] init]],
+        @"dict": @{@"test": [[SampleGenerator alloc] init]}
+    };
 
     numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
-                                                     limitResults:LYTTesterLimitResultsLimitDataCombinations
-                                                       validation:^(__unused UIView *view, NSDictionary *data, id context) {
+                                                 limitResults:LYTTesterLimitResultsLimitDataCombinations
+                                                   validation:^(__unused UIView *view, NSDictionary *data, id context) {
 
-                                                           NSArray *dataValues = @[
-                                                                                   (SampleGenerator *)data[@"gen1"],
-                                                                                   (SampleGenerator *)data[@"array"][1],
-                                                                                   (SampleGenerator *)data[@"dict"][@"test"]
-                                                                                   ];
-                                                           [self validateGenerators:dataValues context:context];
-                                                           numberTimesCalled++;
-                                                       }];
+        NSArray *dataValues = @[
+            (SampleGenerator *)data[@"gen1"],
+            (SampleGenerator *)data[@"array"][1],
+            (SampleGenerator *)data[@"dict"][@"test"]
+        ];
+        [self validateGenerators:dataValues context:context];
+        numberTimesCalled++;
+    }];
     XCTAssertEqual(numberTimesCalled, 10, @"Should have been called 10 times (4 times each minus 2 for the 0-0-0 duplicates)");
 }
 

@@ -92,13 +92,13 @@
     // - One view with a switch subview.
     // - One view with a button with overlapping subviews
     return @{
-             @"view": [[LYTDataValues alloc] initWithValues:@[
-                                                                   [UnitTestViews viewWithNoProblems],
-                                                                   [UnitTestViews viewWithOverlappingViews],
-                                                                   [UnitTestViews viewWithUISwitchSubview],
-                                                                   [UnitTestViews buttonWithBackgroundImage]
-                                                                   ]]
-             };
+        @"view": [[LYTDataValues alloc] initWithValues:@[
+            [UnitTestViews viewWithNoProblems],
+            [UnitTestViews viewWithOverlappingViews],
+            [UnitTestViews viewWithUISwitchSubview],
+            [UnitTestViews buttonWithBackgroundImage]
+        ]]
+    };
 }
 
 + (UIView *)viewForData:(NSDictionary *)data

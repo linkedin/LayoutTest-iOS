@@ -37,9 +37,9 @@
     [superview addSubview:view2];
 
     NSDictionary *viewsDictionary = @{
-                                      @"view1": view1,
-                                      @"view2": view2
-                                      };
+        @"view1": view1,
+        @"view2": view2
+    };
     [superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[view1]-0-[view2]" options:0 metrics:nil views:viewsDictionary]];
     [superview addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"[view1]-10-[view2]" options:0 metrics:nil views:viewsDictionary]];
 

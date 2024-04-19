@@ -76,8 +76,8 @@
 
 + (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     return @{
-             // Empty data
-             };
+        // Empty data
+    };
 }
 
 + (UIView *)viewForData:(__unused NSDictionary *)data

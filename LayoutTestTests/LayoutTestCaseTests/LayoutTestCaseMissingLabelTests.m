@@ -69,11 +69,11 @@
 + (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     // Return 3 views to test. One correct view, on view with overlapping subviews and one view with a switch subview.
     return @{
-             @"view": [[LYTDataValues alloc] initWithValues:@[
-                                                                  [UnitTestViews viewWithNoProblems],
-                                                                  [UnitTestViews viewWithAccessibilityIDButNoLabel]
-                                                                  ]]
-             };
+        @"view": [[LYTDataValues alloc] initWithValues:@[
+            [UnitTestViews viewWithNoProblems],
+            [UnitTestViews viewWithAccessibilityIDButNoLabel]
+        ]]
+    };
 }
 
 + (UIView *)viewForData:(NSDictionary *)data

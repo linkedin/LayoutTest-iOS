@@ -12,7 +12,6 @@
 
 @interface LYTLayoutFailingTestSnapshotRecorder ()
 @property (nonatomic) NSMutableSet *failingTestsSnapshotFolders;
-- (void)testCase:(XCTestCase *)testCase didFailWithDescription:(NSString *)description inFile:(nullable NSString *)filePath atLine:(NSUInteger)lineNumber;
 @end
 
 @interface LayoutReportSnapshotLocationsTests : LYTLayoutTestCase
@@ -21,7 +20,8 @@
 @implementation LayoutReportSnapshotLocationsTests
 
 - (void)testAllLocationsOfReportsAreLoggedToConsoleAtTheEnd {
-    [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] testCase:self didFailWithDescription:@"" inFile:@"File1" atLine:0];
+    XCTIssue *issue = [[XCTIssue alloc] initWithType:XCTIssueTypeAssertionFailure compactDescription:@""];
+    [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] testCase:self didRecordIssue:issue];
     NSString *expectedPathContaining = @"LayoutTestImages/LayoutReportSnapshotLocationsTests/index.html";
     NSString *actualPath = [LYTLayoutFailingTestSnapshotRecorder sharedInstance].failingTestsSnapshotFolders.anyObject;
     XCTAssertTrue([actualPath containsString:expectedPathContaining]);

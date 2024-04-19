@@ -76,8 +76,14 @@
     UICollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:[self.ViewProviderClass reuseIdentifier] forIndexPath:indexPath];
 
     id context = nil;
-    cell = (UICollectionViewCell *)[self.ViewProviderClass viewForData:self.dataArray[(NSUInteger)indexPath.row] reuseView:cell size:nil context:&context];
-    
+    NSError *error;
+    cell = (UICollectionViewCell *)[self.ViewProviderClass viewForData:self.dataArray[(NSUInteger)indexPath.row] 
+                                                             reuseView:cell
+                                                                  size:nil
+                                                               context:&context
+                                                                 error:&error];
+    NSAssert(error == nil, error.description);
+
     return cell;
 }
 

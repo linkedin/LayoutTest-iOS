@@ -91,14 +91,14 @@ class SwiftTest: LayoutTestCase {
     }
 
     class TestView: UIView, ViewProvider {
-        @objc static func dataSpecForTest() -> [AnyHashable: Any] {
+        @objc static func dataSpecForTest() throws -> [AnyHashable: Any] {
             return [
                 "context": IntegerValues(),
                 "otherVariable": IntegerValues()
             ]
         }
 
-        static func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
+        static func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) throws -> UIView {
             // Let's verify that this context works correctly
             context?.pointee = data["context"] as AnyObject?
             return TestView()
@@ -116,14 +116,14 @@ class SwiftTest: LayoutTestCase {
     This is identical to TestView, but it doesn't implement the view creation protocol.
     */
     class NonViewCreationProtocol: NSObject, ViewProvider {
-        @objc static func dataSpecForTest() -> [AnyHashable: Any] {
+        @objc static func dataSpecForTest() throws -> [AnyHashable: Any] {
             return [
                 "context": IntegerValues(),
                 "otherVariable": IntegerValues()
             ]
         }
 
-        @objc static func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
+        @objc static func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) throws -> UIView {
             // Let's verify that this context works correctly
             context?.pointee = data["context"] as AnyObject?
             return TestView()

@@ -81,7 +81,7 @@
 
 #pragma mark - LYTViewProvider
 
-+ (NSDictionary *)dataSpecForTest {
++ (NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     // Return 2 views to test. One with a button with accessibility, the other a button without accessibility.
     return @{
              @"view": [[LYTDataValues alloc] initWithValues:@[
@@ -94,7 +94,8 @@
 + (UIView *)viewForData:(NSDictionary *)data
               reuseView:(__unused UIView *)view
                    size:(__unused LYTViewSize *)size
-                context:(__unused id __autoreleasing *)context {
+                context:(__unused id __autoreleasing *)context
+                  error:(__unused NSError * _Nullable __autoreleasing *)error {
     return (UIView *)data[@"view"];
 }
 

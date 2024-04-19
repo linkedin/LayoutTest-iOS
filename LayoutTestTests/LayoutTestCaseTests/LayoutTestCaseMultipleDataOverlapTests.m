@@ -39,7 +39,7 @@
 
 #pragma mark - LYTViewProvider
 
-+ (NSDictionary *)dataSpecForTest {
++ (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     return @{
              @"view": [UnitTestViews viewWithLongStringOverlappingLabel],
              @"text": [[LYTStringValues alloc] initWithValues:@[@"X", @"A long string that will cause overlap"]]
@@ -49,7 +49,8 @@
 + (UIView *)viewForData:(NSDictionary *)data
               reuseView:(UIView *)view
                    size:(__unused LYTViewSize *)size
-                context:(__unused id __autoreleasing *)context {
+                context:(__unused id __autoreleasing *)context
+                  error:(__unused NSError * _Nullable __autoreleasing * _Nullable)error {
     UIViewWithLabel *reuseView = (UIViewWithLabel *)(view ? view : data[@"view"]);
     reuseView.label.text = data[@"text"];
     return reuseView;

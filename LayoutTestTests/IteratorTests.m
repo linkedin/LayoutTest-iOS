@@ -198,14 +198,15 @@ static NSDictionary *testData = nil;
 
 // View Provider Protocol
 
-+ (NSDictionary *)dataSpecForTest {
++ (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     return testData;
 }
 
 + (UIView *)viewForData:(__unused NSDictionary *)data
               reuseView:(__unused UIView *)view
                    size:(__unused LYTViewSize *)size
-                context:(__unused id __autoreleasing *)context {
+                context:(__unused id __autoreleasing *)context
+                  error:(__unused NSError * _Nullable __autoreleasing *)error {
     return nil;
 }
 

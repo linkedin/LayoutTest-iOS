@@ -105,7 +105,7 @@ void SimpleLog(NSString *format, ...) {
     }
 }
 
-- (void)testCase:(XCTestCase *)testCase didRecordIssue:(XCTIssue *)issue {
+- (void)testCase:(XCTestCase *)testCase didRecordIssue:(__unused XCTIssue *)issue {
     if ([testCase isKindOfClass:[LYTLayoutTestCase class]]) {
         NSString *pathForSnapshots = [self commonRootPathForInvocationClass:[testCase class]];
         pathForSnapshots = [pathForSnapshots stringByAppendingString:@"/index.html"];

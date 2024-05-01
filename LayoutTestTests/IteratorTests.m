@@ -202,11 +202,11 @@ static NSDictionary *testData = nil;
     return testData;
 }
 
-+ (UIView *)viewForData:(__unused NSDictionary *)data
-              reuseView:(__unused UIView *)view
-                   size:(__unused LYTViewSize *)size
-                context:(__unused id __autoreleasing *)context
-                  error:(__unused NSError * _Nullable __autoreleasing *)error {
++ (nullable UIView *)viewForData:(__unused NSDictionary *)data
+                       reuseView:(__unused UIView *)view
+                            size:(__unused LYTViewSize *)size
+                         context:(__unused id __autoreleasing *)context
+                           error:(__unused NSError * _Nullable __autoreleasing *)error {
     return nil;
 }
 

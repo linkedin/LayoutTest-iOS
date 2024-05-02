@@ -232,10 +232,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Failing Test Snapshots
 
-- (void)recordFailureWithDescription:(NSString *)description inFile:(NSString *)filePath atLine:(NSUInteger)lineNumber expected:(BOOL)expected {
-    [super recordFailureWithDescription:description inFile:filePath atLine:lineNumber expected:expected];
+- (void)recordIssue:(XCTIssue *)issue {
+    [super recordIssue:issue];
     if (self.failingTestSnapshotsEnabled) {
-        [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] saveImageOfView:self.viewUnderTest withData:self.dataForViewUnderTest fromInvocation:self.invocation failureDescription:description];
+        [[LYTLayoutFailingTestSnapshotRecorder sharedInstance] saveImageOfView:self.viewUnderTest
+                                                                      withData:self.dataForViewUnderTest
+                                                                fromInvocation:self.invocation
+                                                            failureDescription:issue.compactDescription];
     }
 }
 

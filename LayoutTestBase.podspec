@@ -1,12 +1,12 @@
 Pod::Spec.new do |spec|
   spec.name             = 'LayoutTestBase'
-  spec.version          = '6.0.4'
+  spec.version          = '6.1.0'
   spec.license          = { :type => 'Apache License, Version 2.0' }
   spec.homepage         = 'https://linkedin.github.io/LayoutTest-iOS'
   spec.authors          = 'LinkedIn'
   spec.summary          = 'Base library for LayoutTest without XCTest dependency. LayoutTest enables you to write unit tests which test the layout of views.'
   spec.source           = { :git => 'https://github.com/linkedin/LayoutTest-iOS.git', :tag => spec.version }
-  spec.platform         = :ios, '7.0'
+  spec.platform         = :ios, '12.0'
   spec.frameworks       = 'Foundation', 'UIKit'
   spec.default_subspecs = 'Core', 'Autolayout', 'Catalog', 'Config', 'UIViewHelpers'
   spec.swift_version    = '5.0'
@@ -18,7 +18,6 @@ Pod::Spec.new do |spec|
     sp.dependency 'LayoutTestBase/Catalog'
     sp.dependency 'LayoutTestBase/Config'
     sp.dependency 'LayoutTestBase/UIViewHelpers'
-    sp.platform = :ios, '8.0'
   end
 
   spec.subspec 'Core' do |sp|

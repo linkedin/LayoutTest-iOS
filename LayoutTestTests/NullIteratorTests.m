@@ -40,8 +40,8 @@ static NSDictionary *testData = nil;
 - (void)testNullInDictionary
 {
     testData = @{
-                 @"null": [[NullDataValues alloc] init]
-                 };
+        @"null": [[NullDataValues alloc] init]
+    };
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
                                                        validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
@@ -59,8 +59,8 @@ static NSDictionary *testData = nil;
 - (void)testNullInArray
 {
     testData = @{
-                 @"array": @[@"0", [[NullDataValues alloc] init], @(2)]
-                 };
+        @"array": @[@"0", [[NullDataValues alloc] init], @(2)]
+    };
     __block NSUInteger numberTimesCalled = 0;
     [LYTLayoutPropertyTester runPropertyTestsWithViewProvider:[self class]
                                                        validation:^(__unused UIView *view, NSDictionary *data, __unused id context) {
@@ -87,14 +87,15 @@ static NSDictionary *testData = nil;
 
 // View Provider Protocol
 
-+ (NSDictionary *)dataSpecForTest {
++ (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     return testData;
 }
 
 + (UIView *)viewForData:(__unused NSDictionary *)data
               reuseView:(__unused UIView *)view
                    size:(__unused LYTViewSize *)size
-                context:(__unused id __autoreleasing *)context {
+                context:(__unused id __autoreleasing *)context
+                  error:(__unused NSError * _Nullable __autoreleasing * _Nullable)error {
     return nil;
 }
 

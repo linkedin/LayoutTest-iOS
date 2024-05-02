@@ -15,7 +15,7 @@ LYTViewProvider
 This protocol dictates how the view is created and inflated with data. There are two methods that are required to implement. One easy way to implement it is to add an extension to the view your are trying to test.
 
 ----------------------------------
-+ (NSDictionary *)dataSpecForTest;
++ (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error;
 ----------------------------------
 
 This method defines the mock data we will use for the test. It should return an NSDictionary of any format (usually JSON), but can also include LYTDataValues subclasses. These data values are the key to writing property tests and allow the library to create many combinations of this data to inflate your view with. For instance, you can return the dictionary:
@@ -46,7 +46,7 @@ There are actually more strings and ints in the default data values and this cod
 This API makes it easy for you to write tests which will be ran on many different inputs. It's also easy for you to make your own LYTDataValues subclasses (see the LYTDataValues class for more info).
 
 --------------------------------------------------------------------------------------------------------------------------
-+ (UIView *)viewForData:(NSDictionary *)data reuseView:(UIView *)reuseView size:(LYTViewSize *)size context:(id *)context;
++ (nullable UIView *)viewForData:(NSDictionary *)data reuseView:(UIView *)reuseView size:(LYTViewSize *)size context:(id *)context error:(NSError **)error;
 --------------------------------------------------------------------------------------------------------------------------
 
 This method should inflate your view with data for the test. This data will NOT contain LYTDataValues subclasses, but instead be the output of the LYTDataValues code. A reuse view is provided if you want to reuse views for the test (recommended if you are testing cells). Size and context are additional helpers (see :doc:`030_viewSizes` and :doc:`090_testingOtherObjects`). This method should be simple to implement and look something like this:
@@ -56,10 +56,11 @@ This method should inflate your view with data for the test. This data will NOT 
   // Objective-C
   #import "LayoutTestBase.h"
 
-  + (UIView *)viewForData:(NSDictionary *)data
+  + (nullable UIView *)viewForData:(NSDictionary *)data
                 reuseView:(nullable UIView *)reuseView
                      size:(nullable LYTViewSize *)size
-                  context:(id _Nullable * _Nullable)context {
+                  context:(id _Nullable * _Nullable)context
+                  error:(__unused NSError * _Nullable __autoreleasing *)error {
     SimpleTableViewCell *cell = (SimpleTableViewCell *)reuseView ?: [SimpleTableViewCell loadFromNib];
     [cell prepareForReuse];
     [cell setupWithDictionary:data];
@@ -74,7 +75,7 @@ This method should inflate your view with data for the test. This data will NOT 
   class func viewForData(data: [NSObject: AnyObject],
                     reuseView: UIView?,
                          size: LYTViewSize?,
-                      context: AutoreleasingUnsafeMutablePointer<AnyObject?>) -> UIView {
+                      context: AutoreleasingUnsafeMutablePointer<AnyObject?>) throws -> UIView {
     let cell = reuseView as? SampleTableViewCell ?? SampleTableViewCell.loadFromNib()
     cell.prepareForReuse()
     cell.setupWithDictionary(data)

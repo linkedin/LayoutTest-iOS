@@ -37,16 +37,17 @@ The syntax is also light allowing you to add these tests easily. This test autom
   @end
 
   @implementation SampleTableViewCell (LayoutTesting)
-    + (NSDictionary *)dataSpecForTest {
+    + (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
       return @{
         @"text": [[LYTStringValues alloc] init],
         @"showButton": [[LYTBoolValues alloc] init]
       }
     }
-    + (UIView *)viewForData:(NSDictionary *)data
+    + (nullable UIView *)viewForData:(NSDictionary *)data
                   reuseView:(nullable UIView *)reuseView
                        size:(nullable LYTViewSize *)size
-                    context:(id _Nullable * _Nullable)context {
+                    context:(id _Nullable * _Nullable)context
+                    error:(__unused NSError * _Nullable __autoreleasing *)error {
       SampleTableViewCell *view = (SampleTableViewCell *)reuseView ?: [SampleTableViewCell viewFromNib];
       [view setupWithJSON:data];
       return view;

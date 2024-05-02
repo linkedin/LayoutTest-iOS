@@ -63,16 +63,17 @@
 
 #pragma mark - LYTViewProvider
 
-+ (NSDictionary *)dataSpecForTest {
++ (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     return @{
-             // Empty data
-             };
+        // Empty data
+    };
 }
 
 + (UIView *)viewForData:(__unused NSDictionary *)data
               reuseView:(UIView *)view
                    size:(__unused LYTViewSize *)size
-                context:(__unused id __autoreleasing *)context {
+                context:(__unused id __autoreleasing *)context
+                  error:(__unused NSError * _Nullable __autoreleasing * _Nullable)error {
     return view ?: [UnitTestViews viewWithNoProblems];
 }
 
@@ -83,7 +84,11 @@
              [[LYTViewSize alloc] initWithWidth:@(200)] ];
 }
 
-+ (void)adjustViewSize:(UIView *)view data:(__unused NSDictionary *)data size:(LYTViewSize *)size context:(__unused id)context {
++ (void)adjustViewSize:(UIView *)view 
+                  data:(__unused NSDictionary *)data
+                  size:(LYTViewSize *)size
+               context:(__unused id)context
+                 error:(__unused NSError * _Nullable __autoreleasing * _Nullable)error {
     if (!size.width) {
         view.lyt_width = 300;
     }

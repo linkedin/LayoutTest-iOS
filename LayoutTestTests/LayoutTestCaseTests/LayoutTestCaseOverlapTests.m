@@ -85,26 +85,27 @@
 
 #pragma mark - LYTViewProvider
 
-+ (NSDictionary *)dataSpecForTest {
++ (nullable NSDictionary *)dataSpecForTestWithError:(__unused NSError * _Nullable __autoreleasing *)error {
     // Return 4 views to test.
     // - One correct view
     // - One view with overlapping subviews
     // - One view with a switch subview.
     // - One view with a button with overlapping subviews
     return @{
-             @"view": [[LYTDataValues alloc] initWithValues:@[
-                                                                   [UnitTestViews viewWithNoProblems],
-                                                                   [UnitTestViews viewWithOverlappingViews],
-                                                                   [UnitTestViews viewWithUISwitchSubview],
-                                                                   [UnitTestViews buttonWithBackgroundImage]
-                                                                   ]]
-             };
+        @"view": [[LYTDataValues alloc] initWithValues:@[
+            [UnitTestViews viewWithNoProblems],
+            [UnitTestViews viewWithOverlappingViews],
+            [UnitTestViews viewWithUISwitchSubview],
+            [UnitTestViews buttonWithBackgroundImage]
+        ]]
+    };
 }
 
 + (UIView *)viewForData:(NSDictionary *)data
               reuseView:(__unused UIView *)view
                    size:(__unused LYTViewSize *)size
-                context:(__unused id __autoreleasing *)context {
+                context:(__unused id __autoreleasing *)context
+                  error:(__unused NSError * _Nullable __autoreleasing * _Nullable)error {
     return (UIView *)data[@"view"];
 }
 

@@ -33,7 +33,7 @@ NS_SWIFT_NAME(ViewProvider)
  \returns Template for the data to test on.
  */
 @required
-+ (NSDictionary *)dataSpecForTest;
++ (nullable NSDictionary *)dataSpecForTestWithError:(NSError * _Nullable *)error;
 
 /**
  This method should return a view to run your tests on. You should always use the reuse view if you can, and if not, should recreate a view with the same size as the reuseView. You should then inflate the view with your data and return it.
@@ -46,7 +46,11 @@ NS_SWIFT_NAME(ViewProvider)
  \returns View inflated with data
  */
 @required
-+ (UIView *)viewForData:(NSDictionary *)data reuseView:(nullable UIView *)reuseView size:(nullable LYTViewSize *)size context:(id _Nullable * _Nullable)context;
++ (nullable UIView *)viewForData:(NSDictionary *)data
+                       reuseView:(nullable UIView *)reuseView
+                            size:(nullable LYTViewSize *)size
+                         context:(id _Nullable * _Nullable)context
+                           error:(NSError * _Nullable *)error;
 
 /**
  Returns an array of NSValue objects which wrap a CGSize struct. These are all the sizes that we should test on. The way this works is a little tricky though. It will return a reuse view of this specific size to viewForData:reuseView:. So if that method resizes the view or recreates the view, then this data will be lost.
@@ -69,7 +73,12 @@ NS_SWIFT_NAME(ViewProvider)
  \param context If a context was set in viewForData:reuseView:size:context:, it will be passed back to you here.
  */
 @optional
-+ (void)adjustViewSize:(UIView *)view data:(NSDictionary *)data size:(nullable LYTViewSize *)size context:(nullable id)context;
++ (void)adjustViewSize:(UIView *)view 
+                  data:(NSDictionary *)data
+                  size:(nullable LYTViewSize *)size
+               context:(nullable id)context
+                 error:(NSError * _Nullable *)error
+__attribute__((swift_error(nonnull_error)));
 
 @end
 

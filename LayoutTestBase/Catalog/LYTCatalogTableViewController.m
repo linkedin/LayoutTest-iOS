@@ -68,7 +68,13 @@
     if ([(id)self.ViewProviderClass respondsToSelector:@selector(tableViewCellForCatalogFromData:reuseCell:)]) {
         cell = [self.ViewProviderClass tableViewCellForCatalogFromData:self.dataArray[(NSUInteger)indexPath.row] reuseCell:cell];
     } else {
-        cell = (UITableViewCell *)[self.ViewProviderClass viewForData:self.dataArray[(NSUInteger)indexPath.row] reuseView:cell size:nil context:nil];
+        NSError *error;
+        cell = (UITableViewCell *)[self.ViewProviderClass viewForData:self.dataArray[(NSUInteger)indexPath.row] 
+                                                            reuseView:cell
+                                                                 size:nil
+                                                              context:nil
+                                                                error:&error];
+        NSAssert(error == nil, error.description);
         NSAssert([cell isKindOfClass:[UITableViewCell class]], @"If your view is not a UITableViewCell, you must implement cellForCatalogFromData:reuseCell:");
     }
 

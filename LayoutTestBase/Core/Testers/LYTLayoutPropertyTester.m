@@ -35,7 +35,9 @@
     NSAssert([viewProvider conformsToProtocol:@protocol(LYTViewProvider)], @"You must pass in a class which conforms to LYTViewProvider");
     NSAssert(validation, @"You must pass in a validation block");
 
-    NSDictionary *mutatingData = [viewProvider dataSpecForTest];
+    NSError *error;
+    NSDictionary *mutatingData = [viewProvider dataSpecForTestWithError:&error];
+    NSAssert(error == nil, error.description);
     NSMutableArray *iterators = [NSMutableArray array];
     NSDictionary *dataWithIterators = [mutatingData lyt_mutableDeepCopyWithReplaceBlock:^id(id object) {
         if ([object isKindOfClass:[LYTDataValues class]]) {
@@ -136,10 +138,14 @@
                                          size:(nullable LYTViewSize *)size
                                         block:(void(^)(UIView *view, NSDictionary *data, id context))validation {
     id context = nil;
-    UIView *view = [viewProvider viewForData:data reuseView:reuseView size:size context:&context];
+    NSError *error;
+    UIView *view = [viewProvider viewForData:data reuseView:reuseView size:size context:&context error:&error];
+    NSAssert(error == nil, error.description);
     [view lyt_setSize:size];
-    if ([(id)viewProvider respondsToSelector:@selector(adjustViewSize:data:size:context:)]) {
-        [viewProvider adjustViewSize:view data:data size:size context:context];
+    if ([(id)viewProvider respondsToSelector:@selector(adjustViewSize:data:size:context:error:)]) {
+        error = nil;
+        [viewProvider adjustViewSize:view data:data size:size context:context error:&error];
+        NSAssert(error == nil, error.description);
     }
     [view setNeedsLayout];
     [view layoutIfNeeded];

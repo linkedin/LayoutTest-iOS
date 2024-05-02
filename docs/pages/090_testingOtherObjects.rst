@@ -10,10 +10,11 @@ Sample Code
 
   // Objective-C
   // LYTViewProvider
-  + (UIView *)viewForData:(NSDictionary *)data
+  + (nullable UIView *)viewForData:(NSDictionary *)data
                 reuseView:(nullable UIView *)reuseView
                      size:(nullable LYTViewSize *)size
-                  context:(id _Nullable * _Nullable)context {
+                  context:(id _Nullable * _Nullable)context
+                  error:(__unused NSError * _Nullable __autoreleasing *)error {
     // Ignoring reuse because it doesn't make sense for testing UIViewController subclasses
     SampleViewController *controller = [[SampleViewController alloc] init];
     [controller setupWithDictionary:data];
@@ -37,7 +38,7 @@ Sample Code
   class func viewForData(data: [NSObject: AnyObject],
                     reuseView: UIView?,
                          size: LYTViewSize?,
-                      context: AutoreleasingUnsafeMutablePointer<AnyObject?>) -> UIView {
+                      context: AutoreleasingUnsafeMutablePointer<AnyObject?>) throws -> UIView {
     // Ignoring reuse because it doesn't make sense for testing UIViewController subclasses
     let controller = SampleViewController()
     controller.setupWithData(data)

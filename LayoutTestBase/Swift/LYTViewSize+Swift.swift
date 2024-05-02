@@ -13,7 +13,7 @@ extension ViewSize {
     /**
      The width for the view. If nil, do not edit the width.
      */
-    open var width: CGFloat? {
+    public var width: CGFloat? {
         get {
             return __width.flatMap { CGFloat( $0.floatValue ) }
         }
@@ -22,7 +22,7 @@ extension ViewSize {
     /**
      The height for the view. If nil, do not edit the height.
      */
-    open var height: CGFloat? {
+    public var height: CGFloat? {
         get {
             return __height.flatMap {  CGFloat( $0.floatValue ) }
         }

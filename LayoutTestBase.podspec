@@ -18,7 +18,6 @@ Pod::Spec.new do |spec|
     sp.dependency 'LayoutTestBase/Catalog'
     sp.dependency 'LayoutTestBase/Config'
     sp.dependency 'LayoutTestBase/UIViewHelpers'
-    sp.platform = :ios, '12.0'
   end
 
   spec.subspec 'Core' do |sp|

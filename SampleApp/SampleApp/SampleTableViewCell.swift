@@ -9,6 +9,10 @@
 
 import UIKit
 
+enum SampleTableViewCellError: Error {
+    case invalidNib
+}
+
 open class SampleTableViewCell: UITableViewCell {
 
     private static let leftMaxEdge: CGFloat = 38
@@ -32,8 +36,16 @@ open class SampleTableViewCell: UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: nibName, for: indexPath) as! SampleTableViewCell
     }
 
-    class func loadFromNib() -> SampleTableViewCell {
-        return Bundle.main.loadNibNamed(SampleTableViewCell.nibName, owner: nil, options: nil)![0] as! SampleTableViewCell
+    class func loadFromNib() throws -> SampleTableViewCell {
+        guard let viewInBundle = Bundle.main.loadNibNamed(
+            SampleTableViewCell.nibName,
+            owner: nil,
+            options: nil),
+              let sampleFailingView = viewInBundle.first as? SampleTableViewCell else {
+            throw SampleTableViewCellError.invalidNib
+        }
+
+        return sampleFailingView
     }
 
     func setup(_ json: [AnyHashable: Any]) {
@@ -56,7 +68,7 @@ open class SampleTableViewCell: UITableViewCell {
 
         if let buttonText = json["buttonText"] as? String {
             rightButton.isHidden = false
-            rightButton.setTitle(buttonText, for: UIControlState())
+            rightButton.setTitle(buttonText, for: .normal)
             rightButton.accessibilityLabel = "Double tap to " + buttonText
             buttonWidth.constant = SampleTableViewCell.buttonWidth
         } else {

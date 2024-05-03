@@ -22,27 +22,27 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
         runLayoutTests() { (view: SampleTableViewCell, data: [AnyHashable: Any], context: Any?) in
 
             // Verify that the label and image view are top aligned
-            XCTAssertTrue(view.titleLabel.topAligned(view.mainImageView))
+            XCTAssertTrue(view.titleLabel.lyt_topAligned(view.mainImageView))
 
             // Verify that the text gets set correctly
             XCTAssertEqual(view.titleLabel.text, data["text"] as? String)
 
             if view.mainImageView.isHidden {
                 // If the image view is hidden, then the title label should be 8 from the left edge (image should be squashed)
-                XCTAssertEqual(view.titleLabel.left, self.titleLabelLeftPadding)
+                XCTAssertEqual(view.titleLabel.lyt_left, self.titleLabelLeftPadding)
             } else {
                 // If it is not hidden, then it should be 8 away from the right of the image view
-                XCTAssertEqual(view.titleLabel.left, view.mainImageView.right + 8)
+                XCTAssertEqual(view.titleLabel.lyt_left, view.mainImageView.lyt_right + 8)
                 // The image view should be before the title label
-                XCTAssertTrue(view.mainImageView.before(view.titleLabel))
+                XCTAssertTrue(view.mainImageView.lyt_before(view.titleLabel))
             }
 
             if view.rightButton.isHidden {
                 // If the right button is hidden, then the text label should be 8 from the right edge
-                XCTAssertEqual(view.titleLabel.right, view.width - self.titleLabelLeftPadding)
+                XCTAssertEqual(view.titleLabel.lyt_right, view.lyt_width - self.titleLabelLeftPadding)
             } else {
                 // Otherwise, the text label should be right up against the button
-                XCTAssertEqual(view.titleLabel.right, view.rightButton.left)
+                XCTAssertEqual(view.titleLabel.lyt_right, view.rightButton.lyt_left)
                 // Here, I verify that the button's title is being set correctly
                 XCTAssertEqual(view.rightButton.title(for: .normal), data["buttonText"] as? String)
             }
@@ -54,7 +54,7 @@ class SampleTableViewCellLayoutTests : LayoutTestCase {
 }
 
 extension SampleTableViewCell : ViewProvider {
-    public class func dataSpecForTest() -> [AnyHashable: Any] {
+    public class func dataSpecForTest() throws -> [AnyHashable: Any] {
         return [
             "text": StringValues(),
             "buttonText": StringValues(),
@@ -63,8 +63,17 @@ extension SampleTableViewCell : ViewProvider {
         ]
     }
 
-    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
-        let view = reuseView as? SampleTableViewCell ?? SampleTableViewCell.loadFromNib()
+    public class func view(forData data: [AnyHashable: Any], 
+                           reuse reuseView: UIView?,
+                           size: ViewSize?,
+                           context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) throws -> UIView {
+        let view: SampleTableViewCell
+        if let reuseView = reuseView as? SampleTableViewCell {
+            view = reuseView
+        } else {
+            view = try SampleTableViewCell.loadFromNib()
+        }
+
         view.setup(data)
         return view
     }

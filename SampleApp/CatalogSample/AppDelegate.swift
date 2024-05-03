@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         window = UIWindow(frame: UIScreen.main.bounds)
         let rootViewController = CatalogTableViewController()
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 extension SampleTableViewCell: ViewCatalogProvider {
-    public class func dataSpecForTest() -> [AnyHashable: Any] {
+    public static func dataSpecForTest() throws -> [AnyHashable: Any] {
         return [
             "text": StringValues(),
             "buttonText": DataValues(values: ["Share", "Like", nil]),
@@ -37,8 +37,11 @@ extension SampleTableViewCell: ViewCatalogProvider {
         ]
     }
 
-    public class func view(forData data: [AnyHashable: Any], reuse reuseView: UIView?, size: ViewSize?, context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) -> UIView {
-        let view = reuseView as? SampleTableViewCell ?? Bundle.main.loadNibNamed("SampleTableViewCell", owner: nil, options: nil)?[0] as! SampleTableViewCell
+    public static func view(forData data: [AnyHashable: Any],
+                           reuse reuseView: UIView?,
+                           size: ViewSize?,
+                           context: AutoreleasingUnsafeMutablePointer<AnyObject?>?) throws -> UIView {
+        let view = (reuseView as? SampleTableViewCell) ?? loadFromBundle()
         view.setup(data)
         return view
     }
@@ -49,11 +52,22 @@ extension SampleTableViewCell: ViewCatalogProvider {
     }
 
     public static func heightForTableViewCellForCatalog(fromData data: [AnyHashable: Any]) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     public static func reuseIdentifier() -> String {
         return "SampleTableViewCell"
+    }
+
+    // MARK: - Privat methods
+
+    private static func loadFromBundle() -> SampleTableViewCell {
+        let cellFromBundle = Bundle.main.loadNibNamed("SampleTableViewCell", owner: nil, options: nil)?[0]
+
+        guard let sampleTableViewCell = cellFromBundle as? SampleTableViewCell else {
+            fatalError("Could not load SampleTableViewCell from bundle")
+        }
+        return sampleTableViewCell
     }
 }
 

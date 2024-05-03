@@ -1,47 +1,28 @@
 PODS:
-  - LayoutTest/ModuleHeader (3.0.0):
-    - LayoutTestBase (= 3.0.0)
-  - LayoutTest/Swift (3.0.0):
-    - LayoutTest/ModuleHeader
+  - LayoutTest/Swift (6.1.0):
     - LayoutTest/SwiftSubspec
+  - LayoutTest/SwiftSubspec (6.1.0):
     - LayoutTest/TestCase
-    - LayoutTestBase (= 3.0.0)
-    - LayoutTestBase/Autolayout
-    - LayoutTestBase/Catalog
-    - LayoutTestBase/Config
-    - LayoutTestBase/Core
-    - LayoutTestBase/UIViewHelpers
-  - LayoutTest/SwiftSubspec (3.0.0):
-    - LayoutTest/ModuleHeader
-    - LayoutTest/TestCase
-    - LayoutTestBase (= 3.0.0)
     - LayoutTestBase/Swift
-  - LayoutTest/TestCase (3.0.0):
-    - LayoutTest/ModuleHeader
-    - LayoutTestBase (= 3.0.0)
-    - LayoutTestBase/Config
-    - LayoutTestBase/Core
-  - LayoutTestBase (3.0.0):
-    - LayoutTestBase/Autolayout (= 3.0.0)
-    - LayoutTestBase/Catalog (= 3.0.0)
-    - LayoutTestBase/Config (= 3.0.0)
-    - LayoutTestBase/Core (= 3.0.0)
-    - LayoutTestBase/UIViewHelpers (= 3.0.0)
-  - LayoutTestBase/Autolayout (3.0.0)
-  - LayoutTestBase/Catalog (3.0.0):
-    - LayoutTestBase/Core
-  - LayoutTestBase/Config (3.0.0)
-  - LayoutTestBase/Core (3.0.0):
-    - LayoutTestBase/Config
-  - LayoutTestBase/ModuleHeader (3.0.0)
-  - LayoutTestBase/Swift (3.0.0):
+  - LayoutTest/TestCase (6.1.0):
     - LayoutTestBase/Autolayout
     - LayoutTestBase/Catalog
     - LayoutTestBase/Config
     - LayoutTestBase/Core
-    - LayoutTestBase/ModuleHeader
     - LayoutTestBase/UIViewHelpers
-  - LayoutTestBase/UIViewHelpers (3.0.0):
+  - LayoutTestBase/Autolayout (6.1.0)
+  - LayoutTestBase/Catalog (6.1.0):
+    - LayoutTestBase/Core
+  - LayoutTestBase/Config (6.1.0)
+  - LayoutTestBase/Core (6.1.0):
+    - LayoutTestBase/Config
+  - LayoutTestBase/Swift (6.1.0):
+    - LayoutTestBase/Autolayout
+    - LayoutTestBase/Catalog
+    - LayoutTestBase/Config
+    - LayoutTestBase/Core
+    - LayoutTestBase/UIViewHelpers
+  - LayoutTestBase/UIViewHelpers (6.1.0):
     - LayoutTestBase/Config
 
 DEPENDENCIES:
@@ -50,14 +31,14 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   LayoutTest:
-    :path: ..
+    :path: ".."
   LayoutTestBase:
-    :path: ..
+    :path: ".."
 
 SPEC CHECKSUMS:
-  LayoutTest: b6127bd4e2b1510d553279bac9e020332357fa2c
-  LayoutTestBase: 322ada59ea398c6263d2dc3bec98b41869f1f978
+  LayoutTest: b437c8db637fc36895f9802004be09c75c733183
+  LayoutTestBase: 9f511b9d5cd506b15db04e8948ef0979e454c6c9
 
-PODFILE CHECKSUM: 49d61240f50937629372e86aec364a859466c5d8
+PODFILE CHECKSUM: 5246816d918cdf1a74e375caab9c5c7d07c813b4
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.15.2

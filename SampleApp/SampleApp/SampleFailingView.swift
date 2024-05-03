@@ -9,6 +9,10 @@
 
 import UIKit
 
+enum SampleFailingViewError: Error {
+    case invalidNib
+}
+
 open class SampleFailingView: UIView {
 
     private static let nibName = "SampleFailingView"
@@ -16,12 +20,20 @@ open class SampleFailingView: UIView {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button: UIButton!
     
-    class func loadFromNib() -> SampleFailingView {
-        return Bundle.main.loadNibNamed(SampleFailingView.nibName, owner: nil, options: nil)![0] as! SampleFailingView
+    class func loadFromNib() throws -> SampleFailingView {
+        guard let viewInBundle = Bundle.main.loadNibNamed(
+            SampleFailingView.nibName,
+            owner: nil,
+            options: nil),
+              let sampleFailingView = viewInBundle.first as? SampleFailingView else {
+            throw SampleFailingViewError.invalidNib
+        }
+
+        return sampleFailingView
     }
 
     func setup(_ json: [AnyHashable: Any]) {
         label.text = json["text"] as? String
-        button.setTitle(json["buttonText"] as? String, for: UIControlState())
+        button.setTitle(json["buttonText"] as? String, for: .normal)
     }
 }

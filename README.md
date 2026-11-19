@@ -21,6 +21,17 @@ https://linkedin.github.io/LayoutTest-iOS
 
 ## Installation
 
+### Swift Package Manager
+
+In Xcode, add `https://github.com/linkedin/LayoutTest-iOS` as a package dependency
+and link the **LayoutTest** product to your unit test target only. Use
+`import LayoutTest` in Swift tests.
+
+The **LayoutTestBase** product provides the helpers without an XCTest dependency.
+With Swift Package Manager, use `import LayoutTestBaseSwift` for its Swift helpers.
+
+### CocoaPods
+
 Add to your unit test target:
 
 ```

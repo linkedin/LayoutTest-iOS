@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import LayoutTestBase
+#endif
+
 extension ViewSize {
 
     /**

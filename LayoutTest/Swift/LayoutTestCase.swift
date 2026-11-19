@@ -10,6 +10,11 @@
 import Foundation
 import LayoutTestBase
 
+#if SWIFT_PACKAGE
+@_exported import LayoutTestObjC
+@_exported import LayoutTestBaseSwift
+#endif
+
 /**
 This class defines a basic XCTestCase subclass which implements multiple layout test helpers. It's recommended that your layout tests subclass this class.
 

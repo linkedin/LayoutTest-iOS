@@ -8,7 +8,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 #import <XCTest/XCTest.h>
+#if SWIFT_PACKAGE
+@import LayoutTestBase;
+#else
 #import <LayoutTestBase/LYTLayoutPropertyTester.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

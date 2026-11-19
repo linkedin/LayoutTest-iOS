@@ -8,6 +8,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+@_exported import LayoutTestBase
+#endif
+
 extension DataValues {
     /**
      Returns LYTDataValues with these specific values and overrides any subclass's behavior.

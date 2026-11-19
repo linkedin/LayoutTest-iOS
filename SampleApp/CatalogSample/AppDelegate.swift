@@ -8,7 +8,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 import UIKit
-import LayoutTestBase
+import LayoutTestBaseSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

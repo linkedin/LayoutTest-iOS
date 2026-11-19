@@ -46,6 +46,12 @@ pod 'LayoutTest/Swift'
 
 ## Example
 
+Open `SampleApp/SampleApp.xcodeproj` to run the sample apps. The project uses the
+local Swift package at the repository root; no `pod install` is needed.
+Select **SampleApp** to run the app or its layout tests, or **CatalogSample** to
+browse the view catalog. Only the test target links the **LayoutTest** product;
+the catalog app links **LayoutTestBase**.
+
 A simple test would look something like this. Check the docs for more detailed information and examples.
 
 Objective-C:

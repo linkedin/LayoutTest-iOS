@@ -8,7 +8,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 #import <Foundation/Foundation.h>
-#if SWIFT_PACKAGE
+#if __has_include("../Core/LYTViewProvider.h")
 #import "../Core/LYTViewProvider.h"
 #else
 #import "LYTViewProvider.h"

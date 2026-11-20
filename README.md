@@ -30,6 +30,9 @@ and link the **LayoutTest** product to your unit test target only. Use
 The **LayoutTestBase** product provides the helpers without an XCTest dependency.
 With Swift Package Manager, use `import LayoutTestBaseSwift` for its Swift helpers.
 
+Public Objective-C headers are exposed through relative symlinks in each target's
+`include/<Module>/` directory. Headers under `Private` are implementation-only.
+
 ### CocoaPods
 
 Add to your unit test target:

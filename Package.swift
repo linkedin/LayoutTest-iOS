@@ -13,7 +13,7 @@ let package = Package(
             name: "LayoutTestBase",
             path: "LayoutTestBase",
             exclude: ["Info.plist", "Swift", "LayoutTestBase.h"],
-            publicHeadersPath: ".",
+            publicHeadersPath: "include",
             cSettings: [
                 .headerSearchPath("Autolayout"),
                 .headerSearchPath("Catalog"),
@@ -36,7 +36,7 @@ let package = Package(
             name: "LayoutTestObjC",
             dependencies: ["LayoutTestBase"],
             path: "LayoutTest/TestCase",
-            publicHeadersPath: ".",
+            publicHeadersPath: "include",
             linkerSettings: [.linkedFramework("XCTest")]
         ),
         .target(

@@ -1,5 +1,4 @@
 module LayoutTestBaseObjC {
     umbrella "LayoutTestBase"
     export *
-    module * { export * }
 }

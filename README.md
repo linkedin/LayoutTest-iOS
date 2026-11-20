@@ -21,6 +21,17 @@ https://linkedin.github.io/LayoutTest-iOS
 
 ## Installation
 
+### Swift Package Manager
+
+In Xcode, add `https://github.com/linkedin/LayoutTest-iOS` as a package dependency
+and link the **LayoutTest** product to your unit test target only. Use
+`import LayoutTest` in Swift tests.
+
+The **LayoutTestBase** product provides the helpers without an XCTest dependency.
+With Swift Package Manager, use `import LayoutTestBaseSwift` for its Swift helpers.
+
+### CocoaPods
+
 Add to your unit test target:
 
 ```
@@ -34,6 +45,14 @@ pod 'LayoutTest/Swift'
 ```
 
 ## Example
+
+Open `SampleApp/SampleApp.xcodeproj` to run the sample apps. The project uses the
+local Swift package at the repository root; no `pod install` is needed.
+Select **SampleApp** to run the app or its layout tests, or **CatalogSample** to
+browse the view catalog. Only the test target links the **LayoutTest** product;
+the catalog app links **LayoutTestBase**.
+Both apps use a single-window scene lifecycle on iOS 13 and later, with an
+application-delegate window fallback on iOS 12.
 
 A simple test would look something like this. Check the docs for more detailed information and examples.
 

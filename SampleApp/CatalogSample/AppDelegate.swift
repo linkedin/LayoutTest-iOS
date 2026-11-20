@@ -8,7 +8,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 import UIKit
-import LayoutTestBase
+import LayoutTestBaseSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,14 +16,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if #available(iOS 13.0, *) {
+            return true
+        }
 
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let rootViewController = CatalogTableViewController()
-        rootViewController.viewProviderClass = SampleTableViewCell.self
-        window?.rootViewController = UINavigationController(rootViewController: rootViewController)
-        window?.makeKeyAndVisible()
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = AppDelegate.makeRootViewController()
+        self.window = window
+        window.makeKeyAndVisible()
 
         return true
+    }
+
+    fileprivate static func makeRootViewController() -> UIViewController {
+        let rootViewController = CatalogTableViewController()
+        rootViewController.viewProviderClass = SampleTableViewCell.self
+        return UINavigationController(rootViewController: rootViewController)
+    }
+}
+
+@available(iOS 13.0, *)
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    var window: UIWindow?
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = scene as? UIWindowScene else {
+            return
+        }
+
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = AppDelegate.makeRootViewController()
+        self.window = window
+        window.makeKeyAndVisible()
     }
 }
 

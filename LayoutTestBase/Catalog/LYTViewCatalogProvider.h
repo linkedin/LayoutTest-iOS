@@ -8,7 +8,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 #import <Foundation/Foundation.h>
+#if __has_include("../Core/LYTViewProvider.h")
+#import "../Core/LYTViewProvider.h"
+#else
 #import "LYTViewProvider.h"
+#endif
 
 
 NS_ASSUME_NONNULL_BEGIN

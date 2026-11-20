@@ -8,7 +8,11 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 #import <XCTest/XCTest.h>
+#if __has_include(<LayoutTestBase/LYTLayoutPropertyTester.h>)
 #import <LayoutTestBase/LYTLayoutPropertyTester.h>
+#else
+@import LayoutTestBase;
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

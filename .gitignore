@@ -6,6 +6,10 @@ LayoutTest.xcodeproj/project.xcworkspace/xcuserdata
 # Cocoapods
 Pods
 
+# Swift Package Manager
+.build/
+.swiftpm/
+
 # Sample App
 xcuserdata
 

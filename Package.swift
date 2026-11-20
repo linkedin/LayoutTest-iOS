@@ -6,11 +6,11 @@ let package = Package(
     platforms: [.iOS(.v12)],
     products: [
         .library(name: "LayoutTest", targets: ["LayoutTest"]),
-        .library(name: "LayoutTestBase", targets: ["LayoutTestBaseSwift"])
+        .library(name: "LayoutTestBase", targets: ["LayoutTestBase"])
     ],
     targets: [
         .target(
-            name: "LayoutTestBase",
+            name: "LayoutTestBaseObjC",
             path: "LayoutTestBase",
             exclude: ["Info.plist", "Swift", "LayoutTestBase.h"],
             publicHeadersPath: "include",
@@ -28,20 +28,20 @@ let package = Package(
             ]
         ),
         .target(
-            name: "LayoutTestBaseSwift",
-            dependencies: ["LayoutTestBase"],
+            name: "LayoutTestBase",
+            dependencies: ["LayoutTestBaseObjC"],
             path: "LayoutTestBase/Swift"
         ),
         .target(
             name: "LayoutTestObjC",
-            dependencies: ["LayoutTestBase"],
+            dependencies: ["LayoutTestBaseObjC"],
             path: "LayoutTest/TestCase",
             publicHeadersPath: "include",
             linkerSettings: [.linkedFramework("XCTest")]
         ),
         .target(
             name: "LayoutTest",
-            dependencies: ["LayoutTestObjC", "LayoutTestBaseSwift"],
+            dependencies: ["LayoutTestObjC", "LayoutTestBase"],
             path: "LayoutTest/Swift"
         )
     ]

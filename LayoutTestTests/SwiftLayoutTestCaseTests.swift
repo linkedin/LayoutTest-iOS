@@ -15,6 +15,18 @@ import LayoutTestBase
 */
 class SwiftTest: LayoutTestCase {
 
+    func testBaseModuleCompatibility() {
+        let provider: LayoutTestBase.ViewProvider.Type = TestView.self
+        let size = LayoutTestBase.ViewSize(width: 123, height: 456)
+        let values = DataValues(values: ["value", nil])
+
+        XCTAssertTrue(provider == TestView.self)
+        XCTAssertEqual(size.width, 123)
+        XCTAssertEqual(size.height, 456)
+        XCTAssertEqual(values.numberOfValues(), 2)
+        XCTAssertTrue(values.value(at: 1) is NSNull)
+    }
+
     let exponentialCombinations = IntegerValues().numberOfValues() * IntegerValues().numberOfValues()
     let polynomialCombinations = (IntegerValues().numberOfValues() * 2 - 1)
 

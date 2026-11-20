@@ -9,7 +9,7 @@
 import Foundation
 
 #if SWIFT_PACKAGE
-@_exported import LayoutTestBase
+@_exported import LayoutTestBaseObjC
 #endif
 
 extension DataValues {

@@ -9,7 +9,7 @@
 import Foundation
 
 #if SWIFT_PACKAGE
-import LayoutTestBase
+import LayoutTestBaseObjC
 #endif
 
 extension ViewSize {

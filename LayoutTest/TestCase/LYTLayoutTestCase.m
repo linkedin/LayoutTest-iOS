@@ -7,14 +7,10 @@
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
-#if SWIFT_PACKAGE
-@import LayoutTestBase;
-#else
 #import <LayoutTestBase/LYTConfig.h>
 #import <LayoutTestBase/LYTLayoutPropertyTester.h>
 #import <LayoutTestBase/UIView+LYTTestHelpers.h>
 #import <LayoutTestBase/LYTAutolayoutFailureIntercepter.h>
-#endif
 #import "LYTLayoutTestCase.h"
 #import "LYTLayoutFailingTestSnapshotRecorder.h"
 

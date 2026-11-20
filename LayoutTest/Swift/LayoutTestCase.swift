@@ -8,11 +8,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 
 import Foundation
-import LayoutTestBase
 
 #if SWIFT_PACKAGE
 @_exported import LayoutTestObjC
-@_exported import LayoutTestBaseSwift
+@_exported import LayoutTestBase
+#else
+import LayoutTestBase
 #endif
 
 /**

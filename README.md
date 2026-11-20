@@ -28,10 +28,19 @@ and link the **LayoutTest** product to your unit test target only. Use
 `import LayoutTest` in Swift tests.
 
 The **LayoutTestBase** product provides the helpers without an XCTest dependency.
-With Swift Package Manager, use `import LayoutTestBaseSwift` for its Swift helpers.
+Use `import LayoutTestBase` for its Swift helpers, just as with CocoaPods.
+Both products preserve the CocoaPods Swift API, including module-qualified names
+such as `LayoutTestBase.ViewProvider` and `LayoutTestBase.ViewSize`.
 
-Public Objective-C headers are exposed through relative symlinks in each target's
-`include/<Module>/` directory. Headers under `Private` are implementation-only.
+Objective-C imports retain the `LayoutTest/` and `LayoutTestBase/` header paths,
+including `LayoutTest.h`, `LayoutTestBase.h`, and individual public headers.
+For CocoaPods-generated `LayoutTest-umbrella.h` and `LayoutTestBase-umbrella.h`
+imports, use `LayoutTest.h` and `LayoutTestBase.h`, respectively.
+The underlying Clang modules are named `LayoutTestObjC` and `LayoutTestBaseObjC`
+to avoid collisions with the Swift overlays. Public headers are exposed through
+relative symlinks and forwarding headers in each target's `include/` directory;
+explicit module maps keep these compatibility paths modular. Headers under
+`Private` remain implementation-only.
 
 ### CocoaPods
 

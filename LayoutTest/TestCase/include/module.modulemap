@@ -1,0 +1,6 @@
+module LayoutTestObjC {
+    umbrella "LayoutTest"
+    header "LayoutTestObjC/LayoutTestObjC.h"
+    export *
+    module * { export * }
+}

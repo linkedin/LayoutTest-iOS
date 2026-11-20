@@ -1,5 +1,0 @@
-module LayoutTestBase {
-    umbrella "."
-    exclude header "LayoutTestBase.h"
-    export *
-}

@@ -51,6 +51,8 @@ local Swift package at the repository root; no `pod install` is needed.
 Select **SampleApp** to run the app or its layout tests, or **CatalogSample** to
 browse the view catalog. Only the test target links the **LayoutTest** product;
 the catalog app links **LayoutTestBase**.
+Both apps use a single-window scene lifecycle on iOS 13 and later, with an
+application-delegate window fallback on iOS 12.
 
 A simple test would look something like this. Check the docs for more detailed information and examples.
 

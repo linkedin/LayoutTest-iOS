@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A5C46C32F10AA0000000001 /* SceneLifecycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5C46C32F10AA0000000002 /* SceneLifecycleTests.swift */; };
 		1A963C96A657B82F26E5A89C /* LayoutTestBase in Frameworks */ = {isa = PBXBuildFile; productRef = AC61948DACC3C393D5525F30 /* LayoutTestBase */; };
 		615044901C1888DD00425AED /* SampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61A306071C12588700CB3FEC /* SampleTableViewCell.swift */; };
 		615044911C1888DD00425AED /* SampleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61A306081C12588700CB3FEC /* SampleTableViewCell.xib */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7A5C46C32F10AA0000000002 /* SceneLifecycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneLifecycleTests.swift; sourceTree = "<group>"; };
 		61A305E01C12583100CB3FEC /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61A305E31C12583100CB3FEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61A305EA1C12583100CB3FEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				61A306031C12587100CB3FEC /* SampleTableViewCellLayoutTests.swift */,
 				61A305FA1C12583100CB3FEC /* Info.plist */,
 				C56317EA1C63589900A8E8BA /* SampleFailingLayoutTestsWithSnapshots.swift */,
+				7A5C46C32F10AA0000000002 /* SceneLifecycleTests.swift */,
 			);
 			path = SampleAppTests;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			files = (
 				C56317EB1C63589900A8E8BA /* SampleFailingLayoutTestsWithSnapshots.swift in Sources */,
 				C5CE8F9E1C621E2500250812 /* SampleTableViewCellLayoutTests.swift in Sources */,
+				7A5C46C32F10AA0000000001 /* SceneLifecycleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
